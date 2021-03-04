@@ -1,0 +1,480 @@
+\documentclass[12pt]{article}
+ 
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+%for search in russian
+\usepackage{cmap}
+%--------------------------------------
+
+%Math-specific packages
+%--------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%Format-specific packages
+%--------------------------------------
+\usepackage[left=2cm,
+            right=2cm,
+            top=2cm,
+            bottom=2cm,
+            bindingoffset=0cm]{geometry}
+%--------------------------------------
+
+% for theorems, lemmas and definitions
+%--------------------------------------
+\usepackage{amsthm}
+
+\newtheorem{definition}{Опр.}
+\newtheorem{lemma}{Лемма}
+
+\newtheoremstyle{basic_theorem}    %<name>
+                 {\topsep}   %<space above>
+                 {\topsep}   %<space below>
+                 {\itshape}  %<body font>
+                 {}          %<indent amount>
+                 {\bfseries} %Theorem head font>
+                 {.}         %<punctuation after theorem head>
+                 {\newline}  %<space after theorem head> (default .5em)
+                 {}          %<Theorem head spec>
+\theoremstyle{basic_theorem}
+\newtheorem{theorem}{Теорема}
+
+\newtheoremstyle{name_theorem}
+                {\topsep}
+                {\topsep}
+                {\itshape}
+                {}
+                {\bfseries}
+                {}
+                {\newline}
+                {\thmnote{#3}}
+\theoremstyle{name_theorem}
+\newtheorem*{named_theorem}{Теорема}
+
+\newtheorem*{remark}{Замечание}
+\newtheorem*{corollary}{Следствие}
+\newtheorem*{proposition}{Предложение}
+%--------------------------------------
+
+% For images
+%--------------------------------------
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+%--------------------------------------
+
+% My commands
+%--------------------------------------
+% for definitions
+\newcommand\defin[1]{\textbf{#1}}
+
+\def\R{
+    \mathbb{R}
+}
+
+\def\E{
+    \mathrm{E}
+}
+
+\def\D{
+    \mathrm{D}
+}
+
+\def\P{
+    \mathrm{P}
+}
+
+\def\littleO{
+    \overline{\overline{o}}
+}
+
+%--------------------------------------
+
+\begin{document}
+
+\section{Асимптотические оптимальные оценки}
+    Пусть сл. векторы $\xi_n, \xi \in \R^K$, и определены на $(\Omega, \mathcal{F}, \P)$.
+Пусть функция распределения $\xi_n$ есть $F_n(x)$, хар. ф-ция есть $\phi_n(t)$, а распределение
+есть $Q_n$. Для вектора $\xi$ функцию распределения, хар. ф-цию и распреденеие обозначим $F(x)$,
+$\phi(t),\ Q$ соответственно.
+
+\begin{definition}
+    Функция распределения $F_n(x)$ сходится к $F(x)$ при $n \rightarrow \infty$ в основном
+    (пишем $F_n(x) \Rightarrow F$), если $F_n(x) \rightarrow F(x) \ \forall x \in C(F)$
+\end{definition}
+
+\begin{definition}
+    Распределение $Q_n$ сходится к распределению $Q$ слабо (пишем $Q_n \xrightarrow{w} Q$),
+    если $\forall$ непреревной и ограниченной $g: \R^K \rightarrow \R^1$
+    $$ \int_{\R^K} g(x)Q_n(dx) \rightarrow \int_{\R^K} g(x)Q(dx)$$
+    или, эквивалентно, $\E g(\xi_n) \rightarrow \E g(\xi)$.
+\end{definition}
+
+\begin{theorem}
+    Следующие условия эквивалентны:
+    \begin{enumerate}
+        \item $F_n(x) \Rightarrow F$
+        \item $Q_n \xrightarrow{w} Q$
+        \item $\phi_n(t) \rightarrow \phi \ \forall t \in \R^K$
+    \end{enumerate}
+    Если выполненое любое из условий $1 - 3$, будем писать
+    $\xi_n \xrightarrow{d} \xi$ и говорить, что $\xi_n$ сходится к $\xi$ по распределению.
+\end{theorem}
+
+\begin{theorem}[О наследовании сходимости]
+\label{th::inherit_conv}
+    Пусть сл. векторы $\xi_n, \xi \in \R^K, H: \R^K \rightarrow \R^1$ 
+    Тогда:
+    \begin{enumerate}
+        \item Если $\xi_n \xrightarrow{d} \xi$, то $H(\xi_n) \xrightarrow{d} H(\xi)$
+        \item Если $\xi_n \xrightarrow{\P} \xi$, то $H(\xi_n) \xrightarrow{\P} H(\xi)$
+    \end{enumerate}
+\end{theorem}
+
+\begin{named_theorem}[Лемма Слуцкого]
+\label{th::slut}
+    Пусть $\xi_n, \xi, \eta_n, a \in \R^1, \xi_n \xrightarrow{d} \xi$, а $\eta_n \xrightarrow{\P} a$.
+    Тогда:
+    \begin{enumerate}
+        \item \label{th::slut:sum} $\xi_n + \eta_n \xrightarrow{d} \xi + a$
+        \item \label{th::slut:mult} $\xi_n \eta_n \xrightarrow{d} a\xi$
+    \end{enumerate}
+\end{named_theorem}
+\begin{proof}
+    Достаточно показать, что вектор
+    \begin{equation} \label{vec}
+        (\xi_n, \eta_n)^T \xrightarrow{d} (\xi, a)^T 
+    \end{equation}
+    Действительно, если \ref{vec} верно, то при $H(x, y) = x + y$ в силу Теоремы \ref{th::inherit_conv} получаем пункт \ref{th::slut:sum} леммы,
+    а при $H(x, y) = xy$ -  пункт \ref{th::slut:mult}.
+
+    Для доказательства \ref{th::slut:sum}, проверим, что хар. ф-ция
+    вектора $(\xi_n, \eta_n)^T$ сходится к хар. функции вектора $(\xi, \eta)^T$.
+    Имеем: 
+    $$|\E e^{it\xi_n + is\eta_n} - \E e^{it\xi + isa}| \leq | \E e^{it\xi_n + is\eta_n} - \E e^{it\xi_n + isa}| + | \E e^{it\xi_n + isa} - \E e^{it\xi + isa}| = \alpha_n + \beta_n$$
+
+    $$\alpha_n \leq \E |e^{it\xi_n}(e^{it\eta_n + isa})| = \E |e^{it\eta_n + isa}| = \E g(\eta_n), \ g(x):= |e^{isx} - e^{isa}|$$
+    Ф-ция g(x) непрерывна и ограничена, а т.к. $\eta_n \xrightarrow{d} a$,
+    то в силу Теоремы \ref{th::inherit_conv} $\E g(\eta_n) \rightarrow \E g(a) = 0$
+    Итак, $\alpha \rightarrow 0$.
+
+    $$\beta_n = |\E e^{isa}(e^{it\xi_n} - e^{it\xi})| = |e^{isa} \E (e^{it\xi_n} - e^{it\xi})| = |\E (e^{it\xi_n} - e^{it\xi})| \rightarrow 0$$
+    т.к. $\xi_n \xrightarrow{d} \xi$ и $\phi_n(t) \rightarrow \phi(t)$.
+\end{proof}
+
+Пусть наблюедние $X \sim  P_{\theta},\ \theta \in \Theta \subseteq \R^{K}$, а $\hat{\theta}_n$ - оценка $\theta$
+
+\begin{definition}
+    Если $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \Sigma(\theta)) \ \forall \theta \in \Theta$
+    и ковариционная матрица $0 < \Sigma(\theta) < \infty$, то $\hat{\theta}_n$ называется асимптотической нормальной оценкой.
+\end{definition}
+
+\begin{definition}
+    Если $\hat{\theta}_n \xrightarrow{\P} \theta \ \forall \theta \in \Theta$, то $\hat{\theta}_n$ называется состоятельной оценкой.
+\end{definition}
+
+\begin{remark}
+    Дальше $\theta \in \Theta \subseteq \R^1$, то есть $\theta$ и $\hat{\theta}_n$ - скаляры.
+\end{remark}
+
+Если $\hat{\theta}_n$ - состоятельная оценка $\theta$, то при больших и $\hat{\theta}_n \approx \theta$ с вероятностью, близкой к единице.  
+
+Если $\hat{\theta}_n$ - асимптотическая нормальная оценка $\theta$ (так как $\theta$ и $\hat{\theta}_n$ скаляры:
+
+$n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \sigma^2 < \infty,\ \forall \theta \in \Theta$), то: \begin{enumerate}
+
+    \item $\hat{\theta}_n$ - состоятельная оценка $\theta$, так как $\hat{\theta}_n - \theta = n^{-1/2} n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{\P} 0$ 
+        в силу п. \ref{th::slut:mult} леммы Слуцкого.
+    \item Скорость сходимости $\hat{\theta}_n$ к $\theta$ есть $O(n^{1/2})$
+    \item При больших $n$ со сл. в. $n^{1/2}(\hat{\theta}_n - \theta)$ можно обращаться (с осторожностью!) как с Гауссовской величиной. 
+        
+    Например, пусть дисперсия предельного Гауссовского закона $\sigma^2(\theta)$ будет непреревной ф-цией $\theta$. Тогда
+        $$ \frac{n^{1/2}(\hat{\theta}_n - \theta)}{\sigma(\hat{\theta}_n)} =
+        \underbrace{\frac{n^{1/2}(\hat{\theta}_n - \theta)}{\sigma(\theta)}}_{\xrightarrow{d} N(0, 1)}
+        \underbrace{\frac{\sigma(\theta)}{\sigma(\hat{\theta}_n)}}_{\xrightarrow{\P} 1} \xrightarrow{d} \eta \sim N(0, 1)$$
+        в силу п. 2 леммы Слуцкого. Значит,
+        $$\P_\theta (|\frac{n^{1/2}(\hat{\theta}_n - \theta)}{\sigma(\hat{\theta}_n)}| < \xi_{1 - \alpha/2}) \rightarrow \P(|\eta| < \xi_{1 - \alpha/2}) = 1 - \alpha$$
+
+        То есть примерно с вероятностью $1 - \alpha$ выполнено неравенство, или эквивалентно раскроем по модулю
+        $$\underbrace{\hat{\theta}_n - n^{-1/2}\sigma(\hat{\theta}_n)\xi_{1 - \alpha /2} < \theta < \hat{\theta}_n + n^{-1/2}\sigma(\hat{\theta}_n)\xi_{1 - \alpha /2}}_{\mbox{Асимптотический доверительный интервал уровня $1 - \alpha$}}$$
+
+    \item Асимптотические Гауссовские оценки можно сравнивать между собой: \\
+    Если $n^{1/2} (\hat{\theta}_{i,n} - \theta) \xrightarrow{d} N(0, \sigma^2_{i}(\theta)),\ i = 1, 2, \ldots$, то
+    можно посчитать асимптотическую относительную эффективность (АОЭ): 
+    $$e_{1,2} = \frac{\sigma_2^2(\theta)}{\sigma_1^2(\theta)}$$
+    Напомним, $e_{1, 2} = \lim_{n \to \infty} \frac{n'(x)}{n (x)}, \mbox{ где }
+    n^{1/2}(\hat{\theta}_{1,n} - \theta) \xrightarrow{d} N(0, \sigma_1^2(\theta))$
+    и $n^{1/2}(\hat{\theta}_{2,n'} - \theta) \xrightarrow{d} N(0, \sigma_1^2(\theta))$.
+\end{enumerate}
+
+    Вопрос: Есть ли такая оценка $\theta^*_n$, что АОЭ $e_{\theta^*_n, \hat{\theta}_n}(\theta) \geq 1 \ \forall \hat{\theta}_n$
+    и всех $\theta \in \Theta$, то есть эффективнее всех остальных?
+    
+    Если да, то $\theta^*_n$ требует не больше наблюдений, чем любая $\hat{\theta}_n$, чтобы достичь одинаковой с $\hat{\theta}_n$ точности.
+    Ясно, что пределеная дисперсия $n^{1/2}(\theta^*_n - \theta)$ должна быть не больше асимптотической дисперсии
+    $n^{1/2}(\hat{\theta}_n - \theta)$ для любой асимптотической Гауссовской оценки $\hat{\theta}_n$. Но
+    какова самая маленькая асимптотическая дисперсия у $n^{1/2}(\hat{\theta}_n - \theta)$?
+    
+    \begin{named_theorem}[Теорема Бахадура]
+        \label{th::bahadur}
+        Пусть $X_1, \ldots, X_n$ - н. о. р. сл. в., $X_1$ имеет
+        плотность вероятности $f(x, \theta),\ \theta \in \Theta \subseteq \R^1$,
+        по мере $\nu$. Пусть выполнены следующие условия:
+        \begin{enumerate}
+            \item $\Theta$ - интервал.
+            \item Носитель $N_f = \{x: f(x, \theta) > 0\}$ не зависит от $\theta$.
+            \item \label{th::bahadur:density} $\forall x \in N_f$ плотность $f(x, \theta)$ дважды непрерывно
+                дифференцируема по $\theta$
+            \item \label{th::bahadur:integral} Интеграл $\int f(x, \theta)\nu(dx)$  можно
+                дважды дифференцировать по $\theta$, внося знак
+                дифференцирования под знак интеграла.
+            \item Информация Фишера $0 < i(\theta) < \infty \ \forall \theta \in \Theta$
+            \item \label{th::bahadur:second_partial} $|\frac{\partial^2}{\partial \theta^2} \ln(f(x, \theta))| \leq M(x) \ \forall x \in N_f, \ \theta \in \Theta, \ \E_\theta M(X_1) < \infty$ 
+        \end{enumerate}
+        Тогда, если $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta))$,
+        то $\sigma^2(\theta) \geq \frac{1}{i(\theta)}$ всюду за исключением
+        множества Лебеговой меры нуль.
+    \end{named_theorem}
+    \begin{remark}
+        Если вдобавок $\sigma^2(\theta)$ и $i(\theta)$ непрерывны,
+        то $\sigma^2(\theta) \geq \frac{1}{i(\theta)}$ при всех $\theta \in \Theta$.
+    \end{remark}
+    \begin{proof}
+        Без доказательства.
+    \end{proof}
+
+    \begin{definition}
+        Если $\theta, \hat{\theta}_n \in \R^1$ и $n^{1/2}(\hat{\theta}_n - \theta)\xrightarrow{d} N(0, \frac{1}{i(\theta)}),
+        \ n \rightarrow \infty, \ \forall \theta \in \Theta,$
+        причем $0 < i(\theta) < \infty$, то $\hat{\theta}_n$ называется \defin{асимптотически 
+        эффективной оценкой}.
+    \end{definition}
+    Вопрос: Вообще можно ли найти такую оценку $\hat{\theta}_n$? Да
+    
+    \newpage
+    
+    Дальше $X = (X_1, \ldots, X_n), \ X \sim \P_\theta,\ \theta \in \Theta \subseteq \R^1$.
+    \underline{Условие (A)}:
+    \begin{enumerate}
+        \item $\Theta$ - интервал, $\P_{\theta_1} \neq P_{\theta_2}$ при $\theta_1 \neq \theta_2$.
+        \item $X_1, \ldots, X_n$ - независимые одинаково распределенные случайные величины
+        \item $X_1$ имеет плотность вероятности $f(x, \theta)$ по мере $\nu$
+        \item Носитель $N_f = \{x: f(x, \theta) > 0\}$ не зависит от $\theta$.
+        \item Плотность вектора $X$ есть $p(x, \theta) = \prod_{i=1}^n f(x_i, \theta)$.
+    \end{enumerate}
+    \begin{definition}
+    Функция $p(X, \theta)$ как функция $\theta$ при фиксированном $X$ называется
+    \defin{правдоподобием} функции.
+    $$L_n(X, \theta) = \ln p(X, \theta) = \sum_{i=1}^n \ln f(X_i, \theta)$$ 
+    называется логарифмическим правдоподобием.
+    \end{definition}
+
+    Пусть $\theta_0$ будет истинное значение параметра.
+    \begin{lemma}[Неравенство Йенсена]
+        Пусть $g(x)$ выпукла книзу борелевская функция, $\E|\xi| <\infty$,
+        $\E|g(\xi)| <\infty$. Тогда $g(\E\xi) \leq \E g(\xi)$. Если $\xi$
+        не является почти наверное константой и $g$ строго выпукла, то неравенство строгое.
+    \end{lemma}
+    \begin{theorem}[Экстремальное свойство правдоподобия]
+        \label{th::extr_plausibility}
+        Пусть выполнено Условие (A). Пусть $E_{\theta_0} |\ln f(X_1, \theta)| < \infty,\ \forall \theta \in \Theta$.
+        Тогда 
+        $$\P_{\theta_0}(p(X, \theta_0) > p(X, \theta)) \rightarrow 1,\ n\rightarrow \infty,\ \theta_0 \neq \theta$$
+    \end{theorem}
+    \begin{proof}
+        $$p(X, \theta_0) > p(X, \theta) \Leftrightarrow \ln p(X, \theta_0) > \ln p(X, \theta) \Leftrightarrow$$
+        $$\eta_n := n^{-1} \sum_{i=1}^n \ln \left(\frac{f(X_i, \theta)}{f(X_i, \theta_0)}\right) < 0$$
+    То есть надо показать, что $\P_{\theta_0}(\eta_n < 0) \rightarrow 1$. Но по слабому закону больших чисел:
+    $$\eta_n = n^{-1}\sum \ln \left(\frac{f(X_i, \theta)}{f(X_i, \theta_0)} \right) \xrightarrow{\P}
+    E_{\theta_0}\ln \left(\frac{f(X_1, \theta)}{f(X_1, \theta_0)} \right) $$
+
+    Возьмем функцию $-\ln x$ - строго выпукла вниз и $\frac{f(X_1, \theta)}{f(X_1, \theta_0)}$
+    не является п.н. константой (так как иначе если плотности п.н. совпадают,
+    то и распределения при разных значениях совпадают, что противоречит Условию(A)(1)). 
+
+    В силу неравенства Йенсена:
+    $$\E_{\theta_0} \ln \frac{f(X_1, \theta)}{f(X_1, \theta_0)} < \ln \E_{\theta_0} \frac{f(X_1, \theta)}{f(X_1, \theta_0)} = \ln \int_{N_f} \frac{f(x, \theta)}{f(x, \theta_0)} f(x, \theta_0) \nu(dx) = \ln1 = 0$$
+    Но если $\eta_n$ сходится по вероятности к отрицательному числу, то $P_{\theta_0}(\eta_n < 0) \rightarrow 1$
+\end{proof}
+    В силу теоремы \ref{th::extr_plausibility} естественно брать
+    оценкой то значение $\theta$, которое максимизирует $p(X, \theta)$ при данном $X$
+
+    \begin{definition}
+        Случайная величина $\hat{\theta}_n \in \Theta$ называется
+        \defin{оценкой максимального правдоподобия (о.м.п.)}, если
+        $p(X, \hat{\theta}_n) = \max_{\theta\in\Theta} p(X, \theta)$,
+        или эквивалентно $L_n(X, \hat{\theta}_n) = max_{\theta\in\Theta} L_n(X, \theta)$
+    \end{definition}
+    Итак, о.м.п $\hat{\theta}_n = \arg\max_{\theta\in\Theta} L_n(X, \theta)$.
+    
+    Если в $\forall\theta\in\Theta$ максимум не достигается, то о.м.п. не существует.
+
+    Если $\Theta$ - интервал, $L_n(X, \theta)$ - гладкая по $\theta$ функция,
+    то $\theta$ удовлетворяет уравнению правдоподобия
+    \begin{equation} \label{eq::plausibility}
+        \frac{\partial}{\partial\theta}L_n(X, \theta) = 0
+    \end{equation}
+    \begin{theorem}[О состоятельности решения уравнения правдоподобия]
+        \label{th::consist_plausibility}
+        Пусть выполнено Условие (А). Пусть $\forall x \in N_f \ \exists$ непрерывная
+        производная $f'_{\theta}(x, \theta)$. Тогда уравнение \ref{eq::plausibility}
+        с вероятностью, стремящейся к 1 при $n\rightarrow \infty$ имеет решение $\in\Theta$.
+        При этом среди всех такиъ решений есть такой корень $\hat{\theta}_n$, что он
+        является состоятельнаой оценкой $\theta_0$
+    \end{theorem}
+
+    \begin{proof}
+        Пусть $S_n = \{\omega\}$, при которых уравнение \ref{eq::plausibility} имеет
+        решение для $\theta\in\Theta$. Тогда теорема \ref{th::consist_plausibility} утверждает:
+        \begin{enumerate}
+            \item $P_{\theta_0}(S_n) \rightarrow 1$.
+            \item Существует такое решение $\hat{\theta}_n \in \Theta$, что
+                $$P_{\theta_0} (|\hat{\theta}_n - \theta_0| < \epsilon, S_n) \rightarrow 1,\ n\rightarrow\infty,\ \forall\epsilon>0$$
+        \end{enumerate}
+        \underline{Докажем пункт 1}: Выберем малое $a>0$ так, что на $(\theta_0 - a, \theta_0 + a) \subseteq\Theta$. Пусть
+        $$S^a_n = \{\omega: L_n(X, \theta_0) > L_n(X, \theta_0 - a), L_n(X, \theta_0) > L_n(X, \theta_0 + a)\}$$
+        В силу теоремы \ref{th::extr_plausibility} $\P_{\theta_0}(S_n^a) \rightarrow 1$
+
+        При $\omega\in S_n^a$ функция $L_n(X, \theta)$ имеет
+        локальный максимум $\hat{\theta}^a_n$ на интервале $(\theta_0 - a, \theta_0 + a)$
+        \begin{figure}[h]
+            \includegraphics[width=0.4\textwidth]{L_n_func}
+        \end{figure}
+        
+        Значит, $\frac{\partial}{\partial\theta}L_n(X, \hat{\theta}_n^a) = 0$.
+        Тогда $\P_{\theta_0}(S_n) \geq \P_{\theta_0}(S_n^a) \rightarrow 1$, так
+        как $S_n^a \subseteq S_n$, и пункт 1 доказан.
+
+        \underline{Докажем пункт 2}: $\forall n$ при $\omega\in S_n$ может сущестовать целое множество корней
+        $\{\theta^*_n\}$. Выберем в этом множестве корень $\hat{\theta}_n$,
+        ближайший к $\theta_0$. Это можно сделать, так как
+        функция $\frac{\partial}{\partial\theta} L_n(x, \theta)$ непрерывна по $\theta$,
+        и последовательность корней есть корень. Этот корень $\hat{\theta}_n$
+        и есть состоятельная оценка $\theta$. Покажем это:
+
+        $\forall \text{ малого } \epsilon > 0$:
+        \begin{equation}
+            \label{eq::S_n}
+            \P_{\theta_0}(|\hat{\theta}_n - \theta_0| < \epsilon, S_n) \geq
+            \P_{\theta_0}(|\hat{\theta}^\epsilon_n - \theta_0| < \epsilon, S_n^\epsilon)
+        \end{equation}
+        Так как $S^\epsilon_n \subseteq S_n,\
+        (\omega: |\hat{\theta}^\epsilon_n - \theta_0| < \epsilon) \subseteq
+        (\omega: |\hat{\theta}_n - \theta_0| < \epsilon)$
+        
+        Но $\P_{\theta_0}(|\hat{\theta}^\epsilon_n - \theta_0| < \epsilon, S^\epsilon_n) 
+        \underset{\text{т.к. события из } S_n^\epsilon \text{ лежат в } |\hat{\theta}^\epsilon_n - \theta_0| < \epsilon}{=}
+        \P_{\theta_0}(S_n^\epsilon) \rightarrow 1$, значит в силу \ref{eq::S_n}
+        $$\P_{\theta_0} (|\hat{\theta}_n - \theta_0| < \epsilon, S_n) \rightarrow 1$$
+    \end{proof}
+
+    \begin{remark}
+        Пусть 
+        $$\theta^*_n = \begin{cases}
+            \text{сост. корню уравнения правдоподобия, если он сущ.} \\
+            \theta',\ \theta'\in\Theta, \text{иначе}
+        \end{cases}$$
+        Тогда случайная величина $\theta^*_n$ всегда определена, и
+        $\theta^*_n \xrightarrow{\P} \theta_0$, так как
+        $$\P(|\theta^*_n - \theta_0| < \epsilon) =
+        \P(|\hat{\theta}_n - \theta_0| < \epsilon, S_n) +
+        \P(|\theta' - \theta_0| < \epsilon, \overline{S}_n) \rightarrow 1$$
+        Ясно, что 
+        \begin{equation}
+            \frac{\partial}{\partial\theta} L_n(X, \theta^*_n) = \littleO_p(1)
+        \end{equation}
+        Так как производная отлична от нуля только на $\overline{S}_n$.
+
+        Будем называть $\theta_n^*$ \defin{обобщенным состоятельным корнем уравнения
+        правдоподобия}
+    \end{remark}
+
+    \begin{theorem}[Об асимптотической эффективности состоятельности решения]
+        \label{th::asympt_consist}
+        Пусть $X = (X_1, \ldots, X_n),\ \{X_i\}$ - н.о.р. сл.в., и
+        удовлетворяются предположения Теоремы Бахадура, в которых условия
+        \ref{th::bahadur:density} и \ref{th::bahadur:second_partial} заменены на
+        предположения о третьей, а не второй производной. То есть
+        $$|\frac{\partial^3}{\partial \theta^3} \ln f(x, \theta)| \leq M(x) \ \forall x\in N_f,\ \forall\theta\in\Theta,\ \E_{\theta_0}M(X_1) < \infty$$
+        Тогда, если $\theta^*_n$ - обобщенный состоятельный корень из теоремы \ref{th::consist_plausibility}, то
+        $$\sqrt{n}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, \frac{1}{i(\theta_0)})$$
+        То есть $\theta^*_n$ - асимптотическая эффективная оценка.
+    \end{theorem}
+    \begin{proof}
+        Будем обозначать $\frac{\partial}{\partial\theta}L_n(X, \theta), \frac{\partial^2}{\partial\theta^2}L_n(X, \theta), \ldots$
+        через $L'_n(\theta), L^{(2)}_n(\theta), \ldots$.
+
+        Для фиксированного $X$ в силу формулы Тейлора и последнего замечания:
+        $$\littleO_p(1) = L'_n(\theta^*_n) = L'_n(\theta_0) + L^{(2)}_n(\theta_0)(\theta^*_n - \theta_0) + 
+        \frac{1}{2}L_n^{(3)}(\widetilde{\theta}_n)(\theta^*_n - \theta_0)^2,\ \widetilde{\theta}_n \in(\theta_0, \theta_n^*)$$
+        Отсюда,
+        \begin{equation}
+            \label{eq::taylor_frac}
+            n^{1/2}(\theta^*_n - \theta_0) = -\frac{n^{-1/2} L'_n(\theta_0) + \littleO_p(1)}{n^{-1}(L^{(2)}_n(\theta_0) + \frac{1}{2}L^{(3)}_n(\widetilde{\theta}_n)(\theta^*_n - \theta_0))}
+        \end{equation}
+        \underline{Рассмотрим числитель \ref{eq::taylor_frac}} и покажем, что
+        \begin{equation}
+            \label{eq::taylor_frac::num}
+            n^{-1/2}L_n'(\theta_0) = n^{-1/2}\sum_{i=1}^n \frac{f'_\theta(X_i, \theta_0)}{f(X_i, \theta_0)} \xrightarrow{d} \xi\sim N(0, i(\theta_0))
+        \end{equation}
+        Действительно, 
+        $$\E_{\theta_0}\frac{f'_{\theta_0}(X_1, \theta_0)}{f(X_i, \theta_0)} = \int_{N_f}\frac{f'_\theta(x, \theta_0)}{f(x,\theta_0)} f(x,\theta_0) \nu(dx) = 0$$
+        $$\D_{\theta_0}\frac{f'_{\theta_0}(X_1, \theta_0)}{f(X_i, \theta_0)} = \E_{\theta_0}\left(\frac{\partial}{\partial\theta}\ln f(X_1, \theta_0)\right)^2 - \underbrace{\left(\E_{\theta_0}\frac{f'_{\theta_0}(X_1, \theta_0)}{f(X_i, \theta_0)}\right)^2 }_{ =\ 0} \underset{\text{по опр.}}{=} i(\theta_0)$$
+        Так как $f, f'$ - борелевские функции, то случайные величины $\{\frac{f'_\theta(X_i, \theta_0)}{f(X_i, \theta_0)},\ i=1,\ldots,n\}$ - н.о.р.,
+        соотношение \ref{eq::taylor_frac::num} следует из Центр. пред. Теоремы.
+        
+        В силу Леммы Слуцкого числитель \ref{eq::taylor_frac} $\xrightarrow{\P} N(0, i(\theta_0))$
+
+        Теперь \underline{рассмотрим знаменатель \ref{eq::taylor_frac}}:
+        \begin{equation}
+            \label{eq::taylor_frac::den}
+            n^{-1}L_n^{(2)}(\theta_0) = n^{-1}\sum^n_{i=1}\left[ \frac{f^{(2)}_\theta(X_i, \theta_0)}{f(X_i, \theta_0)} - \left(\frac{f'_\theta(X_i, \theta_0)}{f(X_i, \theta_0)}\right)^2\right] \xrightarrow{\P} -i(\theta)
+        \end{equation}
+        Действительно, в силу ЗБЧ
+        $$n^{-1}\sum^n_{i=1} \frac{f^{(2)}_\theta(X_i, \theta_0)}{f(X_i, \theta_0)} \xrightarrow{\P} \E_{\theta_0}\frac{f^{(2)}_\theta(X_1, \theta_0)}{f(X_1, \theta_0)} = \int_{N_f} \frac{f^{(2)}_\theta(x, \theta_0)}{f(x, \theta_0)} f(x, \theta_0) \nu(dx) = 0$$
+        $$n^{-1}\sum^n_{i=1} \left(\frac{f'_\theta(X_i, \theta_0)}{f(X_i, \theta_0)}\right)^2 \xrightarrow{\P} E_{\theta_0} \left(\frac{\partial}{\partial\theta} \ln f(X_1, \theta_0)\right)^2 = i(\theta)$$
+    
+    Применяя лемму Слуцкого, получим \ref{eq::taylor_frac::den}.
+
+    Далее рассмотрим второе слагаeмое в знаменете \ref{eq::taylor_frac}
+    \begin{equation}
+        \label{eq::taylor_frac::den2}
+        |\frac{1}{2n} L_n^{(3)}(\widetilde{\theta}_n)(\theta^*_n - \theta_0)| \leq \frac{1}{2}|\theta_n^* - \theta_0| n^{-1} \sum_{i=1}^n M(X_i) \xrightarrow[\text{л. Слуцкого}]{\P} 0
+    \end{equation}
+    
+    В силу \ref{eq::taylor_frac::den} и \ref{eq::taylor_frac::den2} и Леммы Слуцкого
+    знаменатель \ref{eq::taylor_frac} сходится по вероятности к $-i(\theta_0)$
+
+    Значит, что вся дробь \ref{eq::taylor_frac} сходится по распределению к
+    $\frac{1}{i(\theta_0)} \xi \sim N(0, \frac{1}{i(\theta_0)})$
+\end{proof}
+
+\subsection*{Оценки максимального правдоподобия для векторого параметра}
+    Пусть $X = (X_1, \ldots, X_n)$ - н.о.р., $X_1 \sim f(x, \theta),\ \theta\in\Theta\subseteq\R^k,\
+    \Theta$ - открытое множество
+
+    Тогда логарифмические правдоподобие имеет вид 
+    $$L_n(X, \theta) = \sum_{i=1}^n\ln f(X_i, \theta)$$
+    
+    Система уравнений правдоподобия
+    \begin{equation}
+        \label{eq::sys_plausibility}
+        \frac{\partial L_n(X, \theta)}{\partial\theta_i} = 0,\ i =1,2,\ldots,k
+    \end{equation}
+    
+    При условиях регулярности, похожих на условия теоремы \ref{th::asympt_consist},
+    показыватся:
+    \begin{enumerate}
+        \item С вероятностью, стремящейся к единице при $n \rightarrow \infty$,
+            система уравнений \ref{eq::sys_plausibility} имеет такое решение $\hat{\theta}_n\in\Theta$,
+            что $\hat{\theta}_n$ сходится к истинному значению $\theta_0$.
+        \item Соответствующая оценка $\theta^*_n$ асимптотически нормальна. А именно
+         $$n^{1/2}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, I^{-1}(\theta_0)),\ n\rightarrow\infty$$
+         Здесь $I(\theta) > 0$ - матрица информации Фишера, то есть
+         $$I(\theta) = (I_{ij}(\theta)),\ I_{ij}(\theta) = \E_\theta \{\frac{\partial}{\partial} \cdot \frac{\partial}{\partial}\}$$ 
+    \end{enumerate}
+\end{document}
