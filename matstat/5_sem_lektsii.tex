@@ -1,0 +1,237 @@
+\documentclass[10pt]{article}
+ 
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+%for search in russian
+\usepackage{cmap}
+%--------------------------------------
+
+%Math-specific packages
+%--------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%Format-specific packages
+%--------------------------------------
+\usepackage[left=2cm,
+            right=2cm,
+            top=1cm,
+            bottom=2cm,
+            bindingoffset=0cm]{geometry}
+%--------------------------------------
+
+% for theorems, lemmas and definitions
+%--------------------------------------
+\usepackage{amsthm}
+
+\newtheorem{definition}{Опр.}
+\newtheorem{example}{Пример}[definition]
+\newtheorem{lemma}{Лемма}
+
+\newtheoremstyle{theorem}    %<name>
+                 {\topsep}   %<space above>
+                 {\topsep}   %<space below>
+                 {\itshape}  %<body font>
+                 {}          %<indent amount>
+                 {\bfseries} %Theorem head font>
+                 {.}         %<punctuation after theorem head>
+                 {\newline}  %<space after theorem head> (default .5em)
+                 {}          %<Theorem head spec>
+\theoremstyle{theorem}
+\newtheorem{theorem}{Теорема}
+
+\newtheorem*{remark}{Замечание}
+\newtheorem*{corollary}{Следствие}
+\newtheorem*{proposition}{Предложение}
+%--------------------------------------
+
+% My commands
+%--------------------------------------
+% for definitions
+\newcommand\defin[1]{\textbf{#1}}
+
+\def\R{
+    \mathbb{R}
+}
+
+\def\E{
+    \mathrm{E}
+}
+
+\def\D{
+    \mathrm{D}
+}
+
+\def\P{
+    \mathrm{P}
+}
+
+\def\F{
+    \mathcal{F}
+}
+
+\def\B{
+    \mathfrak{B}
+}
+
+%--------------------------------------
+
+\begin{document}
+    
+\section{Предварительные сведения}
+
+\begin{definition}
+    Пусть $\Omega = \{\omega\}$ - произвольное множество, а $\F$ - \defin{$\sigma$-алгебра} его подмножеств,
+    то есть система множетсв, таких что:
+    \begin{enumerate}
+        \item $\Omega \in \F$
+        \item Если $A \in \F$, то $\bar{A} := \Omega - A \in \F $
+        \item Если $A_1, A_2, \ldots \in \F$, то $\bigcup_iA_i \in \F$ и $ \bigcap_iA_i \in \F$ 
+    \end{enumerate}
+\end{definition}
+\begin{example}
+    Система всех подмножеств $\F$ - $\sigma$-алгебра
+\end{example}
+\begin{example}
+    $\{0, \Omega\}$ - $\sigma$-алгебра
+\end{example}
+\begin{definition}
+    Пусть $\Omega = \R$, а $\F$ - наименьшая сигма-алгебра, содержащая все
+    интервалы $(\alpha, \beta)$. Такая $\F$ обозначается $\B(\R)$ и
+    называется \defin{борелевской сигма-алгеброй}.
+\end{definition}
+
+\begin{definition}
+    Мера $\mu$, определенная на $\F$, называется \defin{сигма-аддитивной},
+    если это неотрицательная функция, $\mu(A) \geq 0$ для $A \in \F$,
+    и она удовлетворяет условию сигма-аддитивности, то есть:
+    $$\mu(\bigcup_iA_i) = \sum_i\mu(A_i), \ A_i \in \F, A_i \cap A_j \underset{i \neq j}{=} \varnothing $$
+\end{definition}
+\begin{definition}
+    Мера $\mu$ называется \defin{сигма-конечной}, если $\exists$ множетсва $A_i \in \F$
+    такие, что $\bigcup_iA_i = \Omega$ и $\mu(A_i) < \infty$
+\end{definition}
+\begin{example}[Считающая мера]
+    Пусть $\Omega$ - счетное, $\F$ - множество всех подмножеств $\Omega$.
+    Положим для $A \in \F$
+    $$\mu(A) := \{ \mbox{числу точек $\Omega$, попавших в А}\}$$
+    Такая мера называется считающей, она сигма-конечна.
+\end{example}
+\begin{example}[Лебегова мера]
+    Пусть $\Omega = \R, \F = \B(\R)$. $\exists!$ мера
+    $\mu$ на $\B(\R)$ такая, что 
+    $$\mu((\alpha, \beta]) = \beta - \alpha$$
+    Это мера Лебега, она сигма-конечна.
+\end{example}
+\begin{definition}
+    $(\Omega, \F)$ - \defin{измеримое пространство}.
+    $(\Omega, \F, \mu)$ - \defin{пространство с мерой}.
+\end{definition}
+\begin{definition}
+    Если $\mu(\Omega) = 1$, то $\mu$ - \defin{вероятностная мера}, она обозначается
+    через $\P$.
+\end{definition}
+\begin{definition}
+    Тройка $(\Omega, \F, \P)$ - \defin{вероятностное пространство}.
+\end{definition}
+\begin{definition}
+    Измеримая функция $\xi: (\Omega, \F) \rightarrow (\R. \B(\R))$
+    (то есть $\forall B \in \B(\R)\ \xi^{-1}(B):=(\omega:\xi(\omega)\in B) \in \F$)
+    называется \defin{случайной величной}.
+
+    Измеримая функция $\phi:(\R. \B(\R)) \rightarrow (\R. \B(\R))$
+    называется \defin{борелевской}.
+\end{definition}
+\begin{definition}
+    Рассмотрим сл. в. $\xi \in \R^1$. Для $x \in \R^1$ функция 
+    $F(x) = \P(\omega: \xi(\omega) \leq x) = \P(\xi \leq x)$ называется
+    \defin{функцией распределения}.
+\end{definition}
+\begin{definition}
+    Мера $\P_\xi(A) := \P(\omega: \xi(\omega) \in A), \ A \in \B(\R)$,
+    называется \defin{распределением} случайной величины $\xi$.
+
+    Тогда $F(x) = \P_\xi((-\infty, x])$, то есть \underline{$\P_\xi$ определяет $F(x)$}.
+    
+    Обратно: $\P (\alpha < \xi \leq \beta) = F(\beta) - F(\alpha)$, 
+    и $\exists!$ вероятнаостная мера $\P_\xi$ такая, что
+    $\P_\xi((\alpha, \beta]) = F(\beta) - F(\alpha)$, то есть \underline{$F(x)$ определяет $\P_\xi$}.
+\end{definition}
+\begin{definition}
+    Пусть на $(\R, \B(\R))$ задана $\sigma$-конечная мера $\mu$.
+    Если $\exists$ борелевская функция $f(x), f(x) \geq 0$, такая что:
+     $$\P_\xi(A) = \int_Af(x)\mu(dx) \ \forall A \in \B(\R)$$
+    то $f(x)$ называется \defin{плотностью вероятностни по мере $\mu$}.
+\end{definition}
+Если $\mu$ - мера Лебега, то $f(x)$ - обычная плотность вероятности сл. в. $\xi$,
+введенная на 2-ом курсе. Если же $\xi$ дискретна со значениями $x_1, x_2, \ldots$,
+а $\mu$ - cчитающая мера, сосредоточенная в этих точках, то, очевидно,
+$$\P_\xi(A) = \int_A \P(\xi = x)\mu(dx) \ \forall A \in \B(\R)$$
+Последнее равенство означает, что у дискретной случайной величины $\xi$
+есть плотность вероятности $f(x) = \P(\xi = x), \ x = x_1, x_2, \ldots$
+по считающей мере. (При $ x \neq x_1, x_2, \ldots$ значения не важны, их
+можно положить равными 0)
+\begin{definition}
+    \defin{Математическим ожиданием} случайной величины $\xi$ называется число
+    $$\E\xi = \int_\Omega \xi(\omega)\P(d\omega)$$
+    (в предположении, что $\int_\Omega |\xi(\omega)| \P(d\omega) < \infty$,
+    иначе говорим, что мат. ожидание $\nexists$)
+\end{definition}
+    Если $f(x)$ - плотность вероятности случайной величины $\xi$ по мере $\mu$,
+    а $\phi(x)$ - борелевская функция, то
+    $$\E\phi(\xi) = \int_\R\phi(x)\P_\xi(dx) = \int_\R\phi(x)f(x)\mu(dx)$$
+    В частности, если $\xi$ - абсолютно непрерывная случайная величина в
+    терминологии 2-го курса (то есть $\mu$ - мера Лебега), то пишем
+    $$\E\phi(\xi) = \int_\R\phi(x)f(x)dx$$
+    Разумеетса, только в случае $\int_\R|\phi(x)|f(x)dx < \infty$.
+    Если же $\xi$ дискретна со значениями $x_1, x_2, \ldots$ и соответствующими
+    вероятностями, то 
+    $$\E\phi(\xi) = \sum_{i \geq 1} \phi(x_i)p_i \mbox{ (если ряд сходится абсолютно)}$$
+
+\begin{definition}
+    Обозначим $\B(\R^K)$ борелевскую $\sigma$-алгебру подмножеств $\R^K$.
+    Вектор $\xi = (\xi_1, \ldots, \xi_k)^T$ называется \defin{$k$-мерным случайным
+    вектором}, если $\xi$ - измеримое отображение $\xi: (\Omega, \F) \rightarrow (\R^K, \B(\R^K))$
+\end{definition}
+    Известно: $\xi$ - случайный вектор $\Leftrightarrow$ каждая
+    компонента $\xi_i$ - одномерная случайная величина.
+\begin{definition}
+    \defin{Функция распределения случайного вектора $\xi$}:
+    $F(x_1, \ldots, x_K) = \P(\xi_1 \leq x_1, \ldots, \xi_K \leq x_K), x_i \in \R$
+\end{definition}
+\begin{definition}    
+    \defin{Распределение}: $\P_\xi(A) = \P(\omega: \xi(\omega) \in A), \ A \in \B(\R^K)$.
+\end{definition}
+\begin{definition}
+    \defin{Плотность вероятности вектора $\xi$ по мере $\mu$} ($\mu$ определена на элементах $\B(\R^K)$)
+    - борелевская функция $f(x), x = (x_1, \ldots, x_K)$ такая, что:
+    $$\P_\xi(A) = \int_Ap(x)\mu(dx), \ \forall A \in \B(\R^K)$$
+\end{definition}
+\begin{definition}
+    Случайные величины $\{\xi_1, \ldots, \xi_K\}$ \defin{независимы}, если
+    $$P(\xi_1 \in A_1, \ldots, \xi_K \in A_K) = \prod_{i = 1}^K \P(\xi_i \in A_i) \ \forall A_i \in \B(\R) $$
+    Бесконечная последовательность будет последовательностью независимых величин,
+    если каждая конечная подпоследовательность независима.
+\end{definition}
+\begin{theorem}[Необходимые и достаточные условия независимости]
+    Рассмотрим $x = (x_1, \ldots, x_K) \in \R^K$
+    $F(x) = F_{\xi_1}(x_1)F_{\xi_2}(x_2)\ldots F_{\xi_K}(x_K) \ \forall x \in \R^K$
+    
+    Если $\exists$ плотность $f(x)$:
+    $f(x) = f_{\xi_1}(x_1)f_{\xi_2}(x_2)\ldots f_{\xi_K}(x_K) \mbox{ для $\mu$-почти всех } x \in \R^K$
+\end{theorem}
+
+Пусть случайные векторы $\xi, \xi_1, \xi_2, \ldots$ размера $K$ со значениями
+в $(\R, \B(\R^K))$ определены на некотором вероятностном пространстве $(\Omega, \F, \P)$.
+Пусть $|\cdot|$ означает Евклидову норму вектора, то есть $|\xi| = \sqrt{\sum_{i=1}^K\xi_i^2}$.
+\begin{definition}
+    Говорят, что последовательность ${\xi_n}$ сходится \defin{слабо} к $\xi$, если
+    для любой непрерывной и ограниченной $g: \R^K \rightarrow \R^1 \int_{\R^K}g(x)\P_{n}(dx) \rightarrow \int_{R^K}g(x) \P(dx) ,\ n \rightarrow \infty$.
+    Здесь $\P_n$ и $\P$ - распределения соотвественно $\xi_n$ и $\xi$.
+    Пишем $\xi_n \xrightarrow{w} \xi,\ n \rightarrow \infty$.
+\end{definition}
+
+\end{document}
