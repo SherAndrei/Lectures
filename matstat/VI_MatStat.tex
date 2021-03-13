@@ -27,8 +27,14 @@
 %--------------------------------------
 \usepackage{amsthm}
 
+\counterwithin*{equation}{section}
+
 \newtheorem{definition}{Опр.}
 \newtheorem{lemma}{Лемма}
+\newtheorem*{remark}{Замечание}
+\newtheorem*{corollary}{Следствие}
+\newtheorem*{proposition}{Предложение}
+\newtheorem*{example}{Пример}
 
 \newtheoremstyle{basic_theorem}    %<name>
                  {\topsep}   %<space above>
@@ -53,10 +59,6 @@
                 {\thmnote{#3}}
 \theoremstyle{name_theorem}
 \newtheorem*{named_theorem}{Теорема}
-
-\newtheorem*{remark}{Замечание}
-\newtheorem*{corollary}{Следствие}
-\newtheorem*{proposition}{Предложение}
 %--------------------------------------
 
 % For images
@@ -146,10 +148,10 @@ $\phi(t),\ Q$ соответственно.
 \end{named_theorem}
 \begin{proof}
     Достаточно показать, что вектор
-    \begin{equation} \label{vec}
+    \begin{equation} \label{eq::LemmaSlut}
         (\xi_n, \eta_n)^T \xrightarrow{d} (\xi, a)^T 
     \end{equation}
-    Действительно, если \ref{vec} верно, то при $H(x, y) = x + y$ в силу Теоремы \ref{th::inherit_conv} получаем пункт \ref{th::slut:sum} леммы,
+    Действительно, если \eqref{eq::LemmaSlut} верно, то при $H(x, y) = x + y$ в силу Теоремы \ref{th::inherit_conv} получаем пункт \ref{th::slut:sum} леммы,
     а при $H(x, y) = xy$ -  пункт \ref{th::slut:mult}.
 
     Для доказательства \ref{th::slut:sum}, проверим, что хар. ф-ция
@@ -321,14 +323,14 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
     \begin{theorem}[О состоятельности решения уравнения правдоподобия]
         \label{th::consist_plausibility}
         Пусть выполнено Условие (А). Пусть $\forall x \in N_f \ \exists$ непрерывная
-        производная $f'_{\theta}(x, \theta)$. Тогда уравнение \ref{eq::plausibility}
+        производная $f'_{\theta}(x, \theta)$. Тогда уравнение \eqref{eq::plausibility}
         с вероятностью, стремящейся к 1 при $n\rightarrow \infty$ имеет решение $\in\Theta$.
         При этом среди всех такиъ решений есть такой корень $\hat{\theta}_n$, что он
         является состоятельнаой оценкой $\theta_0$
     \end{theorem}
 
     \begin{proof}
-        Пусть $S_n = \{\omega\}$, при которых уравнение \ref{eq::plausibility} имеет
+        Пусть $S_n = \{\omega\}$, при которых уравнение \eqref{eq::plausibility} имеет
         решение для $\theta\in\Theta$. Тогда теорема \ref{th::consist_plausibility} утверждает:
         \begin{enumerate}
             \item $P_{\theta_0}(S_n) \rightarrow 1$.
@@ -368,7 +370,7 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         
         Но $\P_{\theta_0}(|\hat{\theta}^\epsilon_n - \theta_0| < \epsilon, S^\epsilon_n) 
         \underset{\text{т.к. события из } S_n^\epsilon \text{ лежат в } |\hat{\theta}^\epsilon_n - \theta_0| < \epsilon}{=}
-        \P_{\theta_0}(S_n^\epsilon) \rightarrow 1$, значит в силу \ref{eq::S_n}
+        \P_{\theta_0}(S_n^\epsilon) \rightarrow 1$, значит в силу \eqref{eq::S_n}
         $$\P_{\theta_0} (|\hat{\theta}_n - \theta_0| < \epsilon, S_n) \rightarrow 1$$
     \end{proof}
 
@@ -416,7 +418,7 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
             \label{eq::taylor_frac}
             n^{1/2}(\theta^*_n - \theta_0) = -\frac{n^{-1/2} L'_n(\theta_0) + \littleO_p(1)}{n^{-1}(L^{(2)}_n(\theta_0) + \frac{1}{2}L^{(3)}_n(\widetilde{\theta}_n)(\theta^*_n - \theta_0))}
         \end{equation}
-        \underline{Рассмотрим числитель \ref{eq::taylor_frac}} и покажем, что
+        \underline{Рассмотрим числитель \eqref{eq::taylor_frac}} и покажем, что
         \begin{equation}
             \label{eq::taylor_frac::num}
             n^{-1/2}L_n'(\theta_0) = n^{-1/2}\sum_{i=1}^n \frac{f'_\theta(X_i, \theta_0)}{f(X_i, \theta_0)} \xrightarrow{d} \xi\sim N(0, i(\theta_0))
@@ -425,11 +427,11 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         $$\E_{\theta_0}\frac{f'_{\theta_0}(X_1, \theta_0)}{f(X_i, \theta_0)} = \int_{N_f}\frac{f'_\theta(x, \theta_0)}{f(x,\theta_0)} f(x,\theta_0) \nu(dx) = 0$$
         $$\D_{\theta_0}\frac{f'_{\theta_0}(X_1, \theta_0)}{f(X_i, \theta_0)} = \E_{\theta_0}\left(\frac{\partial}{\partial\theta}\ln f(X_1, \theta_0)\right)^2 - \underbrace{\left(\E_{\theta_0}\frac{f'_{\theta_0}(X_1, \theta_0)}{f(X_i, \theta_0)}\right)^2 }_{ =\ 0} \underset{\text{по опр.}}{=} i(\theta_0)$$
         Так как $f, f'$ - борелевские функции, то случайные величины $\{\frac{f'_\theta(X_i, \theta_0)}{f(X_i, \theta_0)},\ i=1,\ldots,n\}$ - н.о.р.,
-        соотношение \ref{eq::taylor_frac::num} следует из Центр. пред. Теоремы.
+        соотношение \eqref{eq::taylor_frac::num} следует из Центр. пред. Теоремы.
         
-        В силу Леммы Слуцкого числитель \ref{eq::taylor_frac} $\xrightarrow{\P} N(0, i(\theta_0))$
+        В силу Леммы Слуцкого числитель \eqref{eq::taylor_frac} $\xrightarrow{\P} N(0, i(\theta_0))$
 
-        Теперь \underline{рассмотрим знаменатель \ref{eq::taylor_frac}}:
+        Теперь \underline{рассмотрим знаменатель \eqref{eq::taylor_frac}}:
         \begin{equation}
             \label{eq::taylor_frac::den}
             n^{-1}L_n^{(2)}(\theta_0) = n^{-1}\sum^n_{i=1}\left[ \frac{f^{(2)}_\theta(X_i, \theta_0)}{f(X_i, \theta_0)} - \left(\frac{f'_\theta(X_i, \theta_0)}{f(X_i, \theta_0)}\right)^2\right] \xrightarrow{\P} -i(\theta)
@@ -438,18 +440,18 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         $$n^{-1}\sum^n_{i=1} \frac{f^{(2)}_\theta(X_i, \theta_0)}{f(X_i, \theta_0)} \xrightarrow{\P} \E_{\theta_0}\frac{f^{(2)}_\theta(X_1, \theta_0)}{f(X_1, \theta_0)} = \int_{N_f} \frac{f^{(2)}_\theta(x, \theta_0)}{f(x, \theta_0)} f(x, \theta_0) \nu(dx) = 0$$
         $$n^{-1}\sum^n_{i=1} \left(\frac{f'_\theta(X_i, \theta_0)}{f(X_i, \theta_0)}\right)^2 \xrightarrow{\P} E_{\theta_0} \left(\frac{\partial}{\partial\theta} \ln f(X_1, \theta_0)\right)^2 = i(\theta)$$
     
-    Применяя лемму Слуцкого, получим \ref{eq::taylor_frac::den}.
+    Применяя лемму Слуцкого, получим \eqref{eq::taylor_frac::den}.
 
-    Далее рассмотрим второе слагаeмое в знаменете \ref{eq::taylor_frac}
+    Далее рассмотрим второе слагаeмое в знаменете \eqref{eq::taylor_frac}
     \begin{equation}
         \label{eq::taylor_frac::den2}
         |\frac{1}{2n} L_n^{(3)}(\widetilde{\theta}_n)(\theta^*_n - \theta_0)| \leq \frac{1}{2}|\theta_n^* - \theta_0| n^{-1} \sum_{i=1}^n M(X_i) \xrightarrow[\text{л. Слуцкого}]{\P} 0
     \end{equation}
     
-    В силу \ref{eq::taylor_frac::den} и \ref{eq::taylor_frac::den2} и Леммы Слуцкого
-    знаменатель \ref{eq::taylor_frac} сходится по вероятности к $-i(\theta_0)$
+    В силу \eqref{eq::taylor_frac::den} и \eqref{eq::taylor_frac::den2} и Леммы Слуцкого
+    знаменатель \eqref{eq::taylor_frac} сходится по вероятности к $-i(\theta_0)$
 
-    Значит, что вся дробь \ref{eq::taylor_frac} сходится по распределению к
+    Значит, что вся дробь \eqref{eq::taylor_frac} сходится по распределению к
     $\frac{1}{i(\theta_0)} \xi \sim N(0, \frac{1}{i(\theta_0)})$
 \end{proof}
 
@@ -461,20 +463,277 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
     $$L_n(X, \theta) = \sum_{i=1}^n\ln f(X_i, \theta)$$
     
     Система уравнений правдоподобия
-    \begin{equation}
+    \begin{equation*}
         \label{eq::sys_plausibility}
         \frac{\partial L_n(X, \theta)}{\partial\theta_i} = 0,\ i =1,2,\ldots,k
-    \end{equation}
+    \end{equation*}
     
     При условиях регулярности, похожих на условия теоремы \ref{th::asympt_consist},
     показыватся:
     \begin{enumerate}
         \item С вероятностью, стремящейся к единице при $n \rightarrow \infty$,
-            система уравнений \ref{eq::sys_plausibility} имеет такое решение $\hat{\theta}_n\in\Theta$,
+            система уравнений \eqref{eq::sys_plausibility} имеет такое решение $\hat{\theta}_n\in\Theta$,
             что $\hat{\theta}_n$ сходится к истинному значению $\theta_0$.
         \item Соответствующая оценка $\theta^*_n$ асимптотически нормальна. А именно
          $$n^{1/2}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, I^{-1}(\theta_0)),\ n\rightarrow\infty$$
          Здесь $I(\theta) > 0$ - матрица информации Фишера, то есть
-         $$I(\theta) = (I_{ij}(\theta)),\ I_{ij}(\theta) = \E_\theta \{\frac{\partial}{\partial} \cdot \frac{\partial}{\partial}\}$$ 
+         $$I(\theta) = (I_{ij}(\theta)),\ I_{ij}(\theta) = \E_\theta \left\{\frac{\partial \ln f(X, \theta)}{\partial\theta_i} \cdot \frac{\partial\ln f(X, \theta)}{\partial\theta_j}\right\}$$ 
     \end{enumerate}
+\begin{example}
+        $X = (X_1, \ldots, X_n)$, где $\{X_i\}$ - н.о.р., $X_1 \sim N(0, \sigma^2),\ a < \theta < b$,
+        $a$ и $b$ - известные конечные числа, дисперсия $\sigma^2$ известна.
+        Построим асимптотически эффективную оценку $\theta^*_n$ для $\theta$.
+
+        Здесь $p(x, \theta) = \left(\frac{1}{\sqrt{2\pi} \sigma}\right)^ne^{-\frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\theta)^2}$,
+        значит
+        $$L_n(X, \theta) = \ln\left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n - \frac{1}{2\sigma^2}\sum_{i=1}^n(X_i-\theta)^2$$
+        Уравнение правдоподобия имеет вид
+        $$\frac{\partial L_n(X, \theta)}{\partial\theta} = \frac{1}{\sigma^2}\sum_{i=1}^n(X_i - \theta) = 0$$
+        Его решение существует и единственно, это $\overline{X}$, причем
+        в т. $\theta = \overline{X}\ L_n(X,\theta)$ достигает максимума,
+        так как $\frac{\partial^2 L_n(X, \overline{X})}{\partial\theta^2} = - \frac{1}{\sigma^2} < 0$
+
+        Таким образом, если $a < \overline{X} < b$, то о.м.п. сущесвтует и равна $\overline{X}$,
+        в противном случае о.м.п. не существует. Если положить
+        \begin{equation}
+            \label{eq::ex::as_appraisal}
+            \theta^*_n = \begin{cases}
+                \overline{X},\ a < \overline{X} < b \\
+                \frac{a+b}{2},\ \overline{X} \notin (a,b) 
+            \end{cases}
+        \end{equation}
+        То в силу теоремы \ref{th::asympt_consist} (её условия
+        выполнены, проверьте сами), $\theta^*_n$ - асимптотически эффективная оценка, то есть
+        \begin{equation}
+            \label{eq::ex::as_conv}
+            n^{1/2}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, \sigma^2)
+        \end{equation}
+        Напомним, что в этой модели $i(\theta) = \frac{1}{\sigma^2}$.
+        Cправедливость \eqref{eq::ex::as_conv} c $\theta^*_n$
+        из \eqref{eq::ex::as_appraisal} легко проверить непосредственно.
+\end{example}
+\begin{example}
+    Если $\Theta$ - компакт (то есть отрезок $[a, b]$), то о.м.п. существует
+    всегда, так как непрерывная функция на отрезке всегда достигает своего максимума.
+    Значит значение о.м.п.
+    \begin{equation*}
+        \theta^*_n = \begin{cases}
+            \overline{X},\ a < \overline{X} < b \\
+            a,\ \overline{X} < a \\
+            b,\ \overline{X} > b
+        \end{cases}
+    \end{equation*}
+    Но на границах теряется асимптотическая Гауссовость.
+\end{example}
+
+
+\section{Проверка статистических гипотез}
+$X = (X_1, \ldots, X_n)$ имеет плотность вероятности $p(X, \theta)$
+по мере $\mu,\ \theta\in\Theta\subseteq\R^1$
+
+\begin{definition}
+    Предположение вида $H_0: \theta\in\Theta_0$, где
+    $\Theta_0\in\Theta$, называется параметрической гипотезой.
+    Альтернатива $H_1:\theta\in\Theta_1$, где
+    $\Theta_1\in\Theta\backslash\Theta_0$
+\end{definition}
+
+\begin{definition}
+    Если $\Theta_0(\Theta_1)$ состоит из одной точки,
+    то гипотеза $H_0$ (альтернатива $H_1$) называется
+    простой.
+    В противном случае $H_0(H_1)$ - сложная
+\end{definition}
+
+\underline{Постановка задачи}:
+
+Необходимо построить правило (статистический критерий - $test$),
+который позволяет заключить, согласуется ли наблюдение $X$
+с $H_0$ или нет.
+
+\underline{Правило.}
+
+Выберем в множестве значений $x$ вектора $X$ (у нас либо
+$x = \R^n$, либо $x = N_p \subseteq \R^n$ - носитель
+плотности) подмножество $S$. Если $X \in S$, то $H_0$ отвергается и
+принимается $H_1$. Если $X \in \overline{S} = X \backslash S$, то
+$H_0$ принимается.
+
+\begin{definition}
+    Множество $S$ называется критическим множеством или критерием,
+    $\overline{S}$ - область принятия гипотезы.
+\end{definition}
+
+\begin{definition}  
+    \defin{Ошибка 1-го рода} - принять $H_1$, когда
+    верна $H_0$. Вероятность ошибки 1-го рода $\alpha
+    = \P(H_1 | H_0)$ (это условная запись, а не условная вероятность). 
+    \defin{Ошибка 2-го рода} - принять $H_0$, когда
+    верна $H_1$. Вероятность ошибки 2-го рода $\beta
+    = \P(H_0 | H_1)$.
+\end{definition}
+
+\begin{definition}
+    \defin{Мощность критерия $S$} называется функция $W(S, \theta) = W(\theta)
+    := \P_\theta(X\in S)$ (вероятность отвергнуть $H_0$, когда
+    значение параметра есть $\theta$).
+\end{definition}
+
+Тогда
+\begin{align*}
+    \alpha &= \alpha(\theta) = W(\theta),\ \theta\in\Theta_0; \\
+    \beta  &= \beta(\theta) = 1 - W(\theta),\ \theta\in\Theta_1
+\end{align*}
+
+\begin{definition}
+Обычно $H_0$ более важна. Поэтому рассматривают критерии
+такие, что 
+$$\alpha(\theta) = W(\theta) = \P_{\theta}(X\in S) \leq\alpha \ \forall \theta\in\Theta_0$$
+    Число $\alpha$ называют \defin{уровнем значимости критерия}.
+    Пишут $S_\alpha$ - критерий уровня $\alpha$. Обычно $\alpha$ -
+    маленькое число, которое мы задаем сами.
+\end{definition}
+
+\begin{definition}
+    Если критерий $S^*_\alpha \in \{S_\alpha\}$ и $\forall\theta\in\Theta_1$ и
+    $\forall S_\alpha \ W(S^*_\alpha,\theta) \geq W(S_\alpha, \theta)$,
+    то критерий $S^*_\alpha$ называется \defin{РНМ-критерием (равномерно наиболее мощным)}.
+\end{definition}
+
+Если $H_0:\theta = \theta_0,\ H_1:\theta = \theta_1$ (то есть
+$H_0$ и $H_1$ - простые), то задача отыскания РНМ-критерия
+заданного уровня $\alpha$ имеет вид:
+\begin{align*}
+  \P_{\theta_0}(X\in S^*_\alpha) &\leq \alpha, \\
+  \P_{\theta_1}(X\in S^*_\alpha) &\geq \P_{\theta_1}(X\in S_\alpha) \ \forall S_\alpha
+\end{align*}
+
+Положим для краткости:
+$p_0(x) := p(x, \theta_0),\ \E_0 = \E_{\theta_0},\ p_{1}(x) = p(x, \theta_1),\ \E_1 = \E_{\theta_1}$
+
+Введем множество
+$$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
+
+\begin{theorem}[Лемма Неймана-Пирсона]
+    \label{th::lemma_N_P}
+    Пусть для некоторого $\lambda > 0$ и критерия $R$
+    (когда $X$ попадает в $R$, то $H_0$ отвергается)
+    выполнено:
+    \begin{enumerate}
+        \item  $\P_0(X\in R) \leq \P_0(X\in S(\lambda))$
+
+        Тогда: 
+        \item  $P_1(X\in R) \leq \P_1(X\in S(\lambda))$
+        \item  $P_1(X\in S(\lambda)) \geq \P_0(X\in S(\lambda))$
+    \end{enumerate}
+\end{theorem}
+\begin{remark}
+    $X\in S(\lambda) \Leftrightarrow \frac{p_1(x)}{p_0(x)} > \lambda$.
+    Так как $p_1(X)$ и $p_0(X)$ - правдоподобие, то критерий
+    называется критерием отношения правдоподобия Неймана-Пирсона.
+\end{remark}
+\begin{remark}
+    Утверждение 3 для $S(\lambda)$
+    означает, что
+    $$\P(H_1 | H_1) \geq \P(H_1|H_0) \Leftrightarrow W(S(\lambda), \theta_1) \geq W(S(\lambda), \theta_0)$$
+    Это свойство назыается несмещенностью критерия $S(\lambda)$
+\end{remark}
+\begin{proof}
+    Дальше для краткости $S(\lambda) = S$. Пусть
+    $I_R(x) = \begin{cases}
+        1, x\in \R \\
+        0, x\notin \R 
+    \end{cases}$, $I_S(x)$ определяем аналогично.
+    Тогда Условие (А) имеет вид:
+    \begin{equation}
+        \label{eq::cond_A}
+        \E_0I_R(x) \leq \E_0I_S(x)
+    \end{equation}
+
+    \underline{Докажем пункт 2}:
+    Верно неравенство
+    \begin{equation} \label{eq::LemmaNP::dens}
+        I_R(x)[p_1(x) - \lambda p_0(x)] \leq I_S(x)[p_1(x) - \lambda p_0(x)]
+    \end{equation}
+
+    Действительно, если $(p_1(x) - \lambda p_0(x)) > 0$,
+    то $I_S(x) = 1$ и \eqref{eq::LemmaNP::dens} очевидно.
+
+    Если же $p_1(x) - \lambda p_0(x) \leq 0$, то правая часть
+    \eqref{eq::LemmaNP::dens} есть ноль, а левая $\leq$ нуля.
+
+    Итак, \eqref{eq::LemmaNP::dens} верно: интегрируем это неравенство по $x\in\R^n$:
+    $$\E_1I_R(X) - \lambda\E_0I_R(X) \leq \E_1I_S(X) - \lambda\E_0I_S(X)$$
+    \begin{equation} \label{eq::LemmaNP::MO}
+        \E_1I_S(X) - \E_1I_R(X) \geq \lambda\underbrace{[\E_0I_S(X) - \E_0I_R(X)]}_{\geq 0 \text{ по условию \eqref{eq::cond_A}}}
+    \end{equation}
+    В силу \eqref{eq::cond_A}, \eqref{eq::LemmaNP::MO} и условия $\lambda > 0$ получаем:
+        $$E_1I_S(X) \geq E_1I_\R(X)$$
+
+    \underline{Докажем пункт 3}: Пусть $\lambda \geq 1$.
+    Из определения $S\ p_1(x) > p_0(x) \ \forall x\in S.$
+    Отсюда
+    $$\P_0(X\in S) = \int_{R^n} I_S(X)p_0(x)\mu(dx) \leq \int_{R^n} I_S(X)p_1(x)\mu(dx) = \P_1(X\in S)$$ 
+    То есть $\P(H_1 | H_0) \leq \P(H_1 | H_1)$
+
+    Пусть $\lambda < 1$. Рассмотрим $\overline{S} = \{x: p_1(x) \leq \lambda p_0(x)\}$.
+    При $\lambda < 1\ p_1(x) < p_0(x)$ при $x\in \overline{S}$.
+    Отсюда
+    $$\P_1(X\in \overline{S}) = \int_{R^n} I_{\overline{S}}(X)p_1(x)\mu(dx) \leq \int_{R^n} I_{\overline{S}}(X)p_0(x)\mu(dx) = \P_0(X\in \overline{S})$$ 
+    То есть $1 - \P_1(X\in S) \leq 1 - \P_0(X\in S)$, откуда
+    $\P_1(X\in S) \geq \P_0 (X\in S)$
+\end{proof}
+
+\begin{example}
+    $X = (X_1,\ldots, X_n), \{X_i\}$ - н.о.р., $X_1 \sim N(\theta, \sigma^2)$,
+    дисперсия $\sigma^2$ известна. Построим наиболее мощный критерий
+    для проверки $H_0: \theta = \theta_0$ против $H_1: \theta = \theta_1$
+    (в случае $\theta_1 > \theta_0$). Уровень значимости возьмем $\alpha$.
+    \begin{enumerate}
+        \item Имеем 
+        $$p_0 = \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp{\left\{-\frac{1}{2\sigma^2} \sum^n_{i=1} (x_i -\theta_0)^2\right\}},\ 
+        p_1 = \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp{\left\{-\frac{1}{2\sigma^2} \sum^n_{i=1} (x_i -\theta_1)^2\right\}};$$
+        $$S(\lambda) = \{x:p_1(x) - \lambda p_0(x) > 0\} \underset{\text{делим на }p_0}{\Leftrightarrow}
+        \exp{\left\{\frac{1}{2\sigma^2}\sum_{i=1}^n\left[ (x_i-\theta_1)^2 -(x_i-\theta_0)^2 \right]\right\}} > \lambda\Leftrightarrow$$
+        $$\Leftrightarrow \sum_{i=1}^n\left[(x_i - \theta_1)^2 - (x_i - \theta_0)^2\right] < \lambda_1 = -2\sigma^2\ln\lambda
+        \underset{\text{арифметика}}{\Leftrightarrow} (\theta_0 - \theta_1)\sum_{i=1}^n x_i \leq\lambda_2 \Leftrightarrow$$
+        $$\Leftrightarrow \sum_{i=1}^n x_i > \widetilde{\lambda},\ \widetilde{\lambda}(\lambda, n, \sigma^2, \theta_0, \theta_1)$$
+        Итак,
+        $$S(\lambda) = \left\{x: \sum_{i=1}^n x_i > \widetilde{\lambda}\right\} \text{ при некотором } \widetilde{\lambda}$$
+
+        \item Определим $\widetilde{\lambda} = \widetilde{\lambda}_\alpha$ 
+            из уравнения
+            $$\alpha = \P_{\theta_0}(X \in S(\widetilde{\lambda}_\alpha)) = 
+            \P_{\theta_0}\left(\sum_{i=1}^n X_i > \widetilde{\lambda}_\alpha\right)$$
+            Преобразуем левую сумму в стандартную Гауссовскую величину. Тогда
+            $$\alpha = \P_{\theta_0}\left(\frac{1}{\sqrt{n} \sigma} \sum_{i=1}^n(X_i - \theta_0) > \frac{\widetilde{\lambda}_\alpha - n\theta_0}{\sqrt{n}\sigma}\right)=
+            1 - \Phi\left(\frac{\widetilde{\lambda}_\alpha - n\theta_0}{\sqrt{\pi}\sigma}\right)$$
+            так как $\frac{1}{\sqrt{n}\sigma}\sum_{i} (X_i - \theta_0) \sim N(0, 1)$ при $H_0$.
+            
+            Значит $\Phi\left(\frac{\widetilde{\lambda}_\alpha - n\theta_0}{\sqrt{\pi}\sigma}\right) = 1 - \alpha,\
+            \left(\frac{\widetilde{\lambda}_\alpha - n\theta_0}{\sqrt{\pi}\sigma}\right) = \xi_{1-\alpha}$
+             - квантиль станд. норм. закона уровня $1 - \alpha$.
+            Окончательно, $\widetilde{\lambda}_\alpha = n\theta_0 + \sqrt{n}\sigma \xi_{1-\alpha}$
+
+        \item Положим $S^*_{\alpha} = \{x: \sum_{i=1}^n x_i > \widetilde{\lambda}_\alpha\}$
+            Тогда $\P_{\theta_0}(X\in S_\alpha^*)=\alpha,$ и: 
+            $$\forall S_\alpha\ \P_{\theta_0}(X\in S_\alpha)\leq\alpha = \P_{\theta_0}(X\in S_\alpha^*)$$
+        
+            Значит, выполнено условие 1 Леммы Неймана-Пирсона, и в силу
+            пункта 2 этой леммы
+            $$\P_{\theta_1}(X\in S_\alpha) \leq \P_{\theta_1}(X\in S_\alpha^*)$$
+            То есть $S_\alpha^*$ - наиболее мощный критерий уровня $\alpha$.
+        \end{enumerate} 
+        Так как $S^*_{\alpha}$ не зависит от $\theta_1$,
+        то $S^*_{\alpha}$ - РНМ-критерий для $H_0: \theta = \theta_0$
+        против $H^+_1 : \theta > \theta_1$
+        Мощность критерия $S^*_{\alpha}$ для $H_0$ при альт. $H^+_1$
+
+        $$W(\theta, S^*_{\alpha}) = \P_\theta\left(\sum_{i=1}^nX_i > n\theta_0 + \sqrt{n}\sigma\xi_{1-\alpha}\right) = $$
+        $$ = \P_\theta\left(\frac{1}{\sqrt{n}\sigma} \sum_{i=1}^n(X_i - \theta) > \frac{\sqrt{n}(\theta_0 - \theta)}{\sigma} + \xi_{1-\alpha}\right) =
+        1 - \Phi\left(\xi_{1-\alpha} + \frac{\sqrt{n}(\theta - \theta_0)}{\sigma}\right)$$
+\end{example}
+
+    \subsection*{О связи между доверительным оцениванием и проверкой гипотез}
+
 \end{document}
