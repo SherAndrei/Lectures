@@ -1,0 +1,467 @@
+\documentclass[12pt]{article}
+ 
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+%for search in russian
+\usepackage{cmap}
+%--------------------------------------
+
+%Math-specific packages
+%--------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%Format-specific packages
+%--------------------------------------
+\usepackage[left=2cm,
+            right=2cm,
+            top=1cm,
+            bottom=2cm,
+            bindingoffset=0cm]{geometry}
+%--------------------------------------
+
+% for theorems, lemmas and definitions
+%--------------------------------------
+\usepackage{amsthm}
+
+\counterwithin*{equation}{section}
+
+\newtheorem{definition}{Опр.}
+\newtheorem{lemma}{Лемма}
+\newtheorem*{remark}{Замечание}
+\newtheorem*{corollary}{Следствие}
+\newtheorem*{proposition}{Предложение}
+\newtheorem*{example}{Пример}
+\newtheorem*{task}{Задача}
+
+\newtheoremstyle{basic_theorem}    %<name>
+                 {\topsep}   %<space above>
+                 {\topsep}   %<space below>
+                 {\itshape}  %<body font>
+                 {}          %<indent amount>
+                 {\bfseries} %Theorem head font>
+                 {.}         %<punctuation after theorem head>
+                 {\newline}  %<space after theorem head> (default .5em)
+                 {}          %<Theorem head spec>
+\theoremstyle{basic_theorem}
+\newtheorem{theorem}{Теорема}
+
+\newtheoremstyle{name_theorem}
+                {\topsep}
+                {\topsep}
+                {\itshape}
+                {}
+                {\bfseries}
+                {.}
+                {\newline}
+                {\thmnote{#3}}
+\theoremstyle{name_theorem}
+\newtheorem*{named_theorem}{Теорема}
+%--------------------------------------
+
+% My commands
+%--------------------------------------
+% for definitions
+\newcommand\defin[1]{\textbf{#1}}
+
+\def\R{
+    \mathbb{R}
+}
+
+\def\E{
+    \mathrm{E}
+}
+
+\def\D{
+    \mathrm{D}
+}
+
+\def\P{
+    \mathrm{P}
+}
+
+\def\F{
+    \mathcal{F}
+}
+
+\def\B{
+    \mathfrak{B}
+}
+
+%--------------------------------------
+
+\begin{document}
+    
+\section{Предварительные сведения}
+
+\begin{definition}
+    Пусть $\Omega = \{\omega\}$ - произвольное множество, а $\F$ - \defin{$\sigma$-алгебра} его подмножеств,
+    то есть система множетсв, таких что:
+    \begin{enumerate}
+        \item $\Omega \in \F$
+        \item Если $A \in \F$, то $\bar{A} := \Omega - A \in \F $
+        \item Если $A_1, A_2, \ldots \in \F$, то $\bigcup_iA_i \in \F$ и $ \bigcap_iA_i \in \F$ 
+    \end{enumerate}
+\end{definition}
+\begin{example}
+    Система всех подмножеств $\F$ - $\sigma$-алгебра
+\end{example}
+\begin{example}
+    $\{0, \Omega\}$ - $\sigma$-алгебра
+\end{example}
+\begin{definition}
+    Пусть $\Omega = \R$, а $\F$ - наименьшая сигма-алгебра, содержащая все
+    интервалы $(\alpha, \beta)$. Такая $\F$ обозначается $\B(\R)$ и
+    называется \defin{борелевской сигма-алгеброй}.
+\end{definition}
+
+\begin{definition}
+    Мера $\mu$, определенная на $\F$, называется \defin{сигма-аддитивной},
+    если это неотрицательная функция, $\mu(A) \geq 0$ для $A \in \F$,
+    и она удовлетворяет условию сигма-аддитивности, то есть:
+    $$\mu(\bigcup_iA_i) = \sum_i\mu(A_i), \ A_i \in \F, A_i \cap A_j \underset{i \neq j}{=} \varnothing $$
+\end{definition}
+\begin{definition}
+    Мера $\mu$ называется \defin{сигма-конечной}, если $\exists$ множетсва $A_i \in \F$
+    такие, что $\bigcup_iA_i = \Omega$ и $\mu(A_i) < \infty$
+\end{definition}
+\begin{example}[Считающая мера]
+    Пусть $\Omega$ - счетное, $\F$ - множество всех подмножеств $\Omega$.
+    Положим для $A \in \F$
+    $$\mu(A) := \{ \mbox{числу точек $\Omega$, попавших в А}\}$$
+    Такая мера называется считающей, она сигма-конечна.
+\end{example}
+\begin{example}[Лебегова мера]
+    Пусть $\Omega = \R, \F = \B(\R)$. $\exists!$ мера
+    $\mu$ на $\B(\R)$ такая, что 
+    $$\mu((\alpha, \beta]) = \beta - \alpha$$
+    Это мера Лебега, она сигма-конечна.
+\end{example}
+\begin{definition}
+    $(\Omega, \F)$ - \defin{измеримое пространство}.
+    $(\Omega, \F, \mu)$ - \defin{пространство с мерой}.
+\end{definition}
+\begin{definition}
+    Если $\mu(\Omega) = 1$, то $\mu$ - \defin{вероятностная мера}, она обозначается
+    через $\P$.
+\end{definition}
+\begin{definition}
+    Тройка $(\Omega, \F, \P)$ - \defin{вероятностное пространство}.
+\end{definition}
+\begin{definition}
+    Измеримая функция $\xi: (\Omega, \F) \rightarrow (\R. \B(\R))$
+    (то есть $\forall B \in \B(\R)\ \xi^{-1}(B):=(\omega:\xi(\omega)\in B) \in \F$)
+    называется \defin{случайной величной}.
+
+    Измеримая функция $\phi:(\R. \B(\R)) \rightarrow (\R. \B(\R))$
+    называется \defin{борелевской}.
+\end{definition}
+\begin{definition}
+    Рассмотрим сл. в. $\xi \in \R^1$. Для $x \in \R^1$ функция 
+    $F(x) = \P(\omega: \xi(\omega) \leq x) = \P(\xi \leq x)$ называется
+    \defin{функцией распределения}.
+\end{definition}
+\begin{definition}
+    Мера $\P_\xi(A) := \P(\omega: \xi(\omega) \in A), \ A \in \B(\R)$,
+    называется \defin{распределением} случайной величины $\xi$.
+
+    Тогда $F(x) = \P_\xi((-\infty, x])$, то есть \underline{$\P_\xi$ определяет $F(x)$}.
+    
+    Обратно: $\P (\alpha < \xi \leq \beta) = F(\beta) - F(\alpha)$, 
+    и $\exists!$ вероятнаостная мера $\P_\xi$ такая, что
+    $\P_\xi((\alpha, \beta]) = F(\beta) - F(\alpha)$, то есть \underline{$F(x)$ определяет $\P_\xi$}.
+\end{definition}
+\begin{definition}
+    Пусть на $(\R, \B(\R))$ задана $\sigma$-конечная мера $\mu$.
+    Если $\exists$ борелевская функция $f(x), f(x) \geq 0$ такая, что:
+     $$\P_\xi(A) = \int_Af(x)\mu(dx) \ \forall A \in \B(\R)$$
+    то $f(x)$ называется \defin{плотностью вероятности случайной величины по мере $\mu$}.
+\end{definition}
+Если $\mu$ - мера Лебега, то $f(x)$ - обычная плотность вероятности сл. в. $\xi$,
+введенная на 2-ом курсе. Если же $\xi$ дискретна со значениями $x_1, x_2, \ldots$,
+а $\mu$ - cчитающая мера, сосредоточенная в этих точках, то, очевидно,
+$$\P_\xi(A) = \int_A \P(\xi = x)\mu(dx) \ \forall A \in \B(\R)$$
+Последнее равенство означает, что у дискретной случайной величины $\xi$
+есть плотность вероятности $f(x) = \P(\xi = x), \ x = x_1, x_2, \ldots$
+по считающей мере. (При $ x \neq x_1, x_2, \ldots$ значения не важны, их
+можно положить равными 0)
+\begin{definition}
+    \defin{Математическим ожиданием} случайной величины $\xi$ называется число
+    $$\E\xi = \int_\Omega \xi(\omega)\P(d\omega)$$
+    (в предположении, что $\int_\Omega |\xi(\omega)| \P(d\omega) < \infty$,
+    иначе говорим, что мат. ожидание $\nexists$)
+\end{definition}
+    Если $f(x)$ - плотность вероятности случайной величины $\xi$ по мере $\mu$,
+    а $\phi(x)$ - борелевская функция, то
+    $$\E\phi(\xi) = \int_\R\phi(x)\P_\xi(dx) = \int_\R\phi(x)f(x)\mu(dx)$$
+    В частности, если $\xi$ - абсолютно непрерывная случайная величина в
+    терминологии 2-го курса (то есть $\mu$ - мера Лебега), то пишем
+    $$\E\phi(\xi) = \int_\R\phi(x)f(x)dx$$
+    Разумеетса, только в случае $\int_\R|\phi(x)|f(x)dx < \infty$.
+    Если же $\xi$ дискретна со значениями $x_1, x_2, \ldots$ и соответствующими
+    вероятностями, то 
+    $$\E\phi(\xi) = \sum_{i \geq 1} \phi(x_i)p_i \mbox{ (если ряд сходится абсолютно)}$$
+
+\begin{definition}
+    Обозначим $\B(\R^K)$ борелевскую $\sigma$-алгебру подмножеств $\R^K$.
+    Вектор $\xi = (\xi_1, \ldots, \xi_k)^T$ называется \defin{$k$-мерным случайным
+    вектором}, если $\xi$ - измеримое отображение $\xi: (\Omega, \F) \rightarrow (\R^K, \B(\R^K))$
+\end{definition}
+    Известно: $\xi$ - случайный вектор $\Leftrightarrow$ каждая
+    компонента $\xi_i$ - одномерная случайная величина.
+\begin{definition}
+    \defin{Функция распределения случайного вектора $\xi$}:
+    $$F(x_1, \ldots, x_K) = \P(\xi_1 \leq x_1, \ldots, \xi_K \leq x_K), x_i\in\R$$
+\end{definition}
+\begin{definition}    
+    \defin{Распределение}: $\P_\xi(A) = \P(\omega: \xi(\omega) \in A), \ A \in \B(\R^K)$.
+\end{definition}
+\begin{definition}
+    \defin{Плотность вероятности вектора $\xi$ по мере $\mu$} ($\mu$ определена на элементах $\B(\R^K)$)
+    - борелевская функция $f(x)\geq 0, x = (x_1, \ldots, x_K)$ такая, что:
+    $$\P_\xi(A) = \int_Af(x)\mu(dx), \ \forall A \in \B(\R^K)$$
+\end{definition}
+\begin{definition}
+    Случайные величины $\{\xi_1, \ldots, \xi_K\}$ \defin{независимы}, если
+    $$P(\xi_1 \in A_1, \ldots, \xi_K \in A_K) = \prod_{i = 1}^K \P(\xi_i \in A_i) \ \forall A_i \in \B(\R) $$
+    Бесконечная последовательность будет последовательностью независимых величин,
+    если каждая конечная подпоследовательность независима.
+\end{definition}
+\begin{named_theorem}[Необходимые и достаточные условия независимости]
+    Рассмотрим $x = (x_1, \ldots, x_K) \in \R^K$
+    \begin{enumerate}
+        \item $F(x) = F_{\xi_1}(x_1)F_{\xi_2}(x_2)\ldots F_{\xi_K}(x_K) \ \forall x \in \R^K$
+        \item Если $\exists$ плотность $f(x)$:
+        $f(x) = f_{\xi_1}(x_1)f_{\xi_2}(x_2)\ldots f_{\xi_K}(x_K) \mbox{ для $\mu$-почти всех } x \in \R^K$
+    \end{enumerate}
+\end{named_theorem}
+
+\subsection*{В заключении Раздела 1 поговорим о сходимости случайных векторов.}
+
+Пусть случайные векторы $\xi, \xi_1, \xi_2, \ldots$ размера $K$ со значениями
+в $(\R, \B(\R^K))$ определены на некотором вероятностном пространстве $(\Omega, \F, \P)$.
+Пусть $|\cdot|$ означает Евклидову норму вектора, то есть $|\xi| = \sqrt{\sum_{i=1}^K\xi_i^2}$.
+\begin{definition}
+    Говорят, что последовательность ${\xi_n}$ сходится \defin{слабо} к $\xi$,
+    (пишем $\xi_n \xrightarrow{w} \xi,\ n \rightarrow \infty$) если
+    для любой непрерывной и ограниченной $g: \R^K \rightarrow \R^1 $
+    \begin{equation} \label{eq::weakly_conv}
+        \int_{\R^K}g(x)\P_{n}(dx) \rightarrow \int_{\R^K}g(x) \P(dx) ,\ n \rightarrow \infty  
+    \end{equation}
+    Здесь $\P_n$ и $\P$ - распределения соотвественно $\xi_n$ и $\xi$.
+    
+    В вероятностных терминах: $\xi_n \xrightarrow{w} \xi,\ n \rightarrow \infty \Leftrightarrow$
+    математическое ожидание $\E\xi_n \rightarrow \E\xi$
+\end{definition}
+\begin{definition}
+    Обозначим $F_n(x),\ F(x),\ x=(x_1, \ldots, x_n)$ как функции распределения
+    векторов $\xi_n$  и $\xi$, тогда сходимостью \defin{в основном} называют
+    \begin{equation} \label{eq::mainly_conv}
+        F_n(x) \Rightarrow F(x), \text{ то есть } F_n(x)\rightarrow F(x)\ \forall x\in C(F)
+    \end{equation}
+\end{definition}
+
+    Пусть $\phi_n(t)$ и $\phi(t), t\in\R^K$, будут характеристические функции
+    $\xi_n$ и $\xi$, то есть $\phi(t):=\E e^{it^T\xi}$.
+    \begin{equation} \label{eq::har_funcs_conv}
+        \phi_n(t) \rightarrow \phi(t)\ \forall t\in\R^K,\ n\rightarrow\infty 
+    \end{equation}
+\begin{definition}
+    Если выполнено любое из соотношений \eqref{eq::weakly_conv} - \eqref{eq::har_funcs_conv}
+    будем писать
+    \begin{equation}\label{eq::raspr_conv}
+        \xi_n\xrightarrow{d}\xi,\ n\rightarrow\infty
+    \end{equation}
+    И говорить, что $\{\xi_n\}$ сходится к $\xi$ \defin{по распределению}.
+\end{definition}
+\begin{remark}
+    Сходимость \eqref{eq::raspr_conv} не следует из сходимости
+    $\xi_{i_n}\xrightarrow{d}\xi_i,\ i=1,\ldots,K$, компонент векторов $\xi_n$ и $\xi$
+
+    Рассмотрим двумерный вектор $(-\xi, \xi),\ \xi \sim N(0,1)$.
+    $(-\xi) \xrightarrow{w} \xi$, так как одна и та же функция распределения и плотность,
+    значит есть покомпонентная сходимость. Почему нет слабой сходимости двумерного вектора?
+    По теореме с прошлого семестра: если $\xi_1 \xrightarrow{w}\xi_2$, то
+    $\sum_i\xi_{1_i} \xrightarrow{w} \sum_i\xi_{2_i}$, но $-\xi+\xi=0 \overset{w}{\nrightarrow} \xi+\xi=2\xi$,
+    так как разные функции распределения.
+\end{remark}
+
+\begin{definition}
+    Говорят, что последовательность $\{\xi_n\}$ 
+    сходится по вероятности к вектору $\xi$ (пишут $\xi_n\xrightarrow{\P}\xi,\ n\rightarrow\infty$),
+    если 
+    \begin{equation} \label{eq::prob_conv}
+        \P(|\xi_n - \xi| > \epsilon) \rightarrow 0,\ n\rightarrow\infty,\ \forall \epsilon>0 
+    \end{equation}
+\end{definition}
+
+Понятно, что сходимость \eqref{eq::prob_conv}
+эквивалентна сходимости компонент $\xi_{i_n}\xrightarrow{\P}\xi_i,\ \forall i=1,\ldots,K$
+
+$\eqref{eq::prob_conv} \Rightarrow \eqref{eq::raspr_conv}$, но
+обратное верно только в частных случаях, например:
+$$\text{Если } \xi_n\xrightarrow{d} c = const,\text{ то }  \xi_n \xrightarrow{\P} c$$
+
+\begin{definition}
+    Говорят, что последовательность $\{\xi_n\}$ сходится \defin{п.н. (почти наверное
+    или с вероятностью единица)} и пишут $\xi_n\xrightarrow{\text{п.н.}}\xi,\ n\rightarrow\infty$,
+    если
+    \begin{equation} \label{eq::pn_conv}
+        \P(w: \xi_n(w)\rightarrow\xi(\omega)) = 1
+    \end{equation}
+\end{definition}
+\begin{task}
+    Если $\xi_n$ и $\xi$ скаляры, и $\xi_n\xrightarrow{\text{п.н.}}\xi$, то верно ли, что
+    $\xi_n^3\xrightarrow{\text{п.н.}}\xi^3$?
+\end{task}
+    Да, верно, так как у них одно и то же множество сходимости.
+
+    Сходимость \eqref{eq::pn_conv} влечет \eqref{eq::prob_conv}, а значит верно следующее:
+    $$\xi_n\xrightarrow{\text{п.н.}}\xi\Rightarrow \xi_n\xrightarrow{\P}\xi\Rightarrow\xi_n\xrightarrow{d}\xi,\ n\rightarrow\infty $$
+
+\begin{theorem}[Теорема непрерывности]
+    Пусть векторы $\{\xi_n\},\ \xi$ определены на $(\Omega, \F, \P),\ \xi_n,\xi\in\R^K$.
+    Пусть $A\in\B(\R^K)$, и $\P(\xi\in A) = 1$ (то есть $A$ - носитель $\xi$).
+    Пусть борелевская $H: \R^K\rightarrow\R^1$, и $H(x)$ непрерывна на множестве $A$.
+    Тогда:
+    \begin{enumerate}
+        \item Если $\xi_n\xrightarrow{d}\xi$, то $H(\xi_n)\xrightarrow{d} H(\xi),\ n\rightarrow\infty$
+        \item Если $\xi_n\xrightarrow{\P}\xi$, то $H(\xi_n)\xrightarrow{\P} H(\xi),\ n\rightarrow\infty$
+        \item Если $\xi_n\xrightarrow{\text{п.н.}}\xi$, то $H(\xi_n)\xrightarrow{\text{п.н.}} H(\xi),\ n\rightarrow\infty$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \underline{Докажем пункт 3}. Остальные будут доказаны на практических занятиях.
+
+    Итак, в силу непреревности функции $H(x)$ на $A$:
+    $$(\omega: \xi_n(\omega) \rightarrow\xi(\omega))\cap(\omega:\xi(\omega)\in A)
+    \subseteq (\omega: H(\xi_n(\omega)) \rightarrow H(\xi(\omega)))$$
+    Значит,
+    $$1 \underset{\xi_n\xrightarrow{\text{п.н.}}\xi}{=} \P(\xi_n(\omega) \rightarrow\xi(\omega)) \underset{A-\text{носитель}}{=} \P(\xi_n(\omega)\rightarrow\xi(\omega), \xi(\omega)\in A) \leq \P(H(\xi_n(\omega))\rightarrow H(\xi(\omega)))$$
+\end{proof}
+
+
+    Пусть на $(\Omega, \F, \P)$ задана бесконечная последовательность
+    случайных величин $\xi_1, \xi_2, \ldots.$
+    \begin{enumerate}
+        \item Если $\{\xi_i\}$ независимы и одинаково распределены (н.о.р.)
+        с конеченым средним, $\E|\xi_1|<\infty$, то
+        \begin{equation} \label{eq::strong_kolm}
+            n^{-1}\sum_{i=1}^n\xi_i\xrightarrow{\text{п.н.}}\E\xi_1,\ n\rightarrow\infty
+        \end{equation}
+        Соотношение \eqref{eq::strong_kolm} - усиленный закон больших чисел Колмогорова
+        \item Если $\{\xi_i\}$ некоррелированные сл.в., может быть, разнораспределенные, но с
+        одинаковым средним $m = \E\xi_i,\ \D\xi_i\leq c <\infty$, то
+        \begin{equation} \label{eq::weak_bigN}
+            n^{-1}\sum^n_{i=1}\xi_i\xrightarrow{\P}m=\E\xi_i,\ n\rightarrow\infty
+        \end{equation}
+        Cоотношение \eqref{eq::weak_bigN} - слабый закон больших чисел.
+        \item Если $\{\xi_i\}$ - н.о.р. сл.в., $\E\xi_1=m,\ 0<\D\xi_1=\sigma^2<\infty$,
+        то
+        \begin{equation} \label{eq::CPT}
+            \frac{1}{\sqrt{n}\sigma}\sum_{i=1}^n(\xi_i-m)\xrightarrow{d}\xi\sim N(0,1),\ n\rightarrow\infty
+        \end{equation}
+        Cоотношение \eqref{eq::CPT} - центральная предельная теорема (точнее, ее вариант).
+        То есть $$n^{1/2}(\overline{\xi}-m)\xrightarrow{d}N(0,\sigma^2)\text{, где } \overline{\xi}:=n^{-1}\sum_{i=1}^n\xi_i$$
+    \end{enumerate}
+
+\section{Примеры статистических задач. \\ Статистическая модель.}
+
+\begin{example}[Оценка среднего]
+\end{example}
+    Для многих изделий одна из основных характеристик - срок службы.
+    Срок службы обычно случаен и заранее неизвестен. Опыт показывает:
+    для однородного процесса производства сроки службы $x_1, x_2, \ldots, x_n$
+    соответственно 1-го, 2-го, и т.д. изделий можно рассматривать как
+    реализации н.о.р. сл.в. $X_1, X_2, \ldots, X_n$
+
+    (Будем предполагать, что на некотором вероятностном пространстве $(\Omega, \F, \P)$
+    определена бесконечная последовательность $X_1, X_2, \ldots$ и $X_1, \ldots, X_n$ - её
+    первые $n$ членов)
+
+    Интересующий нас параметр, определяющий (в какой-то мере) срок службы
+    отождествим с $\theta = \E X_1$.
+
+    Одна из стандарстных статистических задач состоит в том, чтобы выяснить,
+    чему равно $\theta$. Вот возможное решение.
+
+    В силу Усиленного Закона Больших Чисел (УЗБЧ) Колмогорова
+    $$\overline{X} := \frac{1}{n} \sum^n_{i=1}X_i\xrightarrow{\text{п.н.}} \E X_1=\theta,\ n\rightarrow\infty$$ 
+    Возьмем $n$ готовых изделий и проверим их. Пусть $x_1, x_2, \ldots, x_n$ сроки службы
+    готовых изделий. Это реализации сл.в. $X_1, \ldots, X_n$. Естественно ожидать,
+    что $\overline{x}=\frac{1}{n}\sum_{i=1}^nx_i$ при больших $n$ оокажется близким к $\theta$.
+
+    \underline{Это задача точечного оценивания параметра}
+
+    $X_1, \ldots, X_n$ - случайные наблюдения; $\overline{X}$ - (борел. ф-ция) статистическая
+    оценка, это случайная величина $\overline{x}$ - реализация оценки,
+    с ней работают на практике.
+
+    Ясно, что нужны оценки, которые в среднем близки $\theta$.
+    Тогда и реализации будут близки.
+
+    Пусть в частности, 
+    $$\P(X_1 \leq t) = \begin{cases}
+        0,\ t \leq 0 \\
+        1 - e^{-t/\theta},\ t > 0
+    \end{cases}\ \text{параметр } \theta > 0$$
+    То есть $X_1\sim Exp(\frac{1}{\theta})$,
+    и $\E_\theta X_1=\theta$.
+
+    Тогда $\overline{X}$ оптимальна при любом конечном $n\geq 1$
+    в следующем смысле:
+    \begin{enumerate}
+        \item $$\E_\theta\overline{X} = \frac{1}{n}\sum_{i=1}^n\E_\theta X_i=\theta \ \forall\theta > 0$$
+            Это свойство несмещенности качественно: реализации $\overline{X}$ группируются
+            вокруг $\theta$
+        \item $$\D_\theta\overline{X}\leq\D_\theta\hat{\theta}_n
+            \ \forall\theta>0 \text{ и любой несмещенной оценки } \hat{\theta}_n=\hat{\theta}_n(x_1,\ldots,x_n)$$
+            Это свойство также качественно: реализации $\overline{X}$
+            в среднем лежат ближе к $\theta$, чем у других $\hat{\theta}_n$ 
+    \end{enumerate}
+
+    \begin{example}[Проверка однородности данных]
+    \end{example}
+    Некоторый эксперимент проводится сначала $m$ раз в
+    условиях $A$, а затем $n$ раз в условиях $B$.
+    Пусть $x_1,\ldots,x_m$ -  результаты в условиях $A$,
+    $y_1,\ldots,y_n$ - в условиях $B$.
+
+    Например, влияет ли некоторый препарат на развитие растений,
+    лекарство на анализы больного и т.п.
+
+    Будем считать $\{x_i\}$ реализациями н.о.р. сл.в.,
+    $\{X_i\}$ с ф.р. $X_1\sim F_X(x)=\P(X_1\leq X)$.
+    Пусть $\{y_j\}$ - реализации н.о.р. сл.в. $\{Y_j\}$,
+    ф.р. $Y_1\sim F_Y(x)$.
+
+    Последовательности $\{X_i\}$ и $\{Y_j\}$ независимы.
+
+    Интерпретируем поставленную задачу как проверку гипотезы
+    $$H: F_X = F_Y$$. Предположение о том, что условия $B$
+    дают иной результат интерпретируем как гипотезу (альтернативную к $H$)
+    $$K: F_X \neq F_Y$$
+    \underline{Важно}: ни $F_X$, ни $F_Y$ неизвестны!
+    
+    Оценкой $F_X(x)$ возьмем
+    $$\hat{F}_{mX}(x)=\frac{1}{m}\sum^m_{i=1}I(X_i\leq x),\ x\in\R$$
+    Это "хорошая" оценка, т.к. в силу УЗБЧ
+    $$\hat{F}_{mX}(x)=\frac{1}{m}\sum^m_{i=1}I(X_i\leq x)\xrightarrow{\text{п.н.}}\E I(X_1\leq x) = F_X(x)$$
+
+    (У нас $\{X_i\}$ и $\{Y_j\}$ определены на одном $(\Omega,\F,\P)$)
+    \begin{named_theorem}[Теорема Гливенко-Кантелли]
+        $$\sup_x \vert\hat{F}_{mX}(x) - F_X(x)\vert\xrightarrow{\text{п.н.}}0,\ m\rightarrow\infty$$
+    \end{named_theorem}
+
+    Очевидно, если гипотеза $H$ верна, то величина
+    $$\D_{mn} :=\sup_x\vert\hat{F}_{mX}-\hat{F}_{nY}\vert\text{ мала при больших }m,\ n$$
+    Получаем естественное правило: \par
+        Если $\D_{mn}\leq c$, то $H$ принять; \par
+        Если $\D_{mn}>c$, то $H$ опровергнуть и принять $K$. \newline
+    \underline{Но как выбрать константу c?}
+
+
+\end{document}
