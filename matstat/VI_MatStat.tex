@@ -74,6 +74,13 @@
 % for definitions
 \newcommand\defin[1]{\textbf{#1}}
 
+\def\eps{
+    \varepsilon
+}
+\def\Eps{
+    \mathcal{E}
+}
+
 \def\R{
     \mathbb{R}
 }
@@ -335,7 +342,7 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         \begin{enumerate}
             \item $P_{\theta_0}(S_n) \rightarrow 1$.
             \item Существует такое решение $\hat{\theta}_n \in \Theta$, что
-                $$P_{\theta_0} (|\hat{\theta}_n - \theta_0| < \epsilon, S_n) \rightarrow 1,\ n\rightarrow\infty,\ \forall\epsilon>0$$
+                $$P_{\theta_0} (|\hat{\theta}_n - \theta_0| < \eps, S_n) \rightarrow 1,\ n\rightarrow\infty,\ \forall\eps>0$$
         \end{enumerate}
         \underline{Докажем пункт 1}: Выберем малое $a>0$ так, что на $(\theta_0 - a, \theta_0 + a) \subseteq\Theta$. Пусть
         $$S^a_n = \{\omega: L_n(X, \theta_0) > L_n(X, \theta_0 - a), L_n(X, \theta_0) > L_n(X, \theta_0 + a)\}$$
@@ -358,20 +365,20 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         и последовательность корней есть корень. Этот корень $\hat{\theta}_n$
         и есть состоятельная оценка $\theta$. Покажем это:
 
-        $\forall \text{ малого } \epsilon > 0$:
+        $\forall \text{ малого } \eps > 0$:
         \begin{equation}
             \label{eq::S_n}
-            \P_{\theta_0}(|\hat{\theta}_n - \theta_0| < \epsilon, S_n) \geq
-            \P_{\theta_0}(|\hat{\theta}^\epsilon_n - \theta_0| < \epsilon, S_n^\epsilon)
+            \P_{\theta_0}(|\hat{\theta}_n - \theta_0| < \eps, S_n) \geq
+            \P_{\theta_0}(|\hat{\theta}^\eps_n - \theta_0| < \eps, S_n^\eps)
         \end{equation}
-        Так как $S^\epsilon_n \subseteq S_n,\
-        (\omega: |\hat{\theta}^\epsilon_n - \theta_0| < \epsilon) \subseteq
-        (\omega: |\hat{\theta}_n - \theta_0| < \epsilon)$
+        Так как $S^\eps_n \subseteq S_n,\
+        (\omega: |\hat{\theta}^\eps_n - \theta_0| < \eps) \subseteq
+        (\omega: |\hat{\theta}_n - \theta_0| < \eps)$
         
-        Но $\P_{\theta_0}(|\hat{\theta}^\epsilon_n - \theta_0| < \epsilon, S^\epsilon_n) 
-        \underset{\text{т.к. события из } S_n^\epsilon \text{ лежат в } |\hat{\theta}^\epsilon_n - \theta_0| < \epsilon}{=}
-        \P_{\theta_0}(S_n^\epsilon) \rightarrow 1$, значит в силу \eqref{eq::S_n}
-        $$\P_{\theta_0} (|\hat{\theta}_n - \theta_0| < \epsilon, S_n) \rightarrow 1$$
+        Но $\P_{\theta_0}(|\hat{\theta}^\eps_n - \theta_0| < \eps, S^\eps_n) 
+        \underset{\text{т.к. события из } S_n^\eps \text{ лежат в } |\hat{\theta}^\eps_n - \theta_0| < \eps}{=}
+        \P_{\theta_0}(S_n^\eps) \rightarrow 1$, значит в силу \eqref{eq::S_n}
+        $$\P_{\theta_0} (|\hat{\theta}_n - \theta_0| < \eps, S_n) \rightarrow 1$$
     \end{proof}
 
     \begin{remark}
@@ -382,9 +389,9 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         \end{cases}$$
         Тогда случайная величина $\theta^*_n$ всегда определена, и
         $\theta^*_n \xrightarrow{\P} \theta_0$, так как
-        $$\P(|\theta^*_n - \theta_0| < \epsilon) =
-        \P(|\hat{\theta}_n - \theta_0| < \epsilon, S_n) +
-        \P(|\theta' - \theta_0| < \epsilon, \overline{S}_n) \rightarrow 1$$
+        $$\P(|\theta^*_n - \theta_0| < \eps) =
+        \P(|\hat{\theta}_n - \theta_0| < \eps, S_n) +
+        \P(|\theta' - \theta_0| < \eps, \overline{S}_n) \rightarrow 1$$
         Ясно, что 
         \begin{equation}
             \frac{\partial}{\partial\theta} L_n(X, \theta^*_n) = \littleO_p(1)
@@ -735,5 +742,158 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
 \end{example}
 
     \subsection*{О связи между доверительным оцениванием и проверкой гипотез}
+
+\begin{definition}
+    Случайное подмножесто $\Theta^*=\Theta*(X,\alpha)\subseteq\Theta$
+    называется доверительным множеством уровня $1-\alpha,\ 0<\alpha<1$,
+    если
+    $$\P_\theta(\theta\in\Theta^*(X,\alpha))\geq 1-\alpha\ \forall\theta\in\Theta$$
+\end{definition}
+\begin{theorem} \label{th::trusted_set_eq_plausibility_test}
+    \begin{enumerate}
+    \item Пусть $\forall\theta_0\in\Theta$ гипотеза $H_0:\theta=\theta_0$
+    при альтернативе $H_1:\theta\neq\theta_0$ имеет $S_\alpha(\theta_0)$
+    критерием уровня $\alpha$. Пусть $\Theta^*(x,\alpha) = \{\theta:x\in\overline{S_\alpha}(\theta)\}$.
+    тогда $\Theta^*(X,\alpha)$ - доверительное множество уровня $1-\alpha$.
+    (Если есть критерий, то можно по этому  построить доверительное множество)
+    
+        \item Если $\Theta^*(X,\alpha)$ - доверительное множество уровня $1-\alpha$,
+    то $\overline{S_\alpha}(\theta_0)=\{x:\theta_0\notin\Theta(x,\alpha)\}$
+    есть обрасть применения гипотезы $H_0$ (следовательно и критерий).
+    \end{enumerate}
+\end{theorem}
+\begin{remark}
+    Пункт 2 означает, что если $\theta_0$ попало в доверительное множество,
+    то $H_0$ надо применять.
+\end{remark}
+\begin{proof}
+    \begin{enumerate}
+        \item $$\P_\theta(\theta\in\Theta^*(X,\alpha)) = \P_\theta(X\in\overline{S_\alpha}(\theta)) = 1 - \underbrace{\P_\theta(X\in S_\alpha(\theta))}_{\leq\alpha}\geq 1-\alpha\ \forall\theta\in\Theta$$
+        \item $$\P_{\theta_0}(X\in S_\alpha(\theta_0)) = 1-\P_{\theta_0}(X\in \overline{S_\alpha}(\theta_0))=
+        1-\underbrace{\P_{\theta_0}(\theta_0\in\Theta^*(X,\alpha))}_{\geq 1-\alpha} \leq 1-(1-\alpha) = \alpha$$
+    \end{enumerate}
+\end{proof}
+\begin{example}
+    Пусть $X=(X_1,\ldots,X_n)$, $\{X_i\}$ - н.о.р. сл.в., $X_1\sim N(0,\sigma^2),\theta\in\R^1$.
+    Построим критерий для $H_0:\theta=\theta_0$ против $H_1:\theta\neq\theta_0$.
+    Уровень значимости пусть будет $\alpha,\ 0<\alpha<1$.
+    
+    Построим доверительное множество для $\theta$ уровня $1-\alpha$.
+    Пусть $\overline{X}=\frac{1}{n}\sum^n_{i=1}X_i$ - оптимальная оценка $\theta$.
+    Тогда $\frac{n^{1/2}(\overline{X}-\theta)}{\sigma}\sim N(0,1)$,
+    $$\P_\theta\left(\lvert\frac{n^{1/2}(\overline{X}-\theta)}{\sigma}\rvert<\xi_{1-\alpha/2}\right) = 1-\alpha$$ 
+    $$\Phi(\xi_{1-\alpha/2})=1-\alpha/2$$
+    То есть $\Theta^*(X,\alpha)=\{\theta:\vert\frac{n^{1/2}(\overline{X}-\theta)}{\sigma}\vert<\xi_{1-\alpha/2}\}$.
+    В силу замечания к Теореме \ref{th::trusted_set_eq_plausibility_test}
+    $S_{\alpha}(\theta_0)=\{X:\vert\frac{n^{1/2}(\overline{X}-\theta_0)}{\sigma}\vert\geq\xi_{1-\alpha}\}$
+    есть критическое множество для $H_0$. Мощность
+    $$W(\theta)=\P_\theta(X\in S_\alpha(\theta_0))=\P_\theta(\vert\frac{n^{1/2}(\overline{X}-\theta_0)}{\sigma}\vert\geq\xi_{1-\alpha/2})=
+    1-\P_\theta(\vert\frac{n^{1/2}(\overline{X}-\theta_0)}{\sigma}\vert<\xi_{1-\alpha/2})=$$
+    $$=1-\P(-\xi_{1-\alpha/2} + \frac{n^{1/2}(\theta_0-\theta)}{\sigma} < \frac{n^{1/2}(\overline{X}-\theta)}{\sigma} < \xi_{1-\alpha}+\frac{n^{1/2}(\theta_0-\theta)}{\sigma})=$$
+    $$=1-[\Phi(\xi_{1-\alpha/2}+\frac{n^{1/2}(\theta_0-\theta)}{\sigma}) - \Phi(-\xi_{1-\alpha/2}\frac{n^{1/2}+(\theta_0-\theta)}{\sigma})] = $$
+    $$=[\Phi(\xi_{\alpha/2}+\frac{n^{1/2}(\theta_0-\theta)}{\sigma}) + \Phi(\xi_{\alpha/2}+\frac{n^{1/2}+(\theta-\theta_0)}{\sigma})]$$
+    ******* TODO: вставить график *******
+
+    При $n\rightarrow\infty\ W(\theta)\rightarrow 1\ \forall\theta\neq\theta_0!$.
+    То есть $S_\alpha(\theta_0)$ состоятелен против любой фиксированной альтернативы.
+\end{example}
+
+    \underline{Критерий Фишера ($F$-критерий) в Гауссовской линейной регрессией}
+\begin{definition}
+        Если $\xi\sim N(0,1),\ \eta_k\sim\chi^2(k)$, $\xi$ и $\eta_k$
+        независимы, а константа $\mu\in\R^1$, то сл.в.
+        $$t_k(\mu)\overset{d}{=}\frac{\xi+\mu}{\sqrt{\frac{1}{k}\eta_k}}\sim S(k,\mu)$$
+        имеет нецентральное распределение Стьюдента с $k$ степенями свободы
+        и параметром нецентральности $\mu$
+\end{definition}
+\begin{definition}
+    Если $\xi_i\sim N(0,1),i=1,\ldots,k$, и $\{\xi_1,\ldots,\xi_k\}$
+    независимы, а $\Delta^2=********$ тогда
+    $$\eta_k(\Delta)\overset{d}{=}\xi_1^2+\ldots+\xi_k^2\sim\chi^2(k,\Delta^2)$$
+    имеет нецентральное распределение хи-квадрат с $k$ степенями свободы
+    и параметром нецентральности $\Delta^2$
+\end{definition}
+\begin{definition}
+    Если $\eta_k\sim\chi^2(k,\Delta^2),\ \nu_m\sim\chi^2(m)$, и $\eta_k$ и $\nu_m$
+    независимы, то сл.в.
+    $$f_{k,m}(\Delta)\overset{d}{=}\frac{\frac{1}{k}\eta_k}{\frac{1}{m}\nu_m}\sim F(k,m,\Delta^2)$$
+    имеет нецентральное распределение Фишера с $(k,m)$ степенями свободы и параметром
+    нецентральности $\Delta^2$
+\end{definition}
+\begin{lemma}
+    \begin{enumerate}
+        \item Распределение сл.в. $\eta_k\sim\chi^2(k,\Delta^2)$ зависит лишь
+            от $\Delta$, но не от $a_1,\ldots,a_k$. А именно
+            $$\eta_k\overset{d}{=}(z_1+\Delta)^2+z^2+\ldots+z^k$$
+            $(z_1,\ldots,z_k)$ - н.о.р. $N(0,1)$ сл.в.
+        \item Если вектор $\xi\in\R^k,\xi\sim N(a, \Sigma),\Sigma>0$, то
+        $$\xi^T\Sigma^{-1}\xi\sim\chi^2(k,\Delta^2),\Delta=$$ 
+        **********
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item ********
+        
+        Пусть $\xi=(\xi_1,\ldots, \xi_k)^T$, ортог матр.
+        $$C=\begin{pmatrix}
+            \frac{a_1}{\Delta}& \ldots& \frac{a_k}{\Delta} \\
+            \ldots & \ldots &\ldots
+        \end{pmatrix},\ \nu=C\xi$$
+        Тогда $\eta_k\overset{d}{=}|\xi|^2=|\nu|^2$, так как $C$ - ортог.
+        Но $\nu=C\begin{pmatrix}
+            a_1 \\
+            \vdots \\
+            a_k
+        \end{pmatrix} + C\dot{\xi}=\begin{pmatrix}
+            \Delta \\
+            0 \\
+            \vdots \\
+            0
+        \end{pmatrix} + Z$, где $\dot{\xi}=\xi-\E\xi, z=C\dot{\xi}\sim N(0, \E_k)$
+        Итак, $\eta_k\overset{d}{=}|\nu|^2=(z_1+\Delta)^2+z_2^2+\ldots+z_k^2$
+        \item $\xi^T\Sigma^{-1}\xi=|\Sigma^{-1/2}\xi|^2$, причем $\Sigma^{-1/2}\xi\sim N(\Sigma^{-1/2}a, \E_k)$.
+        Отсюда $|\Sigma^{-1/2}\xi|^2\sim\chi^2(k,\Delta^2)$ с $\Delta^2=|\Sigma^{-1/2}a|^2=a^T\Sigma^{-1}a$
+    \end{enumerate}
+\end{proof}
+    \begin{lemma}
+        Случайная величина $t_k(\mu)$ обладает следующим свойством стохастической упорядоченности.
+        при $\mu_2>\mu_1$
+        \begin{equation}
+            *************
+        \end{equation}
+        Аналогично 
+        \begin{equation}
+            \P(\eta_k(\Delta_2)>xi) > \P(\eta_k(\Delta_1)>x), \Delta_2 > \Delta_1
+        \end{equation}
+        \begin{equation}
+            ****************
+        \end{equation}
+    \end{lemma}
+    \begin{proof}
+        **********
+
+        Заметим, что, если $\xi$ и $\eta$ - независимые случайные величины,
+        и $\E|\phi(\xi,\eta)|<\infty$, то
+        \begin{equation} \label{eq::mo_phi}
+            \E\phi(\xi,\eta)=\E\left\{(\E\phi(\xi,\eta)\vert_{\xi=\eta})\right\}
+        \end{equation}
+        В силу \eqref{eq::mo_phi}
+        $$\P(t_k(\mu_2)>x) = \P(\frac{\xi+\mu_2}{\sqrt{\frac{1}{k}\eta_k}}>x)=\E I(\xi>x\sqrt{\frac{1}{k}\eta_k}-\mu_2)=$$
+        $$= \E\left\{1-I()\right\}$$
+
+        *******************
+    \end{proof}
+
+    \underline{Обратимся к линейной гауссовской модели}
+    $X=Z_c+\Eps$, где $X=(X_1,\ldots, X_n)^T$ - наблюдение; $Z - (n\times p)$ - матрица
+    регрессора $p<n$; $\Eps\sim N(0, \sigma^2\E_n)$; $c=(c_1,\ldots, c_p)^T$;
+    \underline{$c$ и $\sigma^2$ неизвестны}. Расммотрим новый вектор $\beta=Ac$, $A-(k\times p)$ - матрица,
+    $rank(A)=k, k\leq p$.
+
+    \underline{Построим для $\beta$ доверительное множество уровня $1-\alpha$}
+
+    Пусть $\hat{c}_n$ - о.п.к. для $c$, $\hat{s}^2_n$ - о.п.к. для $\sigma^2$.
+    Пусть $\hat{\beta}_n=A\hat{c}_n$. Так как $\hat{c}_n\sim N(e,\sigma^2(Z^TZ)^{-1})$
 
 \end{document}
