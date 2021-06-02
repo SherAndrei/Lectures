@@ -164,69 +164,69 @@ $\phi(t),\ Q$ соответственно.
     Для доказательства \ref{th::slut:sum}, проверим, что хар. ф-ция
     вектора $(\xi_n, \eta_n)^T$ сходится к хар. функции вектора $(\xi, \eta)^T$.
     Имеем: 
-    $$|\E e^{it\xi_n + is\eta_n} - \E e^{it\xi + isa}| \leq | \E e^{it\xi_n + is\eta_n} - \E e^{it\xi_n + isa}| + | \E e^{it\xi_n + isa} - \E e^{it\xi + isa}| = \alpha_n + \beta_n$$
+    $$\left\lvert\E e^{it\xi_n + is\eta_n} - \E e^{it\xi + isa}\right\rvert \leq \left\lvert \E e^{it\xi_n + is\eta_n} - \E e^{it\xi_n + isa}\right\rvert + \left\lvert \E e^{it\xi_n + isa} - \E e^{it\xi + isa}\right\rvert = \alpha_n + \beta_n$$
 
-    $$\alpha_n \leq \E |e^{it\xi_n}(e^{it\eta_n + isa})| = \E |e^{it\eta_n + isa}| = \E g(\eta_n), \ g(x):= |e^{isx} - e^{isa}|$$
+    $$\alpha_n \leq \E \left\lvert e^{it\xi_n}(e^{it\eta_n + isa}) \right\rvert  = \E \left\lvert e^{it\eta_n + isa} \right\rvert  = \E g(\eta_n), \ g(x):= \left\lvert e^{isx} - e^{isa} \right\rvert $$
     Ф-ция g(x) непрерывна и ограничена, а т.к. $\eta_n \xrightarrow{d} a$,
     то в силу Теоремы \ref{th::inherit_conv} $\E g(\eta_n) \rightarrow \E g(a) = 0$
     Итак, $\alpha \rightarrow 0$.
 
-    $$\beta_n = |\E e^{isa}(e^{it\xi_n} - e^{it\xi})| = |e^{isa} \E (e^{it\xi_n} - e^{it\xi})| = |\E (e^{it\xi_n} - e^{it\xi})| \rightarrow 0$$
+    $$\beta_n = \left\lvert \E e^{isa}(e^{it\xi_n} - e^{it\xi}) \right\rvert  = \left\lvert e^{isa} \E (e^{it\xi_n} - e^{it\xi}) \right\rvert  = \left\lvert \E (e^{it\xi_n} - e^{it\xi}) \right\rvert  \rightarrow 0$$
     т.к. $\xi_n \xrightarrow{d} \xi$ и $\phi_n(t) \rightarrow \phi(t)$.
 \end{proof}
 
-Пусть наблюедние $X \sim  P_{\theta},\ \theta \in \Theta \subseteq \R^{K}$, а $\hat{\theta}_n$ - оценка $\theta$
+Пусть наблюедние $X \sim  P_{\theta},\ \theta \in \Theta \subseteq \R^{K}$, а $\widehat{\theta}_n$ - оценка $\theta$
 
 \begin{definition}
-    Если $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \Sigma(\theta)) \ \forall \theta \in \Theta$
-    и ковариционная матрица $0 < \Sigma(\theta) < \infty$, то $\hat{\theta}_n$ называется асимптотической нормальной оценкой.
+    Если $\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \Sigma(\theta)) \ \forall \theta \in \Theta$
+    и ковариционная матрица $0 < \Sigma(\theta) < \infty$, то $\widehat{\theta}_n$ называется асимптотической нормальной оценкой.
 \end{definition}
 
 \begin{definition}
-    Если $\hat{\theta}_n \xrightarrow{\P} \theta \ \forall \theta \in \Theta$, то $\hat{\theta}_n$ называется состоятельной оценкой.
+    Если $\widehat{\theta}_n \xrightarrow{\P} \theta \ \forall \theta \in \Theta$, то $\widehat{\theta}_n$ называется состоятельной оценкой.
 \end{definition}
 
 \begin{remark}
-    Дальше $\theta \in \Theta \subseteq \R^1$, то есть $\theta$ и $\hat{\theta}_n$ - скаляры.
+    Дальше $\theta \in \Theta \subseteq \R^1$, то есть $\theta$ и $\widehat{\theta}_n$ - скаляры.
 \end{remark}
 
-Если $\hat{\theta}_n$ - состоятельная оценка $\theta$, то при больших и $\hat{\theta}_n \approx \theta$ с вероятностью, близкой к единице.  
+Если $\widehat{\theta}_n$ - состоятельная оценка $\theta$, то при больших и $\widehat{\theta}_n \approx \theta$ с вероятностью, близкой к единице.  
 
-Если $\hat{\theta}_n$ - асимптотическая нормальная оценка $\theta$ (так как $\theta$ и $\hat{\theta}_n$ скаляры:
+Если $\widehat{\theta}_n$ - асимптотическая нормальная оценка $\theta$ (так как $\theta$ и $\widehat{\theta}_n$ скаляры:
 
-$n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \sigma^2 < \infty,\ \forall \theta \in \Theta$), то: \begin{enumerate}
+$\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \sigma^2 < \infty,\ \forall \theta \in \Theta$), то: \begin{enumerate}
 
-    \item $\hat{\theta}_n$ - состоятельная оценка $\theta$, так как $\hat{\theta}_n - \theta = n^{-1/2} n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{\P} 0$ 
+    \item $\widehat{\theta}_n$ - состоятельная оценка $\theta$, так как $\widehat{\theta}_n - \theta = n^{-1/2} \sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{\P} 0$ 
         в силу п. \ref{th::slut:mult} леммы Слуцкого.
-    \item Скорость сходимости $\hat{\theta}_n$ к $\theta$ есть $O(n^{1/2})$
-    \item При больших $n$ со сл. в. $n^{1/2}(\hat{\theta}_n - \theta)$ можно обращаться (с осторожностью!) как с Гауссовской величиной. 
+    \item Скорость сходимости $\widehat{\theta}_n$ к $\theta$ есть $O(\sqrt{n})$
+    \item При больших $n$ со сл. в. $\sqrt{n}(\widehat{\theta}_n - \theta)$ можно обращаться (с осторожностью!) как с Гауссовской величиной. 
         
     Например, пусть дисперсия предельного Гауссовского закона $\sigma^2(\theta)$ будет непреревной ф-цией $\theta$. Тогда
-        $$ \frac{n^{1/2}(\hat{\theta}_n - \theta)}{\sigma(\hat{\theta}_n)} =
-        \underbrace{\frac{n^{1/2}(\hat{\theta}_n - \theta)}{\sigma(\theta)}}_{\xrightarrow{d} N(0, 1)}
-        \underbrace{\frac{\sigma(\theta)}{\sigma(\hat{\theta}_n)}}_{\xrightarrow{\P} 1} \xrightarrow{d} \eta \sim N(0, 1)$$
+        $$ \frac{\sqrt{n}(\widehat{\theta}_n - \theta)}{\sigma(\widehat{\theta}_n)} =
+        \underbrace{\frac{\sqrt{n}(\widehat{\theta}_n - \theta)}{\sigma(\theta)}}_{\xrightarrow{d} N(0, 1)}
+        \underbrace{\frac{\sigma(\theta)}{\sigma(\widehat{\theta}_n)}}_{\xrightarrow{\P} 1} \xrightarrow{d} \eta \sim N(0, 1)$$
         в силу п. 2 леммы Слуцкого. Значит,
-        $$\P_\theta (|\frac{n^{1/2}(\hat{\theta}_n - \theta)}{\sigma(\hat{\theta}_n)}| < \xi_{1 - \alpha/2}) \rightarrow \P(|\eta| < \xi_{1 - \alpha/2}) = 1 - \alpha$$
+        $$\P_\theta \left(\left\lvert \frac{\sqrt{n}(\widehat{\theta}_n - \theta)}{\sigma(\widehat{\theta}_n)} \right\rvert  < \xi_{1 - \alpha/2}\right) \rightarrow \P(\left\lvert \eta \right\rvert  < \xi_{1 - \alpha/2}) = 1 - \alpha$$
 
         То есть примерно с вероятностью $1 - \alpha$ выполнено неравенство, или эквивалентно раскроем по модулю
-        $$\underbrace{\hat{\theta}_n - n^{-1/2}\sigma(\hat{\theta}_n)\xi_{1 - \alpha /2} < \theta < \hat{\theta}_n + n^{-1/2}\sigma(\hat{\theta}_n)\xi_{1 - \alpha /2}}_{\mbox{Асимптотический доверительный интервал уровня $1 - \alpha$}}$$
+        $$\underbrace{\widehat{\theta}_n - n^{-1/2}\sigma(\widehat{\theta}_n)\xi_{1 - \alpha /2} < \theta < \widehat{\theta}_n + n^{-1/2}\sigma(\widehat{\theta}_n)\xi_{1 - \alpha /2}}_{\mbox{Асимптотический доверительный интервал уровня $1 - \alpha$}}$$
 
     \item Асимптотические Гауссовские оценки можно сравнивать между собой: \\
-    Если $n^{1/2} (\hat{\theta}_{i,n} - \theta) \xrightarrow{d} N(0, \sigma^2_{i}(\theta)),\ i = 1, 2, \ldots$, то
+    Если $\sqrt{n} (\widehat{\theta}_{i,n} - \theta) \xrightarrow{d} N(0, \sigma^2_{i}(\theta)),\ i = 1, 2, \ldots$, то
     можно посчитать асимптотическую относительную эффективность (АОЭ): 
     $$e_{1,2} = \frac{\sigma_2^2(\theta)}{\sigma_1^2(\theta)}$$
     Напомним, $e_{1, 2} = \lim_{n \to \infty} \frac{n'(x)}{n (x)}, \mbox{ где }
-    n^{1/2}(\hat{\theta}_{1,n} - \theta) \xrightarrow{d} N(0, \sigma_1^2(\theta))$
-    и $n^{1/2}(\hat{\theta}_{2,n'} - \theta) \xrightarrow{d} N(0, \sigma_1^2(\theta))$.
+    \sqrt{n}(\widehat{\theta}_{1,n} - \theta) \xrightarrow{d} N(0, \sigma_1^2(\theta))$
+    и $\sqrt{n}(\widehat{\theta}_{2,n'} - \theta) \xrightarrow{d} N(0, \sigma_1^2(\theta))$.
 \end{enumerate}
 
-    Вопрос: Есть ли такая оценка $\theta^*_n$, что АОЭ $e_{\theta^*_n, \hat{\theta}_n}(\theta) \geq 1 \ \forall \hat{\theta}_n$
+    Вопрос: Есть ли такая оценка $\theta^*_n$, что АОЭ $e_{\theta^*_n, \widehat{\theta}_n}(\theta) \geq 1 \ \forall \widehat{\theta}_n$
     и всех $\theta \in \Theta$, то есть эффективнее всех остальных?
     
-    Если да, то $\theta^*_n$ требует не больше наблюдений, чем любая $\hat{\theta}_n$, чтобы достичь одинаковой с $\hat{\theta}_n$ точности.
-    Ясно, что пределеная дисперсия $n^{1/2}(\theta^*_n - \theta)$ должна быть не больше асимптотической дисперсии
-    $n^{1/2}(\hat{\theta}_n - \theta)$ для любой асимптотической Гауссовской оценки $\hat{\theta}_n$. Но
-    какова самая маленькая асимптотическая дисперсия у $n^{1/2}(\hat{\theta}_n - \theta)$?
+    Если да, то $\theta^*_n$ требует не больше наблюдений, чем любая $\widehat{\theta}_n$, чтобы достичь одинаковой с $\widehat{\theta}_n$ точности.
+    Ясно, что пределеная дисперсия $\sqrt{n}(\theta^*_n - \theta)$ должна быть не больше асимптотической дисперсии
+    $\sqrt{n}(\widehat{\theta}_n - \theta)$ для любой асимптотической Гауссовской оценки $\widehat{\theta}_n$. Но
+    какова самая маленькая асимптотическая дисперсия у $\sqrt{n}(\widehat{\theta}_n - \theta)$?
     
     \begin{named_theorem}[Теорема Бахадура]
         \label{th::bahadur}
@@ -242,9 +242,9 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
                 дважды дифференцировать по $\theta$, внося знак
                 дифференцирования под знак интеграла.
             \item Информация Фишера $0 < i(\theta) < \infty \ \forall \theta \in \Theta$
-            \item \label{th::bahadur:second_partial} $|\frac{\partial^2}{\partial \theta^2} \ln(f(x, \theta))| \leq M(x) \ \forall x \in N_f, \ \theta \in \Theta, \ \E_\theta M(X_1) < \infty$ 
+            \item \label{th::bahadur:second_partial} $\left\lvert \frac{\partial^2}{\partial \theta^2} \ln(f(x, \theta)) \right\rvert  \leq M(x) \ \forall x \in N_f, \ \theta \in \Theta, \ \E_\theta M(X_1) < \infty$ 
         \end{enumerate}
-        Тогда, если $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta))$,
+        Тогда, если $\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta))$,
         то $\sigma^2(\theta) \geq \frac{1}{i(\theta)}$ всюду за исключением
         множества Лебеговой меры нуль.
     \end{named_theorem}
@@ -257,12 +257,12 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
     \end{proof}
 
     \begin{definition}
-        Если $\theta, \hat{\theta}_n \in \R^1$ и $n^{1/2}(\hat{\theta}_n - \theta)\xrightarrow{d} N(0, \frac{1}{i(\theta)}),
+        Если $\theta, \widehat{\theta}_n \in \R^1$ и $\sqrt{n}(\widehat{\theta}_n - \theta)\xrightarrow{d} N(0, \frac{1}{i(\theta)}),
         \ n \rightarrow \infty, \ \forall \theta \in \Theta,$
-        причем $0 < i(\theta) < \infty$, то $\hat{\theta}_n$ называется \defin{асимптотически 
+        причем $0 < i(\theta) < \infty$, то $\widehat{\theta}_n$ называется \defin{асимптотически 
         эффективной оценкой}.
     \end{definition}
-    Вопрос: Вообще можно ли найти такую оценку $\hat{\theta}_n$? Да
+    Вопрос: Вообще можно ли найти такую оценку $\widehat{\theta}_n$? Да
     
     \newpage
     
@@ -284,13 +284,13 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
 
     Пусть $\theta_0$ будет истинное значение параметра.
     \begin{lemma}[Неравенство Йенсена]
-        Пусть $g(x)$ выпукла книзу борелевская функция, $\E|\xi| <\infty$,
-        $\E|g(\xi)| <\infty$. Тогда $g(\E\xi) \leq \E g(\xi)$. Если $\xi$
+        Пусть $g(x)$ выпукла книзу борелевская функция, $\E\left\lvert \xi \right\rvert  <\infty$,
+        $\E\left\lvert g(\xi) \right\rvert  <\infty$. Тогда $g(\E\xi) \leq \E g(\xi)$. Если $\xi$
         не является почти наверное константой и $g$ строго выпукла, то неравенство строгое.
     \end{lemma}
     \begin{theorem}[Экстремальное свойство правдоподобия]
         \label{th::extr_plausibility}
-        Пусть выполнено Условие (A). Пусть $E_{\theta_0} |\ln f(X_1, \theta)| < \infty,\ \forall \theta \in \Theta$.
+        Пусть выполнено Условие (A). Пусть $E_{\theta_0} \left\lvert \ln f(X_1, \theta) \right\rvert  < \infty,\ \forall \theta \in \Theta$.
         Тогда 
         $$\P_{\theta_0}(p(X, \theta_0) > p(X, \theta)) \rightarrow 1,\ n\rightarrow \infty,\ \theta_0 \neq \theta$$
     \end{theorem}
@@ -313,12 +313,12 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
     оценкой то значение $\theta$, которое максимизирует $p(X, \theta)$ при данном $X$
 
     \begin{definition}
-        Случайная величина $\hat{\theta}_n \in \Theta$ называется
+        Случайная величина $\widehat{\theta}_n \in \Theta$ называется
         \defin{оценкой максимального правдоподобия (о.м.п.)}, если
-        $p(X, \hat{\theta}_n) = \max_{\theta\in\Theta} p(X, \theta)$,
-        или эквивалентно $L_n(X, \hat{\theta}_n) = max_{\theta\in\Theta} L_n(X, \theta)$
+        $p(X, \widehat{\theta}_n) = \max_{\theta\in\Theta} p(X, \theta)$,
+        или эквивалентно $L_n(X, \widehat{\theta}_n) = max_{\theta\in\Theta} L_n(X, \theta)$
     \end{definition}
-    Итак, о.м.п $\hat{\theta}_n = \arg\max_{\theta\in\Theta} L_n(X, \theta)$.
+    Итак, о.м.п $\widehat{\theta}_n = \arg\max_{\theta\in\Theta} L_n(X, \theta)$.
     
     Если в $\forall\theta\in\Theta$ максимум не достигается, то о.м.п. не существует.
 
@@ -332,7 +332,7 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         Пусть выполнено Условие (А). Пусть $\forall x \in N_f \ \exists$ непрерывная
         производная $f'_{\theta}(x, \theta)$. Тогда уравнение \eqref{eq::plausibility}
         с вероятностью, стремящейся к 1 при $n\rightarrow \infty$ имеет решение $\in\Theta$.
-        При этом среди всех такиъ решений есть такой корень $\hat{\theta}_n$, что он
+        При этом среди всех такиъ решений есть такой корень $\widehat{\theta}_n$, что он
         является состоятельнаой оценкой $\theta_0$
     \end{theorem}
 
@@ -341,44 +341,44 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         решение для $\theta\in\Theta$. Тогда теорема \ref{th::consist_plausibility} утверждает:
         \begin{enumerate}
             \item $P_{\theta_0}(S_n) \rightarrow 1$.
-            \item Существует такое решение $\hat{\theta}_n \in \Theta$, что
-                $$P_{\theta_0} (|\hat{\theta}_n - \theta_0| < \eps, S_n) \rightarrow 1,\ n\rightarrow\infty,\ \forall\eps>0$$
+            \item Существует такое решение $\widehat{\theta}_n \in \Theta$, что
+                $$P_{\theta_0} (\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n) \rightarrow 1,\ n\rightarrow\infty,\ \forall\eps>0$$
         \end{enumerate}
         \underline{Докажем пункт 1}: Выберем малое $a>0$ так, что на $(\theta_0 - a, \theta_0 + a) \subseteq\Theta$. Пусть
         $$S^a_n = \{\omega: L_n(X, \theta_0) > L_n(X, \theta_0 - a), L_n(X, \theta_0) > L_n(X, \theta_0 + a)\}$$
         В силу теоремы \ref{th::extr_plausibility} $\P_{\theta_0}(S_n^a) \rightarrow 1$
 
         При $\omega\in S_n^a$ функция $L_n(X, \theta)$ имеет
-        локальный максимум $\hat{\theta}^a_n$ на интервале $(\theta_0 - a, \theta_0 + a)$
+        локальный максимум $\widehat{\theta}^a_n$ на интервале $(\theta_0 - a, \theta_0 + a)$
         \begin{figure}[h]
             \includegraphics[width=0.4\textwidth]{L_n_func}
         \end{figure}
         
-        Значит, $\frac{\partial}{\partial\theta}L_n(X, \hat{\theta}_n^a) = 0$.
+        Значит, $\frac{\partial}{\partial\theta}L_n(X, \widehat{\theta}_n^a) = 0$.
         Тогда $\P_{\theta_0}(S_n) \geq \P_{\theta_0}(S_n^a) \rightarrow 1$, так
         как $S_n^a \subseteq S_n$, и пункт 1 доказан.
 
         \underline{Докажем пункт 2}: $\forall n$ при $\omega\in S_n$ может сущестовать целое множество корней
-        $\{\theta^*_n\}$. Выберем в этом множестве корень $\hat{\theta}_n$,
+        $\{\theta^*_n\}$. Выберем в этом множестве корень $\widehat{\theta}_n$,
         ближайший к $\theta_0$. Это можно сделать, так как
         функция $\frac{\partial}{\partial\theta} L_n(x, \theta)$ непрерывна по $\theta$,
-        и последовательность корней есть корень. Этот корень $\hat{\theta}_n$
+        и последовательность корней есть корень. Этот корень $\widehat{\theta}_n$
         и есть состоятельная оценка $\theta$. Покажем это:
 
         $\forall \text{ малого } \eps > 0$:
         \begin{equation}
             \label{eq::S_n}
-            \P_{\theta_0}(|\hat{\theta}_n - \theta_0| < \eps, S_n) \geq
-            \P_{\theta_0}(|\hat{\theta}^\eps_n - \theta_0| < \eps, S_n^\eps)
+            \P_{\theta_0}(\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n) \geq
+            \P_{\theta_0}(\left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps, S_n^\eps)
         \end{equation}
         Так как $S^\eps_n \subseteq S_n,\
-        (\omega: |\hat{\theta}^\eps_n - \theta_0| < \eps) \subseteq
-        (\omega: |\hat{\theta}_n - \theta_0| < \eps)$
+        (\omega: \left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps) \subseteq
+        (\omega: \left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps)$
         
-        Но $\P_{\theta_0}(|\hat{\theta}^\eps_n - \theta_0| < \eps, S^\eps_n) 
-        \underset{\text{т.к. события из } S_n^\eps \text{ лежат в } |\hat{\theta}^\eps_n - \theta_0| < \eps}{=}
+        Но $\P_{\theta_0}(\left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps, S^\eps_n) 
+        \underset{\text{т.к. события из } S_n^\eps \text{ лежат в } \left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps}{=}
         \P_{\theta_0}(S_n^\eps) \rightarrow 1$, значит в силу \eqref{eq::S_n}
-        $$\P_{\theta_0} (|\hat{\theta}_n - \theta_0| < \eps, S_n) \rightarrow 1$$
+        $$\P_{\theta_0} (\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n) \rightarrow 1$$
     \end{proof}
 
     \begin{remark}
@@ -389,9 +389,9 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         \end{cases}$$
         Тогда случайная величина $\theta^*_n$ всегда определена, и
         $\theta^*_n \xrightarrow{\P} \theta_0$, так как
-        $$\P(|\theta^*_n - \theta_0| < \eps) =
-        \P(|\hat{\theta}_n - \theta_0| < \eps, S_n) +
-        \P(|\theta' - \theta_0| < \eps, \overline{S}_n) \rightarrow 1$$
+        $$\P(\left\lvert \theta^*_n - \theta_0 \right\rvert  < \eps) =
+        \P(\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n) +
+        \P(\left\lvert \theta' - \theta_0 \right\rvert  < \eps, \overline{S}_n) \rightarrow 1$$
         Ясно, что 
         \begin{equation}
             \frac{\partial}{\partial\theta} L_n(X, \theta^*_n) = \littleO_p(1)
@@ -408,7 +408,7 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         удовлетворяются предположения Теоремы Бахадура, в которых условия
         \ref{th::bahadur:density} и \ref{th::bahadur:second_partial} заменены на
         предположения о третьей, а не второй производной. То есть
-        $$|\frac{\partial^3}{\partial \theta^3} \ln f(x, \theta)| \leq M(x) \ \forall x\in N_f,\ \forall\theta\in\Theta,\ \E_{\theta_0}M(X_1) < \infty$$
+        $$\left\lvert \frac{\partial^3}{\partial \theta^3} \ln f(x, \theta) \right\rvert  \leq M(x) \ \forall x\in N_f,\ \forall\theta\in\Theta,\ \E_{\theta_0}M(X_1) < \infty$$
         Тогда, если $\theta^*_n$ - обобщенный состоятельный корень из теоремы \ref{th::consist_plausibility}, то
         $$\sqrt{n}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, \frac{1}{i(\theta_0)})$$
         То есть $\theta^*_n$ - асимптотическая эффективная оценка.
@@ -423,7 +423,7 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         Отсюда,
         \begin{equation}
             \label{eq::taylor_frac}
-            n^{1/2}(\theta^*_n - \theta_0) = -\frac{n^{-1/2} L'_n(\theta_0) + \littleO_p(1)}{n^{-1}(L^{(2)}_n(\theta_0) + \frac{1}{2}L^{(3)}_n(\widetilde{\theta}_n)(\theta^*_n - \theta_0))}
+            \sqrt{n}(\theta^*_n - \theta_0) = -\frac{n^{-1/2} L'_n(\theta_0) + \littleO_p(1)}{n^{-1}(L^{(2)}_n(\theta_0) + \frac{1}{2}L^{(3)}_n(\widetilde{\theta}_n)(\theta^*_n - \theta_0))}
         \end{equation}
         \underline{Рассмотрим числитель \eqref{eq::taylor_frac}} и покажем, что
         \begin{equation}
@@ -452,7 +452,7 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
     Далее рассмотрим второе слагаeмое в знаменете \eqref{eq::taylor_frac}
     \begin{equation}
         \label{eq::taylor_frac::den2}
-        |\frac{1}{2n} L_n^{(3)}(\widetilde{\theta}_n)(\theta^*_n - \theta_0)| \leq \frac{1}{2}|\theta_n^* - \theta_0| n^{-1} \sum_{i=1}^n M(X_i) \xrightarrow[\text{л. Слуцкого}]{\P} 0
+        \left\lvert \frac{1}{2n} L_n^{(3)}(\widetilde{\theta}_n)(\theta^*_n - \theta_0) \right\rvert  \leq \frac{1}{2}\left\lvert \theta_n^* - \theta_0 \right\rvert  n^{-1} \sum_{i=1}^n M(X_i) \xrightarrow[\text{л. Слуцкого}]{\P} 0
     \end{equation}
     
     В силу \eqref{eq::taylor_frac::den} и \eqref{eq::taylor_frac::den2} и Леммы Слуцкого
@@ -479,10 +479,10 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
     показыватся:
     \begin{enumerate}
         \item С вероятностью, стремящейся к единице при $n \rightarrow \infty$,
-            система уравнений \eqref{eq::sys_plausibility} имеет такое решение $\hat{\theta}_n\in\Theta$,
-            что $\hat{\theta}_n$ сходится к истинному значению $\theta_0$.
+            система уравнений \eqref{eq::sys_plausibility} имеет такое решение $\widehat{\theta}_n\in\Theta$,
+            что $\widehat{\theta}_n$ сходится к истинному значению $\theta_0$.
         \item Соответствующая оценка $\theta^*_n$ асимптотически нормальна. А именно
-         $$n^{1/2}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, I^{-1}(\theta_0)),\ n\rightarrow\infty$$
+         $$\sqrt{n}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, I^{-1}(\theta_0)),\ n\rightarrow\infty$$
          Здесь $I(\theta) > 0$ - матрица информации Фишера, то есть
          $$I(\theta) = (I_{ij}(\theta)),\ I_{ij}(\theta) = \E_\theta \left\{\frac{\partial \ln f(X, \theta)}{\partial\theta_i} \cdot \frac{\partial\ln f(X, \theta)}{\partial\theta_j}\right\}$$ 
     \end{enumerate}
@@ -513,7 +513,7 @@ $n^{1/2}(\hat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \
         выполнены, проверьте сами), $\theta^*_n$ - асимптотически эффективная оценка, то есть
         \begin{equation}
             \label{eq::ex::as_conv}
-            n^{1/2}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, \sigma^2)
+            \sqrt{n}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, \sigma^2)
         \end{equation}
         Напомним, что в этой модели $i(\theta) = \frac{1}{\sigma^2}$.
         Cправедливость \eqref{eq::ex::as_conv} c $\theta^*_n$
@@ -642,7 +642,7 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
 \begin{remark}
     Утверждение 3 для $S(\lambda)$
     означает, что
-    $$\P(H_1 | H_1) \geq \P(H_1|H_0) \Leftrightarrow W(S(\lambda), \theta_1) \geq W(S(\lambda), \theta_0)$$
+    $$\P(H_1 \left\lvert  H_1) \geq \P(H_1 \right\rvert H_0) \Leftrightarrow W(S(\lambda), \theta_1) \geq W(S(\lambda), \theta_0)$$
     Это свойство назыается несмещенностью критерия $S(\lambda)$
 \end{remark}
 \begin{proof}
@@ -681,7 +681,7 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
     Из определения $S\ p_1(x) > p_0(x) \ \forall x\in S.$
     Отсюда
     $$\P_0(X\in S) = \int_{R^n} I_S(X)p_0(x)\mu(dx) \leq \int_{R^n} I_S(X)p_1(x)\mu(dx) = \P_1(X\in S)$$ 
-    То есть $\P(H_1 | H_0) \leq \P(H_1 | H_1)$
+    То есть $\P(H_1 \left\lvert  H_0) \leq \P(H_1  \right\rvert  H_1)$
 
     Пусть $\lambda < 1$. Рассмотрим $\overline{S} = \{x: p_1(x) \leq \lambda p_0(x)\}$.
     При $\lambda < 1\ p_1(x) < p_0(x)$ при $x\in \overline{S}$.
@@ -739,6 +739,9 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
         $$W(\theta, S^*_{\alpha}) = \P_\theta\left(\sum_{i=1}^nX_i > n\theta_0 + \sqrt{n}\sigma\xi_{1-\alpha}\right) = $$
         $$ = \P_\theta\left(\frac{1}{\sqrt{n}\sigma} \sum_{i=1}^n(X_i - \theta) > \frac{\sqrt{n}(\theta_0 - \theta)}{\sigma} + \xi_{1-\alpha}\right) =
         1 - \Phi\left(\xi_{1-\alpha} + \frac{\sqrt{n}(\theta - \theta_0)}{\sigma}\right)$$
+
+        **** TODO вставить график стр 134 ****
+
 \end{example}
 
     \subsection*{О связи между доверительным оцениванием и проверкой гипотез}
@@ -767,11 +770,9 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
     то $H_0$ надо применять.
 \end{remark}
 \begin{proof}
-    \begin{enumerate}
-        \item $$\P_\theta(\theta\in\Theta^*(X,\alpha)) = \P_\theta(X\in\overline{S_\alpha}(\theta)) = 1 - \underbrace{\P_\theta(X\in S_\alpha(\theta))}_{\leq\alpha}\geq 1-\alpha\ \forall\theta\in\Theta$$
-        \item $$\P_{\theta_0}(X\in S_\alpha(\theta_0)) = 1-\P_{\theta_0}(X\in \overline{S_\alpha}(\theta_0))=
+    $$1.\ \P_\theta(\theta\in\Theta^*(X,\alpha)) = \P_\theta(X\in\overline{S_\alpha}(\theta)) = 1 - \underbrace{\P_\theta(X\in S_\alpha(\theta))}_{\leq\alpha}\geq 1-\alpha\ \forall\theta\in\Theta$$
+    $$2.\ \P_{\theta_0}(X\in S_\alpha(\theta_0)) = 1-\P_{\theta_0}(X\in \overline{S_\alpha}(\theta_0))=
         1-\underbrace{\P_{\theta_0}(\theta_0\in\Theta^*(X,\alpha))}_{\geq 1-\alpha} \leq 1-(1-\alpha) = \alpha$$
-    \end{enumerate}
 \end{proof}
 \begin{example}
     Пусть $X=(X_1,\ldots,X_n)$, $\{X_i\}$ - н.о.р. сл.в., $X_1\sim N(0,\sigma^2),\theta\in\R^1$.
@@ -780,19 +781,22 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
     
     Построим доверительное множество для $\theta$ уровня $1-\alpha$.
     Пусть $\overline{X}=\frac{1}{n}\sum^n_{i=1}X_i$ - оптимальная оценка $\theta$.
-    Тогда $\frac{n^{1/2}(\overline{X}-\theta)}{\sigma}\sim N(0,1)$,
-    $$\P_\theta\left(\lvert\frac{n^{1/2}(\overline{X}-\theta)}{\sigma}\rvert<\xi_{1-\alpha/2}\right) = 1-\alpha$$ 
+    Тогда $\frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\sim N(0,1)$,
+    $$\P_\theta\left(\left\lvert\frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\right\rvert<\xi_{1-\alpha/2}\right) = 1-\alpha$$ 
     $$\Phi(\xi_{1-\alpha/2})=1-\alpha/2$$
-    То есть $\Theta^*(X,\alpha)=\{\theta:\vert\frac{n^{1/2}(\overline{X}-\theta)}{\sigma}\vert<\xi_{1-\alpha/2}\}$.
+    То есть $\Theta^*(X,\alpha)=\{\theta:\left\lvert \frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\right\rvert <\xi_{1-\alpha/2}\}$.
     В силу замечания к Теореме \ref{th::trusted_set_eq_plausibility_test}
-    $S_{\alpha}(\theta_0)=\{X:\vert\frac{n^{1/2}(\overline{X}-\theta_0)}{\sigma}\vert\geq\xi_{1-\alpha}\}$
+    $S_{\alpha}(\theta_0)=\{X:\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert \geq\xi_{1-\alpha}\}$
     есть критическое множество для $H_0$. Мощность
-    $$W(\theta)=\P_\theta(X\in S_\alpha(\theta_0))=\P_\theta(\vert\frac{n^{1/2}(\overline{X}-\theta_0)}{\sigma}\vert\geq\xi_{1-\alpha/2})=
-    1-\P_\theta(\vert\frac{n^{1/2}(\overline{X}-\theta_0)}{\sigma}\vert<\xi_{1-\alpha/2})=$$
-    $$=1-\P(-\xi_{1-\alpha/2} + \frac{n^{1/2}(\theta_0-\theta)}{\sigma} < \frac{n^{1/2}(\overline{X}-\theta)}{\sigma} < \xi_{1-\alpha}+\frac{n^{1/2}(\theta_0-\theta)}{\sigma})=$$
-    $$=1-[\Phi(\xi_{1-\alpha/2}+\frac{n^{1/2}(\theta_0-\theta)}{\sigma}) - \Phi(-\xi_{1-\alpha/2}\frac{n^{1/2}+(\theta_0-\theta)}{\sigma})] = $$
-    $$=[\Phi(\xi_{\alpha/2}+\frac{n^{1/2}(\theta_0-\theta)}{\sigma}) + \Phi(\xi_{\alpha/2}+\frac{n^{1/2}+(\theta-\theta_0)}{\sigma})]$$
-    ******* TODO: вставить график *******
+    $$W(\theta)=\P_\theta(X\in S_\alpha(\theta_0))=\P_\theta\left(\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert \geq\xi_{1-\alpha/2}\right)=
+    1-\P_\theta\left(\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert <\xi_{1-\alpha/2}\right)=$$
+    $$=1-\P\left(-\xi_{1-\alpha/2} + \frac{\sqrt{n}(\theta_0-\theta)}{\sigma} < \frac{\sqrt{n}(\overline{X}-\theta)}{\sigma} < \xi_{1-\alpha}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right)=$$
+    $$=1-\left[\Phi\left(\xi_{1-\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right) - \Phi\left(-\xi_{1-\alpha/2}\frac{\sqrt{n}+(\theta_0-\theta)}{\sigma}\right)\right] = $$
+    $$=\left[\Phi\left(\xi_{\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right) + \Phi\left(\xi_{\alpha/2}+\frac{\sqrt{n}+(\theta-\theta_0)}{\sigma}\right)\right]$$
+
+
+    ******* TODO: вставить график стр 136*******
+
 
     При $n\rightarrow\infty\ W(\theta)\rightarrow 1\ \forall\theta\neq\theta_0!$.
     То есть $S_\alpha(\theta_0)$ состоятелен против любой фиксированной альтернативы.
@@ -807,7 +811,7 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
         и параметром нецентральности $\mu$
 \end{definition}
 \begin{definition}
-    Если $\xi_i\sim N(0,1),i=1,\ldots,k$, и $\{\xi_1,\ldots,\xi_k\}$
+    Если $\xi_i\sim N(a_i,1),i=1,\ldots,k$, и $\{\xi_1,\ldots,\xi_k\}$
     независимы, а $\Delta^2=********$ тогда
     $$\eta_k(\Delta)\overset{d}{=}\xi_1^2+\ldots+\xi_k^2\sim\chi^2(k,\Delta^2)$$
     имеет нецентральное распределение хи-квадрат с $k$ степенями свободы
@@ -840,7 +844,7 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
             \frac{a_1}{\Delta}& \ldots& \frac{a_k}{\Delta} \\
             \ldots & \ldots &\ldots
         \end{pmatrix},\ \nu=C\xi$$
-        Тогда $\eta_k\overset{d}{=}|\xi|^2=|\nu|^2$, так как $C$ - ортог.
+        Тогда $\eta_k\overset{d}{=}\left\lvert \xi \right\rvert ^2=\left\lvert \nu \right\rvert ^2$, так как $C$ - ортог.
         Но $\nu=C\begin{pmatrix}
             a_1 \\
             \vdots \\
@@ -851,9 +855,9 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
             \vdots \\
             0
         \end{pmatrix} + Z$, где $\dot{\xi}=\xi-\E\xi, z=C\dot{\xi}\sim N(0, \E_k)$
-        Итак, $\eta_k\overset{d}{=}|\nu|^2=(z_1+\Delta)^2+z_2^2+\ldots+z_k^2$
-        \item $\xi^T\Sigma^{-1}\xi=|\Sigma^{-1/2}\xi|^2$, причем $\Sigma^{-1/2}\xi\sim N(\Sigma^{-1/2}a, \E_k)$.
-        Отсюда $|\Sigma^{-1/2}\xi|^2\sim\chi^2(k,\Delta^2)$ с $\Delta^2=|\Sigma^{-1/2}a|^2=a^T\Sigma^{-1}a$
+        Итак, $\eta_k\overset{d}{=}\left\lvert \nu \right\rvert ^2=(z_1+\Delta)^2+z_2^2+\ldots+z_k^2$
+        \item $\xi^T\Sigma^{-1}\xi=\left\lvert \Sigma^{-1/2}\xi \right\rvert ^2$, причем $\Sigma^{-1/2}\xi\sim N(\Sigma^{-1/2}a, \E_k)$.
+        Отсюда $\left\lvert \Sigma^{-1/2}\xi \right\rvert ^2\sim\chi^2(k,\Delta^2)$ с $\Delta^2=\left\lvert \Sigma^{-1/2}a \right\rvert ^2=a^T\Sigma^{-1}a$
     \end{enumerate}
 \end{proof}
     \begin{lemma}
@@ -874,7 +878,7 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
         **********
 
         Заметим, что, если $\xi$ и $\eta$ - независимые случайные величины,
-        и $\E|\phi(\xi,\eta)|<\infty$, то
+        и $\E\left\lvert \phi(\xi,\eta) \right\rvert <\infty$, то
         \begin{equation} \label{eq::mo_phi}
             \E\phi(\xi,\eta)=\E\left\{(\E\phi(\xi,\eta)\vert_{\xi=\eta})\right\}
         \end{equation}
@@ -893,7 +897,19 @@ $$S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0$$
 
     \underline{Построим для $\beta$ доверительное множество уровня $1-\alpha$}
 
-    Пусть $\hat{c}_n$ - о.п.к. для $c$, $\hat{s}^2_n$ - о.п.к. для $\sigma^2$.
-    Пусть $\hat{\beta}_n=A\hat{c}_n$. Так как $\hat{c}_n\sim N(e,\sigma^2(Z^TZ)^{-1})$
+    Пусть $\widehat{c}_n$ - о.п.к. для $c$, $\widehat{s}^2_n$ - о.п.к. для $\sigma^2$.
+    Пусть $\widehat{\beta}_n=A\widehat{c}_n$. Так как $\widehat{c}_n\sim N(e,\sigma^2(Z^TZ)^{-1})$
+
+
+
+
+    **********************************************************************
+
+
+
+
+    
+
+
 
 \end{document}
