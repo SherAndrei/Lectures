@@ -13,6 +13,7 @@
 %--------------------------------------
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{arydshln}
 
 %Format-specific packages
 %--------------------------------------
@@ -33,9 +34,12 @@
 \counterwithin*{definition}{section}
 
 \newtheorem{lemma}{Лемма}
+\counterwithin*{lemma}{section}
 
 \newtheorem{remark}{Замечание}
 \counterwithin*{remark}{section}
+
+\newtheorem*{remark*}{Замечание}
 
 \newtheorem*{corollary}{Следствие}
 \newtheorem*{proposition}{Предложение}
@@ -80,35 +84,20 @@
 % My commands
 %--------------------------------------
 % for definitions
+
 \newcommand\defin[1]{\textbf{#1}}
 
-\def\eps{
-    \varepsilon
-}
-\def\Eps{
-    \mathcal{E}
-}
+\newcommand*{\defeq}{\stackrel{\text{def}}{=}}
 
-\def\R{
-    \mathbb{R}
-}
+\def\eps{ \varepsilon }
+\def\Eps{ \mathcal{E} }
 
-\def\E{
-    \mathrm{E}
-}
+\def\R{ \mathbb{R} }
+\def\E{ \mathrm{E} }
+\def\D{ \mathrm{D} }
+\def\P{ \mathrm{P} }
 
-\def\D{
-    \mathrm{D}
-}
-
-\def\P{
-    \mathrm{P}
-}
-
-\def\littleO{
-    \overline{\overline{o}}
-}
-
+\def\littleO{ \overline{\overline{o}} }
 %--------------------------------------
 
 \begin{document}
@@ -178,7 +167,7 @@
     Имеем:
     \[\left\lvert\E e^{it\xi_n + is\eta_n} - \E e^{it\xi + isa}\right\rvert \leq \left\lvert \E e^{it\xi_n + is\eta_n} - \E e^{it\xi_n + isa}\right\rvert + \left\lvert \E e^{it\xi_n + isa} - \E e^{it\xi + isa}\right\rvert = \alpha_n + \beta_n\]
 
-    \[\alpha_n \leq \E \left\lvert e^{it\xi_n}(e^{it\eta_n + isa}) \right\rvert  = \E \left\lvert e^{it\eta_n + isa} \right\rvert  = \E g(\eta_n), \ g(x):= \left\lvert e^{isx} - e^{isa} \right\rvert \]
+    \[\alpha_n \leq \E \left\lvert e^{it\xi_n}(e^{it\eta_n + isa}) \right\rvert  = \E \left\lvert e^{it\eta_n + isa} \right\rvert  = \E g(\eta_n), \ g(x)\defeq\left\lvert e^{isx} - e^{isa} \right\rvert \]
     Ф-ция g(x) непрерывна и ограничена, а т.к. \(\eta_n \xrightarrow{d} a\),
     то в силу Теоремы \ref{th::inherit_conv} \(\E g(\eta_n) \rightarrow \E g(a) = 0\)
     Итак, \(\alpha \rightarrow 0\).
@@ -308,7 +297,7 @@
     \end{theorem}
     \begin{proof}
         \[p(X, \theta_0) > p(X, \theta) \Leftrightarrow \ln p(X, \theta_0) > \ln p(X, \theta) \Leftrightarrow\]
-        \[\eta_n := n^{-1} \sum_{i=1}^n \ln \left(\frac{f(X_i, \theta)}{f(X_i, \theta_0)}\right) < 0\]
+        \[\eta_n\defeq n^{-1} \sum_{i=1}^n \ln \left(\frac{f(X_i, \theta)}{f(X_i, \theta_0)}\right) < 0\]
     То есть надо показать, что \(\P_{\theta_0}(\eta_n < 0) \rightarrow 1\). Но по слабому закону больших чисел:
     \[\eta_n = n^{-1}\sum \ln \left(\frac{f(X_i, \theta)}{f(X_i, \theta_0)} \right) \xrightarrow{\P}
     E_{\theta_0}\ln \left(\frac{f(X_1, \theta)}{f(X_1, \theta_0)} \right) \]
@@ -594,7 +583,7 @@
 
 \begin{definition}
     \defin{Мощность критерия \(S\)} называется функция \(W(S, \theta) = W(\theta)
-    := \P_\theta(X\in S)\) (вероятность отвергнуть \(H_0\), когда
+    \defeq\P_\theta(X\in S)\) (вероятность отвергнуть \(H_0\), когда
     значение параметра есть \(\theta\)).
 \end{definition}
 
@@ -628,7 +617,7 @@
 \end{align*}
 
 Положим для краткости:
-\(p_0(x) := p(x, \theta_0),\ \E_0 = \E_{\theta_0},\ p_{1}(x) = p(x, \theta_1),\ \E_1 = \E_{\theta_1}\)
+\(p_0(x)\defeq p(x, \theta_0),\ \E_0 = \E_{\theta_0},\ p_{1}(x) = p(x, \theta_1),\ \E_1 = \E_{\theta_1}\)
 
 Введем множество
 \[S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0\]
@@ -814,7 +803,7 @@
     То есть \(S_\alpha(\theta_0)\) состоятелен против любой фиксированной альтернативы.
 \end{example}
 
-    \underline{Критерий Фишера (\(F\)-критерий) в Гауссовской линейной регрессии}
+\subsection{Критерий Фишера (\(F\)-критерий) в Гауссовской линейной регрессии}
 \begin{definition}
         Если \(\xi\sim N(0,1),\ \eta_k\sim\chi^2(k)\), \(\xi\) и \(\eta_k\)
         независимы, а константа \(\mu\in\R^1\), то сл.в.
@@ -929,7 +918,7 @@
     В силу пункта 2 леммы \ref{delta_dependency}
     \[\frac{1}{\sigma^2}\left(\widehat{\beta}_n-\beta\right)D^{-1}\left(\widehat{\beta}_n-\beta\right)\sim \chi^2(k)\]
     так как \(\frac{(n-p)\widehat{s}^2_n}{\sigma^2}\sim\chi^2(n-p)\), \(\widehat{\beta}_n\) и \(\widehat{s}^2_n\) независимы, то
-    \[f_{k,n-p}(X, \beta):=\frac{\frac{1}{k}(\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)/\sigma^2}{\frac{1}{n-p}(n-p)\widehat{s}^2_n/\sigma^2} =
+    \[f_{k,n-p}(X, \beta)\defeq\frac{\frac{1}{k}(\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)/\sigma^2}{\frac{1}{n-p}(n-p)\widehat{s}^2_n/\sigma^2} =
     \frac{(\widehat{\beta}_n-\beta)D^{-1}(\widehat{\beta}_n-\beta)}{k\widehat{s}^2_n}\sim F(k, n-p)\]
     
     Значит, 
@@ -953,5 +942,191 @@
     Критерий \ref{criterion::F} называют \textbf{критерием Фишера} или \textbf{$F$-критерием}.
     $f_{k,n-p}(X,\beta_0)$ - статистика $F$-критерия.
 
+    \underline{Рассмотрим поведение $F$-критерия при альтернативе $H_1$}. \\
+    При $H_1$ в силу пункта 2 Леммы \ref{delta_dependency}
+    \[f_{k,n-p}(X,\beta_0)=\frac{\frac{1}{k}\overbrace{(\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)/\sigma^2}^{\chi^2(k,\Delta^2)}}{\frac{1}{n-p}\underbrace{(n-p)\widehat{s}^2_n/\sigma^2}_{\chi^2(n-p)}}\sim F(k,n-p,\Delta^2)\]
+    Параметр нецентральности
+    \begin{equation}\label{eq::fi_noncentral}
+        \Delta^2 = \frac{1}{\sigma^2}(\beta-\beta_0)^TD^{-1}(\beta-\beta_0)
+    \end{equation}
+    Мощность $F$-критерия
+    \[W(\beta,S_\alpha(\beta_0))=\P_{\beta,\sigma^2}(f_{k,n-p}(X,\beta_0)>f_{1-\alpha}(k,n-p))=1-F_{k,n-p}(f_{1-\alpha}(k,n-p),\Delta^2)\]
 
+    \underline{Свойства мощности}
+    \begin{enumerate}
+        \item Так как $\Delta =\Delta(\beta)=\Delta(\beta_0)>0$ при $\beta\neq\beta_0$,
+        то в силу соотношения \ref{iid::fi}
+        \[\P_{\beta,\sigma^2}(f_{k,n-p}(X, \beta_0)>f_{1-\alpha}(k,n-p))>\P_{\beta_0,\sigma}(f_{k,n-p}(X,\beta_0)>f_{1-\alpha}(k,n-p))=\alpha\]
+        То есть при $\beta\neq\beta_0\ \P(H_1\vert H_1)>\P(H_1\vert H_0)$.
+        То есть \underline{$F$-критерий несмещенный}! 
+        \item Мощность $W(\beta,S_\alpha(\beta_0))$ строго монотонна по $\Delta$
+        из соотношения \ref{eq::fi_noncentral}
+    \end{enumerate}
+
+    \begin{example}[Определение порядка регрессии]
+        $c_n^T=(\underbrace{c_{(1)n}^T}_{m-\text{вектор}}, \underbrace{c_{(2)n}^T}_{p-m-\text{вектор}}),\ 1\leq m\leq p$ \\
+        $\begin{array}{c cc}
+            H_0:& c_{(2)}=0    &\ (\text{порядок не больше m})\\    
+            H_1:& c_{(2)}\neq0 & \par
+        \end{array}$
+        
+        Рассмотрим матрицу
+        \[ A =
+        \begin{array}{c}
+        \overbrace{
+            \left(
+            \begin{array}{ccc:ccc}
+                0 &        &   & 1 &        &    \\
+                  & \ddots &   &   & \ddots &    \\
+                  &        & 0 &   &        & 1  \\
+            \end{array}
+            \right)
+            }^{p}
+            \\
+            \begin{array}{ccc ccc}
+                 & m &   &  & & p - m \\
+            \end{array}
+        \end{array}
+        \Rightarrow
+        Ac = c_{(2)}
+        \Rightarrow
+        H_0 \Leftrightarrow Ac=0
+        % =(\beta_0)
+        \]
+    \end{example}
+    Пусть $\widehat{c}_n^T=(\underbrace{\widehat{c}_{(1)n}^T}_{m-\text{в-р}}, \underbrace{\widehat{c}_{(2)n}^T}_{p-m-\text{в-р}})$.
+    Тогда $\widehat{\beta}_n=A\widehat{c}_n=\widehat{c}_{(2)n}$.
+    \[(Z^TZ)^{-1}=\left(\begin{array}{c|c}
+        B_{11} & B_{12} \\ \hline
+        B_{21} & B_{22}
+    \end{array}\right)\rightarrow D=A(Z^TZ)^{-1}A^T=B_{22}\Rightarrow\]
+    \[\Rightarrow f_{p-m,n-p}(X,0)=\frac{\widehat{c}_{(2)n}^TB_{22}^{-1}\widehat{c}_{(2)n}}{(p-m)\widehat{s}^2_n}\underset{H_0}{\sim}F(p-m,n-p)\]
+    $H_0$ отвергается, если $f_{p-m,n-p}(X,0)>f_{1-\alpha}(p-m,n-m)$,
+    то есть
+    \begin{equation}\label{fisher::ex::crit}
+        S_{\alpha}(0)=\{x:\frac{\widehat{c}_{(2)n}^TB_{22}^{-1}\widehat{c}_{(2)n}}{(p-m)\widehat{s}^2_n}>f_{1-\alpha}(p-m,n-m)\}
+    \end{equation}
+    \begin{equation}\label{fisher::ex::stat}
+        f_{p-m,n-p}(X,0)\underset{H_1}{\sim} F(p-m,n-p, \Delta^2),\text{ где }\Delta^2=\frac{c_{(2)}^TB_{22}^{-1}c_{(2)}}{\sigma^2}
+    \end{equation}
+    Критерий \ref{fisher::ex::crit} - несмещенный, то есть $\P(H_1\vert H_1)>\P(H_1\vert H_0)=\alpha$. Его мощность
+    \[W(c_{(2)}, S_{\alpha}(0))=\P_{c_{(2), \sigma^2}}(f_{p-m,n-p}(X,0)>f_{1-\alpha}(p-m,n-p))=1-F_{p-m,n-p}(f_{1-\alpha}(p-m,n-p),\Delta^2)\]
+    строго возрастает по $\Delta^2$. Параметр нецентральности $\Delta^2$ определен в \ref{fisher::ex::stat}.
+
+    \begin{example}[Проверка однородности двух выборок]
+        $X=(X_1,\ldots,X_m),\ Y=(Y_1,\ldots,Y_n)$ - независимые гауссовские выборки.
+        То есть $\{X_i\},\ \{Y_i\}$ - н.о.р., $X_1\sim N(a, \sigma^2),\ Y_1\sim N(b, \sigma^2)$.
+        Совокупность $\{X_i\}$ и $\{Y_j\}$ независимы, $m+n>2$. \par
+        \underline{Дисперсии $DX_1,\ DY_1$ одинаковы ($=\sigma^2$), неизвестны, средние
+        $a$ и $b$ неизвестны}.
+
+        $\begin{array}{c cc}
+            H_0:& a = b   &\ (\text{\textbf{гипотеза однородности}}) \\
+            H_1:& a \neq b&
+        \end{array}$
+
+        \begin{remark*}
+            При $\D X_{1}\neq\D X_2$ эта задача называется \textbf{проблемой Беренса-Фишера}.
+        \end{remark*}
+
+        \begin{equation*}
+            \begin{cases}
+                X_i = a+\eps_i,\ &i=1,\ldots,m,\ \eps_i=X_i-a\\
+                Y_i = b+\widehat{\eps}_j,\ &j=1,\ldots,n,\ \widehat{\eps}_j=Y_j-b
+            \end{cases}
+            \Rightarrow
+            \eps_1,\ldots,\eps_m,\widehat{\eps}_1,\ldots, \widehat{\eps}_n\text{ - н.о.р. $N(0, \sigma^2)$ сл.в.}
+        \end{equation*}
+
+        \begin{equation}
+        \begin{array}{cc}
+            \begin{array}{l}
+                \\
+                \widehat{X}\defeq(X_1,\ldots,X_m,Y_1,\ldots,Y_n)^T \\
+                \\
+                c=(a,b)^T \\
+                \\
+                \Eps^T=(\eps_1,\ldots,\eps_m,\widehat{\eps}_1,\ldots, \widehat{\eps}_n)^T \\
+            \end{array} & 
+            Z= \left(\begin{array}{cc}
+                m \begin{cases}
+                    1 \\
+                    \vdots \\
+                    1
+                \end{cases} & 0 \\
+                0 & n \begin{cases}
+                    1 \\
+                    \vdots \\
+                    1
+                \end{cases}
+            \end{array}\right)
+        \end{array}
+        \Rightarrow
+        \underset{\text{\textbf{гаусс. лин. регрессия}}}{\widehat{X}=Zc+\Eps}
+    \end{equation}
+
+    Положим $A=(1, -1)$. Тогда $Ac=a-b=\beta$.
+
+    $\begin{array}{ccc}
+        H_0:& Ac=a-b=\beta=0& (=\beta_0)\\
+        H_1:& Ac=a-b\neq0& (\beta\neq0)
+    \end{array}$
+
+    О.н.к. для вектора $c$ - решение задачи
+    \[
+        \sum_{i=1}^m(X_i-a)^2+\sum_{j=1}^m(Y_j-b)^2\rightarrow \min_{a, b}
+        \Leftrightarrow \begin{cases}
+            -2\sum_i(X_i-a) = 0 \\
+            -2\sum_j(Y_j-a) = 0
+        \end{cases}
+    \]
+    Решением системы является $\widehat{a}_n=\overline{X},\ \widehat{b}_m=\overline{Y}$ -
+    оптимальные оценки $a$ и $b$, $\widehat{c}_n=(\overline{X}, \overline{Y})^T$ - оптимальная
+    оценка для $c$. Оптимальная оценка для $\sigma^2$:
+    \[
+        \widehat{S}^2_{m+n}=\frac{1}{m+n-2}\left[\sum_i(X_i-\overline{X})^2+\sum_j(Y_j-\overline{Y})^2\right]
+    \]
+    Тогда
+    \[
+    \begin{array}{l}
+        \widehat{\beta}_n=A\widehat{c}_n=\overline{X}-\overline{Y} \\
+        Z^TZ=\left(\begin{array}{cc}
+            \overbrace{1\ \ldots\ 1}^m & 0 \\
+                  0      & \underbrace{1\ \ldots\ 1}_n
+        \end{array}\right)
+        \left(\begin{array}{cc}
+              & 1 \\
+            0 & \vdots \\
+              & 1 \\
+            1  & \\
+            \vdots & 0 \\
+            1  &
+        \end{array}\right) = \left(\begin{array}{cc}
+            m & 0 \\
+            0 & n
+        \end{array}\right) \\
+        D=A(Z^TZ)^{-1}A^T=
+        \left(1\ -1 \right)
+        \left(\begin{array}{cc}
+            \frac{1}{m} & 0 \\
+            0 & \frac{1}{n}
+        \end{array}\right)
+        \left(\begin{array}{c}
+            1 \\
+            -1
+        \end{array}\right) = \frac{1}{n} + \frac{1}{m}
+    \end{array}
+    \Rightarrow
+    f_{1, m+n-2}(X,0)=\frac{(\overline{X}-\overline{Y})^2}{\left(\frac{1}{n} + \frac{1}{m}\right)\widehat{S}^2_{m+n}}
+    \]
+    $F$-критерий для $H_0$ имеет вид
+    \[S_{\alpha}(0)=\{x\in\R^{m+n}:f_{1,m+n-2}(x,0)>f_{1-\alpha}(1,m+n-2)\}\]
+    \[f_{1,m+n-2}(X,0)\underset{H_0}{\sim}F(1,\ m+n-2)\]
+    \[f_{1,m+n-2}(X,0)\underset{H_1}{\sim}F(1,\ m+n-2,\Delta^2),\]
+    \[\text{ где параметр нецентральности } \Delta^2=\Delta^2(\underset{a-b}{\beta})=\frac{(a-b)^2}{\sigma^2\left(\frac{1}{n}+\frac{1}{m}\right)}\]
+    \begin{enumerate}
+        \item Если $\vert a-b\vert$  возрастает, то мощность $F$-теста возрастает
+        \item Если $\sigma\rightarrow0$ или $\frac{1}{n}+\frac{1}{m}\rightarrow0$, то мощность возрастает
+    \end{enumerate}
+    \end{example}
 \end{document}
