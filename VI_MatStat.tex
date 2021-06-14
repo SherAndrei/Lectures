@@ -88,6 +88,7 @@
 \newcommand\defin[1]{\textbf{#1}}
 
 \newcommand*{\defeq}{\stackrel{\text{def}}{=}}
+\def\cov{ \mathrm{cov} }
 
 \def\eps{ \varepsilon }
 \def\Eps{ \mathcal{E} }
@@ -846,7 +847,7 @@
             \ldots & \ldots &\ldots
         \end{pmatrix},\ \nu=C\xi\]
         Тогда \(\eta_k\overset{d}{=}\left\lvert \xi \right\rvert ^2=\left\lvert \nu \right\rvert ^2\), так как \(C\) - ортог.
-        Но 
+        Но
         \[\nu=C\begin{pmatrix}
             a_1 \\
             \vdots \\
@@ -920,15 +921,15 @@
     так как \(\frac{(n-p)\widehat{s}^2_n}{\sigma^2}\sim\chi^2(n-p)\), \(\widehat{\beta}_n\) и \(\widehat{s}^2_n\) независимы, то
     \[f_{k,n-p}(X, \beta)\defeq\frac{\frac{1}{k}(\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)/\sigma^2}{\frac{1}{n-p}(n-p)\widehat{s}^2_n/\sigma^2} =
     \frac{(\widehat{\beta}_n-\beta)D^{-1}(\widehat{\beta}_n-\beta)}{k\widehat{s}^2_n}\sim F(k, n-p)\]
-    
-    Значит, 
+
+    Значит,
     \[\P_{\beta, \sigma^2}\left((\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)\leq k\widehat{s}_n^2f_{1-\alpha}(k,n-p)\right) = 1-\alpha\]
     \(f_{1-\alpha}(k.n-p)\) - квантиль уровня \(1-\alpha\ F(k,n-p)\).\\ Доверительное
     множество для \(\beta\) уровня \(1-\alpha\)
     \[\Theta^*(X, \alpha)=\left\{\beta:(\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)<k\widehat{s}^2_nf_{1-\alpha}(k,n-p)\right\} = \]
     \[=\left\{\beta:f_{k,n-p}(X,\beta)<f_{1-\alpha}(k,n-p)\right\}\text{ - \textbf{доверительный эллипсойд}}\]
 
-    Рассмотрим проверку гипотезы 
+    Рассмотрим проверку гипотезы
     \underline{$H_0:\beta=\beta_0$ против $H_1:\beta\neq\beta_0$}.
     $H_0$ называют линейной гипотезой, так как $\beta=Ac$ получается
     линейным преобразованием $c$.
@@ -958,7 +959,7 @@
         то в силу соотношения \ref{iid::fi}
         \[\P_{\beta,\sigma^2}(f_{k,n-p}(X, \beta_0)>f_{1-\alpha}(k,n-p))>\P_{\beta_0,\sigma}(f_{k,n-p}(X,\beta_0)>f_{1-\alpha}(k,n-p))=\alpha\]
         То есть при $\beta\neq\beta_0\ \P(H_1\vert H_1)>\P(H_1\vert H_0)$.
-        То есть \underline{$F$-критерий несмещенный}! 
+        То есть \underline{$F$-критерий несмещенный}!
         \item Мощность $W(\beta,S_\alpha(\beta_0))$ строго монотонна по $\Delta$
         из соотношения \ref{eq::fi_noncentral}
     \end{enumerate}
@@ -966,10 +967,10 @@
     \begin{example}[Определение порядка регрессии]
         $c_n^T=(\underbrace{c_{(1)n}^T}_{m-\text{вектор}}, \underbrace{c_{(2)n}^T}_{p-m-\text{вектор}}),\ 1\leq m\leq p$ \\
         $\begin{array}{c cc}
-            H_0:& c_{(2)}=0    &\ (\text{порядок не больше m})\\    
+            H_0:& c_{(2)}=0    &\ (\text{порядок не больше m})\\
             H_1:& c_{(2)}\neq0 & \par
         \end{array}$
-        
+
         Рассмотрим матрицу
         \[ A =
         \begin{array}{c}
@@ -1047,7 +1048,7 @@
                 c=(a,b)^T \\
                 \\
                 \Eps^T=(\eps_1,\ldots,\eps_m,\widehat{\eps}_1,\ldots, \widehat{\eps}_n)^T \\
-            \end{array} & 
+            \end{array} &
             Z= \left(\begin{array}{cc}
                 m \begin{cases}
                     1 \\
@@ -1083,9 +1084,7 @@
     Решением системы является $\widehat{a}_n=\overline{X},\ \widehat{b}_m=\overline{Y}$ -
     оптимальные оценки $a$ и $b$, $\widehat{c}_n=(\overline{X}, \overline{Y})^T$ - оптимальная
     оценка для $c$. Оптимальная оценка для $\sigma^2$:
-    \[
-        \widehat{S}^2_{m+n}=\frac{1}{m+n-2}\left[\sum_i(X_i-\overline{X})^2+\sum_j(Y_j-\overline{Y})^2\right]
-    \]
+    \[ \widehat{S}^2_{m+n}=\frac{1}{m+n-2}\left[\sum_i(X_i-\overline{X})^2+\sum_j(Y_j-\overline{Y})^2\right] \]
     Тогда
     \[
     \begin{array}{l}
@@ -1117,7 +1116,7 @@
         \end{array}\right) = \frac{1}{n} + \frac{1}{m}
     \end{array}
     \Rightarrow
-    f_{1, m+n-2}(X,0)=\frac{(\overline{X}-\overline{Y})^2}{\left(\frac{1}{n} + \frac{1}{m}\right)\widehat{S}^2_{m+n}}
+    \boxed{f_{1, m+n-2}(X,0)=\frac{(\overline{X}-\overline{Y})^2}{\left(\frac{1}{n} + \frac{1}{m}\right)\widehat{S}^2_{m+n}}}
     \]
     $F$-критерий для $H_0$ имеет вид
     \[S_{\alpha}(0)=\{x\in\R^{m+n}:f_{1,m+n-2}(x,0)>f_{1-\alpha}(1,m+n-2)\}\]
@@ -1129,4 +1128,228 @@
         \item Если $\sigma\rightarrow0$ или $\frac{1}{n}+\frac{1}{m}\rightarrow0$, то мощность возрастает
     \end{enumerate}
     \end{example}
+\subsection{Критерий согласия Хи-квадрат Пирсона. Проверка простой гипотезы в схеме Бернулли.}
+    Пусть проводятся $n$ независимых испытаний, и в каждом испытании возможны
+    $m\geq2$ исходов $A_1,\ldots,A_m$ таких, что $A_iA_j=\emptyset,\ i\neq j,\ \sum A_i=\Omega$, тогда
+    $\P(A_j)=p_j>0,\ \sum_{j=1}^mp_j=1$. Пусть $\nu=(\nu_1,\ldots,\nu_m)^T$, а $\nu_j$ -
+    число появления $A_j$ в $n$ опытах, тогда $\sum_{j=1}^m\nu_j=n$.
+    По вектору наблюдений $\nu$ необходимо проверить следующую гипотезу:
+
+    $\begin{array}{cl}
+        H_0:& p_j=p_j^\circ,\ j=1,\ldots,m\\
+        H_1:& p_j\neq p_j^\circ\ \forall j
+    \end{array}$
+
+    \begin{remark*}
+        $H_0$ - простая гипотеза, т.к. полностью определяет распределение
+        вектора $\nu$.
+        \[ \P(\nu_1=k_1,\ldots,\nu_m=k_m)\underset{H_0}{=}\frac{n!}{k_1!\ldots k_m!}(p_1^\circ)^{k_1}\ldots(p_m^\circ)^{k_m}\]
+    \end{remark*}
+    Это полиномиальное распределение $\prod(n,p_1^\circ, \ldots, p_m^\circ)$.
+    Статистика Хи-квадрат Пирсона:
+    \[\chi_n^2\underset{H_0}{\defeq}\sum_{j=1}^m\frac{(\nu_j-np_j^\circ)^2}{np_j^\circ}\]
+    \underline{Поведение при альтернативе:} Очевидно
+    \[\chi_n^2=n\sum_{j=1}^m\frac{(\nu_j/n-p_j^\circ)^2}{p_j^\circ}\]
+    В силу теоремы Бернулли $\frac{\nu_j}{n}\xrightarrow{\P}p_j$.
+    Поэтому
+    \[\sum_{j=1}^m\frac{(\nu_j/n-p_j^\circ)^2}{p_j^\circ}\xrightarrow[\text{Т. о наслед. сход.}]{\P}\sum_{j=1}^m\frac{(p_j-p_j^\circ)^2}{p_j^\circ}\underset{H_1}{>}0\]
+    Значит,
+    \[\chi_n^2\xrightarrow[H_1]{\P}\infty,\ n\rightarrow\infty\]
+    Поэтому большие значения $\chi_n^2$ часто свидетельсвтуют о том, что
+    стоит отвергнуть $H_0$. Но насколько "большие" значения?
+    \begin{named_theorem}[Теорема Пирсона]
+        \[ \chi_n^2\xrightarrow[H_0]{d}\chi^2(m-1),\ n\rightarrow\infty \]
+        \underline{Правило}: Если $\chi_n^2\leq\chi_{1-\alpha}(m-1)$, то принимаем $H_0$,
+        иначе принимаем $H_1$.
+    \end{named_theorem}
+    \begin{remark*} Тогда
+        \[\P(H_1\vert H_0)=\P(\chi^2_n>\chi_{1-\alpha}(m-1)\vert H_0)\rightarrow\alpha\]
+        \[\P(H_0\vert H_1)=\P(\chi^2_n\leq\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow0\]
+        То есть
+        \[\begin{cases}
+            \P(H_0\vert H_0)\rightarrow1-\alpha \\
+            \P(H_1\vert H_1)\rightarrow1
+        \end{cases}\]
+        \underline{Вероятность принять правильную гипотезу близка к единице!}
+    \end{remark*}
+    \begin{proof}
+        Покажем, что вектор $\nu=(\nu_1,\ldots,\nu_m)^T$ асимптотически нормален, то есть
+        \begin{equation}\label{th::pirson::asym_norm}
+            \sqrt{n}(\nu/n-p)\xrightarrow{d}N(0,P-pp^T),\text{ где }P\defeq\begin{pmatrix}
+                p_1^\circ & & 0 \\
+                  & \ddots & \\
+                0 & & p_m^\circ
+            \end{pmatrix}
+        \end{equation}
+        Введем вектора $X_1,\ldots,X_n$, где $X_i=(0,\ldots,0,\frac{1}{j},0,\ldots,0)^T$,
+        если в $i$-ом испытании произошло $A_j$. Тогда $\nu=\sum_{i=1}^nX_i$
+        \begin{equation}\label{th::pirson::subst_nu}
+            \sqrt{n}(\nu/n-p)=\sqrt{n}\sum_{i=1}^n(X_i-p)
+        \end{equation}
+        Здесь $\{X_i\}$ - н.о.р., $EX_1=p,\ \cov(X_1,X_1)=\E(X_1-p)(X_1-p)^T=\E X_1X_1^T-pp^T=P-pp^T$.
+        Поэтому соотношение \eqref{th::pirson::asym_norm} следует из соотноешния \eqref{th::pirson::subst_nu}
+        и ЦПТ. \\
+        Матрица $P-pp^T$ вырождена, так как сумма ее столбцов равна нулю:
+        если $e=(1,\ldots,1)^T$, то $(P-pp^T)e=p-p(p^Te)=p-p=0$
+
+        Пусть
+        \[P^{-1/2}\defeq\begin{pmatrix}
+            \frac{1}{\sqrt{p_1^\circ}} & & 0 \\
+              & \ddots & \\
+            0 & & \frac{1}{\sqrt{p_m^\circ}}
+        \end{pmatrix},\
+        \xi_n\defeq\sqrt{n}P^{-1/2}(\nu/n-p)
+        \]
+        В силу теоремы о наследовании слабой сходимости и соотношения \eqref{th::pirson::asym_norm}
+        \begin{equation} \label{th::pirson::xi_conv}
+            \xi_n\xrightarrow{d}N(0, P^{-1/2}(P-pp^T)(P^{-1/2})^T)=N(0, E_m-zz^T),\text{ где } z=(\sqrt{p_1^\circ},\ldots,\sqrt{p_m^\circ})^T
+        \end{equation}
+        Пусть ортогональная матрица $U=\begin{pmatrix}
+            \sqrt{p_1^\circ} & \ldots & \sqrt{p_m^\circ} \\
+            \ldots & \ldots & \ldots
+        \end{pmatrix}$. Тогда
+        \[U(E_m-zz^T)U^T=E_m-(Uz)(Uz)^T=\]
+        \[=\begin{pmatrix}
+            1 &        & 0 \\
+              & \ddots &   \\
+            0 &        & 1 \\
+        \end{pmatrix}-\begin{pmatrix}
+            1 \\ 0 \\ \vdots \\ 0
+        \end{pmatrix}\begin{pmatrix}
+            1  & 0  & \ldots  & 0
+        \end{pmatrix}=\begin{pmatrix}
+            0 &   &        & 0 \\
+              & 1 &        &   \\
+              &   & \ddots &   \\
+            0 &   &        & 1 \\
+        \end{pmatrix}=\widetilde{\E}_1\]
+        В силу \eqref{th::pirson::xi_conv} и теоремы о слабой сходимости
+        \begin{equation} \label{th::pirson::uxi_conv}
+            U\xi_n\xrightarrow{d}N(0,\widetilde{\E}_1) = (0,\eta_2,\ldots,\eta_m)^T
+        \end{equation}
+        где $\{\eta_2,\ldots,\eta_m\}$ - независимые $N(0,1)$ сл.в. Из \eqref{th::pirson::uxi_conv}
+        и теоремы о наследовании слабой сходимости следует:
+        \begin{equation}\label{th::pirson::absuxi_conv}
+            \lvert U\xi_n\rvert^2\xrightarrow{d} \eta_2^2+\ldots+\eta_m^2\sim\chi^2(m-1)
+        \end{equation}
+        Осталось заметить, что
+        \[\lvert U\xi_n\rvert^2=\lvert\xi_n\rvert^2=\sum_{j=1}^m\left[\frac{1}{\sqrt{p_j^\circ}}\sqrt{n}(\nu_j/n-p_j^\circ)\right]^2=\sum_{j=1}^m\frac{(\nu_j-np_j^\circ)^2}{np_j^\circ}=\chi_n^2\]
+        Из этого равенства и соотноешния \eqref{th::pirson::absuxi_conv} следует теорема Пирсона.
+    \end{proof}
+
+    \begin{example}[Проверка простой гипотезы о виде функции распределения]
+    $X=(X_1,\ldots,X_n)$, $\{X_i\}$ - н.о.р., $X_1\sim F(x)$.
+
+    $\begin{array}{cl}
+        H_0:& F(x)=F_0(x),\ (F_0\text{ известна})\\
+        H_1:& F(x)\neq F_1(x),\ F_1(x)\neq F_0(x)
+    \end{array}$
+
+    Разобъем носитель $X_1$ на непересекающиеся отрезки $\Delta_1,\ldots,\Delta_m,\ m\geq2$ так, что
+    $X_1\in\Delta_1\cup\Delta_2\cup\ldots\cup\Delta_m$
+    \[p_j^\circ\defeq \P(X_1\in\Delta_j\vert H_0) =\int_{\Delta_j}dF_0(x)>0\ \forall j\]
+    Тогда $\sum_{j=1}^mp_j^\circ=1$. С каждой величиной $X_i$ свяжем испытание
+    с исходами $A_1,\ldots,A_m$, причем $A_j$ происходит тогда и только тогда,
+    когда $X_i\in\Delta_j$. При $H_0$ $\P(A_j)=p_j^\circ$. Тогда наблюдения
+    $X_1,\ldots,X_n$ порождают полиномиальную схему независимых испытаний.
+    Пусть $\nu_j$-число исхода $A_j$ в этих испытаниях, то есть число
+    наблюдений среди $X_1,\ldots,X_n$, попавших в $\Delta_j$.
+    В силу теоремы Пирсона:
+    \[\chi_n^2\defeq\sum_{j=1}^m\frac{(\nu_j-np^\circ_j)^2}{np^\circ_j}\xrightarrow[H_0]{d}\chi^2(m-1)\]
+
+    \underline{Правило}: $H_0$ будем отвергать, если $\chi_n^2>\chi_{1-\alpha}(m-1)$. ($\alpha$ задано)
+    Тогда $\P(H_1\vert H_0)\rightarrow\alpha,\ n\rightarrow\infty$.
+    \[p_j\defeq \P(X_1\in\Delta_j\vert H_1)=\int_{\Delta_j}dF_1(x)\]
+    Если верна $H_1$ и хоть при одном $j$ $p_j\neq p_j^\circ$, то
+    $\P(H_0\vert H_1) = \P(\chi_n^2<\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow 0$
+    \begin{remark*}
+        Если $F_0\not\equiv F_1$, но $p_j=p_j^\circ\ \forall j$,
+        то $\P(H_0\vert H_1)=\P(H_0\vert H_0)\rightarrow1-\alpha\neq0$.
+        Например
+        **** TODO вставить график стр 152 ****
+
+        Здесь $\P(X_1\in\Delta_1\vert H_0)=F_0(0)=\P(X_1\in\Delta_1\vert H_1)=F_1(0)$.
+        Значит, и $\P(X_1\in\Delta_2\vert H_0)=1-F_0(0)=\P(X_1\in\Delta_1\vert H_1)=1-F_1(0)$.
+    \end{remark*}
+    \end{example}
+\subsubsection*{Проверка сложной гипотезы в схеме исп. Бернулли}
+    Пусть проводится $n$ независимых испытаний, искходы
+    $A_1,\ldots,A_m$, $\nu=(\nu_1,\ldots,\nu_m)^T$ - вектор наблюдений.
+    Пусть $H_0:\ \P(A_j)=p_j(\theta),\ \theta\in\Theta\in\R^k,\ k<m-1$.
+
+    \underline{Условия регулярности}
+    \begin{enumerate}
+        \item $\sum_{j=1}^mp_j(\theta)=1,\ \theta\in\Theta$
+        \item $p_j(\theta)\geq c>0\ \forall j=1,\ldots,m$ и $\exists\ \frac{\partial p_j(\theta)}{\partial \theta_l},\frac{\partial^2p_j(\theta)}{\partial\theta_l\partial\theta_r}$
+        \item $rank(\underbrace{\frac{\partial p_j(\theta)}{\partial \theta_l}}_{\text{$m\times k$}})=k,\ \forall\theta\in\Theta$
+    \end{enumerate}
+    В качестве оценки $\theta$ при $H_0$ будем использовать мультиномиальные
+    оценки максимального правдоподобия:
+    \[\P(\nu_1=k_1,\ldots,\nu_m=k_m)=\frac{n!}{k_1!\ldots k_m!}p_1^{k_1}(\theta)\ldots p_m^{k_m}(\theta)\]
+    логарифмического правдоподобия:
+    \[L_n(\nu,\theta)=\ln\left(\frac{n!}{k_1!\ldots k_m!}\right)+\sum_{j=1}^m\nu_j\ln p_j(\theta)\]
+    оценки максимального правдоподобия (мультиномиальные):
+    \[L_n(\nu,\theta)\rightarrow\max_{\theta\in\Theta}\]
+    \begin{named_theorem}[Теорема Фишера]
+        Пусть выполнены условия регулярности, $\widehat{\theta}_n$ - мульт. о.м.п. Тогда
+        \[\widehat{\chi}_n^2=\sum_{j=1}^m\frac{(\nu_j-np_j(\widehat{\theta}_n))^2}{np_j(\widehat{\theta}_n)}\xrightarrow[H_0]{d}\chi(m-k-1)\]
+        \underline{Правило}: Если $\widehat{\chi}_n^2\leq X_{1-\alpha}(m-k-1)$, то принимаем $H_0$, иначе принимаем $H_1$.
+        Тогда $\P(\overline{H_0}\vert H_0)\rightarrow\alpha$
+    \end{named_theorem}
+    \begin{example}[Проверка независимости признаков]
+        Пусть объект классифицирован по двум $A$ и $B$,
+        $A=\{A_1,\ldots,A_s\},\ B=\{B_1,\ldots,B_r\},\ s>1,\ r>1$.
+        Проводится $n$ опытов, и пусть $\nu_{ij}$ - число объектов,
+        имеющих признаки $A_iB_j$. \\
+        Пусть $p_{ij}=\P(A_iB_j)$. Гипотеза независимости
+        $H_0:\ p_{ij}=p_{i\bullet}p_{\bullet j}$ для положительных $p_{i\bullet}$ и $p_{\bullet j}$
+        таких, что $\sum_{i=1}^sp_{i\bullet}=1,\ \sum_{j=1}^rp_{\bullet j}=1$. \\
+        При $H_0$ логарифмическое правдоподобие
+        \[L_n(\nu,p_{i\bullet},p_{\bullet j})=\ln\frac{n!}{\prod_{i,j}\nu_{ij}}+\sum_{i=1}^s\sum_{j=1}^r\nu_{ij}\ln(p_{i\bullet}p_{\bullet j})\]
+        Максимизируя эту функцию по $p_{i\bullet},\ p_{\bullet j}$ при условиях, что $\sum_{i=1}^sp_{i\bullet}=1,\ \sum_{j=1}^rp_{\bullet j}=1$,
+        находим оценки
+        \[\widehat{p}_{i\bullet}=\frac{\nu_{i\bullet}}{n},\ \widehat{p}_{\bullet j}=\frac{\nu_{\bullet j}}{n},\text{ где } \nu_{i\bullet}=\sum_{j}\nu_{ij},\ \nu_{\bullet j}=\sum_{j}\nu_{ij}\]
+        Статистика Хи-квадрат имеет вид
+        \[\widehat{\chi}_n^2=\sum_{i=1}^s\sum_{j=1}^r\frac{(\nu_{ij}-n\widehat{p}_{i\bullet}\widehat{p}_{\bullet j})^2}{n\widehat{p}_{i\bullet}\widehat{p}_{\bullet j}}\]
+        \[\widehat{\chi}_n^2\xrightarrow[H_0]{d}\chi((s-1)(r-1))\]
+        так как $m-k-1=sr-(s+r-2)-1=(s-1)(r-1)$. \\
+        \underline{Правило}: Если $\widehat{\chi}_n^2>\chi_{1-\alpha}((s-1)(r-1))$,
+        то отвергаем $H_0$. Асимптотический уровень теста есть $\alpha$
+    \end{example}
+    \begin{example}[W.H.Gilby. Biometrika, 8,94]
+        1725 школьников классифицировали в соответствии с их
+        качеством одежды и в соответствии с умственными способностями.
+        Использовали следующие градации:
+        
+        \[
+        \begin{array}{lr}
+            \begin{array}{lcl}
+                A &-& \text{умственно отсталый} \\
+                B &-& \text{медлительный и тупой} \\
+                C &-& \text{тупой} \\
+                D &-& \text{медлительный, но умный} \\
+                E &-& \text{достаточно умный} \\
+                F &-& \text{способный} \\
+                G &-& \text{очень способный} \\
+            \end{array} & 
+            \boxed{H_0:\ \text{признаки независимы}}
+        \end{array}
+        \]
+        \newpage
+        \begin{table}[h!]
+            \centering
+            \begin{tabular}{ c|c|c|c|c|c|c|c }
+                & \multicolumn{6}{|c|}{Способности} & \\ \hline
+                Как одевается & A и B & C   & D   & E   & F   & G  & Сумма \\ \hline
+                Очень хорошо  &  33   & 48  & 113 & 209 & 194 & 39 & 636   \\ \hline
+                Хорошо        &  41   & 100 & 202 & 255 & 138 & 15 & 751   \\ \hline
+                Сносно        &  39   & 58  & 70  & 61  & 33  & 4  & 256   \\ \hline
+                Очень плохо   &  17   & 13  & 22  & 10  & 10  & 1  & 73    \\ \hline
+                Сумма         &  130  & 219 & 407 & 535 & 375 & 59 & 1725
+            \end{tabular}
+        \end{table}
+        Здесь $\chi_n^2=174.92>\chi_{0.999}(15)=37.697$. \par
+        Здесь $15 = (s-1)(r-1) = (4-3)(6-1) \Rightarrow$ Отвергаем $H_0$
+    \end{example}
+
 \end{document}
