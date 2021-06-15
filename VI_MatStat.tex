@@ -6,7 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english, russian]{babel}
 %for search in russian
-\usepackage{cmap}
+% \usepackage{cmap}
 %--------------------------------------
 
 %Math-specific packages
@@ -75,16 +75,16 @@
 %--------------------------------------
 \usepackage{wrapfig}
 \usepackage{graphicx}
+\usepackage{gnuplottex}
 \graphicspath{ {./images/} }
 
 %--------------------------------------
 
+% for leftbar
 \usepackage{framed}
 
 % My commands
 %--------------------------------------
-% for definitions
-
 \newcommand\defin[1]{\textbf{#1}}
 
 \newcommand*{\defeq}{\stackrel{\text{def}}{=}}
@@ -352,8 +352,19 @@
 
         При \(\omega\in S_n^a\) функция \(L_n(X, \theta)\) имеет
         локальный максимум \(\widehat{\theta}^a_n\) на интервале \((\theta_0 - a, \theta_0 + a)\)
-        \begin{figure}[h]
-            \includegraphics[width=0.4\textwidth]{L_n_func}
+        \begin{figure}[h!]
+            \centering 
+            \begin{gnuplot}
+                set xlabel '$\theta$'
+                set border 1
+                set xrange [-2:8]
+                set yrange [0:7]
+                unset ytics
+
+                set xtics ("$\\theta_0-a$" -1, 0, "$\\theta_0$" 3, "$\\widehat{\\theta}^a_n$" 4, "$\\theta_0+a$" 7)
+                plot "data/plaus_func.txt" smooth csplines with lines title '$L_n(X,\theta)$'
+
+            \end{gnuplot}
         \end{figure}
 
         Значит, \(\frac{\partial}{\partial\theta}L_n(X, \widehat{\theta}_n^a) = 0\).
@@ -742,8 +753,25 @@
         \[ = \P_\theta\left(\frac{1}{\sqrt{n}\sigma} \sum_{i=1}^n(X_i - \theta) > \frac{\sqrt{n}(\theta_0 - \theta)}{\sigma} + \xi_{1-\alpha}\right) =
         1 - \Phi\left(\xi_{1-\alpha} + \frac{\sqrt{n}(\theta - \theta_0)}{\sigma}\right)\]
 
-        **** TODO вставить график стр 134 ****
+        \begin{figure}[h!]
+            \centering 
+            \begin{gnuplot}
+                set xrange [0:4]
+                set yrange [0:1.5]
+                set xlabel '$\theta$'
 
+                f(x) = atan(x) * 2 / pi
+
+                x1 = 0.654
+                f_cropped(x) = (x >= x1) ? f(x) : 1/0
+
+                set xtics ("$\\theta_0$" x1)
+                set ytics ("$\\alpha$" f(x1), 1)
+
+                plot f_cropped(x) title '$w(\theta,S^*_\alpha)$',\
+                     1 linetype 4 notitle
+            \end{gnuplot}
+        \end{figure}
 \end{example}
 
 \subsection*{О связи между доверительным оцениванием и проверкой гипотез}
@@ -815,7 +843,7 @@
 \begin{definition}
     Если \(\xi_i\sim N(a_i,1),i=1,\ldots,k\), и \(\{\xi_1,\ldots,\xi_k\}\)
     независимы, а \(\Delta^2=\sum_{j=1}^{k}a_j^2\), то сл. в.
-    \[\eta_k(\Delta)\overset{d}{=}\xi_1^2+\ldots+\xi_k^2\sim\chi^2(k,\Delta^2)\]
+    \[ \eta_k(\Delta)\overset{d}{=}\xi_1^2+\ldots+\xi_k^2\sim\chi^2(k,\Delta^2) \]
     имеет нецентральное распределение хи-квадрат с \(k\) степенями свободы
     и параметром нецентральности \(\Delta^2\)
 \end{definition}
@@ -1292,7 +1320,7 @@
     \[L_n(\nu,\theta)\rightarrow\max_{\theta\in\Theta}\]
     \begin{named_theorem}[Теорема Фишера]
         Пусть выполнены условия регулярности, $\widehat{\theta}_n$ - мульт. о.м.п. Тогда
-        \[\widehat{\chi}_n^2=\sum_{j=1}^m\frac{(\nu_j-np_j(\widehat{\theta}_n))^2}{np_j(\widehat{\theta}_n)}\xrightarrow[H_0]{d}\chi(m-k-1)\]
+        \[ \widehat{\chi}_n^2=\sum_{j=1}^m\frac{(\nu_j-np_j(\widehat{\theta}_n))^2}{np_j(\widehat{\theta}_n)}\xrightarrow[H_0]{d}\chi(m-k-1) \]
         \underline{Правило}: Если $\widehat{\chi}_n^2\leq X_{1-\alpha}(m-k-1)$, то принимаем $H_0$, иначе принимаем $H_1$.
         Тогда $\P(\overline{H_0}\vert H_0)\rightarrow\alpha$
     \end{named_theorem}
@@ -1352,4 +1380,139 @@
         Здесь $15 = (s-1)(r-1) = (4-3)(6-1) \Rightarrow$ Отвергаем $H_0$
     \end{example}
 
+    \section{Введение в робастное оценивание}
+
+    Схема засорений Мартина-Йохаи имеет вид:
+    \[y_t = u_t + z^\gamma_t\xi_t,\ t = 1, \ldots, n\]
+    Здесь $\{u_t\}$ - "полезный сигнал" (временной ряд); \\
+    $\{z_t^\gamma\}$ - н.о.р. сл.в., $z_1^{\gamma} \sim Bin(1, \gamma)$
+    с $0 \leq \gamma\leq1$ ($\gamma$ - уровень засорения); \\
+    $\{\xi_t\}$ - н.о.р. сл.в. - грубые выбросы, $\xi_1$ - имеет распределение
+    $\mu_\xi\in M_\xi$;
+    Распределение $\mu_\xi$ неизвестно, а множество $M_\xi$ известно; \\
+    Последовательность $\{u_t\}, \{z^\gamma_t\}, \{\xi_t\}$ независимы между собой. \\
+    Пусть $y_1, \ldots, y_n$ - наблюдения, и распределение
+    вектора $Y_n=y_1, \ldots, y_n$ висит от неизвестного параметра $\beta$.
+    Пусть $\hat{\beta}_n$ - некоторая оценка $\beta$
+
+    \underline{Основное предположение}
+
+    При любом $0 \leq \gamma\leq1$ существует предел
+    \[\hat{\beta}_n\xrightarrow{\P}\theta_\gamma,\ n\rightarrow\infty;\ \theta_0=\beta\]
+
+    \begin{definition}
+        Если существует предел
+        \[IF(\theta_\gamma, \mu_\xi)\defeq\lim_{\gamma\rightarrow+0}\frac{\theta_\gamma-\theta_0}{\gamma}\]
+        то $IF(\theta_\gamma, \mu_\xi)$ называется \defin{функционалом влияния оценки $\widehat{\beta}_n$}
+    \end{definition}
+
+    Если функционал влияния существует, то 
+    \[\theta_\gamma = \theta_0 + IF(\theta_\gamma, \mu_\xi)\gamma + \littleO(\gamma),\ \gamma\rightarrow+0\]
+    \begin{leftbar}
+       $IF(\theta_\gamma, \mu_\xi)$ характеризует главный линейный по
+        $\gamma$ член в разложении по $\gamma$ асимптотического смещения $\theta_\gamma - \theta_0=\theta_\gamma-\beta$
+    \end{leftbar}
+
+    \begin{definition}
+        Величина $GES(\theta_\gamma,M_\xi)\defeq\sup_{\mu_\xi\in M_\xi}\left\lvert IF(\theta_\gamma, \mu_\xi)\right\rvert$
+        называется чувствительностью оценки $\widehat{\beta}_n$ к засорениям (выбросам).
+    \end{definition}
+    \begin{leftbar}
+        Если $GES(\theta_\gamma,M_\xi)<\infty$, то главный член по $\gamma$
+        асимптотического смещения $IF(\theta_\gamma,\mu_\xi)\gamma$
+        равномерно по $\mu_\xi$ $\max$ при таких $\gamma$
+    \end{leftbar}
+    \begin{definition}
+        Если $GES(\theta_\gamma,M_\xi)<\infty$, то оценка $\widehat{\beta}_n$
+        называется \defin{робастной по смещению}, или $B$-робастной.
+    \end{definition}
+
+    \begin{example}[Выборочное среднее]
+        \[\begin{cases}
+            u_t = a + \xi_t \\
+            y_t = u_t + z^\gamma_t\xi_t, \ t=1,\ldots,n
+        \end{cases}\]
+        $\{\xi_t\}$ - н.о.р. сл.в., $\E\eps_1=0$ (тогда $\E u_t=a$), $\E\vert\xi_1\vert<\infty$ \\
+        Возьмем оценкой $a$ эмпирическое среднее $\overline{y}=\frac{1}{n}\sum_{t=1}^ny_t$.
+        Тогда $\overline{y}\xrightarrow{\P}E(u_1+z_1^\gamma\xi_1)=a+\gamma\E\xi_1=\theta^{LS}_\gamma$
+        Функция $\theta_\gamma^{LS}$ определена при всех $\gamma$,
+        \[\frac{d\theta_\gamma^{LS}}{d\gamma}=\E\xi_1=IF(\theta_\gamma^{LS}, \mu_\xi)\]
+        Если $M_1$ - класс распределений с конечным первым моментом, то
+        \[GES(\theta_\gamma^{LS}, M_1) = \sup_{\mu_\xi\in M_1} \vert\E\xi_1\vert = \infty\]
+        Оценка $\overline{y}$ \underline{не $B$-робастна} на  классе $M_1$!
+    \end{example}
+    \begin{example}[Выборочная медиана]
+        Пусть
+        \begin{equation} \label{def::var_series}
+            u_t=a+\eps_t,\ t=1,\ldots,n,\text{ где }\{\eps_t\}\text{ - н.о.р. сл.в.}
+        \end{equation} 
+        $\eps_1\sim G(x)$, функция распределения $G(x)$ неизвестна,
+        $G(0)=1/2$. Тогда функция распределения $u_1$ есть $F(x)=G(x-a)$,
+        то есть $F(a)=1/2$. Таким образом, медиана $G(x)$ это 0, медиана $F(x)$ - $a$.
+        \begin{leftbar}
+            Если $\eps_1$ имеет симметричное относительно 0 распределение
+            (то есть $\eps_1\overset{d}{=}-\eps_1$, что для непрерывной
+            $G(x)$ равносильно условию $G(x)+G(-x)=1\ \forall x$), то
+            автоматически $G(0)=1/2$. Если вдобавок $\E\lvert\eps_1\rvert<\infty$,
+            то $\E\eps_1=0,\E u_1=a$
+        \end{leftbar}
+        Итак, при сформулированных условия оценку медианы можно использовать
+        как оценку математического ожидания.
+
+        Пусть $u_{(1)}\leq u_{(2)}\leq\ldots\leq u_{(n)}$ будет вариационный
+        ряд наблюдений $u_1,\ldots,u_n$.
+        \begin{definition}
+            Величина
+            \[
+                \widehat{m}_n=\begin{cases}
+                    u_{(k+1)}\ &n=2k-1 \\
+                    \frac{u_{(k+1)} + u_{(k)}}{2}\ &n=2k
+                \end{cases}
+            \]
+            называется \defin{выборочной медианой} наблюдений $u_1,\ldots,u_n$.
+        \end{definition}
+
+        Мы знаем, что если $G(x)$ дифф. в нуле, и $g(0) = G'(0)>0$,
+        то для выборочной медианы справедлива асимптотическая нормальность:
+        \[ \sqrt{n}(\widehat{m}_n - a)\xrightarrow{d}N(0, \frac{1}{4g^2(0)}),\ n\rightarrow\infty\]
+        Если в \eqref{def::var_series} $\{\eps_t\}$ - н.о.р., $\E\eps_1=0$,
+        $0<\E\eps_!^2=\sigma^2<\infty$, то $\sqrt{n}(???-a)\xrightarrow{d}N(0,\sigma^2)$.
+        Значит асимптотическая оптимальная эффективность выборочной медианы относительно ???
+        равна
+        \[\boxed{e_{\widehat{m}_n,\ \overline{X}}=4g^2(0)\sigma^2}\]
+
+        \underline{Изучим $B$-робастность выборочной медианы.}
+        Пусть
+        \[
+        \begin{array}{cc}
+        \begin{cases}
+            u_t=a+\eps_t \\
+            y_t=u_t+z_t^\gamma\xi_t,\ t=1,\ldots,n
+        \end{cases} &
+        \widehat{m}_n^y=
+        \begin{cases}
+            y_{(k+1)},\ n=2k-1 \\
+            \frac{y_{(k)}+y_{(k+1)}}{2},\ n=2k
+        \end{cases} \\
+        \end{array}
+        \]
+        \begin{theorem}
+            Пусть $\exists\ g(x)=G'(x)$, $g(x)$ непрерывна и ограничена,
+            $g(0)>0,\ G(0)=1/2$. Тогда:
+            \begin{enumerate}
+                \item $\widehat{m}_n^y\xrightarrow{\P}\theta_\gamma^m,\ \theta_0=a$
+                \item Существует функционал влияния выборочной медианы
+                \[IF(\theta_\gamma^m,\mu_\xi)=\frac{1-2\E G(-\xi_1)}{2g(0)}\]
+                \item Чувствительность выборочной медианы на классе всех возможных
+                распределений $M_\xi$
+                \[GES(\theta_\gamma^m,\mu_\xi)=\sum_{\mu_\xi\in M_\xi}\lvert IF(\theta_\gamma^m,\mu_\xi)\rvert=\frac{1}{2g(0)}<\infty\]
+                то есть \underline{выборочная медиана $B$-робастна}.
+            \end{enumerate}
+        \end{theorem}
+        \begin{proof}
+            стр 164
+        \end{proof}
+    \end{example}
+
+    
 \end{document}
