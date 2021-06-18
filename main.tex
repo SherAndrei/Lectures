@@ -305,7 +305,82 @@ $AR(1)$-модель.
         \[d_n(\beta)(\widehat{\beta}_{n,ML}-\beta)=\frac{M_n}{V_n}\xrightarrow{d}\frac{\xi\eta}{\eta^2}=\frac{\xi}{\eta}\sim K(0,1)\]
         \item \underline{$|\beta|=1$}. Тогда
         \[M_n=\frac{\sqrt{2}}{n}\sum_{t=1}^n\eps_tu_{t-1},\ V_n=\frac{2}{n^2}\sum_{t=1}^nu_{t=1}^2\]
+        Далее, $u_t=u_{t-1}t\eps_t=\eps_1+\ldots+\eps_t$.
+
+        Введем киферовский последовательный процесс
+        \[w_n(s)\defeq n^{-1/2}\sum_{i\leq ns}\eps_i,\ s\in[0,1],\ w_n(s)=0,\ 0\leq s\leq 1/n\]
+        Тогда 
+        \[n^{-1/2}u_{t-1}=w_n\left(\frac{t-1}{n}\right)\]
+        Пусть
+        \[\Delta w_n\left(\frac{t}{n}\right)\defeq w_n\left(\frac{t}{n}\right)-w_n\left(\frac{t-1}{n}\right)=\frac{\eps_t}{\sqrt{n}}\]
+        Тогда
+        \[M_n=\sqrt{2}\sum_{t=1}^nw_n\left(\frac{t-1}{n}\right)\Delta w_n\left(\frac{t}{n}\right),\ V_n=2\sum_{t=1}^nw_n^2\left(\frac{t-1}{n}\right)\frac{1}{n}\]
+        Пусть
+        \[U_n\defeq \left(w_n\left(\frac{1}{n}\right), w_n\left(\frac{2}{n}\right),\ldots,w_n\left(\frac{n}{n}\right)\right)^T\]
+        \begin{leftbar}
+            Тогда $U_n=\left(\frac{\eps_1}{\sqrt{n}},\frac{\eps_1+\eps_2}{\sqrt{n}},\ldots,\frac{\eps_1+\ldots+\eps_n}{\sqrt{n}}\right)^T$
+            и это есть гауссовский вектор со средним ноль, $cov\left(w_n\left(\frac{i}{n}\right),w_n\left(\frac{j}{n}\right)\right)=\frac{\min(i,j)}{n}$
+        \end{leftbar}
+        Действительно,
+        \[U_n\begin{pmatrix}
+            1      &        & 0 \\
+            \vdots & \ddots &    \\
+            1      & \ldots &  1 \\
+        \end{pmatrix}\begin{pmatrix}
+            \eps_1  \\ \vdots \\ \eps_n
+        \end{pmatrix}\]
+        Для $i\leq j$
+        \[cov\left(w_n\left(\frac{i}{n}\right),w_n\left(\frac{j}{n}\right)\right)=\E\left(\frac{1}{n}\sum_{t=1}^i\eps_t\times\sum_{k=1}^j\eps_k\right)=\frac{1}{n}\E\left(\sum_{t=1}^i\eps_i\right)^2=\frac{i}{n}=\frac{min(i,j)}{n}\]
+        Введем вектор $U\defeq\left(w\left(\frac{1}{n}\right),w\left(\frac{2}{n}\right),\ldots,w\left(\frac{n}{n}\right)\right)^T$,
+        где $w(s)$ - стандартный винеровский. Это гауссовский вектор со средним 0,
+        $cov\left(w\left(\frac{i}{n}\right),w\left(\frac{j}{n}\right)\right)=\frac{\min(i,j)}{n}$.
+        Значит,
+        \begin{equation}\label{eq::U_almosteq}
+            U_n\overset{d}{=}U \Rightarrow \phi(U_n)\overset{d}{=}\phi(u),\text{ где $\phi$ - $\forall$ бор.}
+        \end{equation}
+        \begin{leftbar}
+            Действительно, пусть $\xi=\overset{d}{=}\eta,\ \xi,\eta\in\R^k$. Тогда $f(\xi)=\overset{d}{=}f(\eta)$,
+            так как $\P(f(\xi)\in A)=\P(\xi\in f^{-1}(A))=\P(\eta\in f^{-1}(A))=\P(f(\eta)\in A)$
+        \end{leftbar}
+        Пусть
+        \[\overline{M}_n=\sqrt{2}\sum_{t=1}^nw\left(\frac{t-1}{n}\right)\Delta w\left(\frac{t}{n}\right),\ \overline{V}_n=2\sum_{t=1}^nw^2\left(\frac{t-1}{n}\right)\frac{1}{n}\]
+        Так как $M_n,\ V_n$ - борелевские функции от $U_n$, а $\overline{M}_n,\ \overline{V}_n$ - борелевские функции от $U$,
+        то из \eqref{eq::U_almosteq} следует:
+        \begin{equation}\label{eq::eq_mn_vn_w_overlined}
+            \frac{M_n}{V_n}\overset{d}{=}\frac{\overline{M}_n}{\overline{V}_n}
+        \end{equation}
+        Но
+        \[\overline{M}_n\xrightarrow{\text{с.к.}}\sqrt{2}\int_0^1w(s)dw(s),\ \overline{V}_n\xrightarrow{\text{с.к.}}2\int_0^1w^2(s)ds\]
+        Значит, $(\overline{M}_n,\overline{V}_n)^T\xrightarrow{d}\left(\sqrt{2}\int_0^1w(s)dw(s), 2\int_0^1w^2(s)ds\right)$,
+        и, следовательно,
+        \begin{equation}\label{eq::frac_overline_mn_vn}
+            \frac{\overline{M}_n}{\overline{V}_n}\rightarrow\frac{\sqrt{2}\int_0^1w(s)dw(s)}{2\int_0^1w^2(s)ds}=\frac{w^2(1)-1}{2^{3/2}\int^1_0w^2(s)ds}
+        \end{equation}
+        Поскольку
+        \[d_n(\beta)(\widehat{\beta}_{n,ML}-\beta)=\frac{M_n}{V_n}\]
+        то соотношения \eqref{eq::eq_mn_vn_w_overlined}-\eqref{eq::frac_overline_mn_vn} влекут утверждение
+        теоремы.
     \end{enumerate}
 \end{proof}
-
+\begin{theorem}
+    Пусть $\{\eps_t\}$ - н.о.р. $N(0,1)$ сл.в. Тогда
+    \[\sqrt{\sum_{t=1}^nu^2_{t-1}}(\widehat{\beta}_{n,ML}-\beta)\xrightarrow{d}\begin{cases}
+        N(0,1),& |\beta|\neq1\\
+        \widetilde{H}(\beta),& |\beta|=1
+    \end{cases}\]
+    Здесь
+    \[\widetilde{H}(\beta)\text{ - распр. сл.в. }\frac{w^2(1)-1}{2\sqrt{\int_0^1w^2(s)ds}}=\frac{\int_0^1w(s)dw(s)}{\sqrt{\int^1_0w^2(s)ds}}\]
+\end{theorem}
+\begin{proof}
+    \[\sqrt{\sum_{t=1}^nu^2_{t-1}}(\widehat{\beta}_{n,ML}-\beta)=\frac{M_n}{\sqrt{V_n}}\]
+    \begin{enumerate}
+        \item \underline{$|\beta|<1$}: Тогда $(M_n,V_n)^T\xrightarrow{d}(\xi,1)^T$, значит 
+        \[\frac{M_n}{\sqrt{V_n}}\xrightarrow{d}\frac{\xi}{\sqrt{1}}\sim N(0,1)\]
+        \item \underline{$|\beta|>1$}: Тогда $(M_n,V_n)^T\xrightarrow{d}(\xi\eta,\eta^2)^T$, значит 
+        \[\frac{M_n}{\sqrt{V_n}}\xrightarrow{d}\frac{\xi\eta}{\sqrt{\eta^2}}=\xi\cdot sgn\eta\sim N(0,1)\]
+        \item \underline{$|\beta|=1$}: Тогда $(M_n,V_n)^T\xrightarrow{d}\left(\frac{1}{\sqrt{2}}(w^2(1)-1),2\int_0^1w^2(s)ds\right)^T$, значит 
+        \[\frac{M_n}{\sqrt{V_n}}\xrightarrow{d}\frac{w^2(1)-1}{2\sqrt{\int_0^1w^2(s)ds}}\]
+    \end{enumerate}
+\end{proof}
+\subsection{Об оценке наименьших квадратов в авторегрессии}
 \end{document}
