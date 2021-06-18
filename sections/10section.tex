@@ -1,0 +1,876 @@
+\section{Проверка статистических гипотез}
+\(X = (X_1, \ldots, X_n)\) имеет плотность вероятности \(p(X, \theta)\)
+по мере \(\mu,\ \theta\in\Theta\subseteq\R^1\)
+
+\begin{definition}
+    Предположение вида \(H_0: \theta\in\Theta_0\), где
+    \(\Theta_0\in\Theta\), называется параметрической гипотезой.
+    Альтернатива \(H_1:\theta\in\Theta_1\), где
+    \(\Theta_1\in\Theta\backslash\Theta_0\)
+\end{definition}
+
+\begin{definition}
+    Если \(\Theta_0(\Theta_1)\) состоит из одной точки,
+    то гипотеза \(H_0\) (альтернатива \(H_1\)) называется
+    простой.
+    В противном случае \(H_0(H_1)\) - сложная
+\end{definition}
+
+\underline{Постановка задачи}:
+
+Необходимо построить правило (статистический критерий - \(test\)),
+который позволяет заключить, согласуется ли наблюдение \(X\)
+с \(H_0\) или нет.
+
+\underline{Правило.}
+
+Выберем в множестве значений \(x\) вектора \(X\) (у нас либо
+\(x = \R^n\), либо \(x = N_p \subseteq \R^n\) - носитель
+плотности) подмножество \(S\). Если \(X \in S\), то \(H_0\) отвергается и
+принимается \(H_1\). Если \(X \in \overline{S} = X \backslash S\), то
+\(H_0\) принимается.
+
+\begin{definition}
+    Множество \(S\) называется критическим множеством или критерием,
+    \(\overline{S}\) - область принятия гипотезы.
+\end{definition}
+
+\begin{definition}
+    \defin{Ошибка 1-го рода} - принять \(H_1\), когда
+    верна \(H_0\). Вероятность ошибки 1-го рода $\alpha
+    = \P(H_1 | H_0)$ (это условная запись, а не условная вероятность).
+    \defin{Ошибка 2-го рода} - принять \(H_0\), когда
+    верна \(H_1\). Вероятность ошибки 2-го рода $\beta
+    = \P(H_0 | H_1)$.
+\end{definition}
+
+\begin{definition}
+    \defin{Мощность критерия \(S\)} называется функция \(W(S, \theta) = W(\theta)
+    \defeq\P_\theta(X\in S)\) (вероятность отвергнуть \(H_0\), когда
+    значение параметра есть \(\theta\)).
+\end{definition}
+
+Тогда
+\begin{align*}
+    \alpha &= \alpha(\theta) = W(\theta),\ \theta\in\Theta_0; \\
+    \beta  &= \beta(\theta) = 1 - W(\theta),\ \theta\in\Theta_1
+\end{align*}
+
+\begin{definition}
+Обычно \(H_0\) более важна. Поэтому рассматривают критерии
+такие, что
+\[\alpha(\theta) = W(\theta) = \P_{\theta}(X\in S) \leq\alpha \ \forall \theta\in\Theta_0\]
+    Число \(\alpha\) называют \defin{уровнем значимости критерия}.
+    Пишут \(S_\alpha\) - критерий уровня \(\alpha\). Обычно \(\alpha\) -
+    маленькое число, которое мы задаем сами.
+\end{definition}
+
+\begin{definition}
+    Если критерий \(S^*_\alpha \in \{S_\alpha\}\) и \(\forall\theta\in\Theta_1\) и
+    \(\forall S_\alpha \ W(S^*_\alpha,\theta) \geq W(S_\alpha, \theta)\),
+    то критерий \(S^*_\alpha\) называется \defin{РНМ-критерием (равномерно наиболее мощным)}.
+\end{definition}
+
+Если \(H_0:\theta = \theta_0,\ H_1:\theta = \theta_1\) (то есть
+\(H_0\) и \(H_1\) - простые), то задача отыскания РНМ-критерия
+заданного уровня \(\alpha\) имеет вид:
+\begin{align*}
+  \P_{\theta_0}(X\in S^*_\alpha) &\leq \alpha, \\
+  \P_{\theta_1}(X\in S^*_\alpha) &\geq \P_{\theta_1}(X\in S_\alpha) \ \forall S_\alpha
+\end{align*}
+
+Положим для краткости:
+\(p_0(x)\defeq p(x, \theta_0),\ \E_0 = \E_{\theta_0},\ p_{1}(x) = p(x, \theta_1),\ \E_1 = \E_{\theta_1}\)
+
+Введем множество
+\[S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0\]
+
+\subsection{Лемма Неймана-Пирсона}
+Пусть для некоторого \(\lambda > 0\) и критерия \(R\)
+(когда \(X\) попадает в \(R\), то \(H_0\) отвергается)
+выполнено:
+\begin{enumerate}
+    \item  \(\P_0(X\in R) \leq \P_0(X\in S(\lambda))\)
+
+    Тогда:
+    \item  \(P_1(X\in R) \leq \P_1(X\in S(\lambda))\)
+    \item  \(P_1(X\in S(\lambda)) \geq \P_0(X\in S(\lambda))\)
+\end{enumerate}
+\begin{remark}
+    \(X\in S(\lambda) \Leftrightarrow \frac{p_1(x)}{p_0(x)} > \lambda\).
+    Так как \(p_1(X)\) и \(p_0(X)\) - правдоподобие, то критерий
+    называется критерием отношения правдоподобия Неймана-Пирсона.
+\end{remark}
+\begin{remark}
+    Утверждение 3 для \(S(\lambda)\)
+    означает, что
+    \[\P(H_1 \left\lvert  H_1) \geq \P(H_1 \right\rvert H_0) \Leftrightarrow W(S(\lambda), \theta_1) \geq W(S(\lambda), \theta_0)\]
+    Это свойство называется несмещенностью критерия \(S(\lambda)\)
+\end{remark}
+\begin{proof}
+    Дальше для краткости \(S(\lambda) = S\). Пусть
+    \(I_R(x) = \begin{cases}
+        1, x\in \R \\
+        0, x\notin \R
+    \end{cases}\), \(I_S(x)\) определяем аналогично.
+    Тогда Условие (А) имеет вид:
+    \begin{equation}
+        \label{eq::cond_A}
+        \E_0I_R(x) \leq \E_0I_S(x)
+    \end{equation}
+
+    \underline{Докажем пункт 2}:
+    Верно неравенство
+    \begin{equation} \label{eq::LemmaNP::dens}
+        I_R(x)[p_1(x) - \lambda p_0(x)] \leq I_S(x)[p_1(x) - \lambda p_0(x)]
+    \end{equation}
+
+    Действительно, если \((p_1(x) - \lambda p_0(x)) > 0\),
+    то \(I_S(x) = 1\) и \eqref{eq::LemmaNP::dens} очевидно.
+
+    Если же \(p_1(x) - \lambda p_0(x) \leq 0\), то правая часть
+    \eqref{eq::LemmaNP::dens} есть ноль, а левая \(\leq\) нуля.
+
+    Итак, \eqref{eq::LemmaNP::dens} верно: интегрируем это неравенство по \(x\in\R^n\):
+    \[\E_1I_R(X) - \lambda\E_0I_R(X) \leq \E_1I_S(X) - \lambda\E_0I_S(X)\]
+    \begin{equation} \label{eq::LemmaNP::MO}
+        \E_1I_S(X) - \E_1I_R(X) \geq \lambda\underbrace{[\E_0I_S(X) - \E_0I_R(X)]}_{\geq 0 \text{ по условию \eqref{eq::cond_A}}}
+    \end{equation}
+    В силу \eqref{eq::cond_A}, \eqref{eq::LemmaNP::MO} и условия \(\lambda > 0\) получаем:
+        \[E_1I_S(X) \geq E_1I_\R(X)\]
+
+    \underline{Докажем пункт 3}: Пусть \(\lambda \geq 1\).
+    Из определения \(S\ p_1(x) > p_0(x) \ \forall x\in S.\)
+    Отсюда
+    \[\P_0(X\in S) = \int_{R^n} I_S(X)p_0(x)\mu(dx) \leq \int_{R^n} I_S(X)p_1(x)\mu(dx) = \P_1(X\in S)\]
+    То есть \(\P(H_1 \left\lvert  H_0) \leq \P(H_1  \right\rvert  H_1)\)
+
+    Пусть \(\lambda < 1\). Рассмотрим \(\overline{S} = \{x: p_1(x) \leq \lambda p_0(x)\}\).
+    При \(\lambda < 1\ p_1(x) < p_0(x)\) при \(x\in \overline{S}\).
+    Отсюда
+    \[\P_1(X\in \overline{S}) = \int_{R^n} I_{\overline{S}}(X)p_1(x)\mu(dx) \leq \int_{R^n} I_{\overline{S}}(X)p_0(x)\mu(dx) = \P_0(X\in \overline{S})\]
+    То есть \(1 - \P_1(X\in S) \leq 1 - \P_0(X\in S)\), откуда
+    \(\P_1(X\in S) \geq \P_0 (X\in S)\)
+\end{proof}
+
+\begin{example}
+    \(X = (X_1,\ldots, X_n), \{X_i\}\) - н.о.р., \(X_1 \sim N(\theta, \sigma^2)\),
+    дисперсия \(\sigma^2\) известна. Построим наиболее мощный критерий
+    для проверки \(H_0: \theta = \theta_0\) против \(H_1: \theta = \theta_1\)
+    (в случае \(\theta_1 > \theta_0\)). Уровень значимости возьмем \(\alpha\).
+    \begin{enumerate}
+        \item Имеем
+        \[p_0 = \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp{\left\{-\frac{1}{2\sigma^2} \sum^n_{i=1} (x_i -\theta_0)^2\right\}},\
+        p_1 = \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp{\left\{-\frac{1}{2\sigma^2} \sum^n_{i=1} (x_i -\theta_1)^2\right\}};\]
+        \[S(\lambda) = \{x:p_1(x) - \lambda p_0(x) > 0\} \underset{\text{делим на }p_0}{\Leftrightarrow}
+        \exp{\left\{\frac{1}{2\sigma^2}\sum_{i=1}^n\left[ (x_i-\theta_1)^2 -(x_i-\theta_0)^2 \right]\right\}} > \lambda\Leftrightarrow\]
+        \[\Leftrightarrow \sum_{i=1}^n\left[(x_i - \theta_1)^2 - (x_i - \theta_0)^2\right] < \lambda_1 = -2\sigma^2\ln\lambda
+        \underset{\text{арифметика}}{\Leftrightarrow} (\theta_0 - \theta_1)\sum_{i=1}^n x_i \leq\lambda_2 \Leftrightarrow\]
+        \[\Leftrightarrow \sum_{i=1}^n x_i > \widetilde{\lambda},\ \widetilde{\lambda}(\lambda, n, \sigma^2, \theta_0, \theta_1)\]
+        Итак,
+        \[S(\lambda) = \left\{x: \sum_{i=1}^n x_i > \widetilde{\lambda}\right\} \text{ при некотором } \widetilde{\lambda}\]
+
+        \item Определим \(\widetilde{\lambda} = \widetilde{\lambda}_\alpha\)
+            из уравнения
+            \[\alpha = \P_{\theta_0}(X \in S(\widetilde{\lambda}_\alpha)) =
+            \P_{\theta_0}\left(\sum_{i=1}^n X_i > \widetilde{\lambda}_\alpha\right)\]
+            Преобразуем левую сумму в стандартную Гауссовскую величину. Тогда
+            \[\alpha = \P_{\theta_0}\left(\frac{1}{\sqrt{n} \sigma} \sum_{i=1}^n(X_i - \theta_0) > \frac{\widetilde{\lambda}_\alpha - n\theta_0}{\sqrt{n}\sigma}\right)=
+            1 - \Phi\left(\frac{\widetilde{\lambda}_\alpha - n\theta_0}{\sqrt{\pi}\sigma}\right)\]
+            так как \(\frac{1}{\sqrt{n}\sigma}\sum_{i} (X_i - \theta_0) \sim N(0, 1)\) при \(H_0\).
+
+            Значит $\Phi\left(\frac{\widetilde{\lambda}_\alpha - n\theta_0}{\sqrt{\pi}\sigma}\right) = 1 - \alpha,\
+            \left(\frac{\widetilde{\lambda}_\alpha - n\theta_0}{\sqrt{\pi}\sigma}\right) = \xi_{1-\alpha}$
+             - квантиль станд. норм. закона уровня \(1 - \alpha\).
+            Окончательно, \(\widetilde{\lambda}_\alpha = n\theta_0 + \sqrt{n}\sigma \xi_{1-\alpha}\)
+
+        \item Положим \(S^*_{\alpha} = \{x: \sum_{i=1}^n x_i > \widetilde{\lambda}_\alpha\}\). Тогда:
+            \[\P_{\theta_0}(X\in S_\alpha^*)=\alpha\text{ и } \forall S_\alpha\ \P_{\theta_0}(X\in S_\alpha)\leq\alpha = \P_{\theta_0}(X\in S_\alpha^*)\]
+
+            Значит, выполнено условие 1 Леммы Неймана-Пирсона, и в силу
+            пункта 2 этой леммы
+            \[\P_{\theta_1}(X\in S_\alpha) \leq \P_{\theta_1}(X\in S_\alpha^*)\]
+            То есть \(S_\alpha^*\) - наиболее мощный критерий уровня \(\alpha\).
+        \end{enumerate}
+        Так как \(S^*_{\alpha}\) не зависит от \(\theta_1\),
+        то \(S^*_{\alpha}\) - РНМ-критерий для \(H_0: \theta = \theta_0\)
+        против \(H^+_1 : \theta > \theta_1\)
+        Мощность критерия \(S^*_{\alpha}\) для \(H_0\) при альт. \(H^+_1\)
+
+        \[W(\theta, S^*_{\alpha}) = \P_\theta\left(\sum_{i=1}^nX_i > n\theta_0 + \sqrt{n}\sigma\xi_{1-\alpha}\right) = \]
+        \[ = \P_\theta\left(\frac{1}{\sqrt{n}\sigma} \sum_{i=1}^n(X_i - \theta) > \frac{\sqrt{n}(\theta_0 - \theta)}{\sigma} + \xi_{1-\alpha}\right) =
+        1 - \Phi\left(\xi_{1-\alpha} + \frac{\sqrt{n}(\theta - \theta_0)}{\sigma}\right)\]
+
+        % TODO
+        \ifdraft
+            \begin{figure}[h]
+                \centering
+                \begin{gnuplot}[terminal=epslatex, scale=0.8]
+                    set xrange [0:4]
+                    set yrange [0:1.5]
+                    set border 1
+                    set yzeroaxis ls -1
+                    set xlabel '$\theta$'
+    
+                    f(x) = atan(x) * 2 / pi
+    
+                    x1 = 0.654
+                    f_cropped(x) = (x >= x1-0.01) ? f(x) : NaN
+    
+                    set xtics ("$\\theta_0$" x1)
+                    set ytics ("$\\alpha$" f(x1), 1)
+    
+                    set arrow from x1,0 to x1,f(x1) nohead dashtype 3 
+                    set arrow from 0,f(x1) to x1,f(x1) nohead dashtype 3
+                    set label "0" at 0,0 offset -2,-1
+                    plot f_cropped(x) title '$w(\theta,S^*_\alpha)$',\
+                         1 linetype 0 notitle
+                \end{gnuplot}
+            \end{figure}
+        \fi
+\end{example}
+
+\subsection*{О связи между доверительным оцениванием и проверкой гипотез}
+
+\begin{definition}
+    Случайное подмножесто \(\Theta^*=\Theta^*(X,\alpha)\subseteq\Theta\)
+    называется доверительным множеством уровня \(1-\alpha,\ 0<\alpha<1\),
+    если
+    \[\P_\theta(\theta\in\Theta^*(X,\alpha))\geq 1-\alpha\ \forall\theta\in\Theta\]
+\end{definition}
+\begin{theorem} \label{th::trusted_set_eq_plausibility_test}
+    \begin{enumerate}
+        \item Пусть \(\forall\theta_0\in\Theta\) гипотеза \(H_0:\theta=\theta_0\)
+        при альтернативе \(H_1:\theta\neq\theta_0\) имеет \(S_\alpha(\theta_0)\)
+        критерием уровня \(\alpha\). Пусть \(\Theta^*(x,\alpha) = \{\theta:x\in\overline{S_\alpha}(\theta)\}\).
+        тогда \(\Theta^*(X,\alpha)\) - доверительное множество уровня \(1-\alpha\).
+        (Если есть критерий, то можно по этому  построить доверительное множество)
+
+        \item Если \(\Theta^*(X,\alpha)\) - доверительное множество уровня \(1-\alpha\),
+        то \(\overline{S_\alpha}(\theta_0)=\{x:\theta_0\notin\Theta(x,\alpha)\}\)
+        есть область применения гипотезы \(H_0\) (следовательно и критерий).
+    \end{enumerate}
+\end{theorem}
+\begin{remark} \label{hyp::accept_HO}
+    Пункт 2 означает, что если \(\theta_0\) попало в доверительное множество,
+    то \(H_0\) надо принимать.
+\end{remark}
+\begin{proof}
+    \[1.\ \P_\theta(\theta\in\Theta^*(X,\alpha)) = \P_\theta(X\in\overline{S_\alpha}(\theta)) = 1 - \underbrace{\P_\theta(X\in S_\alpha(\theta))}_{\leq\alpha}\geq 1-\alpha\ \forall\theta\in\Theta\]
+    \[2.\ \P_{\theta_0}(X\in S_\alpha(\theta_0)) = 1-\P_{\theta_0}(X\in \overline{S_\alpha}(\theta_0))=
+        1-\underbrace{\P_{\theta_0}(\theta_0\in\Theta^*(X,\alpha))}_{\geq 1-\alpha} \leq 1-(1-\alpha) = \alpha\]
+\end{proof}
+\begin{example}
+    Пусть \(X=(X_1,\ldots,X_n)\), \(\{X_i\}\) - н.о.р. сл.в., \(X_1\sim N(0,\sigma^2),\theta\in\R^1\).
+    Построим критерий для \(H_0:\theta=\theta_0\) против \(H_1:\theta\neq\theta_0\).
+    Уровень значимости пусть будет \(\alpha,\ 0<\alpha<1\).
+
+    Построим доверительное множество для \(\theta\) уровня \(1-\alpha\).
+    Пусть \(\overline{X}=\frac{1}{n}\sum^n_{i=1}X_i\) - оптимальная оценка \(\theta\).
+    Тогда \(\frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\sim N(0,1)\),
+    \[\P_\theta\left(\left\lvert\frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\right\rvert<\xi_{1-\alpha/2}\right) = 1-\alpha\]
+    \[\Phi(\xi_{1-\alpha/2})=1-\alpha/2\]
+    То есть \(\Theta^*(X,\alpha)=\{\theta:\left\lvert \frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\right\rvert <\xi_{1-\alpha/2}\}\).
+    В силу замечания к Теореме \ref{th::trusted_set_eq_plausibility_test}
+    \(S_{\alpha}(\theta_0)=\{X:\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert \geq\xi_{1-\alpha}\}\)
+    есть критическое множество для \(H_0\). Мощность
+    \[W(\theta)=\P_\theta(X\in S_\alpha(\theta_0))=\P_\theta\left(\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert \geq\xi_{1-\alpha/2}\right)=
+    1-\P_\theta\left(\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert <\xi_{1-\alpha/2}\right)=\]
+    \[=1-\P\left(-\xi_{1-\alpha/2} + \frac{\sqrt{n}(\theta_0-\theta)}{\sigma} < \frac{\sqrt{n}(\overline{X}-\theta)}{\sigma} < \xi_{1-\alpha}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right)=\]
+    \[=1-\left[\Phi\left(\xi_{1-\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right) - \Phi\left(-\xi_{1-\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right)\right] = \]
+    \[=\left[\Phi\left(\xi_{\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right) + \Phi\left(\xi_{\alpha/2}+\frac{\sqrt{n}(\theta-\theta_0)}{\sigma}\right)\right]\]
+    % TODO
+    \ifdraft
+        \begin{figure}[h]
+            \centering
+            \begin{gnuplot}[scale=0.5]
+                set xlabel '$\theta$'
+                set border 1
+                set yzeroaxis ls 1
+                set xrange [-1:4]
+                set yrange [0:2]
+    
+                f(x) = 1 - (exp(-3*(x-1)**2))/2
+    
+                set xtics (0, "$\\theta_0$" 1)
+                set ytics (1, "$\\alpha$" f(1))
+                
+                plot f(x) title '$W(\theta)$', \
+                    1 linetype 4 notitle
+            \end{gnuplot}
+        \end{figure}
+    \fi
+    При \(n\rightarrow\infty\ W(\theta)\rightarrow 1\ \forall\theta\neq\theta_0\).
+    То есть \(S_\alpha(\theta_0)\) состоятелен против любой фиксированной альтернативы.
+\end{example}
+
+\subsection{Критерий Фишера (\(F\)-критерий) в Гауссовской линейной регрессии}
+\begin{definition}
+        Если \(\xi\sim N(0,1),\ \eta_k\sim\chi^2(k)\), \(\xi\) и \(\eta_k\)
+        независимы, а константа \(\mu\in\R^1\), то сл.в.
+        \[t_k(\mu)\overset{d}{=}\frac{\xi+\mu}{\sqrt{\eta_k/k}}\sim S(k,\mu)\]
+        имеет нецентральное распределение Стьюдента с \(k\) степенями свободы
+        и параметром нецентральности \(\mu\)
+\end{definition}
+\begin{definition}
+    Если \(\xi_i\sim N(a_i,1),i=1,\ldots,k\), и \(\{\xi_1,\ldots,\xi_k\}\)
+    независимы, а \(\Delta^2=\sum_{j=1}^{k}a_j^2\), то сл. в.
+    \[ \eta_k(\Delta)\overset{d}{=}\xi_1^2+\ldots+\xi_k^2\sim\chi^2(k,\Delta^2) \]
+    имеет нецентральное распределение хи-квадрат Пирсона с \(k\) степенями свободы
+    и параметром нецентральности \(\Delta^2\)
+\end{definition}
+\begin{definition}
+    Если \(\eta_k\sim\chi^2(k,\Delta^2),\ \nu_m\sim\chi^2(m)\), и \(\eta_k\) и \(\nu_m\)
+    независимы, то сл.в.
+    \[f_{k,m}(\Delta)\overset{d}{=}\frac{\frac{1}{k}\eta_k}{\frac{1}{m}\nu_m}\sim F(k,m,\Delta^2)\]
+    имеет нецентральное распределение Фишера с \((k,m)\) степенями свободы и параметром
+    нецентральности \(\Delta^2\)
+\end{definition}
+\begin{lemma} \label{delta_dependency}
+    \begin{enumerate}
+        \item Распределение сл.в. \(\eta_k\sim\chi^2(k,\Delta^2)\) зависит лишь
+            от \(\Delta\), но не от \(a_1,\ldots,a_k\). А именно
+            \[\eta_k\overset{d}{=}(z_1+\Delta)^2+z_2^2+\ldots+z_k^2\mbox{, где \(\{z_1,\ldots,z_k\}\) - н.о.р. \(N(0,1)\) сл.в. } \]
+
+        \item Если вектор \(\xi\in\R^k,\xi\sim N(a, \Sigma),\Sigma>0\), то
+        \[\xi^T\Sigma^{-1}\xi\sim\chi^2(k,\Delta^2),\Delta^2 = a^{T}\Sigma^{-1}a\]
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item По определению \(\eta_k(\Delta)\overset{d}{=}\sum_{i=1}^k\xi^2_i\),
+        где \((\xi_1,\ldots,\xi_k)\) - н.о.р. \(N(a_i,1)\) сл.в.
+
+        Пусть \(\xi=(\xi_1,\ldots, \xi_k)^T\), ортогональная матрица
+        \[C=\begin{pmatrix}
+            \frac{a_1}{\Delta}& \ldots& \frac{a_k}{\Delta} \\
+            \ldots & \ldots &\ldots
+        \end{pmatrix},\ \nu=C\xi\]
+        Тогда \(\eta_k\overset{d}{=}\left\lvert \xi \right\rvert ^2=\left\lvert \nu \right\rvert ^2\), так как \(C\) - ортог.
+        Но
+        \[\nu=C\begin{pmatrix}
+            a_1 \\
+            \vdots \\
+            a_k
+        \end{pmatrix} + C\overset{\circ}{\xi}=\begin{pmatrix}
+            \Delta \\
+            0 \\
+            \vdots \\
+            0
+        \end{pmatrix} + Z \mbox{, где \(\overset{\circ}{\xi}=\xi-\E\xi, Z=C\overset{\circ}{\xi}\sim N(0, \E_k)\)}\]
+        Итак, \(\eta_k\overset{d}{=}\left\lvert \nu \right\rvert ^2=(z_1+\Delta)^2+z_2^2+\ldots+z_k^2\)
+
+        \item \(\xi^T\Sigma^{-1}\xi=\left\lvert \Sigma^{-1/2}\xi \right\rvert ^2\), причем \(\Sigma^{-1/2}\xi\sim N(\Sigma^{-1/2}a, \E_k)\).
+        Отсюда \(\left\lvert \Sigma^{-1/2}\xi \right\rvert ^2\sim\chi^2(k,\Delta^2)\) с \(\Delta^2=\left\lvert \Sigma^{-1/2}a \right\rvert ^2=a^T\Sigma^{-1}a\)
+    \end{enumerate}
+\end{proof}
+\begin{lemma}
+    Случайная величина \(t_k(\mu)\) обладает следующим свойством стохастической упорядоченности.
+    при \(\mu_2>\mu_1\)
+    \begin{equation}\label{iid::st}
+        \P\left(t_k(\mu_2)>x\right) > \P\left(t_k(\mu_1)>x\right)\mbox{ при всех \(x\in\R^1\)}
+    \end{equation}
+    Аналогично
+    \begin{equation}\label{iid::xi}
+        \P(\eta_k(\Delta_2)>x) > \P(\eta_k(\Delta_1)>x), \Delta_2>\Delta_1
+    \end{equation}
+    \begin{equation}\label{iid::fi}
+        \P(f_{k,m}(\Delta_2)>x) > \P(f_{k,m}(\Delta_1)>x), \Delta_2>\Delta_1
+    \end{equation}
+\begin{leftbar}
+    Нецентральные распределения Пирсона и Фишера стохастически упорядочены
+    по параметру нецентральности.
+\end{leftbar}
+\end{lemma}
+\begin{proof}
+    Докажем соотношение \ref{iid::st}, \ref{iid::xi} и \ref{iid::fi} доказываются
+    аналогично.
+
+    Заметим, что, если \(\xi\) и \(\eta\) - независимые случайные величины,
+    и \(\E\left\lvert \phi(\xi,\eta) \right\rvert <\infty\), то
+    \begin{equation} \label{eq::mo_phi}
+        \E\phi(\xi,\eta)=\E\left\{\left.\E\phi(\xi,\eta)\right\vert_{\xi=\eta}\right\}
+    \end{equation}
+    В силу \eqref{eq::mo_phi}
+    \[\P(t_k(\mu_2)>x) = \P\left(\frac{\xi+\mu_2}{\sqrt{\frac{1}{k}\eta_k}}>x\right)=\E I\left(\xi>x\sqrt{\frac{1}{k}\eta_k}-\mu_2\right)=\]
+    \[=\E\left\{1-I\left(\xi\leq x\sqrt{\frac{1}{k}\eta_k}-\mu_2\right)\right\}
+    =1-E\left\{EI(\xi\leq y)\bigg|_{y=x\sqrt{\frac{\eta_k}{k}}-\mu_2}\right\}=\]
+    \[=1-\E\Phi\left(x\sqrt{\frac{1}{k}\eta_k}-\mu_2\right) \underset{}{>} 1 - \E\Phi\left(x\sqrt{\frac{1}{k}\eta_k}-\mu_1\right)=\P(t_k(\mu_1)>x)\]
+    \[\mbox{ так как } \E\Phi\left(x\sqrt{\frac{1}{k}\eta_k}-\mu_2\right) < \E\Phi\left(x\sqrt{\frac{1}{k}\eta_k}-\mu_1\right) \mbox{ в силу возрастающей }\Phi(y)\]
+\end{proof}
+
+\underline{Обратимся к линейной гауссовской модели}
+\[X=Zc+\Eps\]
+\[X=(X_1,\ldots, X_n)^T\text{ - наблюдения},\ Z\text{ - \(n\times p\) матрица регрессоров \(p<n\)}\]
+\[\Eps\sim N(0, \sigma^2\E_n),\ c=(c_1,\ldots, c_p)^T\]
+\[\text{\underline{\(c\) и \(\sigma^2\) неизвестны}}\]
+Рассмотрим новый вектор \(\beta=Ac\), \(A - k\times p\) матрица, \(rkA=k, k\leq p\).
+
+\underline{Построим для \(\beta\) доверительное множество уровня \(1-\alpha\)}
+
+Пусть \(\widehat{c}_n\) - оценка наименьших квадратов (о.н.к.) для \(c\), \(\widehat{s}^2_n\) - о.н.к. для \(\sigma^2\).
+Пусть \(\widehat{\beta}_n=A\widehat{c}_n\).
+\[\widehat{c}_n\sim N(c,\sigma^2(Z^TZ)^{-1}) \Rightarrow \widehat{\beta}_n\sim N(\underbrace{Ac}_{\beta}{}, \sigma^2D)\text{, где }D = A(Z^TZ)^{-1}A^T\]
+
+\begin{leftbar}
+Заметим, что \(D > 0\), так как для \(\alpha\in\R^k,\alpha\neq0\),
+\[\alpha^TD\alpha=(A^t\alpha)^T(Z^TZ)^{-1}(A^T\alpha)>0, \text{ т.к. } (Z^TZ)^{-1}>0, A^T\alpha\neq0 \text{ при } rkA=k, \alpha\neq0\]
+\end{leftbar}
+В силу пункта 2 леммы \ref{delta_dependency}
+\[\frac{1}{\sigma^2}\left(\widehat{\beta}_n-\beta\right)D^{-1}\left(\widehat{\beta}_n-\beta\right)\sim \chi^2(k)\]
+так как \(\frac{(n-p)\widehat{s}^2_n}{\sigma^2}\sim\chi^2(n-p)\), \(\widehat{\beta}_n\) и \(\widehat{s}^2_n\) независимы, то
+\[f_{k,n-p}(X, \beta)\defeq\frac{\frac{1}{k}(\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)/\sigma^2}{\frac{1}{n-p}(n-p)\widehat{s}^2_n/\sigma^2} =
+\frac{(\widehat{\beta}_n-\beta)D^{-1}(\widehat{\beta}_n-\beta)}{k\widehat{s}^2_n}\sim F(k, n-p)\]
+
+Значит,
+\[\P_{\beta, \sigma^2}\left((\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)\leq k\widehat{s}_n^2f_{1-\alpha}(k,n-p)\right) = 1-\alpha\]
+\(f_{1-\alpha}(k,n-p)\) - квантиль уровня \(1-\alpha\ F(k,n-p)\).\\ Доверительное
+множество для \(\beta\) уровня \(1-\alpha\)
+\[\Theta^*(X, \alpha)=\left\{\beta:(\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)<k\widehat{s}^2_nf_{1-\alpha}(k,n-p)\right\} = \]
+\[=\left\{\beta:f_{k,n-p}(X,\beta)<f_{1-\alpha}(k,n-p)\right\}\text{ - \textbf{доверительный эллипсоид}}\]
+
+Рассмотрим проверку гипотезы
+\underline{$H_0:\beta=\beta_0$ против $H_1:\beta\neq\beta_0$}.
+$H_0$ называют линейной гипотезой, так как $\beta=Ac$ получается
+линейным преобразованием $c$.
+В силу замечания \ref{hyp::accept_HO} $H_0$ надо принимать, если
+$\beta_0\in\Theta^*(X,\alpha)$, то есть область принятия $H_0$:
+\[\overline{S}_\alpha(\beta_0)=\{x:f_{k,n-p}(x,\beta_0)\leq f_{1-\alpha}(k,n-p)\}\]
+То есть критическое множество (критерий уровня $\alpha$):
+\begin{equation} \label{criterion::F}
+    S_\alpha(\beta_0)=\{x:f_{k,n-p}(x,\beta_0)> f_{1-\alpha}(k,n-p)\}
+\end{equation}
+Критерий \ref{criterion::F} называют \textbf{критерием Фишера} или \textbf{$F$-критерием}.
+$f_{k,n-p}(X,\beta_0)$ - статистика $F$-критерия.
+
+\underline{Рассмотрим поведение $F$-критерия при альтернативе $H_1$}. \\
+При $H_1$ в силу пункта 2 Леммы \ref{delta_dependency}
+\[f_{k,n-p}(X,\beta_0)=\frac{\frac{1}{k}\overbrace{(\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)/\sigma^2}^{\chi^2(k,\Delta^2)}}{\frac{1}{n-p}\underbrace{(n-p)\widehat{s}^2_n/\sigma^2}_{\chi^2(n-p)}}\sim F(k,n-p,\Delta^2)\]
+Параметр нецентральности
+\begin{equation}\label{eq::fi_noncentral}
+    \Delta^2 = \frac{1}{\sigma^2}(\beta-\beta_0)^TD^{-1}(\beta-\beta_0)
+\end{equation}
+Мощность $F$-критерия
+\[W(\beta,S_\alpha(\beta_0))=\P_{\beta,\sigma^2}(f_{k,n-p}(X,\beta_0)>f_{1-\alpha}(k,n-p))=1-F_{k,n-p}(f_{1-\alpha}(k,n-p),\Delta^2)\]
+
+\underline{Свойства мощности}
+\begin{enumerate}
+    \item Так как $\Delta =\Delta(\beta)=\Delta(\beta_0)>0$ при $\beta\neq\beta_0$,
+    то в силу соотношения \ref{iid::fi}
+    \[\P_{\beta,\sigma^2}(f_{k,n-p}(X, \beta_0)>f_{1-\alpha}(k,n-p))>\P_{\beta_0,\sigma}(f_{k,n-p}(X,\beta_0)>f_{1-\alpha}(k,n-p))=\alpha\]
+    То есть при $\beta\neq\beta_0\ \P(H_1\vert H_1)>\P(H_1\vert H_0)$.
+    То есть \underline{$F$-критерий несмещенный}!
+    \item Мощность $W(\beta,S_\alpha(\beta_0))$ строго монотонна по $\Delta$
+    из соотношения \ref{eq::fi_noncentral}
+\end{enumerate}
+
+\begin{example}[Определение порядка регрессии]
+    $c_n^T=(\underbrace{c_{(1)n}^T}_{m-\text{вектор}}, \underbrace{c_{(2)n}^T}_{p-m-\text{вектор}}),\ 1\leq m\leq p$ \\
+    $\begin{array}{c cc}
+        H_0:& c_{(2)}=0    &\ (\text{порядок не больше m})\\
+        H_1:& c_{(2)}\neq0 & \par
+    \end{array}$
+
+    Рассмотрим матрицу
+    \[ A =
+    \begin{array}{c}
+    \overbrace{
+        \left(
+        \begin{array}{ccc:ccc}
+            0 &        &   & 1 &        &    \\
+                & \ddots &   &   & \ddots &    \\
+                &        & 0 &   &        & 1  \\
+        \end{array}
+        \right)
+        }^{p}
+        \\
+        \begin{array}{ccc ccc}
+                & m &   &  & & p - m \\
+        \end{array}
+    \end{array}
+    \Rightarrow
+    Ac = c_{(2)}
+    \Rightarrow
+    H_0 \Leftrightarrow Ac=0
+    % =(\beta_0)
+    \]
+\end{example}
+Пусть $\widehat{c}_n^T=(\underbrace{\widehat{c}_{(1)n}^T}_{m-\text{в-р}}, \underbrace{\widehat{c}_{(2)n}^T}_{p-m-\text{в-р}})$.
+Тогда $\widehat{\beta}_n=A\widehat{c}_n=\widehat{c}_{(2)n}$.
+\[(Z^TZ)^{-1}=\left(\begin{array}{c|c}
+    B_{11} & B_{12} \\ \hline
+    B_{21} & B_{22}
+\end{array}\right)\rightarrow D=A(Z^TZ)^{-1}A^T=B_{22}\Rightarrow\]
+\[\Rightarrow f_{p-m,n-p}(X,0)=\frac{\widehat{c}_{(2)n}^TB_{22}^{-1}\widehat{c}_{(2)n}}{(p-m)\widehat{s}^2_n}\underset{H_0}{\sim}F(p-m,n-p)\]
+$H_0$ отвергается, если $f_{p-m,n-p}(X,0)>f_{1-\alpha}(p-m,n-m)$,
+то есть
+\begin{equation}\label{fisher::ex::crit}
+    S_{\alpha}(0)=\{x:\frac{\widehat{c}_{(2)n}^TB_{22}^{-1}\widehat{c}_{(2)n}}{(p-m)\widehat{s}^2_n}>f_{1-\alpha}(p-m,n-m)\}
+\end{equation}
+\begin{equation}\label{fisher::ex::stat}
+    f_{p-m,n-p}(X,0)\underset{H_1}{\sim} F(p-m,n-p, \Delta^2),\text{ где }\Delta^2=\frac{c_{(2)}^TB_{22}^{-1}c_{(2)}}{\sigma^2}
+\end{equation}
+Критерий \ref{fisher::ex::crit} - несмещенный, то есть $\P(H_1\vert H_1)>\P(H_1\vert H_0)=\alpha$. Его мощность
+\[W(c_{(2)}, S_{\alpha}(0))=\P_{c_{(2), \sigma^2}}(f_{p-m,n-p}(X,0)>f_{1-\alpha}(p-m,n-p))=1-F_{p-m,n-p}(f_{1-\alpha}(p-m,n-p),\Delta^2)\]
+строго возрастает по $\Delta^2$. Параметр нецентральности $\Delta^2$ определен в \ref{fisher::ex::stat}.
+
+\begin{example}[Проверка однородности двух выборок]
+    $X=(X_1,\ldots,X_m),\ Y=(Y_1,\ldots,Y_n)$ - независимые гауссовские выборки.
+    То есть $\{X_i\},\ \{Y_i\}$ - н.о.р., $X_1\sim N(a, \sigma^2),\ Y_1\sim N(b, \sigma^2)$.
+    Совокупность $\{X_i\}$ и $\{Y_j\}$ независимы, $m+n>2$. \par
+    \underline{Дисперсии $DX_1,\ DY_1$ одинаковы ($=\sigma^2$), неизвестны, средние
+    $a$ и $b$ неизвестны}.
+
+    $\begin{array}{c cc}
+        H_0:& a = b   &\ (\text{\textbf{гипотеза однородности}}) \\
+        H_1:& a \neq b&
+    \end{array}$
+
+    \begin{remark*}
+        При $\D X_{1}\neq\D Y_1$ эта задача называется \textbf{проблемой Беренса-Фишера}.
+    \end{remark*}
+
+    \begin{equation*}
+        \begin{cases}
+            X_i = a+\eps_i,\ &i=1,\ldots,m,\ \eps_i=X_i-a\\
+            Y_i = b+\widehat{\eps}_j,\ &j=1,\ldots,n,\ \widehat{\eps}_j=Y_j-b
+        \end{cases}
+        \Rightarrow
+        \eps_1,\ldots,\eps_m,\widehat{\eps}_1,\ldots, \widehat{\eps}_n\text{ - н.о.р. $N(0, \sigma^2)$ сл.в.}
+    \end{equation*}
+
+    \begin{equation}
+    \begin{array}{cc}
+        \begin{array}{l}
+            \\
+            \widehat{X}\defeq(X_1,\ldots,X_m,Y_1,\ldots,Y_n)^T \\
+            \\
+            c=(a,b)^T \\
+            \\
+            \Eps^T=(\eps_1,\ldots,\eps_m,\widehat{\eps}_1,\ldots, \widehat{\eps}_n)^T \\
+        \end{array} &
+        Z= \left(\begin{array}{cc}
+            m \begin{cases}
+                1 \\
+                \vdots \\
+                1
+            \end{cases} & 0 \\
+            0 & n \begin{cases}
+                1 \\
+                \vdots \\
+                1
+            \end{cases}
+        \end{array}\right)
+    \end{array}
+    \Rightarrow
+    \underset{\text{\textbf{гаусс. лин. регрессия}}}{\widehat{X}=Zc+\Eps}
+\end{equation}
+
+Положим $A=(1, -1)$. Тогда $Ac=a-b=\beta$.
+
+$\begin{array}{ccc}
+    H_0:& Ac=a-b=\beta=0& (=\beta_0)\\
+    H_1:& Ac=a-b\neq0& (\beta\neq0)
+\end{array}$
+
+О.н.к. для вектора $c$ - решение задачи
+\[
+    \sum_{i=1}^m(X_i-a)^2+\sum_{j=1}^n(Y_j-b)^2\rightarrow \min_{a, b}
+    \Leftrightarrow \begin{cases}
+        -2\sum_i(X_i-a) = 0 \\
+        -2\sum_j(Y_j-b) = 0
+    \end{cases}
+\]
+Решением системы является $\widehat{a}_m=\overline{X},\ \widehat{b}_n=\overline{Y}$ -
+оптимальные оценки $a$ и $b$, $\widehat{c}_n=(\overline{X}, \overline{Y})^T$ - оптимальная
+оценка для $c$. Оптимальная оценка для $\sigma^2$:
+\[ \widehat{S}^2_{m+n}=\frac{1}{m+n-2}\left[\sum_i(X_i-\overline{X})^2+\sum_j(Y_j-\overline{Y})^2\right] \]
+Тогда
+\[
+\begin{array}{l}
+    \widehat{\beta}_n=A\widehat{c}_n=\overline{X}-\overline{Y} \\
+    Z^TZ=\left(\begin{array}{cc}
+        \overbrace{1\ \ldots\ 1}^m & 0 \\
+                0      & \underbrace{1\ \ldots\ 1}_n
+    \end{array}\right)
+    \left(\begin{array}{cc}
+            & 1 \\
+        0 & \vdots \\
+            & 1 \\
+        1  & \\
+        \vdots & 0 \\
+        1  &
+    \end{array}\right) = \left(\begin{array}{cc}
+        m & 0 \\
+        0 & n
+    \end{array}\right) \\
+    D=A(Z^TZ)^{-1}A^T=
+    \left(1\ -1 \right)
+    \left(\begin{array}{cc}
+        \frac{1}{m} & 0 \\
+        0 & \frac{1}{n}
+    \end{array}\right)
+    \left(\begin{array}{c}
+        1 \\
+        -1
+    \end{array}\right) = \frac{1}{n} + \frac{1}{m}
+\end{array}
+\Rightarrow
+\boxed{f_{1, m+n-2}(X,0)=\frac{(\overline{X}-\overline{Y})^2}{\left(\frac{1}{n} + \frac{1}{m}\right)\widehat{S}^2_{m+n}}}
+\]
+$F$-критерий для $H_0$ имеет вид
+\[S_{\alpha}(0)=\{x\in\R^{m+n}:f_{1,m+n-2}(x,0)>f_{1-\alpha}(1,m+n-2)\}\]
+\[f_{1,m+n-2}(X,0)\underset{H_0}{\sim}F(1,\ m+n-2)\]
+\[f_{1,m+n-2}(X,0)\underset{H_1}{\sim}F(1,\ m+n-2,\Delta^2),\]
+\[\text{ где параметр нецентральности } \Delta^2=\Delta^2(\underset{a-b}{\beta})=\frac{(a-b)^2}{\sigma^2\left(\frac{1}{n}+\frac{1}{m}\right)}\]
+\begin{enumerate}
+    \item Если $\vert a-b\vert$  возрастает, то мощность $F$-теста возрастает
+    \item Если $\sigma\rightarrow0$ или $\frac{1}{n}+\frac{1}{m}\rightarrow0$, то мощность возрастает
+\end{enumerate}
+\end{example}
+\subsection{Критерий согласия Хи-квадрат Пирсона. Проверка простой гипотезы в схеме Бернулли.}
+Пусть проводятся $n$ независимых испытаний, и в каждом испытании возможны
+$m\geq2$ исходов $A_1,\ldots,A_m$ таких, что $A_iA_j=\emptyset,\ i\neq j,\ \sum A_i=\Omega$, тогда
+$\P(A_j)=p_j>0,\ \sum_{j=1}^mp_j=1$. Пусть $\nu=(\nu_1,\ldots,\nu_m)^T$, а $\nu_j$ -
+число появления $A_j$ в $n$ опытах, тогда $\sum_{j=1}^m\nu_j=n$.
+По вектору наблюдений $\nu$ необходимо проверить следующую гипотезу:
+
+$\begin{array}{cl}
+    H_0:& p_j=p_j^\circ,\ j=1,\ldots,m\\
+    H_1:& p_j\neq p_j^\circ\text{ хотя бы при одном $j$}
+\end{array}$
+
+\begin{remark*}
+    $H_0$ - простая гипотеза, т.к. полностью определяет распределение
+    вектора $\nu$.
+    \[ \P(\nu_1=k_1,\ldots,\nu_m=k_m)\underset{H_0}{=}\frac{n!}{k_1!\ldots k_m!}(p_1^\circ)^{k_1}\ldots(p_m^\circ)^{k_m}\]
+\end{remark*}
+Это полиномиальное распределение $\prod(n,p_1^\circ, \ldots, p_m^\circ)$.
+Статистика Хи-квадрат Пирсона:
+\[\chi_n^2\underset{H_0}{\defeq}\sum_{j=1}^m\frac{(\nu_j-np_j^\circ)^2}{np_j^\circ}\]
+\underline{Поведение при альтернативе:} Очевидно
+\[\chi_n^2=n\sum_{j=1}^m\frac{(\nu_j/n-p_j^\circ)^2}{p_j^\circ}\]
+В силу теоремы Бернулли $\frac{\nu_j}{n}\xrightarrow{\P}p_j$.
+Поэтому
+\[\sum_{j=1}^m\frac{(\nu_j/n-p_j^\circ)^2}{p_j^\circ}\xrightarrow[\text{Т. о наслед. сход.}]{\P}\sum_{j=1}^m\frac{(p_j-p_j^\circ)^2}{p_j^\circ}\underset{H_1}{>}0\]
+Значит,
+\[\chi_n^2\xrightarrow[H_1]{\P}\infty,\ n\rightarrow\infty\]
+Поэтому большие значения $\chi_n^2$ часто свидетельсвтуют о том, что
+стоит отвергнуть $H_0$. Но насколько "большие" значения?
+\subsection{Теорема Пирсона}
+\[ \chi_n^2\xrightarrow[H_0]{d}\chi^2(m-1),\ n\rightarrow\infty \]
+\underline{Правило}: Если $\chi_n^2\leq\chi_{1-\alpha}(m-1)$, то принимаем $H_0$,
+иначе принимаем $H_1$.
+\begin{remark*} Тогда
+    \[\P(H_1\vert H_0)=\P(\chi^2_n>\chi_{1-\alpha}(m-1)\vert H_0)\rightarrow\alpha\]
+    \[\P(H_0\vert H_1)=\P(\chi^2_n\leq\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow0\]
+    То есть
+    \[\begin{cases}
+        \P(H_0\vert H_0)\rightarrow1-\alpha \\
+        \P(H_1\vert H_1)\rightarrow1
+    \end{cases}\]
+    \underline{Вероятность принять правильную гипотезу близка к единице!}
+\end{remark*}
+\begin{proof}
+    Покажем, что вектор $\nu=(\nu_1,\ldots,\nu_m)^T$ асимптотически нормален, то есть
+    \begin{equation}\label{th::pirson::asym_norm}
+        \sqrt{n}(\nu/n-p)\xrightarrow{d}N(0,P-pp^T),\text{ где }P\defeq\begin{pmatrix}
+            p_1^\circ & & 0 \\
+                & \ddots & \\
+            0 & & p_m^\circ
+        \end{pmatrix}
+    \end{equation}
+    Введем вектора $X_1,\ldots,X_n$, где $X_i=(0,\ldots,0,\frac{1}{j},0,\ldots,0)^T$,
+    если в $i$-ом испытании произошло $A_j$. Тогда $\nu=\sum_{i=1}^nX_i$
+    \begin{equation}\label{th::pirson::subst_nu}
+        \sqrt{n}(\nu/n-p)=\sqrt{n}\sum_{i=1}^n(X_i-p)
+    \end{equation}
+    Здесь $\{X_i\}$ - н.о.р., $EX_1=p,\ \cov(X_1,X_1)=\E(X_1-p)(X_1-p)^T=\E X_1X_1^T-pp^T=P-pp^T$.
+    Поэтому соотношение \eqref{th::pirson::asym_norm} следует из соотноешния \eqref{th::pirson::subst_nu}
+    и ЦПТ. \\
+    Матрица $P-pp^T$ вырождена, так как сумма ее столбцов равна нулю:
+    если $e=(1,\ldots,1)^T$, то $(P-pp^T)e=p-p(p^Te)=p-p=0$
+
+    Пусть
+    \[P^{-1/2}\defeq\begin{pmatrix}
+        \frac{1}{\sqrt{p_1^\circ}} & & 0 \\
+            & \ddots & \\
+        0 & & \frac{1}{\sqrt{p_m^\circ}}
+    \end{pmatrix},\
+    \xi_n\defeq\sqrt{n}P^{-1/2}(\nu/n-p)
+    \]
+    В силу теоремы о наследовании слабой сходимости и соотношения \eqref{th::pirson::asym_norm}
+    \begin{equation} \label{th::pirson::xi_conv}
+        \xi_n\xrightarrow{d}N(0, P^{-1/2}(P-pp^T)(P^{-1/2})^T)=N(0, E_m-zz^T),\text{ где } z=(\sqrt{p_1^\circ},\ldots,\sqrt{p_m^\circ})^T
+    \end{equation}
+    Пусть ортогональная матрица $U=\begin{pmatrix}
+        \sqrt{p_1^\circ} & \ldots & \sqrt{p_m^\circ} \\
+        \ldots & \ldots & \ldots
+    \end{pmatrix}$. Тогда
+    \[U(E_m-zz^T)U^T=E_m-(Uz)(Uz)^T=\]
+    \[=\begin{pmatrix}
+        1 &        & 0 \\
+            & \ddots &   \\
+        0 &        & 1 \\
+    \end{pmatrix}-\begin{pmatrix}
+        1 \\ 0 \\ \vdots \\ 0
+    \end{pmatrix}\begin{pmatrix}
+        1  & 0  & \ldots  & 0
+    \end{pmatrix}=\begin{pmatrix}
+        0 &   &        & 0 \\
+            & 1 &        &   \\
+            &   & \ddots &   \\
+        0 &   &        & 1 \\
+    \end{pmatrix}=\widetilde{\E}_1\]
+    В силу \eqref{th::pirson::xi_conv} и теоремы о слабой сходимости
+    \begin{equation} \label{th::pirson::uxi_conv}
+        U\xi_n\xrightarrow{d}N(0,\widetilde{\E}_1) = (0,\eta_2,\ldots,\eta_m)^T
+    \end{equation}
+    где $\{\eta_2,\ldots,\eta_m\}$ - независимые $N(0,1)$ сл.в. Из \eqref{th::pirson::uxi_conv}
+    и теоремы о наследовании слабой сходимости следует:
+    \begin{equation}\label{th::pirson::absuxi_conv}
+        \lvert U\xi_n\rvert^2\xrightarrow{d} \eta_2^2+\ldots+\eta_m^2\sim\chi^2(m-1)
+    \end{equation}
+    Осталось заметить, что
+    \[\lvert U\xi_n\rvert^2=\lvert\xi_n\rvert^2=\sum_{j=1}^m\left[\frac{1}{\sqrt{p_j^\circ}}\sqrt{n}(\nu_j/n-p_j^\circ)\right]^2=\sum_{j=1}^m\frac{(\nu_j-np_j^\circ)^2}{np_j^\circ}=\chi_n^2\]
+    Из этого равенства и соотноешния \eqref{th::pirson::absuxi_conv} следует теорема Пирсона.
+\end{proof}
+
+\begin{example}[Проверка простой гипотезы о виде функции распределения]
+$X=(X_1,\ldots,X_n)$, $\{X_i\}$ - н.о.р., $X_1\sim F(x)$.
+
+$\begin{array}{cl}
+    H_0:& F(x)=F_0(x),\ (F_0\text{ известна})\\
+    H_1:& F(x)=F_1(x),\ F_1(x)\neq F_0(x)
+\end{array}$
+
+Разобьем носитель $X_1$ на непересекающиеся отрезки $\Delta_1,\ldots,\Delta_m,\ m\geq2$ так, что
+$X_1\in\Delta_1\cup\Delta_2\cup\ldots\cup\Delta_m$
+\[p_j^\circ\defeq \P(X_1\in\Delta_j\vert H_0) =\int_{\Delta_j}dF_0(x)>0\ \forall j\]
+Тогда $\sum_{j=1}^mp_j^\circ=1$. С каждой величиной $X_i$ свяжем испытание
+с исходами $A_1,\ldots,A_m$, причем $A_j$ происходит тогда и только тогда,
+когда $X_i\in\Delta_j$. При $H_0$ $\P(A_j)=p_j^\circ$. Тогда наблюдения
+$X_1,\ldots,X_n$ порождают полиномиальную схему независимых испытаний.
+Пусть $\nu_j$-число исхода $A_j$ в этих испытаниях, то есть число
+наблюдений среди $X_1,\ldots,X_n$, попавших в $\Delta_j$.
+В силу теоремы Пирсона:
+\[\chi_n^2\defeq\sum_{j=1}^m\frac{(\nu_j-np^\circ_j)^2}{np^\circ_j}\xrightarrow[H_0]{d}\chi^2(m-1)\]
+
+\underline{Правило}: $H_0$ будем отвергать, если $\chi_n^2>\chi_{1-\alpha}(m-1)$. ($\alpha$ задано)
+Тогда $\P(H_1\vert H_0)\rightarrow\alpha,\ n\rightarrow\infty$.
+\[p_j\defeq \P(X_1\in\Delta_j\vert H_1)=\int_{\Delta_j}dF_1(x)\]
+Если верна $H_1$ и хоть при одном $j$ $p_j\neq p_j^\circ$, то
+$\P(H_0\vert H_1) = \P(\chi_n^2<\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow 0$
+\begin{remark*}
+    Если $F_0\not\equiv F_1$, но $p_j=p_j^\circ\ \forall j$,
+    то $\P(H_0\vert H_1)=\P(H_0\vert H_0)\rightarrow1-\alpha\neq0$.
+    Например:
+    % TODO
+    \ifdraft
+        \begin{figure}[h!]
+            \centering
+            \begin{gnuplot}[terminal=epslatex, scale=0.5]
+                set xrange [-2:4]
+                set yrange [0.4:3]
+                set border 1
+                set yzeroaxis linetype -1
+                set xlabel '$m=2$'
+                unset ytics
+    
+                set xtics (0)
+    
+                f(x) = 0.5+exp(x)
+    
+                set arrow from -2,1.5 to 0,1.5 heads
+                set label "$\\Delta_1$" at -1, 1.65
+    
+                set arrow from 0,1.5 to 0.916291,1.5 heads
+                set label "$\\Delta_2$" at 0.45814, 1.33
+    
+                plot f(x) ls 7 title '$F_0$', \
+                     f(2*x) ls 1 title '$F_1$'
+            \end{gnuplot}
+        \end{figure}
+    \fi
+
+    Здесь $\P(X_1\in\Delta_1\vert H_0)=F_0(0)=\P(X_1\in\Delta_1\vert H_1)=F_1(0)$.
+    Значит, и $\P(X_1\in\Delta_2\vert H_0)=1-F_0(0)=\P(X_1\in\Delta_1\vert H_1)=1-F_1(0)$.
+\end{remark*}
+\end{example}
+\subsubsection*{Проверка сложной гипотезы в схеме испытаний Бернулли}
+Пусть проводится $n$ независимых испытаний, исходы
+$A_1,\ldots,A_m$, $\nu=(\nu_1,\ldots,\nu_m)^T$ - вектор наблюдений.
+Пусть $H_0:\ \P(A_j)=p_j(\theta),\ \theta\in\Theta\in\R^k,\ k<m-1$.
+
+\underline{Условия регулярности}
+\begin{enumerate}
+    \item $\sum_{j=1}^mp_j(\theta)=1,\ \theta\in\Theta$
+    \item $p_j(\theta)\geq c>0\ \forall j=1,\ldots,m$ и $\exists\ \frac{\partial p_j(\theta)}{\partial \theta_l},\frac{\partial^2p_j(\theta)}{\partial\theta_l\partial\theta_r}$
+    \item $rank(\underbrace{\frac{\partial p_j(\theta)}{\partial \theta_l}}_{\text{$m\times k$}})=k,\ \forall\theta\in\Theta$
+\end{enumerate}
+В качестве оценки $\theta$ при $H_0$ будем использовать мультиномиальные
+оценки максимального правдоподобия:
+\[\P(\nu_1=k_1,\ldots,\nu_m=k_m)=\frac{n!}{k_1!\ldots k_m!}p_1^{k_1}(\theta)\ldots p_m^{k_m}(\theta)\]
+логарифмического правдоподобия:
+\[L_n(\nu,\theta)=\ln\left(\frac{n!}{\nu_1!\ldots \nu_m!}\right)+\sum_{j=1}^m\nu_j\ln p_j(\theta)\]
+оценки максимального правдоподобия (мультиномиальные):
+\[L_n(\nu,\theta)\rightarrow\max_{\theta\in\Theta}\]
+\subsection{Теорема Фишера}
+Пусть выполнены условия регулярности, $\widehat{\theta}_n$ - мульт. о.м.п. Тогда
+\[ \widehat{\chi}_n^2=\sum_{j=1}^m\frac{(\nu_j-np_j(\widehat{\theta}_n))^2}{np_j(\widehat{\theta}_n)}\xrightarrow[H_0]{d}\chi(m-k-1) \]
+\underline{Правило}: Если $\widehat{\chi}_n^2\leq\chi_{1-\alpha}(m-k-1)$, то принимаем $H_0$, иначе принимаем $H_1$.
+Тогда $\P(\overline{H_0}\vert H_0)\rightarrow\alpha$
+\begin{example}[Проверка независимости признаков]
+    Пусть объект классифицирован по двум $A$ и $B$,
+    $A=\{A_1,\ldots,A_s\},\ B=\{B_1,\ldots,B_r\},\ s>1,\ r>1$.
+    Проводится $n$ опытов, и пусть $\nu_{ij}$ - число объектов,
+    имеющих признаки $A_iB_j$. \\
+    Пусть $p_{ij}=\P(A_iB_j)$. Гипотеза независимости
+    $H_0:\ p_{ij}=p_{i\bullet}p_{\bullet j}$ для положительных $p_{i\bullet}$ и $p_{\bullet j}$
+    таких, что $\sum_{i=1}^sp_{i\bullet}=1,\ \sum_{j=1}^rp_{\bullet j}=1$. \\
+    При $H_0$ логарифмическое правдоподобие
+    \[L_n(\nu,p_{i\bullet},p_{\bullet j})=\ln\frac{n!}{\prod_{i,j}\nu_{ij}}+\sum_{i=1}^s\sum_{j=1}^r\nu_{ij}\ln(p_{i\bullet}p_{\bullet j})\]
+    Максимизируя эту функцию по $p_{i\bullet},\ p_{\bullet j}$ при условиях, что $\sum_{i=1}^sp_{i\bullet}=1,\ \sum_{j=1}^rp_{\bullet j}=1$,
+    находим оценки
+    \[\widehat{p}_{i\bullet}=\frac{\nu_{i\bullet}}{n},\ \widehat{p}_{\bullet j}=\frac{\nu_{\bullet j}}{n},\text{ где } \nu_{i\bullet}=\sum_{j}\nu_{ij},\ \nu_{\bullet j}=\sum_{i}\nu_{ij}\]
+    Статистика Хи-квадрат имеет вид
+    \[\widehat{\chi}_n^2=\sum_{i=1}^s\sum_{j=1}^r\frac{(\nu_{ij}-n\widehat{p}_{i\bullet}\widehat{p}_{\bullet j})^2}{n\widehat{p}_{i\bullet}\widehat{p}_{\bullet j}}\]
+    \[\widehat{\chi}_n^2\xrightarrow[H_0]{d}\chi((s-1)(r-1))\]
+    так как $m-k-1=sr-(s+r-2)-1=(s-1)(r-1)$. \\
+    \underline{Правило}: Если $\widehat{\chi}_n^2>\chi_{1-\alpha}((s-1)(r-1))$,
+    то отвергаем $H_0$. Асимптотический уровень теста есть $\alpha$
+\end{example}
+\begin{example}[W.H.Gilby. Biometrika, 8,94]
+    1725 школьников классифицировали в соответствии с их
+    качеством одежды и в соответствии с умственными способностями.
+    Использовали следующие градации:
+    \[
+    \begin{array}{lr}
+        \begin{array}{lcl}
+            A &-& \text{умственно отсталый} \\
+            B &-& \text{медлительный и тупой} \\
+            C &-& \text{тупой} \\
+            D &-& \text{медлительный, но умный} \\
+            E &-& \text{достаточно умный} \\
+            F &-& \text{способный} \\
+            G &-& \text{очень способный} \\
+        \end{array} & 
+        \boxed{H_0:\ \text{признаки независимы}}
+    \end{array}
+    \]
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{ c|c|c|c|c|c|c|c }
+            & \multicolumn{6}{|c|}{Способности} & \\ \hline
+            Как одевается & A и B & C   & D   & E   & F   & G  & Сумма \\ \hline
+            Очень хорошо  &  33   & 48  & 113 & 209 & 194 & 39 & 636   \\ \hline
+            Хорошо        &  41   & 100 & 202 & 255 & 138 & 15 & 751   \\ \hline
+            Сносно        &  39   & 58  & 70  & 61  & 33  & 4  & 256   \\ \hline
+            Очень плохо   &  17   & 13  & 22  & 10  & 10  & 1  & 73    \\ \hline
+            Сумма         &  130  & 219 & 407 & 535 & 375 & 59 & 1725
+        \end{tabular}
+    \end{table}
+
+    Здесь $\chi_n^2=174.92>\chi_{0.999}(15)=37.697$. \par
+    Здесь $15 = (s-1)(r-1) = (4-3)(6-1) \Rightarrow$ Отвергаем $H_0$
+\end{example}
