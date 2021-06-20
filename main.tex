@@ -78,6 +78,7 @@
 
 \def\R{ \mathbb{R} }
 \def\Z{ \mathbb{Z} }
+\def\C{ \mathbb{C} }
 \def\E{ \mathrm{E} }
 \def\D{ \mathrm{D} }
 \def\P{ \mathrm{P} }
@@ -454,7 +455,7 @@ $AR(1)$-модель.
         \[\widetilde{u}_t=p\lim_{k\rightarrow\infty}(u_t^{(k)}+\beta^k\widetilde{u}_{t-k})=u_t=\sum_{j\geq0}\beta^j\eps_{t-j}\]
         \item \underline{Стационарность в широком смысле} \\
         Последовательность $\{u_t\}$ из \eqref{eq::ar_equation_solution} стационарна в широком смысле
-        так как она стационарная в узком смысле и есть ??? до 2-го порядка.
+        так как она стационарная в узком смысле и есть момент до 2-го порядка.
         Тогда из \eqref{eq::ar_equation} 
         \[\E u_t=\beta\E u_{t-1}+\E\eps_t;\ (1-\beta)\E u_0=0,\ \E u_0=0\]
         Для $\eps>0\ \E u_{t+\tau}u_t=\beta\E u_{t+\tau-1}u_t+\E\eps_{t+\tau}u_t$. Но $\E\eps_{t+\tau}u_t=\E\eps_{t+\tau}\E u_t=0$, т.к. $\eps_{t+\tau}$ и $u_t$ нез.
@@ -513,7 +514,9 @@ $AR(1)$-модель.
 Мы берем оценкой неизвестного парметра $\beta$ о.н.к., которая получается решением задачи
 \[\sum_{t=1}^n(u_t-\theta u_{t-1})^2\rightarrow\min_{\theta}\]
 Эту оценку обозначим $\widehat{\beta}_{n,LS}$, очевидно,
-\[\widehat{\beta}_{n,LS}=\frac{\sum_{t=1}^nu_{t-1}u_t}{\sum_{t=1}^nu_{t-1}^2}\]
+\begin{equation} \label{eq::ls_frac_repr} \tag{18'}
+    \widehat{\beta}_{n,LS}=\frac{\sum_{t=1}^nu_{t-1}u_t}{\sum_{t=1}^nu_{t-1}^2}
+\end{equation}
 Наша ближайшая цель - доказать теорему \ref{th::beta_ls_d_conv_ar},
 
 \underline{Вот что нам известно и что будем использовать}
@@ -578,5 +581,330 @@ $AR(1)$-модель.
     \item Как построить непараметрические оценки, асимптотически гауссовские, и с меньшей ас. дисперсией, чем у о.н.к?
     \item Будет ли о.н.к. $\widehat{\beta}_{n,LS}$ $B$-робастна?
 \end{enumerate}
+
+\subsubsection*{Асимптотические доверительные интервалы}
+В силу \eqref{eq::ls_frac_repr} 
+\[\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\widehat{\beta}_{n,LS}^2}}=\underbrace{\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\beta^2}}}_{\xrightarrow{d}N(0,1)}\underbrace{\frac{\sqrt{1-\beta^2}}{\sqrt{1-\widehat{\beta}_{n,LS}^2}}}_{\xrightarrow{\P}1}\xrightarrow[n\rightarrow\infty]{d}N(0,1)\text{ по лемме Слуцкого}\]
+Пусть $\xi_{1-\alpha/2}$ - квантиль уровня $1-\alpha/2$ ф.р. $\Phi(x)\sim N(0,1)$. Тогда
+\[\P(\left\lvert \frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\widehat{\beta}_{n,LS}^2}}\right\rvert <\xi_{1-\alpha/2})\xrightarrow[n\rightarrow\infty]{} 1-\alpha\]
+То есть при больших $n$ примерно с вероятностью $1-\alpha$
+\[\widehat{\beta}_{n,LS}-\frac{\sqrt{1-\widehat{\beta}_{n,LS}^2}}{\sqrt{n}}\xi_{1-\alpha/2}<\beta<\widehat{\beta}_{n,LS}+\frac{\sqrt{1-\widehat{\beta}_{n,LS}^2}}{\sqrt{n}}\xi_{1-\alpha/2}\]
+Получили доверительный интервал для $\beta$ ас. уровня $1-\alpha$.
+
+\subsubsection*{Проверка гипотез}
+Проверим гипотезу $H_0:\beta=\beta_0$ против альтернатив $H_1:\beta\neq\beta_0$.
+Критическое множество (критерий):
+\[S_\alpha=\left\{u_0,\ldots,u_n: |\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta_0)}{\sqrt{1-\beta_0^2}}>\xi_{1-\alpha/2}\right\}\].
+Тогда, очевидно, $\P(H_1|H_0)\rightarrow\alpha$, а так как при $H_1$:
+\[\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta_0)}{\sqrt{1-\beta_0^2}}=\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\beta_0^2}}+\frac{\sqrt{n}(\beta-\beta_0)}{\sqrt{1-\beta_0^2}}\xrightarrow[n\rightarrow\infty]{\P}\]
+то $\P(H_0|H_1)\rightarrow0$. Значит
+\[\begin{cases}
+    \P(H_0|H_0)\rightarrow1-\alpha \\
+    \P(H_1|H_1)\rightarrow1
+\end{cases}\quad n\rightarrow\infty\]
+Вероятность принять правильную гипотезу близка к единице!
+
+\subsubsection*{О робастности о.н.к.}
+\begin{equation*}
+    u_t=\beta u_{t-1}+\eps_t,\ t\in\Z,\ \{\eps_t\}\text{ - н.о.р, }\E\eps_1=0,\ 0<\sigma^2=\E\eps_1^2<\infty,\ \left\lvert \beta\right\rvert <1
+\end{equation*}
+Пусть наблюдаются
+\[y_t=u_t+z_t^\gamma\xi_t,\ t=0,1,\ldots,n;\]
+$\{u_t\}$ - стац.; \\
+$\{z_t^\gamma\}$ - н.о.р., $z_1^\gamma\sim Br(\gamma)$ и $0\leq\gamma\leq1$; \\
+$\{\xi_t\}$ - н.о.р., $\xi_1\sim\mu_\xi,\ \mu_x\xi\in M_2$, т.е. $\E\xi_1^2<\infty$; \\
+Последовательности $\{u_t\}$, $\{z_t^\gamma\}$, $\{\xi_t\}$ независимы между собой.
+Пусть
+\[\widehat{\beta}_{n,LS}^y=\frac{\sum_{t=1}^ny_{t-1}y_t}{\sum_{t=1}^n}y_{t-1}^2\text{ - о.н.к., построенная по засоренным данным $\{y_t\}$}\]
+Найдем ее функционал влияния.
+
+\underline{Первый способ}.
+
+Предположим дополнительно, что у $\eps_1$ сущесвтует плотность вероятности
+$g(x)=G'(x)$. Тогда последовательность $\{u_t\}$ удовлетворяет условиям с.п.,
+а так как $\{z_t^\gamma\xi_t\},\ t\in\Z$, - посл. н.о.р. сл.в., которые не зависят от $\{u_t\}$,
+то $\{y_t\}$ - строго стационрная последовательность с с.п. Кроме того,
+\[\E\left\lvert y_1\right\rvert <\infty,\text{ т.к. } \E y_1^2=\E(u_1+z_1^\gamma\xi_1)^2=\E u_1^2+2\underbrace{\E u_1}_0\E z_1^\gamma\E\xi_1+\E(z_1^\gamma\xi_1)^2=\E u_1^2+\gamma\E\xi_1^2<\infty \]
+Значит, в силу З.Б.Ч. для посл. с с.п. имеем:
+\[\widehat{\beta}^y_{n,LS}=\frac{\frac{1}{n}\sum_{t=1}^ny_{t-1}y_t}{\frac{1}{n}\sum_{t=1}^ny_t^2}\xrightarrow{\P}\theta_\gamma^{LS}=\frac{\E y_0y_1}{\E y_0^2}=\frac{\E(u_0+z_0^\gamma\xi_0)(u_1+z_1^\gamma\xi_1)}{\E(u_1+z_1^\gamma\xi_1)^2}=\frac{\E u_0u_1+\gamma^2(\E\xi_0)^2}{\E u_0^2+\gamma\E\xi_0^2}\]
+Отсюда
+\[IF(\theta_\gamma^{LS},\mu_\xi)=\left.\frac{d\theta_\gamma^{LS}}{d\gamma}\right\rvert_{\gamma=0}=-\beta(1-\beta^2)\frac{\E\xi_0^2}{\E\eps_1^2}\]
+Если $M_2$ - множество распределений с конечным 2-ым моментом, то при $\beta\neq0$
+\[GES(\theta_\gamma^{LS},M_2)=\sup_{\mu_\xi\in M_2}\left\lvert IF(\theta_\gamma^{LS},\mu_\xi)\right\rvert =\infty\]
+\underline{О.н.к. неробастна!}
+
+\underline{Второй способ}.
+
+Предположим опять, что $\eps_1$ имеет плотность вероятности (Лебегову) $g(x)$.
+Тогда, как говорилось, последовательность $\{y_t\}$ удовлетворяет усл. с.п.
+
+
+Оценка $\widehat{\beta}^y_{n,LS}$ - корень уравнения
+\[l_{n,LS}(\theta)=\frac{1}{n}\sum_{t=1}^ny_{t-1}(y_t-\theta y_{t-1})=0\]
+\begin{enumerate}
+    \item 
+    \[l_{n,LS}(\theta)=\frac{1}{n}\sum_{t=1}^ny_{t-1}(y_t-\theta y_{t-1})\xrightarrow{\P}\E y_0(y_1-\theta y_0),\ \theta\in\R,\ 0\leq\gamma\leq1\]
+    То есть $\Lambda_{LS}(\gamma,\theta)=\E y_0(y_1-\theta y_0)$.
+    Пусть
+    \[
+    \begin{array}{cc}
+        H_{00} = (z_0^\gamma=0,z_1^\gamma=0); & H_{01} = (z_0^\gamma=0,z_1^\gamma=1); \\
+        H_{10} = (z_0^\gamma=1,z_1^\gamma=0); & H_{11} = (z_0^\gamma=1,z_1^\gamma=1);
+    \end{array}
+    \]
+    Тогда
+    \[\Lambda_{LS}(\gamma,\theta)=\sum_{i,j=0}^1\E(y_0(y_1-\theta y_0)|H_{ij})\P(H_{ij})=(1-\gamma)^2\E u_0(u_1-\theta u_0)+\]
+    \[+\gamma(1-\gamma)\E(u_0+\xi_0)(u_1-\theta u_0-\theta\xi_0)+\gamma^2\E(u_0+\xi_0)(u_1+\xi_1-\theta u_0-\theta\xi_1)\]
+    Значит, функция $\Lambda_{LS}(\gamma,\theta)$ определена при всех $\gamma$ и $\theta$.
+    \item \[\Lambda_{LS}(0,\beta)=\E u_0(u_1-\beta u_0)=\E u_0\xi_1=0\]
+    \item $\frac{\partial \Lambda_{LS}(\gamma,\theta)}{\partial\gamma}$, $\frac{\partial \Lambda_{LS}(\gamma,\theta)}{\partial\theta}$ 
+    сущесвтуют и непрерывны по паре $(\gamma,\theta)$ при $\gamma,\theta\in\R^1$
+    \[\frac{\partial \Lambda_{LS}(\gamma,\theta)}{\partial\gamma}=-\beta\E\xi_0^2,\ \frac{\partial \Lambda_{LS}(\gamma,\theta)}{\partial\theta}=-\E u_0^2\]
+    \item \[\lambda(\beta)=-\E u_0^2=-\frac{\E\eps_1^2}{1-\beta^2}<0\]
+\end{enumerate}
+Так как $\phi_t(J_n,\theta)$ непр., то
+\[IF(\theta_\gamma^{LS},\mu_\xi)=-\left(\frac{\partial\Lambda_{LS}(0,\beta)}{\partial\theta}\right)^{-1}\frac{\partial\Lambda_{LS}(0,\beta)}{\partial\gamma}=-\frac{(-\beta\E\xi_0^2)(1-\beta^2)}{-\E\eps_1^2}=-\beta(1-\beta^2)\frac{\E\xi_0^2}{\E\eps_1^2}\]
+Очевидно, что при $\beta\neq0$
+\[GES(\theta_\gamma^{LS}, M_2)=\infty\]
+то есть $\widehat{\beta}_{n,LS}^y$ \underline{не $B$ - робастна!}
+
+\begin{task}
+    \[u_t=\beta u_{t-1}+\eps_t,\ t\in\Z,\ \{\eps_t\}\text{ - н.о.р, }\E\eps_1=0,\ 0<\sigma^2=\E\eps_1^2<\infty,\ \left\lvert \beta\right\rvert <1,\ \beta\neq0\]
+    \[y_t=u_t+z_t^\gamma\xi_t\]
+    Оценка $\widehat{\beta}_n$ - ищется как корень уравнения
+    \[\sum_{t=1}^ny_{t-2}(y_t-\theta y_{t-1})=0\]    
+    \begin{enumerate}
+        \item Будет ли оценка $\widehat{\beta}_n$ $B$-робастной?
+        \item Чему равен фунционал влияния 2-го порядка?
+    \end{enumerate}
+\end{task}
+
+\newpage
+\subsection{О процедурах наименьших квадратов в $AR(p)$}
+Авторегрессия порядка $p$ ($AR(p)$ - модель) описывается
+стохастическим разностным уравнением
+
+\begin{equation}\label{eq::ar_p_equation}
+    u_t=\beta_1u_{t-1}+\beta_2u_{t-2}+\ldots+\beta_pu_{t-p}+\eps_t,\ t\in\Z
+\end{equation}
+Здесь $\{\eps_t\}$ - н.о.р. сл.в., $\E\eps_1=0,\ 0<\E\eps_1^2=\sigma^2<\infty$;
+$\beta_1,\ldots,\beta_p$ - неизвестные коэффициенты авторегрессии, $\beta_j\in\R$
+\begin{definition}
+    Уравнение
+    \begin{equation} \label{def::corresponding_to_ar_p_eq}
+        x^p=\beta_1x^{p-1}+\ldots+\beta_p
+    \end{equation}
+    называется характеристическим уравнением, соответствующим уравнению \eqref{eq::ar_p_equation}.
+\end{definition}
+\begin{theorem}\label{th::single_stat_solution_ar_p}
+    Пусть корни характеристического уравнения \eqref{def::corresponding_to_ar_p_eq} по
+    модулю меньше единицы. Тогда уравнение \eqref{eq::ar_p_equation} имеет
+    почти наверное единственное строго стационарное решение
+    \begin{equation}\label{eq::ar_p_equation_solution}
+            u_t=\sum_{j\geq0}\gamma_j\eps_{t-j},\text{ ряд с.к. сходится (в $L_2$)}
+    \end{equation} 
+    Коэффициенты $\{\gamma_j\}$ определяются рекуррентным соотношением
+    \[\gamma_j=\beta_1\gamma_{j=1}+\ldots+\beta_p\gamma_{j-p},\ j=1,2,\ldots;\]
+    \[\gamma_0=1,\ \gamma_j=0, j<0;\]
+    \[\left\lvert \gamma_j\right\rvert \leq c\lambda^j,\ 0<\lambda<1\]
+\end{theorem}
+
+Ряд \eqref{eq::ar_equation_solution} определяет также стационарную в
+широком смысле последовательность с \underline{нулевым} средним.
+
+В случае $p=1$ утверждение Теоремы \ref{th::single_stat_solution_ar_p} совпадает
+с утверждением доказанной нами Теоремы \ref{th::single_stat_solution_ar}.
+Доказательство теоремы \ref{th::single_stat_solution_ar_p} при $p>1$
+идейно не отличается от доказательства теоремы \ref{th::single_stat_solution_ar},
+но технически громоздко. Мы его опускаем.
+
+\begin{remark*}
+    Поскольку из \eqref{eq::ar_p_equation_solution} $u_t=u_t(\eps_t,\eps_{t-1},\ldots)$,
+    то сл.в. $\eps_{t+1}$ не зависит от множества сл.в. $\{u_t,u_{t-1},\ldots\}$.
+\end{remark*}
+\subsubsection*{Прогнозирование}
+Пусть наблюдения $u_1,u_2,\ldots,u_n$ будут выборкой из стационарного решения \eqref{eq::ar_p_equation_solution}.
+Пусть $n\geq p$. Оптимальный с.к. прогноз ненаблюдаемой величины $u_{n+1}$ по наблюдениям
+$u_1,u_2,\ldots,u_n$ есть решение задачи
+\[\E\left\lvert u_{n+1}-\phi(u_1,u_2,\ldots,u_n)\right\rvert ^2\rightarrow\min_{\substack{\text{бор. }\phi: \\ \E\phi(u_1,u_2,\ldots,u_n)<\infty}}\]
+Мы знаем, что решение этой задачи есть
+\[u_{n+1}^*=\phi^*(u_1,u_2,\ldots,u_n)=\E(u_{n+1}|u_1,u_2,\ldots,u_n)\]
+Имеем:
+\[\E(u_{n+1}|u_1,u_2,\ldots,u_n)=\E\left(\sum_{j=1}^p\beta_ju_{n+1-j}+\eps_{n+1}\vert u_1,u_2,\ldots,u_n\right)=\]
+\[=\E\left(\sum_{j=1}^p\beta_ju_{n+1-j}\vert u_1,u_2,\ldots,u_n\right)+\E\left(\eps_{n+1}\vert u_1,u_2,\ldots,u_n\right)=\beta_1u_n+\beta_2u_{n-1}+\ldots+\beta_pu_{n+1-p}\]
+так как $\E\left(\eps_{n+1}\vert u_1,u_2,\ldots,u_n\right)=\E\eps_{n+1}=0$ в силу Замечания. Итак, опт. с.к. прогноз
+\[
+    \boxed{u^*_{n+1}=\beta_1u_n+\ldots+\beta_pu_{n+1-p}}
+\]
+Чтобы построить $u^*_{n+1}$ надо оценить $\beta_1,\ldots,\beta_p$.
+
+\underline{Построим о.н.к. неизвестных $\beta_1,\ldots,\beta_p$ по наблюдениям $u_{n-p},\ldots,u_n$}.
+
+Положим $\widetilde{u}_{t-1}\defeq(u_{t-1},\ldots,u_{t-p})^T,\ \beta=(\beta_1,\ldots,\beta_p)^T$,
+тогда \eqref{eq::ar_p_equation} имеет вид
+\[u_t=\widetilde{u}_{t-1}^T\beta+\eps_t,\ t\in\Z\]
+Оценка наименьших квадратов вектора $\beta$ - решение задачи
+\begin{equation} \label{eq::find_ls_ar_p}
+    \sum_{t=1}^n(u_t-\widetilde{u}_{t-1}^T\theta)^2\rightarrow\min_{\theta=(\theta_1,\ldots,\theta_p)^T\in\R^1}
+\end{equation}
+Решение задачи \eqref{eq::find_ls_ar_p} совпадает с решением системы уравнений
+\[ \sum_{t=1}^nu_{t-j}(u_t-\widetilde{u}_{t-1}^T\theta)=0,\ j=1,\ldots,p\]
+Запишем эти уравнения в векторной форме
+\begin{equation} \tag{23'}
+    \sum_{t=1}^n\widetilde{u}_{t-1}(u_t-\widetilde{u}_{t-1}^T\theta) = 0
+\end{equation}
+Решение этого векторного уравнения
+\[\widehat{\beta}_{n,LS}=\left(\sum_{t=1}^n\widetilde{u}_{t-1}\widetilde{u}_{t-1}^T\right)^{-1}\sum_{t=1}^m\widetilde{u}_{t-1}u_t\]
+Если $p\times p$ матрица $\sum_{t=1}^n\widetilde{u}_{t-1}\widetilde{u}_{t-1}^T$ вырождена, то полагаем $\widehat{\beta}_{n,LS}=0$
+\begin{theorem} \label{th::beta_ls_d_conv_ar_p}
+    Пусть $\{\eps_t\}$ - н.о.р. сл.в., $\E\eps_1=0,\ 0<\E\eps_1^2=\sigma^2<\infty$.
+    Пусть корни характеристического уравнения \eqref{def::corresponding_to_ar_p_eq} по модулю меньше единицы.
+    Тогда 
+    \[\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)\xrightarrow[n\rightarrow\infty]{d}N(0,\delta^2K^{-1}),\text{ где }K=\E\widetilde{u}_0\widetilde{u}_0^T>0\]
+\end{theorem}
+\begin{remark}
+    В теореме \ref{th::beta_ls_d_conv_ar_p} речь идет о сходимости по распределению векторов
+    $\xi_n\defeq \sqrt{n}(\widetilde{\beta}_{n,LS}-\beta)$ к гауссовскому вектору $\xi\sim N(0,\sigma^2K^{-1})$
+
+    Напомним, что если $\xi_n,\xi\in\R^p$ случ. векторы, то $\xi_n\xrightarrow{d}\xi$, если
+    \begin{equation} \label{eq::int_distrib_func_conv}
+        \int_{\R^p}g(x)d\P_n(x)\rightarrow\int_{\R^p}g(x)d\P(x)
+    \end{equation}
+    для любой непрерывной и ограниченной функции $g:\R^p\rightarrow\R^1$. Здесь $\P_n$ и $\P$ - 
+    распределения векторов $\xi_n$ и $\xi$. Можно проверить, что это определенеие равносильно
+    следующему: для любой непрерывной и ограниченной $g:\R^p\rightarrow\C$ выполнено \eqref{eq::int_distrib_func_conv}.
+    Разумеется, \eqref{eq::int_distrib_func_conv} означает, что $\E g(\xi_n)\rightarrow\E g(\xi)$.
+    Мы знаем, что если $\xi_n\xrightarrow{d}\xi$, то для любого постоянного вектора $\lambda\in\R^p$
+    \begin{equation}\label{eq::vecprod_d_conv}
+        \lambda^T\xi_n\xrightarrow{d}\lambda^T\xi
+    \end{equation}
+    Действительно, функция $\pi(x)=\lambda^Tx$ непрерывна, и \eqref{eq::vecprod_d_conv} следует из теоремы о наследовании
+    сходимости, но верно и обратное: если выполнено соотношение \eqref{eq::vecprod_d_conv}, то $\xi_n\xrightarrow{d}\xi$.
+
+    Действительно, функция $g(x)=e^{ix},\ x\in\R^1$, ограниченная непрерывная функция $g:\R^1\rightarrow\C$.
+    Тогда из \eqref{eq::vecprod_d_conv} следует, что
+    \[\E g(\xi_n)=\E e^{i\lambda^T\xi_n}\rightarrow\E g(\xi)=\E e^{i\lambda^T\xi},\ \forall\lambda\in\R^p\]
+    Последнее соотношение означает, что характеристическая функция вектора $\xi_n$ $\E e^{i\lambda^T\xi_n}$
+    при любом значении аргумента $\lambda$ сходится к характеристической функциии $\E e^{i\lambda^T\xi}$ вектора $\xi$.
+    Значит $\xi_n\xrightarrow{d}\xi$.
+    \begin{lemma}[Прием Крамера-Уолда]\label{lm::cramer_wold}
+        Если $\xi_n,\xi\in\R^p$, то
+        \[\xi_n\xrightarrow{d}\xi\Leftrightarrow\lambda^T\xi_n\xrightarrow{d}\lambda^T\xi,\ \forall\lambda\in\R^p\]
+    \end{lemma}
+    \begin{leftbar}
+        Этот прием сводит сходимость по распределению векторов $\xi_n,\ \xi$ к сходимости скаляров $\lambda^T\xi_n,\ \lambda^T\xi$, но при
+        всех $\lambda$
+    \end{leftbar}
+\end{remark}
+\begin{remark}
+    Пусть $\{\xi_n\}$ - сл. посл., $\xi_n\in\R^k$. \\
+    Будем писать $\xi_n=\littleO_p(1),\ n\rightarrow\infty$, если $\xi_n\xrightarrow{\P}0$. \\
+    Будем говорить, что последовательность $\{\xi_n\}$ ограничена по вероятности и писать $\bigO_p(1)$, если
+    \[\forall\eps>0\ \exists A=A(\eps):\ \sup_n\P(\left\lvert \xi_n\right\rvert >A)<\eps\]
+\end{remark}
+\begin{task} Пусть $\xi_n\in\R^k,\ \eta_n\in\R^1$.
+    \begin{enumerate}
+        \item Если $\xi_n=\bigO_p(1)$, а $\eta_n=\littleO_p(1)$, то $\xi_n\eta_n=\littleO_p(1)$
+        \item Если $\xi_n\xrightarrow{d}\xi$, то $\xi_n=\bigO_p(1)$.
+    \end{enumerate}
+\end{task}
+\begin{proof}[Доказательство теоремы \ref{th::beta_ls_d_conv_ar_p}]
+    Мы докажем теорему при дополнительных предположениях: $\E\left\lvert \eps_1\right\rvert ^{2+\delta}<\infty$ для некоторой $\delta>0$;
+    существует плотность вероятности $g(x)$ по мере Лебега.
+    \begin{enumerate}
+        \item Покажем, что матрица $K=\E\widetilde{u}_0\widetilde{u}_0^T>0$. Для $\alpha\in\R^p,\ \alpha\neq0$, имеем:
+        \[\alpha^TK\alpha=\E(\alpha^T\widetilde{u}_0)(\widetilde{u}_0^T\alpha)=\E\left\lvert \alpha\widetilde{u}_0\right\rvert ^2\]
+        Но $u_t=\sum_{s\geq0}\gamma_s\eps_{t-s}=\eps_t+\sum_{s\geq1}\gamma_s\eps_{t-s}$, ряд сходится в $L^{2+\delta}$.
+
+        Значит, 
+        \[\alpha^T\widetilde{u}_0=\alpha^T(u_{-1},\ldots,u_{-p})^T=\alpha_1\eps_{-1}+\sum_{s\geq1}\gamma_s\eps_{-1}+\alpha_2u_{-2}+\ldots+\alpha_pu_{-p}\]
+        Случайная величина $\eps_{-1}$ абсолютно непрерывна и не зависит от остальных слагаемых. Значит, при $\alpha_1\neq0$
+        величина $\alpha^T\widetilde{u}_0$ абсолютно непрерывна, $\P(\alpha^T\widetilde{u}_0\neq0)=1$, $\E\left\lvert \alpha^T\widetilde{u}_0\right\rvert ^2>0$.
+        Если $\alpha_1=0$, то повторяем рассуждения для первой ненулевой комп. вектора $\alpha$
+
+        \item Покажем, что следующий вектор
+        \[K^{-1}\sqrt{n}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\xrightarrow{d}N(0,\sigma^2K^{-1})\]
+        Для этого достаточно показать, что $\frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\xrightarrow{d}N(0,\sigma^2K)$
+        и применить Теорему о слабой сходимости.
+        В силу леммы \ref{lm::cramer_wold} достаточно проверить, что $\forall\lambda\in\R^p$
+        \begin{equation}\label{eq::sup_eq_for_step2}
+            \frac{1}{\sqrt{n}}\sum_{t=1}^n\lambda^T\widetilde{u}_{t-1}\eps_t=\frac{1}{\sqrt{n}}\sum_{t=1}^n\eta_t\xrightarrow{d}N(0,\sigma^2\lambda^TK\lambda)
+        \end{equation}
+        Последовательность $\eta_t$ есть функция от $\{u_t\}$, это строго стац. последовательность с сильным перемешиванием с
+        коэффициентом перемешивания $\alpha(\tau)\neq c\lambda^T,\ 0<\lambda<1$.
+        \[\E\eta_t=\E(\lambda^T\widetilde{u}_{t-1})\E\eps_t=0\]
+        \[\E\left\lvert \eta_t\right\rvert ^{2+\delta}=\E\left\lvert \lambda^T\widetilde{u}_{t-1}\right\rvert ^{2+\delta}\underbrace{\E\left\lvert \eps_t\right\rvert ^{2+\delta}}_{<\infty\text{ по усл.}}<\infty,\text{ т.к. } \E\left\lvert u_t\right\rvert ^{2+\delta}<\infty\text{ (см. док-во Т. \ref{th::beta_ls_d_conv_ar})}\]
+        \[\left\{\E\left\lvert \lambda^T\widetilde{u}_{t-1}\right\rvert ^{2+\delta}\right\}^{\frac{1}{2+\delta}}\leq\sum_{i=1}^p\left\lvert \lambda_i\right\rvert \left\{\E\left\lvert u_1\right\rvert ^{2+\delta}\right\}^{\frac{1}{2+\delta}}<\infty\text{ в силу нер-ва Минковсокго}\]
+        Крмое того, при $t<s$ 
+        \[\E\eta_t\eta_s=\E\left\{(\lambda^T\widetilde{u}_{t-1}\eps_t)(\lambda^T\widetilde{u}_{s-1})\right\}\E\eps_s=0\]
+        Кроме того,
+        \[\sum_{\tau\geq1}(\alpha(\tau))^{\frac{2}{2+\delta}}<\infty\]
+        В силу Ц.П.Т. для последовательности с с.п.
+        \[\frac{1}{\sqrt{n}}\sum_{t=1}^n\eta_t\xrightarrow{d}N(0,\E\eta_0^2),\ \E\eta_0^2=\sigma^2\lambda^TK\lambda\]
+        Т.о. доказали \eqref{eq::sup_eq_for_step2}, поэтому
+        \begin{equation}\label{eq::eq_for_step2}
+            K^{-1}\frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\xrightarrow{d}N(0,\sigma^2K^{-1})
+        \end{equation}
+        
+        \item Пусть $K_n\defeq\frac{1}{n}\sum_{t=1}^n\widetilde{u}_{t-1}\widetilde{u}_{t-1}^T$.
+        Если $\det(K_n)>0$, то
+        \[\widetilde{\beta}_{n,LS}=K_n^{-1}\frac{1}{n}\sum_{t=1}^n\widetilde{u}_{t-1}u_t=K_n^{-1}\frac{1}{n}\sum_{t=1}^n\widetilde{u}_{t-1}(\widetilde{u}_{t-1}^T\beta+\eps_t)=\beta+K_n^{-1}\frac{1}{n}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\]
+        Значит, при невырожденной $K_n$
+        \[\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)=K_n^{-1}\frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\]
+        В силу З.Б.Ч. для посл. с с.п.
+        \[K_n\xrightarrow{\text{п.н.}}K=\E\widetilde{u}_0\widetilde{u}_0^T>0,\ \det(K)>0\] 
+        Поэтому $\det(K_n)\xrightarrow{\text{п.н.}}\det(K)>0$, и если $S_n=\{\omega:\det(K_n)>0\}$, то $\P(S_n)\rightarrow1$.
+
+        Напомним,
+        \[\widehat{\beta}_{n,LS}=\begin{cases}
+            K_n^{-1}\frac{1}{n}\sum_{t=1}^n\widetilde{u}_{t-1}u_t,\ \omega\in S_n \\
+            0,\ \omega\in\overline{S}_n
+        \end{cases}\]
+        Покажем, что
+        \begin{equation}\label{def::gamma_n}
+            \gamma_n\defeq\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)-K^{-1}\frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\xrightarrow{\P}0
+        \end{equation}
+        
+        Из \eqref{eq::eq_for_step2} и \eqref{def::gamma_n} следует, что
+        \[\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)\xrightarrow{d}N(0,\sigma^2K^{-1})\]
+        Действительно, если $\xi_n$ и $\eta_n$ - любые случайные векторы такие, что $\xi_n=\eta_n+\alpha_n$,
+        и $\eta_n\xrightarrow{d}\xi$, а $\alpha_n=\littleO_p(1)$, то $\lambda^T\xi_n=\lambda^T\eta_n+\lambda^T\alpha_n\xrightarrow{d}\lambda^T\xi$
+        в силу Леммы Слуцкого (т.к. $\lambda^T\eta_n\xrightarrow{d}\lambda^T\xi$, а $\lambda^T\alpha_n\xrightarrow{\P}0$) $\forall\lambda\in\R^p$.
+
+        Значит, $\xi_n\xrightarrow{d}\xi$ в силу Леммы \ref{lm::cramer_wold}.
+
+        Пусть
+        \[S_n^\Delta=\left\{\omega:\ \det(K_n)\geq\Delta=\frac{1}{2}\det(K)\right\}\]
+        Тогда
+        \[\P(\overline{S_n^\Delta})\leq\P(\left\lvert \det(K_n)-\det(K)\right\rvert >\Delta)\rightarrow0\Rightarrow\P(S_n^\Delta)\rightarrow1\]
+
+        Далее $\left\lvert \bullet\right\rvert $ - Евклидова норма матрицы или вектора на $S_n^\Delta$
+        \[\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)=K^{-1}_n\frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\]
+        Поэтому $\forall\delta>0$:
+        \[\P(\left\lvert \gamma_n\right\rvert >\delta)=\P\left(\left\lvert (K^{-1}_n-K^{-1})\frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\right\rvert >\delta,S_n^\Delta\right)+\P\left(\left\lvert \gamma_n\right\rvert >\delta,\overline{S}_n^\Delta\right)\]
+        Вторая вероятность не больше $\P(\overline{S}_n^\Delta)\rightarrow0$. Первая вероятность
+        не больше
+        \begin{equation} \label{eq::sec_prob_sup}
+            \P(\left\lvert K_n^{-1}\right\rvert \left\lvert K-K_n\right\rvert \left\lvert K^{-1}\right\rvert \left\lvert \frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\right\rvert >\delta, S_n^\Delta)
+        \end{equation}
+        В \eqref{eq::sec_prob_sup} $\left\lvert K-K_n\right\rvert \xrightarrow{\P}0$, $\left\lvert K^{-1}\right\rvert $ - кон. число, $\left\lvert \frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\right\rvert =\bigO_p(1)$.
+
+        Рассмотрим $\left\lvert K_n^{-1}\right\rvert $ на $S_n^\Delta$. Пусть $A_{ji}^n$ и $A_{ji}$ - алгебр. доп. в $K_n$ и $K$ соответственно.
+        Тогда:
+        \[K_n^{-1}=(a_{ij}^n)\defeq\left(\frac{A_{ji}^n}{\det(K_n)}\right)\]
+        На $S_n^\Delta$:
+        \[\left\lvert a^n_{ij}\right\rvert \leq\frac{\left\lvert A_{ij}^n\right\rvert }{\Delta}\]
+        Пусть $B_n=(b_{ij}^n)\defeq\left(\frac{\left\lvert A_{ji}^n\right\rvert }{\Delta}\right)$, $B=(b_{ij})\defeq\left(\frac{\left\lvert A_{ji}\right\rvert }{\Delta}\right)$ - $p\times p$ матрицы.
+
+        Поскольку $b^n_{ij}\xrightarrow{\text{п.н.}}b_{ij}$, то $\left\lvert B_n\right\rvert \xrightarrow{\text{п.н.}}\left\lvert B\right\rvert $,
+        и поэтому $\left\lvert K_n^{-1}\right\rvert \leq\left\lvert B_n\right\rvert =\bigO_p(1)$.
+
+        Поэтому вероятность в \eqref{eq::eq_for_step2} не больше
+        \[\P(\left\lvert B_n\right\rvert \left\lvert K-K_n\right\rvert \left\lvert K^{-1}\right\rvert \left\lvert \frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\right\rvert >\delta)\rightarrow0\]
+        Соотношение \eqref{def::gamma_n} доказано, а значит и Теорема.
+    \end{enumerate}
+\end{proof}
+
+\subsection{Проверка гипотез о порядке авторегрессии}
 
 \end{document}
