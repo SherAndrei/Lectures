@@ -47,6 +47,7 @@
 \newtheorem*{corollary}{Следствие}
 \newtheorem*{proposition}{Предложение}
 \newtheorem*{example}{Пример}
+\newtheorem*{examples}{Примеры}
 \newtheorem*{task}{Задача}
 %--------------------------------------
 
@@ -270,8 +271,8 @@ $AR(1)$-модель.
         функция вектора $(\xi,1)^T$, где $\xi\sim N(0,1)$. Действительно,
         \[\phi(t,s)=\E\exp{\left\{i(t\xi+s)\right\}}=e^{is}\phi_\xi(t)=\exp{\left\{is-\frac{t^2}{2}\right\}}\]
         \begin{theorem*}[О наследовании сходимости]
-            Пусть случайный вектор $S_n\xrightarrow{d}S,\ n\rightarrow\infty,\ S_n,S\in\R^k,\ H:R^k\rightarrow R^1$ - 
-            борелевская функция, непрерывная на множестве $A$ таком, что $\P(S\in A)=1$. Тогда $H(S_n)\xrightarrow{d}H(S),\ n\rightarrow\infty$
+            Пусть случайный вектор $S_n\underset{n\rightarrow\infty}{\xrightarrow{d}}S,\ S_n,S\in\R^k,\ H:R^k\rightarrow R^1$ - 
+            борелевская функция, непрерывная на множестве $A$ таком, что $\P(S\in A)=1$. Тогда $H(S_n)\underset{n\rightarrow\infty}{\xrightarrow{d}}H(S)$
         \end{theorem*}
         В силу \eqref{def::mutual_char_func} $(M_n,V_n)^T\xrightarrow{d}(\xi,1)^T$.
         Если $H(x,y)=\frac{x}{y}$, то $H(x,y)$  непрерывна при $y>0$.  Можно взять
@@ -380,10 +381,10 @@ $AR(1)$-модель.
 \[\widehat{\beta}_{n,LS}=\frac{\sum_{t=1}^nu_{t-1}u_{t}}{\sum_{t=1}^nu^2_{t-1}}\]
 О.н.к. $\widehat{\beta}_{n,LS}$ - непараметрическая!
 
-\begin{theorem}
+\begin{theorem} \label{th::beta_ls_d_conv_ar}
     Пусть $u_t=\beta u_{t-1}+\eps_t,\ \left\lvert \beta\right\rvert <1,\ t\in\Z$. Если $\{\eps_t\}$ - н.о.р.,
     $\E\eps_1=0,\ 0<\E\eps_1^2<\infty$, то
-    \[\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)\xrightarrow{d}N(0,1-\beta^2),\ n\rightarrow\infty\]
+    \[\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)\underset{n\rightarrow\infty}{\xrightarrow{d}}N(0,1-\beta^2)\]
 \end{theorem}
 \begin{remark*}
     \begin{enumerate}
@@ -401,7 +402,7 @@ $AR(1)$-модель.
     Любая последовательность $\{u_t\}$, для которой в \eqref{eq::ar_equation} левая часть
     равно правой \underline{почти наверное}, называется \defin{решением уравнения \eqref{eq::ar_equation}}
 \end{definition}
-\begin{theorem}
+\begin{theorem} \label{th::single_stat_solution_ar}
     При $\left\lvert \beta\right\rvert <1$ существует п.н. единственное строго стационарное решение уравнения \eqref{eq::ar_equation}.
     Оно имеет вид:
     \begin{equation}\label{eq::ar_equation_solution}
@@ -422,7 +423,7 @@ $AR(1)$-модель.
         что эта с.к. сходимость с.к. фундаментальности, то есть 
         \[\lim_{n,m\rightarrow\infty}\E\left\lvert u_t^{(n)}-u_t^{(m)}\right\rvert ^2=0\]
         Пусть для краткости $l\defeq\min(m,n)$, $k\defeq\max(m,n)$. Тогда
-        \[\E\left\lvert u_t^{(n)}-u_t^{(m)}\right\rvert ^2=\E\left\lvert \sum_{j=l+1}^k\beta^j\eps_{t-j}\right\rvert ^2=\sigma^2\sum_{j=l+1}^k\beta^{2j}\rightarrow0,\text{ т.к. }l,k\rightarrow\infty,\ |\beta|<1\]
+        \[\E\left\lvert u_t^{(n)}-u_t^{(m)}\right\rvert ^2=\E\left\lvert \sum_{j=l+1}^k\beta^j\eps_{t-j}\right\rvert ^2=\sigma^2\sum_{j=l+1}^k\beta^{2j}\rightarrow0,\text{ т.к. }l,k\rightarrow\infty,\ \left\lvert \beta\right\rvert <1\]
         Значит, что ряд \eqref{eq::ar_equation_solution} с.к. сходится. Имеем п.н.
         \[u_t=\sum_{j\geq0}\beta^j\eps_{t-j}=\eps_t+\beta\sum_{j\geq1}\beta^j\eps_{t-j}=\eps_t+\beta\sum_{s\geq0}\beta^s\eps_{t-s-1}=\eps_t+\beta u_{t-1}\]
         Значит, $\{u_t\}$ из \eqref{eq::ar_equation_solution} есть решение \eqref{eq::ar_equation}.
@@ -437,7 +438,7 @@ $AR(1)$-модель.
         В силу этой задачи $\{u_t^{(n)}\}$ - строго стационарна, то есть распределение вектора $U_n(\tau)$
         вовсе не зависит от $\tau$, но
         \begin{equation}\label{eq::vec_ar_solution_d_conv}
-            U_n(\tau)\xrightarrow{d}U(\tau),\ n\rightarrow\infty,\text{ т.к. } u_t^{(n)}\xrightarrow{\text{с.к.}}u_t
+            U_n(\tau)\underset{n\rightarrow\infty}{\xrightarrow{d}}U(\tau),\text{ т.к. } u_t^{(n)}\xrightarrow{\text{с.к.}}u_t
         \end{equation}
         Значит, в силу \eqref{eq::vec_ar_solution_d_conv}, распределение $U(\tau)$ от $\tau$ не зависит.
         
@@ -446,7 +447,7 @@ $AR(1)$-модель.
         Тогда п.н.
         \[\widetilde{u}_t=\beta\widetilde{u}_{t-1}+\eps_t=\underbrace{\eps_t+\beta\eps_{t-1}+\ldots+\beta^{k-1}\eps_{t-k+1}}_{u_t^{(k)}}+\beta^k\widetilde{u}_{t-k}\]
         Имеем
-        \[\P(|\beta^k\widetilde{u}_{t-k}|>\delta)=\P(|\beta^k\widetilde{u}_0|>\delta)\underset{|\beta|<1}{\rightarrow}0,\ k\rightarrow\infty\]
+        \[\P(\left\lvert \beta^k\widetilde{u}_{t-k}\right\rvert >\delta)=\P(\left\lvert \beta^k\widetilde{u}_0\right\rvert >\delta)\underset{\left\lvert \beta\right\rvert <1}{\rightarrow}0,\ k\rightarrow\infty\]
         Знаем, что $u_t^{(k)}\xrightarrow{\text{с.к.}}u_t=\sum_{j\geq0}\beta^j\eps_{t-j},\ \E u_t^2<\infty$.
         Значит, $u_t^{(k)}+\beta^k\widetilde{u}_{t-k}\xrightarrow{\P}u_t,\ \rightarrow\infty$.
         Следовательно, п.н.
@@ -460,7 +461,122 @@ $AR(1)$-модель.
         \[\E u_t^2=\beta^2\E u_{t-1}^2+\underbrace{2\beta\E(u_{t-1}\eps_t)}_0+\E\eps_t^2\Rightarrow
         (1-\beta^2)\E\underbrace{u_0^2}_{R(0)}=\E\eps_0^2=\sigma^2\Rightarrow R(0)=\frac{\sigma^2}{1-\beta^2}\]
         \underline{Получаем:} 
-        \[R(\tau)=\beta R(\tau-1),\ R(0)=\frac{\sigma^2}{1-\beta^2}\Rightarrow R(\tau)=\frac{\sigma^2\beta^{|\tau|}}{1-\beta^2},\ \forall\tau\]
+        \[R(\tau)=\beta R(\tau-1),\ R(0)=\frac{\sigma^2}{1-\beta^2}\Rightarrow R(\tau)=\frac{\sigma^2\beta^{\left\lvert \tau\right\rvert }}{1-\beta^2},\ \forall\tau\]
     \end{enumerate}
 \end{proof}
+\subsection{Замечания о последовательностях с сильным перемешиванием (с.п.)}
+\begin{definition}
+    Пусть $\{u_t\},\ t\in\Z$, строго стационарная последовательность. Если
+    \[\alpha(\tau)\defeq\sup_{\substack{A\in M_{-\infty}^0\\ B\in M_{\tau}^{\infty}}}\left\lvert \P(AB)-\P(A)\P(B)\right\rvert \rightarrow0,\ \tau\rightarrow\infty\]
+    То $\{u_t\}$ удовлетворяет условию \defin{сильного перемешивания с коэффициентом пер. $\alpha(\tau)$}.
+    Здесь $M_a^b=\sigma\{u_t,\ a\leq t\leq b\}$
+\end{definition}
+\begin{examples}
+    \begin{enumerate}
+        \item $\{\eps_t\}$ - н.о.р. сл.в. Здесь $\alpha(\tau)=0,\ \tau>0$
+        \item $u_t=\eps_t+\alpha_1\eps_{t-1}+\ldots +\alpha_q\eps_{t-q}$, $\{\eps_t\}$ - н.о.р. Здесь $\alpha(\tau)=0,\ \tau>q$
+        \item $u_t=\beta_1u_{t-1}+\ldots+\beta_qu_{t-p}+\eps_t$, $\{\eps_t\}$ - н.о.р., $\eps_1$ имеет Лебегову пл. в.,
+        $\E\eps_1=0, \E\eps_1^2<\infty$
+        Mokkadem (1988): стр. стац. реш. $\{u_t\}$ удовлетворяет усл. с.п. с $\alpha(\tau)\leq c\lambda^\tau,\ 0<\lambda<1$
+    \end{enumerate}
+\end{examples}
+\begin{task}
+    Если $\{u_t\}$ удовлетворяет условию сильного перемешивания с коэффициентом $\alpha(\tau)$,
+    а $\eta_t=f(u_t,u_{t-1},\ldots,u_{t-k})$, то $\{\eta_t\}$ уд. усл. с.п. с $\alpha_\eta(\tau)\leq\alpha(\tau-k),\ \tau>k$
+\end{task}
+\begin{theorem*}[Закон больших чисел (З.Б.Ч.)]
+    Если $\{u_t\},\ t\in\Z$, строго стац. посл. с с.п., $\E\left\lvert u_1\right\rvert <\infty$, то
+    \[\frac{1}{n}\sum_{t=1}^nu_t\underset{n\rightarrow\infty}{\xrightarrow{\text{п.н.}}}\E u_1\]
+\end{theorem*}
+\begin{theorem*}[Центральная предельная теорема (Ц.П.Т.)]
+    Пусть $\{u_t\},\ t\in\Z$, стр. стац. посл. с с.п., $\E u_1=0,\ \E\left\lvert u_1\right\rvert ^{2+\delta}<\infty$ при некотором $\delta>0$.
+    Пусть $\sum_{\tau\geq1}(\alpha(\tau))^{\frac{2}{2+\delta}}<\infty$. Тогда
+    \begin{enumerate}
+        \item Ряд $\Delta\defeq\E u_0^2+2\sum_{\tau\geq1}\E u_0u_\tau$ сходится абсолютно
+        \item Если $\Delta>0$, то $\frac{1}{\sqrt{n}}\sum_{t=1}^nu_t\xrightarrow{d}N(0,\Delta^2)$
+    \end{enumerate}
+\end{theorem*}
+\begin{corollary}
+    Если $\{u_t\}$ уд. с.п., $\E u_1=m,\ \E\left\lvert u_1-m\right\rvert ^{2+\delta}<\infty,\ \sum_{\tau\geq1}(\alpha(\tau))^{\frac{2}{2+\delta}}<\infty,\ \overline{\Delta}^2=\D u_t+2\sum_{t\geq1}R(\tau)$,
+    то при  $\widetilde{\Delta}>0$
+    \[\sup_{x}\left\lvert \P(\sqrt{n}(\overline{u}-m)\leq x)-\Phi\left(\frac{x}{\widetilde{\Delta}}\right)\right\rvert \underset{n\rightarrow\infty}{\rightarrow}0\]
+\end{corollary}
+
+\newpage
+Мы рассматриваем $AR(1)$ модель.
+\begin{equation} \label{eq::new_ar_equation}
+    u_t=\beta u_{t-1}+\eps_t,\ t\in\Z
+\end{equation}
+в которой $\{\eps_t\}$ - н.о.р. сл.в., $\E\eps_1=0,\ 0<\sigma^2=\E\eps_1^2<\infty,\ \left\lvert \beta\right\rvert <1$.
+Пусть функция распределения $\eps_1$ есть $G(x),\ g(x)=G'(x)$, $G(x)$ и $g(x)$ неизвестны.
+Пусть наблюдения $u_0,\ldots,u_n$ - выборка из стационарного решения $AR(1)$ уравнения.
+Мы берем оценкой неизвестного парметра $\beta$ о.н.к., которая получается решением задачи
+\[\sum_{t=1}^n(u_t-\theta u_{t-1})^2\rightarrow\min_{\theta}\]
+Эту оценку обозначим $\widehat{\beta}_{n,LS}$, очевидно,
+\[\widehat{\beta}_{n,LS}=\frac{\sum_{t=1}^nu_{t-1}u_t}{\sum_{t=1}^nu_{t-1}^2}\]
+Наша ближайшая цель - доказать теорему \ref{th::beta_ls_d_conv_ar},
+
+\underline{Вот что нам известно и что будем использовать}
+\begin{enumerate}
+    \item В силу доказанной теоремы \ref{th::single_stat_solution_ar} стационарное
+    решение уравнения \eqref{eq::new_ar_equation} при $\left\lvert \beta\right\rvert <1,\ \E\eps_1=0,\ 0<\E\eps^2_1=\sigma^2<\infty$
+    имеет вид
+    \begin{equation}\label{eq::new_ar_equation_solution}
+        u_t=\sum_{j\geq0}\beta^j\eps_{t-j},\text{ ряд с.к. сход.}
+    \end{equation}
+    Последовательность $\{u_t\},\ t\in\Z$, и \eqref{eq::new_ar_equation_solution}
+    является строго стационарной, а также стационарной в широком смысле
+    \[\E u_t=0,\ R(\tau)=cov(u_t,u_{t+\tau})=\frac{\sigma^2\beta^{\left\lvert \tau\right\rvert }}{1-\beta^2},\ \tau\in\Z\]
+    Поскольку $u_{t-1} = u_{t-1}(\eps_{t-1},\eps_{t-2},\ldots)$, сл.в. $\eps_t$ не зависит от $\{u_{t-1},u_{t-2},\ldots\}$
+    \item Строго стационарная последовательность \eqref{eq::new_ar_equation_solution} удовлетворяет
+    условию сильного перемешивания с коэффициентом перемешивания $\alpha(\tau)\leq c\lambda^{\tau},\ 0<\lambda<1$,
+    если $\eps_1$ имеет плотность вероятности $g(x)$.
+    \item З.Б.Ч. для посл. с с.п.
+    \item Ц.П.Т. для посл. с с.п.
+    \item Mokkadem (1988): Если $\{u_t\}$ удовлетворяет условию сильного перемешивания с коэффициентом $\alpha(\tau)$,
+    а $\eta_t=f(u_t,u_{t-1},\ldots,u_{t-k})$, то $\{\eta_t\}$ уд. усл. с.п. с $\alpha_\eta(\tau)\leq\alpha(\tau-k),\ \tau>k$
+\end{enumerate}
+
+\newpage
+\begin{proof}[Доказательство теоремы \ref{th::beta_ls_d_conv_ar}]
+    Предположим дополнительно, что $\E\left\lvert \eps_1\right\rvert ^{2+\delta}<\infty$ при некотором $\delta>0$.
+    Пусть еще сущесвтует плотность вероятности $\eps_1\sim g(x)$ по мере Лебега.
+    \begin{enumerate}
+        \item Покажем, что ряд \eqref{eq::new_ar_equation_solution} сходится не только в $L^2$ (с.к.),
+        но и в $L^{2+\delta}$, и, значит, $\E\left\lvert u_1\right\rvert ^{2+\delta}<\infty$
+
+        \underline{Справедливо неравенство Миньковского}:
+        если $\E\left\lvert \xi\right\rvert ^{2+\delta}<\infty,\ \E\left\lvert \eta\right\rvert ^{2+\delta}<\infty$ при $\delta>0$,  то
+        \[\{\E\left\lvert \xi+\eta\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}\leq\{\E\left\lvert \xi\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}+\{\E\left\lvert \eta\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}\]
+        Рассмотрим частную сумму $S_n\defeq\sum_{j=0}^n\beta^j\eps_{t-j},\ l\defeq\min(m,n)$, $k\defeq\max(m,n)$, 
+        \[\{\E\left\lvert S_n-S_m\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}=\{\E\left\lvert \sum_{j=l+1}^{k}\beta^j\eps_{t-j}\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}\leq\]
+        \[\leq\sum_{j=l+1}^k\{\E\left\lvert \beta^j\eps_{t-j}\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}=\E\{\left\lvert \eps_1\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}\sum_{j=l+1}^k\left\lvert \beta\right\rvert ^j\xrightarrow[\left\lvert \beta\right\rvert <1,\ l,k\rightarrow\infty]{} 0\]
+        Значит, последовательность $\{S_n\}$ частных сумм фундаментальна, и ряд $u_t=\sum_{j\geq0}\beta^j\eps_{t-j}$ сходится в $L^{2+\delta},\ \E\left\lvert u_1\right\rvert ^{2+\delta}<\infty$
+        
+        \item 
+        \[\widehat{\beta}_{n,LS}=\frac{\sum_{t=1}^nu_{t-1}u_t}{\sum_{t=1}^nu_{t-1}^2}\overset{\text{п.н.}}{=}\beta+\frac{\sum_{t=1}^nu_{t-1}\eps_t}{\sum_{t=1}^nu_{t-1}^2}\]
+        \[\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)=\frac{\frac{1}{\sqrt{n}}\sum_{t=1}^nu_{t-1}\eps_t}{\frac{1}{n}\sum_{t=1}^nu_{t-1}^2}\]
+
+        \item В силу результатов Mokkadem (1988) посл. $\{u_t\}$ удовлетворяет условию сильного перемешивания с коэффициентом $\alpha(\tau)\leq c\lambda^\tau,\ 0<\lambda<1$.
+        Последовательность $\{\eps_t u_{t-1}=(u_t-\beta u_{t-1})u_{t-1}\}$ тоже удовлетворяет условию сильного перемешивания с эксп. убывающим коэфф. 
+        $\alpha'(\tau)\leq c'\lambda^\tau$,
+        \[\sum_{\tau\geq1}(\alpha'(\tau))^{\frac{\delta}{2+\delta}}\leq\sum_{\tau\geq1}(c'\lambda^\tau)^{\frac{\delta}{2+\delta}}=\frac{(c'\lambda)^{\frac{\delta}{2+\delta}}}{1-\lambda^{\frac{\delta}{2+\delta}}}<\infty\]
+        \[\E\eps_t u_{t-1}=\E\eps_t\E u_{t-1}=0;\ \E\left\lvert \eps_t u_{t-1}\right\rvert ^{2+\delta}=\E\left\lvert \eps_1\right\rvert ^{2+\delta}\E\left\lvert u_1\right\rvert ^{2+\delta}<\infty\]
+        В силу Ц.П.Т. для посл. с с.п.
+        \[\frac{1}{\sqrt{n}}\sum_{t=1}^n\eps_t u_{t-1}\xrightarrow{d}N(0,\Delta^2),\text{ где }\Delta^2=\E(\eps_1 u_0)^2+\underbrace{2\sum_{\tau\geq1}\E(\eps_1 u_0\eps_{1+\tau}u_{\tau})}_{0}=\E\eps_1^2\E u_0^2\]
+        
+        \item
+        \[\frac{1}{n}\sum_{t=1}^nu_{t-1}^2\xrightarrow{\text{п.н.}}\E u_0^2\text{ в силу З.Б.Ч. для посл с с.п.}\]
+
+        \item Значит
+        \[\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)\xrightarrow{d}\frac{1}{\E u_0^2}N(0,\E\eps_1^2\E u_0^2)=N\left(0,\frac{\E\eps_1^2\E u_0^2}{(\E u_0^2)^2}\right)=N\left(0,\frac{\E\eps_1^2}{\E u_0^2}\right)=N(0,1-\beta^2)\]
+    \end{enumerate}
+\end{proof}
+
+\underline{Вот два важных вопроса:}
+\begin{enumerate}
+    \item Как построить непараметрические оценки, асимптотически гауссовские, и с меньшей ас. дисперсией, чем у о.н.к?
+    \item Будет ли о.н.к. $\widehat{\beta}_{n,LS}$ $B$-робастна?
+\end{enumerate}
+
 \end{document}
