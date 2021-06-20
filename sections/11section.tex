@@ -138,58 +138,55 @@ $\mu_\xi\in M_\xi$;
                 \end{cases}
             \end{equation}
             Справедливость формулы \eqref{def::sample_median} легко понять из следующих рисунков:
-            % TODO
-            \ifdraft
-                \begin{figure}[h!]
-                    \centering
-                    \begin{gnuplot}[scale=0.6]
-                        set xlabel '$n=1$'
-                        set border 0
-                        set xzeroaxis
-                        set yzeroaxis
-                        set xrange [-0.2:3]
-                        set yrange [-1.5:1.5]
-                        set ytics (0, 1, -1)
-                        unset xtics
-    
-                        set arrow from -0.2,1 to 1,1
-                        set arrow from 3,-1 to 1,-1
-    
-                        set label at 1,0 "$y_{(1)}$" point pointtype 7 pointsize 2 offset -1,-1.3
-    
-                        set label at 2,1 "$\\widehat{m}_1^y$"
-                        set arrow from 1.9,0.9 to 1.1,0.1
-    
-                        plot 0 notitle
-                    \end{gnuplot}
-                    \begin{gnuplot}[terminal=epslatex,scale=0.6]
-                        set xlabel '$n=2$'
-                        set border 0
-                        set xzeroaxis ls -1
-                        set yzeroaxis ls -1
-                        set xrange [-0.2:3]
-                        set yrange [-2.5:2.5]
-                        set ytics (0, 1, -1, 2, -2)
-                        unset xtics
-    
-                        set arrow from -0.2,2 to 1,2
-                        set arrow from 3,-2 to 2,-2
-                        set arrow from 1,0 to 2,0 heads
-    
-                        set label at 1,1 "" point pointtype 7 pointsize 1
-                        set label at 2,-1 "" point pointtype 7 pointsize 1
-    
-                        set label at 1,0 "$y_{(1)}$" offset -1,-1.3
-                        set label at 2,0 "$y_{(2)}$" offset -1,-1.3
-    
-                        set label at 2,1 "$\\widehat{m}_2^y$"
-                        set arrow from 1.96,0.9 to 1.6,0.1
-                        set label at 1.5,0 "X"
-    
-                        plot 0 notitle ls -1
-                    \end{gnuplot}
-                \end{figure}
-            \fi
+            \begin{figure}[h!]
+                \centering
+                \begin{gnuplot}[scale=0.6]
+                    set xlabel '$n=1$'
+                    set border 0
+                    set xzeroaxis
+                    set yzeroaxis
+                    set xrange [-0.2:3]
+                    set yrange [-1.5:1.5]
+                    set ytics (0, 1, -1)
+                    unset xtics
+
+                    set arrow from -0.2,1 to 1,1
+                    set arrow from 3,-1 to 1,-1
+
+                    set label at 1,0 "$y_{(1)}$" point pointtype 7 pointsize 2 offset -1,-1.3
+
+                    set label at 2,1 "$\\widehat{m}_1^y$"
+                    set arrow from 1.9,0.9 to 1.1,0.1
+
+                    plot 0 notitle
+                \end{gnuplot}
+                \begin{gnuplot}[terminal=epslatex,scale=0.6]
+                    set xlabel '$n=2$'
+                    set border 0
+                    set xzeroaxis ls -1
+                    set yzeroaxis ls -1
+                    set xrange [-0.2:3]
+                    set yrange [-2.5:2.5]
+                    set ytics (0, 1, -1, 2, -2)
+                    unset xtics
+
+                    set arrow from -0.2,2 to 1,2
+                    set arrow from 3,-2 to 2,-2
+                    set arrow from 1,0 to 2,0 heads
+
+                    set label at 1,1 "" point pointtype 7 pointsize 1
+                    set label at 2,-1 "" point pointtype 7 pointsize 1
+
+                    set label at 1,0 "$y_{(1)}$" offset -1,-1.3
+                    set label at 2,0 "$y_{(2)}$" offset -1,-1.3
+
+                    set label at 2,1 "$\\widehat{m}_2^y$"
+                    set arrow from 1.96,0.9 to 1.6,0.1
+                    set label at 1.5,0 "X"
+
+                    plot 0 notitle ls -1
+                \end{gnuplot}
+            \end{figure}
 
             Так бывает всегда: при нечетном $n$ решение уравнения \eqref{def::sample_median}
             всегда $\exists!$, это $\widehat{m}_n^y$; при четном $n$ решений целый
@@ -249,36 +246,33 @@ $\mu_\xi\in M_\xi$;
                 \Lambda_M(\gamma,\theta_\gamma^m-\Delta)>0\\
                 \Lambda_M(\gamma,\theta_\gamma^m+\Delta)<0
             \end{cases}$
-            % TODO
-            \ifdraft
-                \begin{figure}[h]
-                    \centering 
-                    \begin{gnuplot}[terminal=epslatex, scale=0.6]
-                        set xlabel '$\theta$'
-                        set border 0
-                        set xrange [-1:4]
-                        set yrange [-0.6:0.6]
-                        set xzeroaxis ls -1
-                        set yzeroaxis ls -1
-                        unset ytics
-                        unset xtics
-                        
-                        f(x) = (-0.4*x+1.6)**(3)-0.5
-                        a = 1
-                        b = 3
-                        f_cropped(x) = (x >= a && x <= b) ? f(x) : 1/0
-    
-                        set arrow from a,0 to a,f(a) nohead dashtype 3
-                        set arrow from b,0 to b,f(b) nohead dashtype 3
-    
-                        set label "$\\theta_\\gamma^m$" at 2.016,0 point pointtype 7 pointsize 1 offset -1,-1.3
-                        set label "$\\theta_\\gamma^m-\\Delta$" at a,0 point pointtype 7 pointsize 1 offset 0,-1
-                        set label "$\\theta_\\gamma^m+\\Delta$" at b,0 point pointtype 7 pointsize 1 offset 0,1
-                        set label "0" at 0,0 offset -2,-1
-                        plot f_cropped(x)  title '$\Lambda_M(\gamma,\theta_\gamma^m-\Delta)$'
-                    \end{gnuplot}
-                \end{figure}
-            \fi
+            \begin{figure}[h]
+                \centering 
+                \begin{gnuplot}[terminal=epslatex, scale=0.6]
+                    set xlabel '$\theta$'
+                    set border 0
+                    set xrange [-1:4]
+                    set yrange [-0.6:0.6]
+                    set xzeroaxis ls -1
+                    set yzeroaxis ls -1
+                    unset ytics
+                    unset xtics
+                    
+                    f(x) = (-0.4*x+1.6)**(3)-0.5
+                    a = 1
+                    b = 3
+                    f_cropped(x) = (x >= a && x <= b) ? f(x) : 1/0
+
+                    set arrow from a,0 to a,f(a) nohead dashtype 3
+                    set arrow from b,0 to b,f(b) nohead dashtype 3
+
+                    set label "$\\theta_\\gamma^m$" at 2.016,0 point pointtype 7 pointsize 1 offset -1,-1.3
+                    set label "$\\theta_\\gamma^m-\\Delta$" at a,0 point pointtype 7 pointsize 1 offset 0,-1
+                    set label "$\\theta_\\gamma^m+\\Delta$" at b,0 point pointtype 7 pointsize 1 offset 0,1
+                    set label "0" at 0,0 offset -2,-1
+                    plot f_cropped(x)  title '$\Lambda_M(\gamma,\theta_\gamma^m-\Delta)$'
+                \end{gnuplot}
+            \end{figure}
             Но 
             \begin{equation} \label{eq::sample_plaus_func_ineq}
                 \begin{cases}

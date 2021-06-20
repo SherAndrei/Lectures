@@ -201,33 +201,30 @@
         \[ = \P_\theta\left(\frac{1}{\sqrt{n}\sigma} \sum_{i=1}^n(X_i - \theta) > \frac{\sqrt{n}(\theta_0 - \theta)}{\sigma} + \xi_{1-\alpha}\right) =
         1 - \Phi\left(\xi_{1-\alpha} + \frac{\sqrt{n}(\theta - \theta_0)}{\sigma}\right)\]
 
-        % TODO
-        \ifdraft
-            \begin{figure}[h]
-                \centering
-                \begin{gnuplot}[terminal=epslatex, scale=0.8]
-                    set xrange [0:4]
-                    set yrange [0:1.5]
-                    set border 1
-                    set yzeroaxis ls -1
-                    set xlabel '$\theta$'
-    
-                    f(x) = atan(x) * 2 / pi
-    
-                    x1 = 0.654
-                    f_cropped(x) = (x >= x1-0.01) ? f(x) : NaN
-    
-                    set xtics ("$\\theta_0$" x1)
-                    set ytics ("$\\alpha$" f(x1), 1)
-    
-                    set arrow from x1,0 to x1,f(x1) nohead dashtype 3 
-                    set arrow from 0,f(x1) to x1,f(x1) nohead dashtype 3
-                    set label "0" at 0,0 offset -2,-1
-                    plot f_cropped(x) title '$w(\theta,S^*_\alpha)$',\
-                         1 linetype 0 notitle
-                \end{gnuplot}
-            \end{figure}
-        \fi
+        \begin{figure}[h]
+            \centering
+            \begin{gnuplot}[terminal=epslatex, scale=0.8]
+                set xrange [0:4]
+                set yrange [0:1.5]
+                set border 1
+                set yzeroaxis ls -1
+                set xlabel '$\theta$'
+
+                f(x) = atan(x) * 2 / pi
+
+                x1 = 0.654
+                f_cropped(x) = (x >= x1-0.01) ? f(x) : NaN
+
+                set xtics ("$\\theta_0$" x1)
+                set ytics ("$\\alpha$" f(x1), 1)
+
+                set arrow from x1,0 to x1,f(x1) nohead dashtype 3 
+                set arrow from 0,f(x1) to x1,f(x1) nohead dashtype 3
+                set label "0" at 0,0 offset -2,-1
+                plot f_cropped(x) title '$w(\theta,S^*_\alpha)$',\
+                        1 linetype 0 notitle
+            \end{gnuplot}
+        \end{figure}
 \end{example}
 
 \subsection*{О связи между доверительным оцениванием и проверкой гипотез}
@@ -279,27 +276,24 @@
     \[=1-\P\left(-\xi_{1-\alpha/2} + \frac{\sqrt{n}(\theta_0-\theta)}{\sigma} < \frac{\sqrt{n}(\overline{X}-\theta)}{\sigma} < \xi_{1-\alpha}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right)=\]
     \[=1-\left[\Phi\left(\xi_{1-\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right) - \Phi\left(-\xi_{1-\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right)\right] = \]
     \[=\left[\Phi\left(\xi_{\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right) + \Phi\left(\xi_{\alpha/2}+\frac{\sqrt{n}(\theta-\theta_0)}{\sigma}\right)\right]\]
-    % TODO
-    \ifdraft
-        \begin{figure}[h]
-            \centering
-            \begin{gnuplot}[scale=0.5]
-                set xlabel '$\theta$'
-                set border 1
-                set yzeroaxis ls 1
-                set xrange [-1:4]
-                set yrange [0:2]
-    
-                f(x) = 1 - (exp(-3*(x-1)**2))/2
-    
-                set xtics (0, "$\\theta_0$" 1)
-                set ytics (1, "$\\alpha$" f(1))
-                
-                plot f(x) title '$W(\theta)$', \
-                    1 linetype 4 notitle
-            \end{gnuplot}
-        \end{figure}
-    \fi
+    \begin{figure}[h]
+        \centering
+        \begin{gnuplot}[scale=0.5]
+            set xlabel '$\theta$'
+            set border 1
+            set yzeroaxis ls 1
+            set xrange [-1:4]
+            set yrange [0:2]
+
+            f(x) = 1 - (exp(-3*(x-1)**2))/2
+
+            set xtics (0, "$\\theta_0$" 1)
+            set ytics (1, "$\\alpha$" f(1))
+            
+            plot f(x) title '$W(\theta)$', \
+                1 linetype 4 notitle
+        \end{gnuplot}
+    \end{figure}
     При \(n\rightarrow\infty\ W(\theta)\rightarrow 1\ \forall\theta\neq\theta_0\).
     То есть \(S_\alpha(\theta_0)\) состоятелен против любой фиксированной альтернативы.
 \end{example}
@@ -765,33 +759,30 @@ $\P(H_0\vert H_1) = \P(\chi_n^2<\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow 0$
     Если $F_0\not\equiv F_1$, но $p_j=p_j^\circ\ \forall j$,
     то $\P(H_0\vert H_1)=\P(H_0\vert H_0)\rightarrow1-\alpha\neq0$.
     Например:
-    % TODO
-    \ifdraft
-        \begin{figure}[h!]
-            \centering
-            \begin{gnuplot}[terminal=epslatex, scale=0.5]
-                set xrange [-2:4]
-                set yrange [0.4:3]
-                set border 1
-                set yzeroaxis linetype -1
-                set xlabel '$m=2$'
-                unset ytics
-    
-                set xtics (0)
-    
-                f(x) = 0.5+exp(x)
-    
-                set arrow from -2,1.5 to 0,1.5 heads
-                set label "$\\Delta_1$" at -1, 1.65
-    
-                set arrow from 0,1.5 to 0.916291,1.5 heads
-                set label "$\\Delta_2$" at 0.45814, 1.33
-    
-                plot f(x) ls 7 title '$F_0$', \
-                     f(2*x) ls 1 title '$F_1$'
-            \end{gnuplot}
-        \end{figure}
-    \fi
+    \begin{figure}[h!]
+        \centering
+        \begin{gnuplot}[terminal=epslatex, scale=0.5]
+            set xrange [-2:4]
+            set yrange [0.4:3]
+            set border 1
+            set yzeroaxis linetype -1
+            set xlabel '$m=2$'
+            unset ytics
+
+            set xtics (0)
+
+            f(x) = 0.5+exp(x)
+
+            set arrow from -2,1.5 to 0,1.5 heads
+            set label "$\\Delta_1$" at -1, 1.65
+
+            set arrow from 0,1.5 to 0.916291,1.5 heads
+            set label "$\\Delta_2$" at 0.45814, 1.33
+
+            plot f(x) ls 7 title '$F_0$', \
+                    f(2*x) ls 1 title '$F_1$'
+        \end{gnuplot}
+    \end{figure}
 
     Здесь $\P(X_1\in\Delta_1\vert H_0)=F_0(0)=\P(X_1\in\Delta_1\vert H_1)=F_1(0)$.
     Значит, и $\P(X_1\in\Delta_2\vert H_0)=1-F_0(0)=\P(X_1\in\Delta_1\vert H_1)=1-F_1(0)$.

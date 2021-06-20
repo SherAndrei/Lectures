@@ -239,27 +239,24 @@
 
     При \(\omega\in S_n^a\) функция \(L_n(X, \theta)\) имеет
     локальный максимум \(\widehat{\theta}^a_n\) на интервале \((\theta_0 - a, \theta_0 + a)\)
-    % TODO
-    \ifdraft
-        \begin{figure}[h]
-            \centering 
-            \begin{gnuplot}[terminal=epslatex, scale=0.8]
-                set xlabel '$\theta$'
-                set border 1
-                set xrange [-2:8]
-                set yrange [0:7]
-                set yzeroaxis ls -1
-                unset ytics
-    
-                set xtics ("$\\theta_0-a$" -1, 0, "$\\theta_0$" 3, "$\\widehat{\\theta}^a_n$" 4, "$\\theta_0+a$" 7)
-                set arrow from -1,0 to -1,2 nohead dashtype 3
-                set arrow from 3,0 to 3,4.5 nohead dashtype 3
-                set arrow from 4,0 to 4,6 nohead dashtype 3
-                set arrow from 7,0 to 7,1 nohead dashtype 3
-                plot "data/plaus_func.txt" smooth csplines with lines title '$L_n(X,\theta)$'
-            \end{gnuplot}
-        \end{figure}
-    \fi
+    \begin{figure}[h]
+        \centering 
+        \begin{gnuplot}[terminal=epslatex, scale=0.8]
+            set xlabel '$\theta$'
+            set border 1
+            set xrange [-2:8]
+            set yrange [0:7]
+            set yzeroaxis ls -1
+            unset ytics
+
+            set xtics ("$\\theta_0-a$" -1, 0, "$\\theta_0$" 3, "$\\widehat{\\theta}^a_n$" 4, "$\\theta_0+a$" 7)
+            set arrow from -1,0 to -1,2 nohead dashtype 3
+            set arrow from 3,0 to 3,4.5 nohead dashtype 3
+            set arrow from 4,0 to 4,6 nohead dashtype 3
+            set arrow from 7,0 to 7,1 nohead dashtype 3
+            plot "data/plaus_func.txt" smooth csplines with lines title '$L_n(X,\theta)$'
+        \end{gnuplot}
+    \end{figure}
 
     Значит, \(\frac{\partial}{\partial\theta}L_n(X, \widehat{\theta}_n^a) = 0\).
     Тогда \(\P_{\theta_0}(S_n) \geq \P_{\theta_0}(S_n^a) \rightarrow 1\), так
