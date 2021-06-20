@@ -1,4 +1,7 @@
 \section{Асимптотические оптимальные оценки}
+
+\subsection{Определения слабой сходимости (по распределению), сходимости по вероятности и п.н.,
+теоремы о наследовании сходимости. Лемма Слуцкого.}
     Пусть сл. векторы \(\xi_n, \xi \in \R^K\), и определены на \((\Omega, \mathcal{F}, \P)\).
 Пусть функция распределения \(\xi_n\) есть \(F_n(x)\), хар. ф-ция есть \(\phi_n(t)\), а распределение
 есть \(Q_n\). Для вектора \(\xi\) функцию распределения, хар. ф-цию и распреденеие обозначим \(F(x)\),
@@ -8,14 +11,12 @@
     Функция распределения \(F_n(x)\) сходится к \(F(x)\) при \(n \rightarrow \infty\) в основном
     (пишем \(F_n(x) \Rightarrow F\)), если \(F_n(x) \rightarrow F(x) \ \forall x \in C(F)\)
 \end{definition}
-
 \begin{definition}
     Распределение \(Q_n\) сходится к распределению \(Q\) слабо (пишем \(Q_n \xrightarrow{w} Q\)),
     если \(\forall\) непреревной и ограниченной \(g: \R^K \rightarrow \R^1\)
     \[ \int_{\R^K} g(x)Q_n(dx) \rightarrow \int_{\R^K} g(x)Q(dx)\]
     или, эквивалентно, \(\E g(\xi_n) \rightarrow \E g(\xi)\).
 \end{definition}
-
 \begin{theorem}
     Следующие условия эквивалентны:
     \begin{enumerate}
@@ -26,7 +27,6 @@
     Если выполненое любое из условий \(1 - 3\), будем писать
     \(\xi_n \xrightarrow{d} \xi\) и говорить, что \(\xi_n\) сходится к \(\xi\) по распределению.
 \end{theorem}
-
 \begin{theorem}[О наследовании сходимости] \label{th::inherit_conv}
     Пусть сл. векторы \(\xi_n,\ \xi\in\R^K,\ H:\R^K\rightarrow\R^1\) непрерывная.
     Тогда:
@@ -35,14 +35,14 @@
         \item Если \(\xi_n \xrightarrow{\P} \xi\), то \(H(\xi_n) \xrightarrow{\P} H(\xi)\)
     \end{enumerate}
 \end{theorem}
-
-\subsection{Лемма Слуцкого}
-Пусть \(\xi_n, \xi, \eta_n, a \in \R^1, \xi_n \xrightarrow{d} \xi\), а \(\eta_n \xrightarrow{\P} a\).
-Тогда:
-\begin{enumerate}
-    \item \(\xi_n + \eta_n \xrightarrow{d} \xi + a\)
-    \item \(\xi_n \eta_n \xrightarrow{d} a\xi\)
-\end{enumerate}
+\begin{theorem*}[Лемма Слуцкого]
+    Пусть \(\xi_n, \xi, \eta_n, a \in \R^1, \xi_n \xrightarrow{d} \xi\), а \(\eta_n \xrightarrow{\P} a\).
+    Тогда:
+    \begin{enumerate}
+        \item \(\xi_n + \eta_n \xrightarrow{d} \xi + a\)
+        \item \(\xi_n \eta_n \xrightarrow{d} a\xi\)
+    \end{enumerate}
+\end{theorem*}
 \begin{proof}
     Достаточно показать, что вектор
     \begin{equation} \label{eq::LemmaSlut}
@@ -65,22 +65,20 @@
     т.к. \(\xi_n \xrightarrow{d} \xi\) и \(\phi_n(t) \rightarrow \phi(t)\).
 \end{proof}
 
-Пусть наблюедние \(X \sim  P_{\theta},\ \theta \in \Theta \subseteq \R^{K}\), а \(\widehat{\theta}_n\) - оценка \(\theta\)
-
+\subsection{Состоятельные и асимптотически нормальные оценки. Теорема Бахадура и асимптотически эффективные оценки.}
+Пусть наблюдение \(X \sim  P_{\theta},\ \theta \in \Theta \subseteq \R^{K}\), а \(\widehat{\theta}_n\) - оценка \(\theta\)
 \begin{definition}
     Если \(\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \Sigma(\theta)) \ \forall \theta \in \Theta\)
-    и ковариционная матрица \(0 < \Sigma(\theta) < \infty\), то \(\widehat{\theta}_n\) называется асимптотической нормальной оценкой.
+    и \(0 < \Sigma(\theta) < \infty\), то \(\widehat{\theta}_n\) называется \defin{асимптотически нормальной оценкой}.
 \end{definition}
-
 \begin{definition}
-    Если \(\widehat{\theta}_n \xrightarrow{\P} \theta \ \forall \theta \in \Theta\), то \(\widehat{\theta}_n\) называется состоятельной оценкой.
+    Если \(\widehat{\theta}_n \xrightarrow{\P} \theta \ \forall \theta \in \Theta\), то \(\widehat{\theta}_n\) называется \defin{состоятельной оценкой}.
 \end{definition}
-
 \begin{remark}
     Дальше \(\theta \in \Theta \subseteq \R^1\), то есть \(\theta\) и \(\widehat{\theta}_n\) - скаляры.
 \end{remark}
 
-Если \(\widehat{\theta}_n\) - состоятельная оценка \(\theta\), то при больших и \(\widehat{\theta}_n \approx \theta\) с вероятностью, близкой к единице.
+Если \(\widehat{\theta}_n\) - состоятельная оценка \(\theta\), то при больших \(n\) \(\widehat{\theta}_n \approx \theta\) с вероятностью, близкой к единице.
 
 Если \(\widehat{\theta}_n\) - асимптотическая нормальная оценка \(\theta\) (так как \(\theta\) и \(\widehat{\theta}_n\) скаляры:
 \(\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \sigma^2 < \infty,\ \forall \theta \in \Theta\)), то:
@@ -90,7 +88,7 @@
     \item Скорость сходимости \(\widehat{\theta}_n\) к \(\theta\) есть \(O(\sqrt{n})\)
     \item При больших \(n\) со сл. в. \(\sqrt{n}(\widehat{\theta}_n - \theta)\) можно обращаться (с осторожностью!) как с Гауссовской величиной.
 
-    Например, пусть дисперсия предельного Гауссовского закона \(\sigma^2(\theta)\) будет непреревной ф-цией \(\theta\). Тогда
+    Например, пусть дисперсия предельного Гауссовского закона \(\sigma^2(\theta)\) будет непрерывной ф-цией \(\theta\). Тогда
     \[ \frac{\sqrt{n}(\widehat{\theta}_n - \theta)}{\sigma(\widehat{\theta}_n)} =
     \underbrace{\frac{\sqrt{n}(\widehat{\theta}_n - \theta)}{\sigma(\theta)}}_{\xrightarrow{d} N(0, 1)}
     \underbrace{\frac{\sigma(\theta)}{\sigma(\widehat{\theta}_n)}}_{\xrightarrow{\P} 1} \xrightarrow{d} \eta \sim N(0, 1)\]
@@ -120,7 +118,7 @@
 \(\sqrt{n}(\widehat{\theta}_n - \theta)\) для любой асимптотической Гауссовской оценки \(\widehat{\theta}_n\). Но
 какова самая маленькая асимптотическая дисперсия у \(\sqrt{n}(\widehat{\theta}_n - \theta)\)?
 
-\subsection{Теорема Бахадура}
+\begin{theorem*}[Теорема Бахадура]
 Пусть \(X_1, \ldots, X_n\) - н. о. р. сл. в., \(X_1\) имеет
 плотность вероятности \(f(x, \theta),\ \theta \in \Theta \subseteq \R^1\),
 по мере \(\nu\). Пусть выполнены следующие условия:
@@ -138,6 +136,7 @@
 Тогда, если \(\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta))\),
 то \(\sigma^2(\theta) \geq \frac{1}{i(\theta)}\) всюду за исключением
 множества Лебеговой меры нуль.
+\end{theorem*}
 \begin{remark}
     Если вдобавок \(\sigma^2(\theta)\) и \(i(\theta)\) непрерывны,
     то \(\sigma^2(\theta) \geq \frac{1}{i(\theta)}\) при всех \(\theta \in \Theta\).
@@ -154,7 +153,9 @@
 \end{definition}
 Вопрос: Вообще можно ли найти такую оценку \(\widehat{\theta}_n\)? Да
 
-\newpage
+\subsection{Теорема об экстремальном свойстве правдоподобия как мотивация
+к построению оценок максимального правдоподобия.}
+
 Дальше \(X = (X_1, \ldots, X_n), \ X \sim \P_\theta,\ \theta \in \Theta \subseteq \R^1\).
 \underline{Условие (A)}:
 \begin{enumerate}
@@ -177,8 +178,7 @@
     \(\E\left\lvert g(\xi) \right\rvert  <\infty\). Тогда \(g(\E\xi) \leq \E g(\xi)\). Если \(\xi\)
     не является почти наверное константой и \(g\) строго выпукла, то неравенство строгое.
 \end{lemma}
-\begin{theorem}[Экстремальное свойство правдоподобия]
-    \label{th::extr_plausibility}
+\begin{theorem}[Экстремальное свойство правдоподобия] \label{th::extr_plausibility}
     Пусть выполнено Условие (A). Пусть \(E_{\theta_0} \left\lvert \ln f(X_1, \theta) \right\rvert  < \infty,\ \forall \theta \in \Theta\).
     Тогда
     \[\P_{\theta_0}(p(X, \theta_0) > p(X, \theta)) \rightarrow 1,\ n\rightarrow \infty,\ \theta_0 \neq \theta\]
@@ -211,6 +211,8 @@
 
 Если в \(\forall\theta\in\Theta\) максимум не достигается, то о.м.п. не существует.
 
+\subsection{Теорема о существовании сосотоятельного решения уравнения правдоподобия.}
+
 Если \(\Theta\) - интервал, \(L_n(X, \theta)\) - гладкая по \(\theta\) функция,
 то \(\theta\) удовлетворяет уравнению правдоподобия
 \begin{equation} \label{eq::plausibility}
@@ -224,7 +226,6 @@
     При этом среди всех таких решений есть такой корень \(\widehat{\theta}_n\), что он
     является состоятельнаой оценкой \(\theta_0\)
 \end{theorem}
-
 \begin{proof}
     Пусть \(S_n = \{\omega\}\), при которых уравнение \eqref{eq::plausibility} имеет
     решение для \(\theta\in\Theta\). Тогда теорема \ref{th::consist_plausibility} утверждает:
@@ -241,7 +242,7 @@
     локальный максимум \(\widehat{\theta}^a_n\) на интервале \((\theta_0 - a, \theta_0 + a)\)
     \begin{figure}[h]
         \centering 
-        \begin{gnuplot}[terminal=epslatex, scale=0.8]
+        \begin{gnuplot}[terminal=epslatex, scale=0.6]
             set xlabel '$\theta$'
             set border 1
             set xrange [-2:8]
@@ -260,8 +261,7 @@
 
     Значит, \(\frac{\partial}{\partial\theta}L_n(X, \widehat{\theta}_n^a) = 0\).
     Тогда \(\P_{\theta_0}(S_n) \geq \P_{\theta_0}(S_n^a) \rightarrow 1\), так
-    как \(S_n^a \subseteq S_n\), и пункт 1 доказан.
-
+    как \(S_n^a \subseteq S_n\), и пункт 1 доказан. \\
     \underline{Докажем пункт 2}: \(\forall n\) при \(\omega\in S_n\) может сущестовать целое множество корней
     \(\{\theta^*_n\}\). Выберем в этом множестве корень \(\widehat{\theta}_n\),
     ближайший к \(\theta_0\). Это можно сделать, так как
@@ -272,19 +272,18 @@
     \(\forall \text{ малого } \eps > 0\):
     \begin{equation}
         \label{eq::S_n}
-        \P_{\theta_0}(\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n) \geq
-        \P_{\theta_0}(\left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps, S_n^\eps)
+        \P_{\theta_0}\left(\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n\right) \geq
+        \P_{\theta_0}\left(\left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps, S_n^\eps\right)
     \end{equation}
     Так как $S^\eps_n \subseteq S_n,\
-    (\omega: \left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps) \subseteq
-    (\omega: \left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps)$
+    \left(\omega: \left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps\right) \subseteq
+    \left(\omega: \left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps\right)$
 
-    Но $\P_{\theta_0}(\left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps, S^\eps_n)
+    Но $\P_{\theta_0}\left(\left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps, S^\eps_n\right)
     \underset{\text{т.к. события из } S_n^\eps \text{ лежат в } \left\lvert \widehat{\theta}^\eps_n - \theta_0 \right\rvert  < \eps}{=}
     \P_{\theta_0}(S_n^\eps) \rightarrow 1$, значит в силу \eqref{eq::S_n}
-    \[\P_{\theta_0} (\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n) \rightarrow 1\]
+    \[\P_{\theta_0} \left(\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n\right) \rightarrow 1\]
 \end{proof}
-
 \begin{remark}
     Пусть
     \[\theta^*_n = \begin{cases}
@@ -306,6 +305,7 @@
     правдоподобия}
 \end{remark}
 
+\subsection{Теорема об асимптотической эффективности состоятельного решения уравнения правдоподобия.}
 \begin{theorem}[Об асимптотической эффективности состоятельности решения]
     \label{th::asympt_consist}
     Пусть \(X = (X_1, \ldots, X_n),\ \{X_i\}\) - н.о.р. сл.в., и
@@ -366,7 +366,7 @@
     \(\frac{1}{i(\theta_0)} \xi \sim N(0, \frac{1}{i(\theta_0)})\)
 \end{proof}
 
-\subsection*{Оценки максимального правдоподобия для векторого параметра}
+\subsection{Построение асимпотически эффективной оценки по выборке н. о. р. случайных величин из гауссовского закона.}
 Пусть \(X = (X_1, \ldots, X_n)\) - н.о.р., $X_1 \sim f(x, \theta),\ \theta\in\Theta\subseteq\R^k,\
 \Theta$ - открытое множество
 
@@ -436,4 +436,3 @@
     \end{equation*}
     Но на границах теряется асимптотическая Гауссовость.
 \end{example}
-

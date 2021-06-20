@@ -1,4 +1,6 @@
 \section{Проверка статистических гипотез}
+
+\subsection{Задача проверки параметрических гипотез - основные определения.}
 \(X = (X_1, \ldots, X_n)\) имеет плотность вероятности \(p(X, \theta)\)
 по мере \(\mu,\ \theta\in\Theta\subseteq\R^1\)
 
@@ -8,7 +10,6 @@
     Альтернатива \(H_1:\theta\in\Theta_1\), где
     \(\Theta_1\in\Theta\backslash\Theta_0\)
 \end{definition}
-
 \begin{definition}
     Если \(\Theta_0(\Theta_1)\) состоит из одной точки,
     то гипотеза \(H_0\) (альтернатива \(H_1\)) называется
@@ -34,7 +35,6 @@
     Множество \(S\) называется критическим множеством или критерием,
     \(\overline{S}\) - область принятия гипотезы.
 \end{definition}
-
 \begin{definition}
     \defin{Ошибка 1-го рода} - принять \(H_1\), когда
     верна \(H_0\). Вероятность ошибки 1-го рода $\alpha
@@ -43,7 +43,6 @@
     верна \(H_1\). Вероятность ошибки 2-го рода $\beta
     = \P(H_0 | H_1)$.
 \end{definition}
-
 \begin{definition}
     \defin{Мощность критерия \(S\)} называется функция \(W(S, \theta) = W(\theta)
     \defeq\P_\theta(X\in S)\) (вероятность отвергнуть \(H_0\), когда
@@ -86,24 +85,25 @@
 \[S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0\]
 
 \subsection{Лемма Неймана-Пирсона}
-Пусть для некоторого \(\lambda > 0\) и критерия \(R\)
-(когда \(X\) попадает в \(R\), то \(H_0\) отвергается)
-выполнено:
-\begin{enumerate}
-    \item  \(\P_0(X\in R) \leq \P_0(X\in S(\lambda))\)
+\begin{theorem*}[Лемма Неймана-Пирсона]
+    Пусть для некоторого \(\lambda > 0\) и критерия \(R\)
+    (когда \(X\) попадает в \(R\), то \(H_0\) отвергается)
+    выполнено:
+    \begin{enumerate}
+        \item  \(\P_0(X\in R) \leq \P_0(X\in S(\lambda))\)
 
-    Тогда:
-    \item  \(P_1(X\in R) \leq \P_1(X\in S(\lambda))\)
-    \item  \(P_1(X\in S(\lambda)) \geq \P_0(X\in S(\lambda))\)
-\end{enumerate}
+        Тогда:
+        \item  \(P_1(X\in R) \leq \P_1(X\in S(\lambda))\)
+        \item  \(P_1(X\in S(\lambda)) \geq \P_0(X\in S(\lambda))\)
+    \end{enumerate}
+\end{theorem*}
 \begin{remark}
     \(X\in S(\lambda) \Leftrightarrow \frac{p_1(x)}{p_0(x)} > \lambda\).
     Так как \(p_1(X)\) и \(p_0(X)\) - правдоподобие, то критерий
     называется критерием отношения правдоподобия Неймана-Пирсона.
 \end{remark}
 \begin{remark}
-    Утверждение 3 для \(S(\lambda)\)
-    означает, что
+    Утверждение 3 для \(S(\lambda)\) означает, что
     \[\P(H_1 \left\lvert  H_1) \geq \P(H_1 \right\rvert H_0) \Leftrightarrow W(S(\lambda), \theta_1) \geq W(S(\lambda), \theta_0)\]
     Это свойство называется несмещенностью критерия \(S(\lambda)\)
 \end{remark}
@@ -121,22 +121,22 @@
 
     \underline{Докажем пункт 2}:
     Верно неравенство
-    \begin{equation} \label{eq::LemmaNP::dens}
+    \begin{equation} \label{eq::lem_np_dens}
         I_R(x)[p_1(x) - \lambda p_0(x)] \leq I_S(x)[p_1(x) - \lambda p_0(x)]
     \end{equation}
 
     Действительно, если \((p_1(x) - \lambda p_0(x)) > 0\),
-    то \(I_S(x) = 1\) и \eqref{eq::LemmaNP::dens} очевидно.
+    то \(I_S(x) = 1\) и \eqref{eq::lem_np_dens} очевидно.
 
     Если же \(p_1(x) - \lambda p_0(x) \leq 0\), то правая часть
-    \eqref{eq::LemmaNP::dens} есть ноль, а левая \(\leq\) нуля.
+    \eqref{eq::lem_np_dens} есть ноль, а левая \(\leq\) нуля.
 
-    Итак, \eqref{eq::LemmaNP::dens} верно: интегрируем это неравенство по \(x\in\R^n\):
+    Итак, \eqref{eq::lem_np_dens} верно: интегрируем это неравенство по \(x\in\R^n\):
     \[\E_1I_R(X) - \lambda\E_0I_R(X) \leq \E_1I_S(X) - \lambda\E_0I_S(X)\]
-    \begin{equation} \label{eq::LemmaNP::MO}
+    \begin{equation} \label{eq::lem_np_mean}
         \E_1I_S(X) - \E_1I_R(X) \geq \lambda\underbrace{[\E_0I_S(X) - \E_0I_R(X)]}_{\geq 0 \text{ по условию \eqref{eq::cond_A}}}
     \end{equation}
-    В силу \eqref{eq::cond_A}, \eqref{eq::LemmaNP::MO} и условия \(\lambda > 0\) получаем:
+    В силу \eqref{eq::cond_A}, \eqref{eq::lem_np_mean} и условия \(\lambda > 0\) получаем:
         \[E_1I_S(X) \geq E_1I_\R(X)\]
 
     \underline{Докажем пункт 3}: Пусть \(\lambda \geq 1\).
@@ -153,6 +153,8 @@
     \(\P_1(X\in S) \geq \P_0 (X\in S)\)
 \end{proof}
 
+\subsection{Оптимальная проверка гипотезы о среднем
+гауссовской выборки как пример применения леммы Неймана-Пирсона.}
 \begin{example}
     \(X = (X_1,\ldots, X_n), \{X_i\}\) - н.о.р., \(X_1 \sim N(\theta, \sigma^2)\),
     дисперсия \(\sigma^2\) известна. Построим наиболее мощный критерий
@@ -227,7 +229,9 @@
         \end{figure}
 \end{example}
 
-\subsection*{О связи между доверительным оцениванием и проверкой гипотез}
+\subsection{Теорма о двойственности задач доверительного оценивания
+и проверки гипотез. Пример - проверка гипотезы о среднем гауссовской выборки
+при двухмерной альтернативе.}
 
 \begin{definition}
     Случайное подмножесто \(\Theta^*=\Theta^*(X,\alpha)\subseteq\Theta\)
@@ -276,6 +280,7 @@
     \[=1-\P\left(-\xi_{1-\alpha/2} + \frac{\sqrt{n}(\theta_0-\theta)}{\sigma} < \frac{\sqrt{n}(\overline{X}-\theta)}{\sigma} < \xi_{1-\alpha}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right)=\]
     \[=1-\left[\Phi\left(\xi_{1-\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right) - \Phi\left(-\xi_{1-\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right)\right] = \]
     \[=\left[\Phi\left(\xi_{\alpha/2}+\frac{\sqrt{n}(\theta_0-\theta)}{\sigma}\right) + \Phi\left(\xi_{\alpha/2}+\frac{\sqrt{n}(\theta-\theta_0)}{\sigma}\right)\right]\]
+
     \begin{figure}[h]
         \centering
         \begin{gnuplot}[scale=0.5]
@@ -294,17 +299,20 @@
                 1 linetype 4 notitle
         \end{gnuplot}
     \end{figure}
+
     При \(n\rightarrow\infty\ W(\theta)\rightarrow 1\ \forall\theta\neq\theta_0\).
     То есть \(S_\alpha(\theta_0)\) состоятелен против любой фиксированной альтернативы.
 \end{example}
 
-\subsection{Критерий Фишера (\(F\)-критерий) в Гауссовской линейной регрессии}
+\subsection{Определения нецентральных распределений Стьюдента, \\
+хи-квадрат Пирсона и Фишера.
+Лемма о нецентральном распределении хи-квадрат.}
 \begin{definition}
         Если \(\xi\sim N(0,1),\ \eta_k\sim\chi^2(k)\), \(\xi\) и \(\eta_k\)
         независимы, а константа \(\mu\in\R^1\), то сл.в.
         \[t_k(\mu)\overset{d}{=}\frac{\xi+\mu}{\sqrt{\eta_k/k}}\sim S(k,\mu)\]
         имеет нецентральное распределение Стьюдента с \(k\) степенями свободы
-        и параметром нецентральности \(\mu\)
+        и параметром \\ нецентральности \(\mu\)
 \end{definition}
 \begin{definition}
     Если \(\xi_i\sim N(a_i,1),i=1,\ldots,k\), и \(\{\xi_1,\ldots,\xi_k\}\)
@@ -358,6 +366,9 @@
         Отсюда \(\left\lvert \Sigma^{-1/2}\xi \right\rvert ^2\sim\chi^2(k,\Delta^2)\) с \(\Delta^2=\left\lvert \Sigma^{-1/2}a \right\rvert ^2=a^T\Sigma^{-1}a\)
     \end{enumerate}
 \end{proof}
+
+\subsection{Лемма о стохастической упорядоченности нецентральных распределений Стьюдента,
+хи-квадрат Пирсона и Фишера.}
 \begin{lemma}
     Случайная величина \(t_k(\mu)\) обладает следующим свойством стохастической упорядоченности.
     при \(\mu_2>\mu_1\)
@@ -393,6 +404,7 @@
     \[\mbox{ так как } \E\Phi\left(x\sqrt{\frac{1}{k}\eta_k}-\mu_2\right) < \E\Phi\left(x\sqrt{\frac{1}{k}\eta_k}-\mu_1\right) \mbox{ в силу возрастающей }\Phi(y)\]
 \end{proof}
 
+\subsection{Линейная гауссовская регрессия - доверительный эллипсоид для параметра $\beta=Ac$}
 \underline{Обратимся к линейной гауссовской модели}
 \[X=Zc+\Eps\]
 \[X=(X_1,\ldots, X_n)^T\text{ - наблюдения},\ Z\text{ - \(n\times p\) матрица регрессоров \(p<n\)}\]
@@ -423,6 +435,8 @@
 \[\Theta^*(X, \alpha)=\left\{\beta:(\widehat{\beta}_n-\beta)^TD^{-1}(\widehat{\beta}_n-\beta)<k\widehat{s}^2_nf_{1-\alpha}(k,n-p)\right\} = \]
 \[=\left\{\beta:f_{k,n-p}(X,\beta)<f_{1-\alpha}(k,n-p)\right\}\text{ - \textbf{доверительный эллипсоид}}\]
 
+\subsection{Критерий Фишера для линейной гипотезы $H_0:\beta=\beta_0$ в гауссовской линейной регрессии.
+Его несмещенность и строгая монотонность мощности.}
 Рассмотрим проверку гипотезы
 \underline{$H_0:\beta=\beta_0$ против $H_1:\beta\neq\beta_0$}.
 $H_0$ называют линейной гипотезой, так как $\beta=Ac$ получается
@@ -458,6 +472,7 @@ $f_{k,n-p}(X,\beta_0)$ - статистика $F$-критерия.
     из соотношения \ref{eq::fi_noncentral}
 \end{enumerate}
 
+\subsection{Определение порядка регрессии с помощью критерия Фишера.}
 \begin{example}[Определение порядка регрессии]
     $c_n^T=(\underbrace{c_{(1)n}^T}_{m-\text{вектор}}, \underbrace{c_{(2)n}^T}_{p-m-\text{вектор}}),\ 1\leq m\leq p$ \\
     $\begin{array}{c cc}
@@ -508,6 +523,7 @@ $H_0$ отвергается, если $f_{p-m,n-p}(X,0)>f_{1-\alpha}(p-m,n-m)$,
 \[W(c_{(2)}, S_{\alpha}(0))=\P_{c_{(2), \sigma^2}}(f_{p-m,n-p}(X,0)>f_{1-\alpha}(p-m,n-p))=1-F_{p-m,n-p}(f_{1-\alpha}(p-m,n-p),\Delta^2)\]
 строго возрастает по $\Delta^2$. Параметр нецентральности $\Delta^2$ определен в \ref{fisher::ex::stat}.
 
+\subsection{Проверка однородности двух гауссовских выборок.}
 \begin{example}[Проверка однородности двух выборок]
     $X=(X_1,\ldots,X_m),\ Y=(Y_1,\ldots,Y_n)$ - независимые гауссовские выборки.
     То есть $\{X_i\},\ \{Y_i\}$ - н.о.р., $X_1\sim N(a, \sigma^2),\ Y_1\sim N(b, \sigma^2)$.
@@ -622,7 +638,9 @@ $F$-критерий для $H_0$ имеет вид
     \item Если $\sigma\rightarrow0$ или $\frac{1}{n}+\frac{1}{m}\rightarrow0$, то мощность возрастает
 \end{enumerate}
 \end{example}
-\subsection{Критерий согласия Хи-квадрат Пирсона. Проверка простой гипотезы в схеме Бернулли.}
+
+\subsection{Критерий согласия хи-квадрат Пирсона. Проверка для гипотезы о параметрах полиномиального распределения:
+опредлеление, поведение статистики Пирсона при альтернативах и теорема Пирсона. Проверка гипотезы о виде функции распределения.}
 Пусть проводятся $n$ независимых испытаний, и в каждом испытании возможны
 $m\geq2$ исходов $A_1,\ldots,A_m$ таких, что $A_iA_j=\emptyset,\ i\neq j,\ \sum A_i=\Omega$, тогда
 $\P(A_j)=p_j>0,\ \sum_{j=1}^mp_j=1$. Пусть $\nu=(\nu_1,\ldots,\nu_m)^T$, а $\nu_j$ -
@@ -651,8 +669,9 @@ $\begin{array}{cl}
 \[\chi_n^2\xrightarrow[H_1]{\P}\infty,\ n\rightarrow\infty\]
 Поэтому большие значения $\chi_n^2$ часто свидетельсвтуют о том, что
 стоит отвергнуть $H_0$. Но насколько "большие" значения?
-\subsection{Теорема Пирсона}
+\begin{theorem*}[Теорема Пирсона]
 \[ \chi_n^2\xrightarrow[H_0]{d}\chi^2(m-1),\ n\rightarrow\infty \]
+\end{theorem*}
 \underline{Правило}: Если $\chi_n^2\leq\chi_{1-\alpha}(m-1)$, то принимаем $H_0$,
 иначе принимаем $H_1$.
 \begin{remark*} Тогда
@@ -759,7 +778,8 @@ $\P(H_0\vert H_1) = \P(\chi_n^2<\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow 0$
     Если $F_0\not\equiv F_1$, но $p_j=p_j^\circ\ \forall j$,
     то $\P(H_0\vert H_1)=\P(H_0\vert H_0)\rightarrow1-\alpha\neq0$.
     Например:
-    \begin{figure}[h!]
+
+    \begin{figure}[h]
         \centering
         \begin{gnuplot}[terminal=epslatex, scale=0.5]
             set xrange [-2:4]
@@ -779,8 +799,7 @@ $\P(H_0\vert H_1) = \P(\chi_n^2<\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow 0$
             set arrow from 0,1.5 to 0.916291,1.5 heads
             set label "$\\Delta_2$" at 0.45814, 1.33
 
-            plot f(x) ls 7 title '$F_0$', \
-                    f(2*x) ls 1 title '$F_1$'
+            plot f(x) ls 7 title '$F_0$', f(2*x) ls 1 title '$F_1$'
         \end{gnuplot}
     \end{figure}
 
@@ -788,7 +807,8 @@ $\P(H_0\vert H_1) = \P(\chi_n^2<\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow 0$
     Значит, и $\P(X_1\in\Delta_2\vert H_0)=1-F_0(0)=\P(X_1\in\Delta_1\vert H_1)=1-F_1(0)$.
 \end{remark*}
 \end{example}
-\subsubsection*{Проверка сложной гипотезы в схеме испытаний Бернулли}
+
+\subsection{Проверка сложной гипотезы в схеме испытаний Бернулли. Проверка независимости признаков.}
 Пусть проводится $n$ независимых испытаний, исходы
 $A_1,\ldots,A_m$, $\nu=(\nu_1,\ldots,\nu_m)^T$ - вектор наблюдений.
 Пусть $H_0:\ \P(A_j)=p_j(\theta),\ \theta\in\Theta\in\R^k,\ k<m-1$.
@@ -806,11 +826,14 @@ $A_1,\ldots,A_m$, $\nu=(\nu_1,\ldots,\nu_m)^T$ - вектор наблюдени
 \[L_n(\nu,\theta)=\ln\left(\frac{n!}{\nu_1!\ldots \nu_m!}\right)+\sum_{j=1}^m\nu_j\ln p_j(\theta)\]
 оценки максимального правдоподобия (мультиномиальные):
 \[L_n(\nu,\theta)\rightarrow\max_{\theta\in\Theta}\]
-\subsection{Теорема Фишера}
+\begin{theorem*}[Теорема Фишера]
 Пусть выполнены условия регулярности, $\widehat{\theta}_n$ - мульт. о.м.п. Тогда
 \[ \widehat{\chi}_n^2=\sum_{j=1}^m\frac{(\nu_j-np_j(\widehat{\theta}_n))^2}{np_j(\widehat{\theta}_n)}\xrightarrow[H_0]{d}\chi(m-k-1) \]
+
 \underline{Правило}: Если $\widehat{\chi}_n^2\leq\chi_{1-\alpha}(m-k-1)$, то принимаем $H_0$, иначе принимаем $H_1$.
 Тогда $\P(\overline{H_0}\vert H_0)\rightarrow\alpha$
+
+\end{theorem*}
 \begin{example}[Проверка независимости признаков]
     Пусть объект классифицирован по двум $A$ и $B$,
     $A=\{A_1,\ldots,A_s\},\ B=\{B_1,\ldots,B_r\},\ s>1,\ r>1$.
@@ -831,6 +854,8 @@ $A_1,\ldots,A_m$, $\nu=(\nu_1,\ldots,\nu_m)^T$ - вектор наблюдени
     \underline{Правило}: Если $\widehat{\chi}_n^2>\chi_{1-\alpha}((s-1)(r-1))$,
     то отвергаем $H_0$. Асимптотический уровень теста есть $\alpha$
 \end{example}
+
+\newpage
 \begin{example}[W.H.Gilby. Biometrika, 8,94]
     1725 школьников классифицировали в соответствии с их
     качеством одежды и в соответствии с умственными способностями.
