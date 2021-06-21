@@ -27,17 +27,17 @@
 % for theorems, lemmas and definitions
 %--------------------------------------
 \usepackage{amsthm}
+\usepackage{mdframed}
 
 \counterwithin*{equation}{section}
 
 \newtheorem{definition}{Опр.}
 \counterwithin*{definition}{section}
 
-\newtheorem{theorem}{Теорема}
+\mdtheorem{theorem}{Теорема}
 \counterwithin*{theorem}{section}
-\newtheorem*{theorem*}{Теорема}
 
-\newtheorem{lemma}{Лемма}
+\newmdtheoremenv{lemma}{Лемма}
 \counterwithin*{lemma}{section}
 
 \newtheorem{remark}{Замечание}
@@ -60,7 +60,10 @@
 
 \usepackage[cleanup, subfolder]{gnuplottex}
  
-
+% For hyperlinks
+%--------------------------------------
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
 %--------------------------------------
 
 % for leftbar
@@ -89,6 +92,9 @@
 %--------------------------------------
 
 \includeonly{
+    auxiliary/title_page,
+    auxiliary/annotation,
+    auxiliary/literature,
     sections/09section,
     sections/10section,
     sections/11section,
@@ -98,13 +104,20 @@
 
 \begin{document}
 
-\tableofcontents
+\include{auxiliary/title_page}
 
 \newpage
+
+\include{auxiliary/annotation}
+
+\newpage
+\tableofcontents
 
 \include{sections/09section}
 \include{sections/10section}
 \include{sections/11section}
 \include{sections/12section}
+
+\include{auxiliary/literature}
 
 \end{document}
