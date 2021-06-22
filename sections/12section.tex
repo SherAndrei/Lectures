@@ -144,11 +144,11 @@ $AR(1)$-модель.
 \[H(\beta)=\frac{W^2(1)-1}{2^{3/2}\int_0^1W^2(s)ds}\]
 \begin{theorem}
     Пусть $\{\eps_t\}$-н.о.р. сл.в., $\eps_1\sim N(0,1)$. Тогда
-    \[d_n(\beta)(\widehat{\beta}_{n,ML}-\beta)\xrightarrow{d}\begin{cases}
+    \[d_n(\beta)(\widehat{\beta}_{n,ML}-\beta)\xrightarrow[n\rightarrow\infty]{d}\begin{cases}
         N(0,1),& \left\lvert \beta\right\rvert <1 \\
         H(0,1),& \left\lvert \beta\right\rvert =1 \\
         K(0,1),& \left\lvert \beta\right\rvert >1 
-    \end{cases}, \quad n\rightarrow\infty\]
+    \end{cases}\]
 \end{theorem}
 \begin{proof}
     \[\widehat{\beta}_{n,ML}=\frac{\sum_{t=1}^nu_{t-1}u_t}{\sum_{t=1}^nu_{t-1}^2}=\frac{\sum_{t=1}^nu_{t-1}(\beta u_{t-1}+\eps_t)}{\sum_{t=1}^nu_{t-1}^2}=\beta+\frac{\sum_{t=1}^n\eps_tu_{t-1}}{\sum_{t=1}^nu_{t-1}^2}\]
@@ -157,7 +157,7 @@ $AR(1)$-модель.
     Тогда 
     \[d_n(\beta)(\widehat{\beta}_{n,ML}-\beta)=\frac{M_n}{V_n}\]
     Пусть $f_n(t,s)$ - совместная характеристическая функция $M_n$ и $V_n$.
-    Тогда (см [RAO M.M. Statist, 1978, V.6, pp. 185-190])
+    Тогда (см. [RAO M.M. Statist, 1978, V.6, pp. 185-190])
     \begin{equation}\label{def::mutual_char_func}
         f_n(t,s)\rightarrow f(t,s)=\begin{cases}
             \exp{\left\{is-\frac{t^2}{2}\right\}},& \left\lvert \beta\right\rvert <1 \\
@@ -169,7 +169,7 @@ $AR(1)$-модель.
         функция вектора $(\xi,1)^T$, где $\xi\sim N(0,1)$. Действительно,
         \[\phi(t,s)=\E\exp{\left\{i(t\xi+s)\right\}}=e^{is}\phi_\xi(t)=\exp{\left\{is-\frac{t^2}{2}\right\}}\]
         \begin{theorem*}[О наследовании сходимости]
-            Пусть случайный вектор $S_n\underset{n\rightarrow\infty}{\xrightarrow{d}}S,\ S_n,S\in\R^k,\ H:R^k\rightarrow R^1$ - 
+            Пусть случайный вектор $S_n\underset{n\rightarrow\infty}{\xrightarrow{d}}S,\ S_n,S\in\R^k,\ H:\R^k\rightarrow \R^1$ - 
             борелевская функция, непрерывная на множестве $A$ таком, что $\P(S\in A)=1$. Тогда $H(S_n)\underset{n\rightarrow\infty}{\xrightarrow{d}}H(S)$
         \end{theorem*}
         В силу \eqref{def::mutual_char_func} $(M_n,V_n)^T\xrightarrow{d}(\xi,1)^T$.
@@ -201,7 +201,7 @@ $AR(1)$-модель.
         \[U_n\defeq \left(w_n\left(\frac{1}{n}\right), w_n\left(\frac{2}{n}\right),\ldots,w_n\left(\frac{n}{n}\right)\right)^T\]
         \begin{leftbar}
             Тогда $U_n=\left(\frac{\eps_1}{\sqrt{n}},\frac{\eps_1+\eps_2}{\sqrt{n}},\ldots,\frac{\eps_1+\ldots+\eps_n}{\sqrt{n}}\right)^T$
-            и это есть гауссовский вектор со средним ноль, $cov\left(w_n\left(\frac{i}{n}\right),w_n\left(\frac{j}{n}\right)\right)=\frac{\min(i,j)}{n}$
+            и это есть гауссовский вектор со средним ноль, $\cov\left(w_n\left(\frac{i}{n}\right),w_n\left(\frac{j}{n}\right)\right)=\frac{\min(i,j)}{n}$
         \end{leftbar}
         Действительно,
         \[U_n\begin{pmatrix}
@@ -212,16 +212,16 @@ $AR(1)$-модель.
             \eps_1  \\ \vdots \\ \eps_n
         \end{pmatrix}\]
         Для $i\leq j$
-        \[cov\left(w_n\left(\frac{i}{n}\right),w_n\left(\frac{j}{n}\right)\right)=\E\left(\frac{1}{n}\sum_{t=1}^i\eps_t\times\sum_{k=1}^j\eps_k\right)=\frac{1}{n}\E\left(\sum_{t=1}^i\eps_i\right)^2=\frac{i}{n}=\frac{min(i,j)}{n}\]
+        \[\cov\left(w_n\left(\frac{i}{n}\right),w_n\left(\frac{j}{n}\right)\right)=\E\left(\frac{1}{n}\sum_{t=1}^i\eps_t\times\sum_{k=1}^j\eps_k\right)=\frac{1}{n}\E\left(\sum_{t=1}^i\eps_i\right)^2=\frac{i}{n}=\frac{min(i,j)}{n}\]
         Введем вектор $U\defeq\left(w\left(\frac{1}{n}\right),w\left(\frac{2}{n}\right),\ldots,w\left(\frac{n}{n}\right)\right)^T$,
         где $w(s)$ - стандартный винеровский. Это гауссовский вектор со средним 0,
-        $cov\left(w\left(\frac{i}{n}\right),w\left(\frac{j}{n}\right)\right)=\frac{\min(i,j)}{n}$.
+        $\cov\left(w\left(\frac{i}{n}\right),w\left(\frac{j}{n}\right)\right)=\frac{\min(i,j)}{n}$.
         Значит,
         \begin{equation}\label{eq::U_almosteq}
             U_n\overset{d}{=}U \Rightarrow \phi(U_n)\overset{d}{=}\phi(u),\text{ где $\phi$ - $\forall$ бор.}
         \end{equation}
         \begin{leftbar}
-            Действительно, пусть $\xi=\overset{d}{=}\eta,\ \xi,\eta\in\R^k$. Тогда $f(\xi)=\overset{d}{=}f(\eta)$,
+            Действительно, пусть $\xi\overset{d}{=}\eta,\ \xi,\eta\in\R^k$. Тогда $f(\xi)\overset{d}{=}f(\eta)$,
             так как $\P(f(\xi)\in A)=\P(\xi\in f^{-1}(A))=\P(\eta\in f^{-1}(A))=\P(f(\eta)\in A)$
         \end{leftbar}
         Пусть
@@ -262,7 +262,7 @@ $AR(1)$-модель.
         \item \underline{$\left\lvert \beta\right\rvert <1$}: Тогда $(M_n,V_n)^T\xrightarrow{d}(\xi,1)^T$, значит 
         \[\frac{M_n}{\sqrt{V_n}}\xrightarrow{d}\frac{\xi}{\sqrt{1}}\sim N(0,1)\]
         \item \underline{$\left\lvert \beta\right\rvert >1$}: Тогда $(M_n,V_n)^T\xrightarrow{d}(\xi\eta,\eta^2)^T$, значит 
-        \[\frac{M_n}{\sqrt{V_n}}\xrightarrow{d}\frac{\xi\eta}{\sqrt{\eta^2}}=\xi\cdot sgn\eta\sim N(0,1)\]
+        \[\frac{M_n}{\sqrt{V_n}}\xrightarrow{d}\frac{\xi\eta}{\sqrt{\eta^2}}=\xi\cdot \sgn \eta\sim N(0,1)\]
         \item \underline{$\left\lvert \beta\right\rvert =1$}: Тогда $(M_n,V_n)^T\xrightarrow{d}\left(\frac{1}{\sqrt{2}}(w^2(1)-1),2\int_0^1w^2(s)ds\right)^T$, значит 
         \[\frac{M_n}{\sqrt{V_n}}\xrightarrow{d}\frac{w^2(1)-1}{2\sqrt{\int_0^1w^2(s)ds}}\]
     \end{enumerate}
@@ -296,6 +296,7 @@ $AR(1)$-модель.
     \end{enumerate}
 \end{remark*}
 
+\newpage
 \subsection{Теорема об $AR(1)$ модели с $|\beta|<1$ - существование и свойства стационарного решения.}
 Рассмотрим стационарное $AR(1)$ уравнение
 \begin{equation}\label{eq::ar_equation}
@@ -315,7 +316,7 @@ $AR(1)$-модель.
     \end{equation}
     Решение \eqref{eq::ar_equation_solution} является также стационарным в широком смысле,
     причем
-    \[\E u_t=0,\ R(\tau)=cov(u_t,u_{t+\tau})=\frac{\sigma^2\beta^{\left\lvert \tau\right\rvert }}{1-\beta^2}\]
+    \[\E u_t=0,\ R(\tau)=\cov(u_t,u_{t+\tau})=\frac{\sigma^2\beta^{\left\lvert \tau\right\rvert }}{1-\beta^2}\]
 \end{theorem}
 \begin{proof}
     \begin{enumerate}
@@ -324,7 +325,7 @@ $AR(1)$-модель.
         Ряд с.к. сходится, если для некоторой случайной величины $S_t,\ \E S_t^2<\infty$, существует
         с.к. предел
         \[\lim_{n\rightarrow\infty}u_t^{(n)}=S_t,\ S_t-\text{ есть сумма ряда}\] 
-        То есть $\E\left\lvert u_t^{(n)}-S_t\right\rvert ^2\rightarrow0,\ n\rightarrow\infty$. Известно (по критерию Коши),
+        То есть $\E\left\lvert u_t^{(n)}-S_t\right\rvert ^2\xrightarrow[n\rightarrow\infty]{}0$. Известно (по критерию Коши),
         что эта с.к. сходимость с.к. фундаментальности, то есть 
         \[\lim_{n,m\rightarrow\infty}\E\left\lvert u_t^{(n)}-u_t^{(m)}\right\rvert ^2=0\]
         Пусть для краткости $l\defeq\min(m,n)$, $k\defeq\max(m,n)$. Тогда
@@ -334,8 +335,8 @@ $AR(1)$-модель.
         Значит, $\{u_t\}$ из \eqref{eq::ar_equation_solution} есть решение \eqref{eq::ar_equation}.
         
         \item \underline{Строгая стационарность} \\
-        Пусть $U(\tau)=(u_{t_1+\tau},\ldots,u_{t_1+\tau})$. Надо показать, что $U(\tau)\overset{d}{=}U(0)$. \\
-        Пусть $U_n(\tau)\defeq(u^{(n)}_{t_1+\tau},\ldots,u^{(n)}_{t_1+\tau})$
+        Пусть $U(\tau)=(u_{t_1+\tau},\ldots,u_{t_k+\tau})$. Надо показать, что $U(\tau)\overset{d}{=}U(0)$. \\
+        Пусть $U_n(\tau)\defeq(u^{(n)}_{t_1+\tau},\ldots,u^{(n)}_{t_k+\tau})$
         \begin{task}
             Если $\{\xi_t\}$ - строго стац. посл., а $\eta_t=f(\xi_t,\xi_{t-1},\ldots,\xi_{t-k})$, ($f$ - бор.),
             то $\{\eta_t\}$ - строго стац. посл.
@@ -354,7 +355,7 @@ $AR(1)$-модель.
         Имеем
         \[\P(\left\lvert \beta^k\widetilde{u}_{t-k}\right\rvert >\delta)=\P(\left\lvert \beta^k\widetilde{u}_0\right\rvert >\delta)\underset{\left\lvert \beta\right\rvert <1}{\rightarrow}0,\ k\rightarrow\infty\]
         Знаем, что $u_t^{(k)}\xrightarrow{\text{с.к.}}u_t=\sum_{j\geq0}\beta^j\eps_{t-j},\ \E u_t^2<\infty$.
-        Значит, $u_t^{(k)}+\beta^k\widetilde{u}_{t-k}\xrightarrow{\P}u_t,\ \rightarrow\infty$.
+        Значит, $u_t^{(k)}+\beta^k\widetilde{u}_{t-k}\xrightarrow[k\rightarrow\infty]{\P}u_t$.
         Следовательно, п.н.
         \[\widetilde{u}_t=p\lim_{k\rightarrow\infty}(u_t^{(k)}+\beta^k\widetilde{u}_{t-k})=u_t=\sum_{j\geq0}\beta^j\eps_{t-j}\]
         \item \underline{Стационарность в широком смысле} \\
@@ -437,7 +438,7 @@ $AR(1)$-модель.
     \end{equation}
     Последовательность $\{u_t\},\ t\in\Z$, и \eqref{eq::new_ar_equation_solution}
     является строго стационарной, а также стационарной в широком смысле
-    \[\E u_t=0,\ R(\tau)=cov(u_t,u_{t+\tau})=\frac{\sigma^2\beta^{\left\lvert \tau\right\rvert }}{1-\beta^2},\ \tau\in\Z\]
+    \[\E u_t=0,\ R(\tau)=\cov(u_t,u_{t+\tau})=\frac{\sigma^2\beta^{\left\lvert \tau\right\rvert }}{1-\beta^2},\ \tau\in\Z\]
     Поскольку $u_{t-1} = u_{t-1}(\eps_{t-1},\eps_{t-2},\ldots)$, сл.в. $\eps_t$ не зависит от $\{u_{t-1},u_{t-2},\ldots\}$
     \item Строго стационарная последовательность \eqref{eq::new_ar_equation_solution} удовлетворяет
     условию сильного перемешивания с коэффициентом перемешивания $\alpha(\tau)\leq c\lambda^{\tau},\ 0<\lambda<1$,
@@ -451,17 +452,17 @@ $AR(1)$-модель.
 \newpage
 \begin{proof}[Доказательство теоремы \ref{th::beta_ls_d_conv_ar}]
     Предположим дополнительно, что $\E\left\lvert \eps_1\right\rvert ^{2+\delta}<\infty$ при некотором $\delta>0$.
-    Пусть еще сущесвтует плотность вероятности $\eps_1\sim g(x)$ по мере Лебега.
+    Пусть еще существует плотность вероятности $\eps_1\sim g(x)$ по мере Лебега.
     \begin{enumerate}
         \item Покажем, что ряд \eqref{eq::new_ar_equation_solution} сходится не только в $L^2$ (с.к.),
         но и в $L^{2+\delta}$, и, значит, $\E\left\lvert u_1\right\rvert ^{2+\delta}<\infty$
 
-        \underline{Справедливо неравенство Миньковского}:
+        \underline{Справедливо неравенство Минковского}:
         если $\E\left\lvert \xi\right\rvert ^{2+\delta}<\infty,\ \E\left\lvert \eta\right\rvert ^{2+\delta}<\infty$ при $\delta>0$,  то
         \[\{\E\left\lvert \xi+\eta\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}\leq\{\E\left\lvert \xi\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}+\{\E\left\lvert \eta\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}\]
         Рассмотрим частную сумму $S_n\defeq\sum_{j=0}^n\beta^j\eps_{t-j},\ l\defeq\min(m,n)$, $k\defeq\max(m,n)$, 
-        \[\{\E\left\lvert S_n-S_m\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}=\{\E\left\lvert \sum_{j=l+1}^{k}\beta^j\eps_{t-j}\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}\leq\]
-        \[\leq\sum_{j=l+1}^k\{\E\left\lvert \beta^j\eps_{t-j}\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}=\E\{\left\lvert \eps_1\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}\sum_{j=l+1}^k\left\lvert \beta\right\rvert ^j\xrightarrow[\left\lvert \beta\right\rvert <1,\ l,k\rightarrow\infty]{} 0\]
+        \[\{\E\left\lvert S_n-S_m\right\rvert ^{2+\delta}\}^{\frac{1}{2+\delta}}=\left\{\E\left\lvert \sum_{j=l+1}^{k}\beta^j\eps_{t-j}\right\rvert ^{2+\delta}\right\}^{\frac{1}{2+\delta}}\leq\]
+        \[\leq\sum_{j=l+1}^k\left\{\E\left\lvert \beta^j\eps_{t-j}\right\rvert ^{2+\delta}\right\}^{\frac{1}{2+\delta}}=\E\left\{\left\lvert \eps_1\right\rvert ^{2+\delta}\right\}^{\frac{1}{2+\delta}}\sum_{j=l+1}^k\left\lvert \beta\right\rvert ^j\xrightarrow[\left\lvert \beta\right\rvert <1,\ l,k\rightarrow\infty]{} 0\]
         Значит, последовательность $\{S_n\}$ частных сумм фундаментальна, и ряд $u_t=\sum_{j\geq0}\beta^j\eps_{t-j}$ сходится в $L^{2+\delta},\ \E\left\lvert u_1\right\rvert ^{2+\delta}<\infty$
         
         \item 
@@ -494,7 +495,7 @@ $AR(1)$-модель.
 В силу \eqref{eq::ls_frac_repr} 
 \[\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\widehat{\beta}_{n,LS}^2}}=\underbrace{\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\beta^2}}}_{\xrightarrow{d}N(0,1)}\underbrace{\frac{\sqrt{1-\beta^2}}{\sqrt{1-\widehat{\beta}_{n,LS}^2}}}_{\xrightarrow{\P}1}\xrightarrow[n\rightarrow\infty]{d}N(0,1)\text{ по лемме Слуцкого}\]
 Пусть $\xi_{1-\alpha/2}$ - квантиль уровня $1-\alpha/2$ ф.р. $\Phi(x)\sim N(0,1)$. Тогда
-\[\P(\left\lvert \frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\widehat{\beta}_{n,LS}^2}}\right\rvert <\xi_{1-\alpha/2})\xrightarrow[n\rightarrow\infty]{} 1-\alpha\]
+\[\P\left(\left\lvert \frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\widehat{\beta}_{n,LS}^2}}\right\rvert <\xi_{1-\alpha/2}\right)\xrightarrow[n\rightarrow\infty]{} 1-\alpha\]
 То есть при больших $n$ примерно с вероятностью $1-\alpha$
 \[\widehat{\beta}_{n,LS}-\frac{\sqrt{1-\widehat{\beta}_{n,LS}^2}}{\sqrt{n}}\xi_{1-\alpha/2}<\beta<\widehat{\beta}_{n,LS}+\frac{\sqrt{1-\widehat{\beta}_{n,LS}^2}}{\sqrt{n}}\xi_{1-\alpha/2}\]
 Получили доверительный интервал для $\beta$ ас. уровня $1-\alpha$.
@@ -502,9 +503,9 @@ $AR(1)$-модель.
 \subsubsection*{Проверка гипотез}
 Проверим гипотезу $H_0:\beta=\beta_0$ против альтернатив $H_1:\beta\neq\beta_0$.
 Критическое множество (критерий):
-\[S_\alpha=\left\{u_0,\ldots,u_n: |\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta_0)}{\sqrt{1-\beta_0^2}}>\xi_{1-\alpha/2}\right\}\].
+\[S_\alpha=\left\{u_0,\ldots,u_n: \left\lvert\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta_0)}{\sqrt{1-\beta_0^2}}\right\rvert>\xi_{1-\alpha/2}\right\}\].
 Тогда, очевидно, $\P(H_1|H_0)\rightarrow\alpha$, а так как при $H_1$:
-\[\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta_0)}{\sqrt{1-\beta_0^2}}=\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\beta_0^2}}+\frac{\sqrt{n}(\beta-\beta_0)}{\sqrt{1-\beta_0^2}}\xrightarrow[n\rightarrow\infty]{\P}\]
+\[\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta_0)}{\sqrt{1-\beta_0^2}}=\frac{\sqrt{n}(\widehat{\beta}_{n,LS}-\beta)}{\sqrt{1-\beta_0^2}}+\frac{\sqrt{n}(\beta-\beta_0)}{\sqrt{1-\beta_0^2}}\xrightarrow[n\rightarrow\infty]{\P}\infty\]
 то $\P(H_0|H_1)\rightarrow0$. Значит
 \[\begin{cases}
     \P(H_0|H_0)\rightarrow1-\alpha \\
@@ -529,7 +530,7 @@ $\{\xi_t\}$ - н.о.р., $\xi_1\sim\mu_\xi,\ \mu_x\xi\in M_2$, т.е. $\E\xi_1^2
 
 \underline{Первый способ}.
 
-Предположим дополнительно, что у $\eps_1$ сущесвтует плотность вероятности
+Предположим дополнительно, что у $\eps_1$ существует плотность вероятности
 $g(x)=G'(x)$. Тогда последовательность $\{u_t\}$ удовлетворяет условиям с.п.,
 а так как $\{z_t^\gamma\xi_t\},\ t\in\Z$, - посл. н.о.р. сл.в., которые не зависят от $\{u_t\}$,
 то $\{y_t\}$ - строго стационрная последовательность с с.п. Кроме того,
@@ -567,7 +568,7 @@ $g(x)=G'(x)$. Тогда последовательность $\{u_t\}$ удов
     Значит, функция $\Lambda_{LS}(\gamma,\theta)$ определена при всех $\gamma$ и $\theta$.
     \item \[\Lambda_{LS}(0,\beta)=\E u_0(u_1-\beta u_0)=\E u_0\xi_1=0\]
     \item $\frac{\partial \Lambda_{LS}(\gamma,\theta)}{\partial\gamma}$, $\frac{\partial \Lambda_{LS}(\gamma,\theta)}{\partial\theta}$ 
-    сущесвтуют и непрерывны по паре $(\gamma,\theta)$ при $\gamma,\theta\in\R^1$
+    существуют и непрерывны по паре $(\gamma,\theta)$ при $\gamma,\theta\in\R^1$
     \[\frac{\partial \Lambda_{LS}(\gamma,\theta)}{\partial\gamma}=-\beta\E\xi_0^2,\ \frac{\partial \Lambda_{LS}(\gamma,\theta)}{\partial\theta}=-\E u_0^2\]
     \item \[\lambda(\beta)=-\E u_0^2=-\frac{\E\eps_1^2}{1-\beta^2}<0\]
 \end{enumerate}
@@ -657,7 +658,7 @@ $u_1,u_2,\ldots,u_n$ есть решение задачи
 \[u_t=\widetilde{u}_{t-1}^T\beta+\eps_t,\ t\in\Z\]
 Оценка наименьших квадратов вектора $\beta$ - решение задачи
 \begin{equation} \label{eq::find_ls_ar_p}
-    \sum_{t=1}^n(u_t-\widetilde{u}_{t-1}^T\theta)^2\rightarrow\min_{\theta=(\theta_1,\ldots,\theta_p)^T\in\R^1}
+    \sum_{t=1}^n(u_t-\widetilde{u}_{t-1}^T\theta)^2\rightarrow\min_{\theta=(\theta_1,\ldots,\theta_p)^T\in\R^p}
 \end{equation}
 Решение задачи \eqref{eq::find_ls_ar_p} совпадает с решением системы уравнений
 \[ \sum_{t=1}^nu_{t-j}(u_t-\widetilde{u}_{t-1}^T\theta)=0,\ j=1,\ldots,p\]
@@ -697,7 +698,7 @@ $u_1,u_2,\ldots,u_n$ есть решение задачи
 
     Действительно, функция $g(x)=e^{ix},\ x\in\R^1$, ограниченная непрерывная функция $g:\R^1\rightarrow\C$.
     Тогда из \eqref{eq::vecprod_d_conv} следует, что
-    \[\E g(\xi_n)=\E e^{i\lambda^T\xi_n}\rightarrow\E g(\xi)=\E e^{i\lambda^T\xi},\ \forall\lambda\in\R^p\]
+    \[\E g(\lambda^T\xi_n)=\E e^{i\lambda^T\xi_n}\rightarrow\E g(\lambda^T\xi)=\E e^{i\lambda^T\xi},\ \forall\lambda\in\R^p\]
     Последнее соотношение означает, что характеристическая функция вектора $\xi_n$ $\E e^{i\lambda^T\xi_n}$
     при любом значении аргумента $\lambda$ сходится к характеристической функциии $\E e^{i\lambda^T\xi}$ вектора $\xi$.
     Значит $\xi_n\xrightarrow{d}\xi$.
@@ -745,11 +746,11 @@ $u_1,u_2,\ldots,u_n$ есть решение задачи
             \frac{1}{\sqrt{n}}\sum_{t=1}^n\lambda^T\widetilde{u}_{t-1}\eps_t=\frac{1}{\sqrt{n}}\sum_{t=1}^n\eta_t\xrightarrow{d}N(0,\sigma^2\lambda^TK\lambda)
         \end{equation}
         Последовательность $\eta_t$ есть функция от $\{u_t\}$, это строго стац. последовательность с сильным перемешиванием с
-        коэффициентом перемешивания $\alpha(\tau)\neq c\lambda^T,\ 0<\lambda<1$.
+        коэффициентом перемешивания $\alpha(\tau)\leq c\lambda^T,\ 0<\lambda<1$.
         \[\E\eta_t=\E(\lambda^T\widetilde{u}_{t-1})\E\eps_t=0\]
         \[\E\left\lvert \eta_t\right\rvert ^{2+\delta}=\E\left\lvert \lambda^T\widetilde{u}_{t-1}\right\rvert ^{2+\delta}\underbrace{\E\left\lvert \eps_t\right\rvert ^{2+\delta}}_{<\infty\text{ по усл.}}<\infty,\text{ т.к. } \E\left\lvert u_t\right\rvert ^{2+\delta}<\infty\text{ (см. док-во Т. \ref{th::beta_ls_d_conv_ar})}\]
         \[\left\{\E\left\lvert \lambda^T\widetilde{u}_{t-1}\right\rvert ^{2+\delta}\right\}^{\frac{1}{2+\delta}}\leq\sum_{i=1}^p\left\lvert \lambda_i\right\rvert \left\{\E\left\lvert u_1\right\rvert ^{2+\delta}\right\}^{\frac{1}{2+\delta}}<\infty\text{ в силу нер-ва Минковсокго}\]
-        Крмое того, при $t<s$ 
+        Кроме того, при $t<s$ 
         \[\E\eta_t\eta_s=\E\left\{(\lambda^T\widetilde{u}_{t-1}\eps_t)(\lambda^T\widetilde{u}_{s-1})\right\}\E\eps_s=0\]
         Кроме того,
         \[\sum_{\tau\geq1}(\alpha(\tau))^{\frac{2}{2+\delta}}<\infty\]
@@ -799,7 +800,7 @@ $u_1,u_2,\ldots,u_n$ есть решение задачи
         Вторая вероятность не больше $\P(\overline{S}_n^\Delta)\rightarrow0$. Первая вероятность
         не больше
         \begin{equation} \label{eq::sec_prob_sup}
-            \P(\left\lvert K_n^{-1}\right\rvert \left\lvert K-K_n\right\rvert \left\lvert K^{-1}\right\rvert \left\lvert \frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\right\rvert >\delta, S_n^\Delta)
+            \P\left(\left\lvert K_n^{-1}\right\rvert \left\lvert K-K_n\right\rvert \left\lvert K^{-1}\right\rvert \left\lvert \frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\right\rvert >\delta, S_n^\Delta\right)
         \end{equation}
         В \eqref{eq::sec_prob_sup} $\left\lvert K-K_n\right\rvert \xrightarrow{\P}0$, $\left\lvert K^{-1}\right\rvert $ - кон. число, $\left\lvert \frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\right\rvert =\bigO_p(1)$.
 
@@ -814,11 +815,12 @@ $u_1,u_2,\ldots,u_n$ есть решение задачи
         и поэтому $\left\lvert K_n^{-1}\right\rvert \leq\left\lvert B_n\right\rvert =\bigO_p(1)$.
 
         Поэтому вероятность в \eqref{eq::eq_for_step2} не больше
-        \[\P(\left\lvert B_n\right\rvert \left\lvert K-K_n\right\rvert \left\lvert K^{-1}\right\rvert \left\lvert \frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\right\rvert >\delta)\rightarrow0\]
+        \[\P\left(\left\lvert B_n\right\rvert \left\lvert K-K_n\right\rvert \left\lvert K^{-1}\right\rvert \left\lvert \frac{1}{\sqrt{n}}\sum_{t=1}^n\widetilde{u}_{t-1}\eps_t\right\rvert >\delta\right)\rightarrow0\]
         Соотношение \eqref{def::gamma_n} доказано, а значит и Теорема.
     \end{enumerate}
 \end{proof}
 
+\newpage
 \subsection{Проверка гипотез о порядке авторегрессии.}
 Пусть $\beta^T=(\underbrace{\beta_1^T}_{m\text{ в-р}},\underbrace{\beta_2^T}_{p-m\text{ в-р}})$
 

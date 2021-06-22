@@ -83,7 +83,7 @@
 Если \(\widehat{\theta}_n\) - состоятельная оценка \(\theta\), то при больших \(n\) \(\widehat{\theta}_n \approx \theta\) с вероятностью, близкой к единице.
 
 Если \(\widehat{\theta}_n\) - асимптотическая нормальная оценка \(\theta\) (так как \(\theta\) и \(\widehat{\theta}_n\) скаляры:
-\(\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)) \ 0 < \sigma^2 < \infty,\ \forall \theta \in \Theta\)), то:
+\(\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \sigma^2(\theta)),\ 0 < \sigma^2 < \infty,\ \forall \theta \in \Theta\)), то:
 \begin{enumerate}
     \item \(\widehat{\theta}_n\) - состоятельная оценка \(\theta\), так как \(\widehat{\theta}_n - \theta = n^{-1/2} \sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{\P} 0\)
         в силу п. (2) леммы Слуцкого.
@@ -108,7 +108,7 @@
 
     Напомним, $e_{1, 2} = \lim_{n \to \infty} \frac{n'(x)}{n (x)}$, где
     $\sqrt{n}(\widehat{\theta}_{1,n}-\theta)\xrightarrow{d}N(0, \sigma_1^2(\theta))$
-    и \(\sqrt{n}(\widehat{\theta}_{2,n'} - \theta) \xrightarrow{d} N(0, \sigma_1^2(\theta))\).
+    и \(\sqrt{n}(\widehat{\theta}_{2,n'} - \theta) \xrightarrow{d} N(0, \sigma_2^2(\theta))\).
 
 \end{enumerate}
 
@@ -160,14 +160,17 @@
 к построению оценок максимального правдоподобия.}
 
 Дальше \(X = (X_1, \ldots, X_n), \ X \sim \P_\theta,\ \theta \in \Theta \subseteq \R^1\).
-\underline{Условие (A)}:
-\begin{enumerate}
-    \item \(\Theta\) - интервал, \(\P_{\theta_1} \neq P_{\theta_2}\) при \(\theta_1 \neq \theta_2\).
-    \item \(X_1, \ldots, X_n\) - независимые одинаково распределенные случайные величины
-    \item \(X_1\) имеет плотность вероятности \(f(x, \theta)\) по мере \(\nu\)
-    \item Носитель \(N_f = \{x: f(x, \theta) > 0\}\) не зависит от \(\theta\).
-    \item Плотность вектора \(X\) есть \(p(x, \theta) = \prod_{i=1}^n f(x_i, \theta)\).
-\end{enumerate}
+\begin{definition}
+    \defin{Условие (А)}
+    \begin{enumerate}
+        \item \(\Theta\) - интервал, \(\P_{\theta_1} \neq P_{\theta_2}\) при \(\theta_1 \neq \theta_2\).
+        \item \(X_1, \ldots, X_n\) - независимые одинаково распределенные случайные величины
+        \item \(X_1\) имеет плотность вероятности \(f(x, \theta)\) по мере \(\nu\)
+        \item Носитель \(N_f = \{x: f(x, \theta) > 0\}\) не зависит от \(\theta\).
+        \item Плотность вектора \(X\) есть \(p(x, \theta) = \prod_{i=1}^n f(x_i, \theta)\).
+    \end{enumerate}
+\end{definition}
+
 \begin{definition}
     Функция \(p(X, \theta)\) как функция \(\theta\) при фиксированном \(X\) называется
     \defin{правдоподобием} функции.
@@ -177,7 +180,7 @@
 
 Пусть \(\theta_0\) будет истинное значение параметра.
 \begin{lemma}[Неравенство Йенсена]
-    Пусть \(g(x)\) выпукла книзу борелевская функция, \(\E\left\lvert \xi \right\rvert  <\infty\),
+    Пусть \(g(x)\) выпуклая книзу борелевская функция, \(\E\left\lvert \xi \right\rvert  <\infty\),
     \(\E\left\lvert g(\xi) \right\rvert  <\infty\). Тогда \(g(\E\xi) \leq \E g(\xi)\). Если \(\xi\)
     не является почти наверное константой и \(g\) строго выпукла, то неравенство строгое.
 \end{lemma}
@@ -195,7 +198,7 @@
 
     Возьмем функцию \(-\ln x\) - строго выпукла вниз и \(\frac{f(X_1, \theta)}{f(X_1, \theta_0)}\)
     не является п.н. константой (так как иначе если плотности п.н. совпадают,
-    то и распределения при разных значениях совпадают, что противоречит Условию(A)(1)).
+    то и распределения при разных значениях совпадают, что противоречит пункту 1 Условия(A)).
 
     В силу неравенства Йенсена:
     \[\E_{\theta_0} \ln \frac{f(X_1, \theta)}{f(X_1, \theta_0)} < \ln \E_{\theta_0} \frac{f(X_1, \theta)}{f(X_1, \theta_0)} = \ln \int_{N_f} \frac{f(x, \theta)}{f(x, \theta_0)} f(x, \theta_0) \nu(dx) = \ln1 = 0\]
@@ -214,7 +217,7 @@
 
 Если в \(\forall\theta\in\Theta\) максимум не достигается, то о.м.п. не существует.
 
-\subsection{Теорема о существовании сосотоятельного решения уравнения правдоподобия.}
+\subsection{Теорема о существовании состоятельного решения уравнения правдоподобия.}
 
 Если \(\Theta\) - интервал, \(L_n(X, \theta)\) - гладкая по \(\theta\) функция,
 то \(\theta\) удовлетворяет уравнению правдоподобия
@@ -227,7 +230,7 @@
     производная \(f'_{\theta}(x, \theta)\). Тогда уравнение \eqref{eq::plausibility}
     с вероятностью, стремящейся к 1 при \(n\rightarrow \infty\) имеет решение \(\in\Theta\).
     При этом среди всех таких решений есть такой корень \(\widehat{\theta}_n\), что он
-    является состоятельнаой оценкой \(\theta_0\)
+    является состоятельной оценкой \(\theta_0\)
 \end{theorem}
 \begin{proof}
     Пусть \(S_n = \{\omega\}\), при которых уравнение \eqref{eq::plausibility} имеет
@@ -235,7 +238,7 @@
     \begin{enumerate}
         \item \(P_{\theta_0}(S_n) \rightarrow 1\).
         \item Существует такое решение \(\widehat{\theta}_n \in \Theta\), что
-            \[P_{\theta_0} \left(\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n\right) \rightarrow 1,\ n\rightarrow\infty,\ \forall\eps>0\]
+            \[P_{\theta_0} \left(\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n\right) \xrightarrow[n\rightarrow\infty]{} 1,\ \forall\eps>0\]
     \end{enumerate}
     \underline{Докажем пункт 1}: Выберем малое \(a>0\) так, что на \((\theta_0 - a, \theta_0 + a) \subseteq\Theta\). Пусть
     \[S^a_n = \{\omega: L_n(X, \theta_0) > L_n(X, \theta_0 - a), L_n(X, \theta_0) > L_n(X, \theta_0 + a)\}\]
@@ -290,14 +293,14 @@
 \begin{remark}
     Пусть
     \[\theta^*_n = \begin{cases}
-        \text{сост. корню уравнения правдоподобия, если он сущ.} \\
+        \text{сост. корень уравнения правдоподобия, если он сущ.} \\
         \theta',\ \theta'\in\Theta, \text{иначе}
     \end{cases}\]
     Тогда случайная величина \(\theta^*_n\) всегда определена, и
     \(\theta^*_n \xrightarrow{\P} \theta_0\), так как
-    \[\P(\left\lvert \theta^*_n - \theta_0 \right\rvert  < \eps) =
-    \P(\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n) +
-    \P(\left\lvert \theta' - \theta_0 \right\rvert  < \eps, \overline{S}_n) \rightarrow 1\]
+    \[\P\left(\left\lvert \theta^*_n - \theta_0 \right\rvert<\eps\right) =
+    \P\left(\left\lvert \widehat{\theta}_n - \theta_0 \right\rvert  < \eps, S_n\right) +
+    \P\left(\left\lvert \theta' - \theta_0 \right\rvert  < \eps, \overline{S}_n\right) \rightarrow 1\]
     Ясно, что
     \begin{equation}
         \frac{\partial}{\partial\theta} L_n(X, \theta^*_n) = \littleO_p(1)
@@ -318,7 +321,7 @@
     предположения о третьей, а не второй производной. То есть
     \[\left\lvert \frac{\partial^3}{\partial \theta^3} \ln f(x, \theta) \right\rvert  \leq M(x) \ \forall x\in N_f,\ \forall\theta\in\Theta,\ \E_{\theta_0}M(X_1) < \infty\]
     Тогда, если \(\theta^*_n\) - обобщенный состоятельный корень из теоремы \ref{th::consist_plausibility}, то
-    \[\sqrt{n}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, \frac{1}{i(\theta_0)})\]
+    \[\sqrt{n}(\theta^*_n - \theta_0) \xrightarrow{d} N\left(0, \frac{1}{i(\theta_0)}\right)\]
     То есть \(\theta^*_n\) - асимптотическая эффективная оценка.
 \end{theorem}
 \begin{proof}
@@ -357,7 +360,7 @@
 
     Применяя лемму Слуцкого, получим \eqref{eq::taylor_frac::den}.
 
-    Далее рассмотрим второе слагаeмое в знаменете \eqref{eq::taylor_frac}
+    Далее рассмотрим второе слагаeмое в знаменателе \eqref{eq::taylor_frac}
     \begin{equation}
         \label{eq::taylor_frac::den2}
         \left\lvert \frac{1}{2n} L_n^{(3)}(\widetilde{\theta}_n)(\theta^*_n - \theta_0) \right\rvert  \leq \frac{1}{2}\left\lvert \theta_n^* - \theta_0 \right\rvert  n^{-1} \sum_{i=1}^n M(X_i) \xrightarrow[\text{л. Слуцкого}]{\P} 0
@@ -370,18 +373,18 @@
     \(\frac{1}{i(\theta_0)} \xi \sim N(0, \frac{1}{i(\theta_0)})\)
 \end{proof}
 
-\subsection{Построение асимпотически эффективной оценки по выборке н. о. р. случайных величин из гауссовского закона.}
+\subsection{Построение асимптотически эффективной оценки по выборке н. о. р. случайных величин из гауссовского закона.}
 Пусть \(X = (X_1, \ldots, X_n)\) - н.о.р., $X_1 \sim f(x, \theta),\ \theta\in\Theta\subseteq\R^k,\
 \Theta$ - открытое множество
 
-Тогда логарифмические правдоподобие имеет вид
+Тогда логарифмическое правдоподобие имеет вид
 \[L_n(X, \theta) = \sum_{i=1}^n\ln f(X_i, \theta)\]
 
 Система уравнений правдоподобия
-\begin{equation*}
+\begin{equation}
     \label{eq::sys_plausibility}
     \frac{\partial L_n(X, \theta)}{\partial\theta_i} = 0,\ i =1,2,\ldots,k
-\end{equation*}
+\end{equation}
 
 При условиях регулярности, похожих на условия теоремы \ref{th::asympt_consist},
 показыватся:
@@ -390,16 +393,16 @@
         система уравнений \eqref{eq::sys_plausibility} имеет такое решение \(\widehat{\theta}_n\in\Theta\),
         что \(\widehat{\theta}_n\) сходится к истинному значению \(\theta_0\).
     \item Соответствующая оценка \(\theta^*_n\) асимптотически нормальна. А именно
-        \[\sqrt{n}(\theta^*_n - \theta_0) \xrightarrow{d} N(0, I^{-1}(\theta_0)),\ n\rightarrow\infty\]
-        Здесь \(I(\theta) > 0\) - матрица информации Фишера, то есть
-        \[I(\theta) = (I_{ij}(\theta)),\ I_{ij}(\theta) = \E_\theta \left\{\frac{\partial \ln f(X, \theta)}{\partial\theta_i} \cdot \frac{\partial\ln f(X, \theta)}{\partial\theta_j}\right\}\]
+        \[\sqrt{n}(\theta^*_n - \theta_0) \xrightarrow[n\rightarrow\infty]{d} N(0, J^{-1}(\theta_0))\]
+        Здесь \(J(\theta) > 0\) - матрица информации Фишера, то есть
+        \[J(\theta) = (J_{ij}(\theta)) = \left(\E_\theta \left\{\frac{\partial \ln f(X, \theta)}{\partial\theta_i} \cdot \frac{\partial\ln f(X, \theta)}{\partial\theta_j}\right\}\right)\]
 \end{enumerate}
 \begin{example}
     \(X = (X_1, \ldots, X_n)\), где \(\{X_i\}\) - н.о.р., \(X_1 \sim N(0, \sigma^2),\ a < \theta < b\),
     \(a\) и \(b\) - известные конечные числа, дисперсия \(\sigma^2\) известна.
     Построим асимптотически эффективную оценку \(\theta^*_n\) для \(\theta\).
 
-    Здесь \(p(x, \theta) = \left(\frac{1}{\sqrt{2\pi} \sigma}\right)^ne^{-\frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\theta)^2}\),
+    Здесь \(p(x, \theta) = \left(\frac{1}{\sqrt{2\pi} \sigma}\right)^n\exp{\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\theta)^2\right\}}\),
     значит
     \[L_n(X, \theta) = \ln\left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n - \frac{1}{2\sigma^2}\sum_{i=1}^n(X_i-\theta)^2\]
     Уравнение правдоподобия имеет вид

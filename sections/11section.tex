@@ -20,7 +20,7 @@ $\mu_\xi\in M_\xi$;
 \underline{Основное предположение}
 
 При любом $0 \leq \gamma\leq1$ существует предел
-\[\hat{\beta}_n\xrightarrow{\P}\theta_\gamma,\ n\rightarrow\infty;\ \theta_0=\beta\]
+\[\hat{\beta}_n\xrightarrow[n\rightarrow\infty]{\P}\theta_\gamma;\ \theta_0=\beta\]
 
 \begin{definition}
     Если существует предел
@@ -99,10 +99,10 @@ $\mu_\xi\in M_\xi$;
 
     Мы знаем, что если $G(x)$ дифф. в нуле, и $g(0) = G'(0)>0$,
     то для выборочной медианы справедлива асимптотическая нормальность:
-    \[ \sqrt{n}(\widehat{m}_n - a)\xrightarrow{d}N(0, \frac{1}{4g^2(0)}),\ n\rightarrow\infty\]
+    \[ \sqrt{n}(\widehat{m}_n - a)\xrightarrow[n\rightarrow\infty]{d}N(0, \frac{1}{4g^2(0)})\]
     Если в \eqref{def::var_series} $\{\eps_t\}$ - н.о.р., $\E\eps_1=0$,
-    $0<\E\eps_1^2=\sigma^2<\infty$, то $\sqrt{n}(\widetilde{u}-a)\xrightarrow{d}N(0,\sigma^2)$.
-    Значит асимптотическая оптимальная эффективность выборочной медианы относительно $\widetilde{u}$
+    $0<\E\eps_1^2=\sigma^2<\infty$, то $\sqrt{n}(\overline{u}-a)\xrightarrow{d}N(0,\sigma^2)$.
+    Значит асимптотическая оптимальная эффективность выборочной медианы относительно $\overline{u}$
     равна
     \[\boxed{e_{\widehat{m}_n,\ \overline{X}}=4g^2(0)\sigma^2}\]
 
@@ -138,7 +138,7 @@ $\mu_\xi\in M_\xi$;
             \item Выборочная медиана $\widehat{m}_n^y$ 
             удовлетворяет уравнению
             \begin{equation} \label{def::sample_median}
-                l_n(\theta)\defeq\frac{1}{n}\sum_{t=1}^nsgn(y_t-\theta)=0,\text{ где }sgn(x)=\begin{cases}
+                l_n(\theta)\defeq\frac{1}{n}\sum_{t=1}^n\sgn (y_t-\theta)=0,\text{ где }\sgn (x)=\begin{cases}
                     -1, x<0 \\
                     0, x=0 \\
                     1, x>0
@@ -200,7 +200,7 @@ $\mu_\xi\in M_\xi$;
             интервал и $\widehat{m}_n^y$ - его середина.
 
             В силу Закона Больших Чисел при любом $\theta$ и любом $0\leq\gamma\leq1$
-            \[ l_n(\theta)=\frac{1}{n}\sum_{t=1}^nsgn(y_t-\theta)\xrightarrow{\P}\E sgn(y_1-\theta)\defeq\Lambda_M(\gamma,\theta) \]
+            \[ l_n(\theta)=\frac{1}{n}\sum_{t=1}^n\sgn (y_t-\theta)\xrightarrow{\P}\E \sgn (y_1-\theta)\defeq\Lambda_M(\gamma,\theta) \]
             
             \underline{Задача:} Пусть $\xi$ и $\eta$ - независимые случайные векторы, причем
             $\eta$ - дискретный вектор со значениями $\eta_1,\eta_2,\ldots$. Проверить, что
@@ -211,7 +211,7 @@ $\mu_\xi\in M_\xi$;
                 \Lambda_M(\gamma,\theta)=\E(1-2I(y_1-\theta\leq0))=1-2\E I(\eps_1\leq\theta-a-z_1^\gamma\xi_1)=
                 1-2\E G(\theta-a-z_1^\gamma\xi_1)
             \end{equation}
-            так как $signx=1-2I(x<0),\ x\neq0$. Чтобы упростить \eqref{eq::lambda_transforming},
+            так как $\sgn x=1-2I(x<0),\ x\neq0$. Чтобы упростить \eqref{eq::lambda_transforming},
             введем две гипотезы $H_1=(z_1^\gamma=0)$ и $H_2=(z_2^\gamma=1)$.
             Тогда, используя задачу, получаем из \eqref{eq::lambda_transforming}:
             \[\Lambda_M(\gamma,\theta)=1-2(1-\gamma)G(\theta-a)-2\gamma\E G(\theta-a-\xi_1)\]
@@ -233,7 +233,7 @@ $\mu_\xi\in M_\xi$;
             \end{equation}
             \item Покажем, что
             \begin{equation} \label{eq::sample_median_p_conv}
-                \widehat{m}_n^y\xrightarrow{\P}\theta_\gamma^m,\ n\rightarrow\infty
+                \widehat{m}_n^y\xrightarrow[n\rightarrow\infty]{\P}\theta_\gamma^m
             \end{equation}
             Тогда из \eqref{eq::theta_func_derivative}-\eqref{eq::sample_median_p_conv}
             будет слеовать, что функционал влияния выборочной медианы равен
@@ -293,7 +293,7 @@ $\mu_\xi\in M_\xi$;
             лежат в интервале $(\theta_\gamma^m-\Delta, \theta_\gamma^m+\Delta)$. А значит
             и выборочная медиана тоже! Поскольку $\Delta>0$ любое, то получаем
             \begin{equation*}
-                \widehat{m}_n^y\xrightarrow{\P}\theta_\gamma^m,\ n\rightarrow\infty
+                \widehat{m}_n^y\xrightarrow[n\rightarrow\infty]{\P}\theta_\gamma^m
             \end{equation*}
             что и доказывает теорему.
         \end{enumerate}
@@ -311,7 +311,7 @@ $\mu_\xi\in M_\xi$;
         при всех $\lvert\theta-\beta\rvert<\delta,\ 0\leq\gamma<\gamma_0$
     \item $\Lambda(0,\beta)=0$
     \item Пусть $\Lambda(\gamma,\theta)$ можно продолжить на отрезок малых $\gamma$ так,
-    что при $\lvert\theta-\beta\rvert<\delta,\ \lvert\gamma\rvert<\gamma_0$ сущесвтуют
+    что при $\lvert\theta-\beta\rvert<\delta,\ \lvert\gamma\rvert<\gamma_0$ существуют
     и непрерывны по паре аргументов $(\gamma,\theta)$ частные производные
     $\frac{\partial\Lambda(\gamma,\theta)}{\partial\gamma}$, $\frac{\partial\Lambda(\gamma,\theta)}{\partial\theta}$.
     \item Пусть $\lambda(\beta)\defeq\frac{\partial\Lambda(0,\theta)}{\partial\theta}\neq0$
@@ -328,7 +328,7 @@ $\mu_\xi\in M_\xi$;
     Пусть 
     \[\begin{cases}
         u_t=a+\eps_t \\ y_t=u_t+z_t^\gamma\xi_t
-    \end{cases} \{\eps_t\}\text{-н.о.р.},\ \eps_1\sim g(x)=G'(x),\ g(x)=g(-x)\]
+    \end{cases} \{\eps_t\}\text{ - н.о.р.},\ \eps_1\sim g(x)=G'(x),\ g(x)=g(-x)\]
      Тогда $a$ - медиана функции распределения случайной величины $u_1$.
 
      Будем искать оценку $a$, обозначим ее как $\widehat{a}_n$, как корень уравнения
@@ -336,7 +336,7 @@ $\mu_\xi\in M_\xi$;
          \sum_{t=1}^n\psi(y_t-\theta)=0
      \end{equation}
      Тогда оценка называется \defin{$M$-оценкой}. В частности, при $\psi(x)=x,\ \widehat{a}_n=\overline{y}$;
-     при $\psi(x)=sgn(x),\ \widehat{a}_n=\widehat{m}_n^y$.
+     при $\psi(x)=\sgn (x),\ \widehat{a}_n=\widehat{m}_n^y$.
 
      Пусть выполняются условия: \begin{enumerate}
          \item $\psi(x)$ - нечетная строго возрастающая функция
@@ -354,7 +354,7 @@ $\mu_\xi\in M_\xi$;
          Введем гипотезы $H_1=(z_1^\gamma=0),\ H_2=(z_2^\gamma=0)$. Тогда 
          \[\Lambda(\gamma,\theta)=\sum_{i=1}^2\E(\psi(\underbrace{\eps_1+a+z_1^\gamma\xi_1}_{y_1}-\theta)\vert H_i)\P(H_i)
          =(1-\gamma)\E\psi(\eps_1+a-\theta)+\gamma\E\psi(\eps_1+\xi_1+a-\theta)\]
-         \item $\Lambda(0,a)=\E\psi(\eps_1)=0$, так как $\psi(x)$ - нечетная, а $g(x)$-четная.
+         \item $\Lambda(0,a)=\E\psi(\eps_1)=0$, так как $\psi(x)$ - нечетная, а $g(x)$ - четная.
          \item Функция $\Lambda(\gamma,\theta)$ определена при всех $\gamma$ и $\theta$.
          Частные производные $\frac{\partial\Lambda(\gamma,\theta)}{\partial\gamma}$, $\frac{\partial\Lambda(\gamma,\theta)}{\partial\theta}$
          существуют при условиях (1)-(2) и непрерывны по паре $(\gamma,\theta)$. В частности,
@@ -364,5 +364,5 @@ $\mu_\xi\in M_\xi$;
      В силу теоремы \ref{th::M_estimate_sample_median} 
     \[\widehat{a}_n\xrightarrow{\P}\theta_\gamma,\ \theta_0=a \]
     \[IF(\theta_\gamma,\mu_\xi)=\frac{\E\psi(\eps_1+\xi_1)}{\E\psi'(\eps_1)} \]
-    \[GES(\theta_\gamma, M_\xi)\leq\frac{\max\{|c_1|,|c_2|\}}{\E\psi'(\eps_1)}<\infty,\text{ $M_\xi$-класс всех вер. распределений}\]
+    \[GES(\theta_\gamma, M_\xi)\leq\frac{\max\{|c_1|,|c_2|\}}{\E\psi'(\eps_1)}<\infty,\text{ $M_\xi$ - класс всех вер. распределений}\]
 \end{example}

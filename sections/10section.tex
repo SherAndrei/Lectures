@@ -6,15 +6,15 @@
 
 \begin{definition}
     Предположение вида \(H_0: \theta\in\Theta_0\), где
-    \(\Theta_0\in\Theta\), называется параметрической гипотезой.
+    \(\Theta_0\in\Theta\), называется \defin{параметрической гипотезой}.
     Альтернатива \(H_1:\theta\in\Theta_1\), где
     \(\Theta_1\in\Theta\backslash\Theta_0\)
 \end{definition}
 \begin{definition}
     Если \(\Theta_0(\Theta_1)\) состоит из одной точки,
     то гипотеза \(H_0\) (альтернатива \(H_1\)) называется
-    простой.
-    В противном случае \(H_0(H_1)\) - сложная
+    \defin{простой}.
+    В противном случае \(H_0(H_1)\) - \defin{сложная}.
 \end{definition}
 
 \underline{Постановка задачи}:
@@ -32,8 +32,8 @@
 \(H_0\) принимается.
 
 \begin{definition}
-    Множество \(S\) называется критическим множеством или критерием,
-    \(\overline{S}\) - область принятия гипотезы.
+    Множество \(S\) называется \defin{критическим множеством} или \defin{критерием},
+    \(\overline{S}\) - \defin{область принятия гипотезы}.
 \end{definition}
 \begin{definition}
     \defin{Ошибка 1-го рода} - принять \(H_1\), когда
@@ -78,13 +78,14 @@
   \P_{\theta_1}(X\in S^*_\alpha) &\geq \P_{\theta_1}(X\in S_\alpha) \ \forall S_\alpha
 \end{align*}
 
+\subsection{Лемма Неймана-Пирсона}
+
 Положим для краткости:
-\(p_0(x)\defeq p(x, \theta_0),\ \E_0 = \E_{\theta_0},\ p_{1}(x) = p(x, \theta_1),\ \E_1 = \E_{\theta_1}\)
+\(p_0(x)\defeq p(x, \theta_0),\ \E_0\defeq\E_{\theta_0},\ p_{1}(x)\defeq p(x, \theta_1),\ \E_1\defeq\E_{\theta_1}\)
 
 Введем множество
-\[S(\lambda) = \{x: p_1(x) - \lambda p_0(x) > 0\}, \lambda > 0\]
+\[S(\lambda)\defeq\{x: p_1(x) - \lambda p_0(x) > 0\},\ \lambda > 0\]
 
-\subsection{Лемма Неймана-Пирсона}
 \begin{theorem*}[Лемма Неймана-Пирсона]
     Пусть для некоторого \(\lambda > 0\) и критерия \(R\)
     (когда \(X\) попадает в \(R\), то \(H_0\) отвергается)
@@ -100,12 +101,12 @@
 \begin{remark}
     \(X\in S(\lambda) \Leftrightarrow \frac{p_1(x)}{p_0(x)} > \lambda\).
     Так как \(p_1(X)\) и \(p_0(X)\) - правдоподобие, то критерий
-    называется критерием отношения правдоподобия Неймана-Пирсона.
+    называется \defin{критерием отношения правдоподобия Неймана-Пирсона}.
 \end{remark}
 \begin{remark}
     Утверждение 3 для \(S(\lambda)\) означает, что
     \[\P(H_1 \left\lvert  H_1) \geq \P(H_1 \right\rvert H_0) \Leftrightarrow W(S(\lambda), \theta_1) \geq W(S(\lambda), \theta_0)\]
-    Это свойство называется несмещенностью критерия \(S(\lambda)\)
+    Это свойство называется \defin{несмещенностью критерия} \(S(\lambda)\)
 \end{remark}
 \begin{proof}
     Дальше для краткости \(S(\lambda) = S\). Пусть
@@ -156,7 +157,7 @@
 \subsection{Оптимальная проверка гипотезы о среднем
 гауссовской выборки как пример применения леммы Неймана-Пирсона.}
 \begin{example}
-    \(X = (X_1,\ldots, X_n), \{X_i\}\) - н.о.р., \(X_1 \sim N(\theta, \sigma^2)\),
+    \(X = (X_1,\ldots, X_n),\ \{X_i\}\) - н.о.р., \(X_1 \sim N(\theta, \sigma^2)\),
     дисперсия \(\sigma^2\) известна. Построим наиболее мощный критерий
     для проверки \(H_0: \theta = \theta_0\) против \(H_1: \theta = \theta_1\)
     (в случае \(\theta_1 > \theta_0\)). Уровень значимости возьмем \(\alpha\).
@@ -229,6 +230,7 @@
         \end{figure}
 \end{example}
 
+\newpage
 \subsection{Теорема о двойственности задач доверительного оценивания
 и проверки гипотез. Пример - проверка гипотезы о среднем гауссовской выборки
 при двухмерной альтернативе.}
@@ -249,7 +251,7 @@
 
         \item Если \(\Theta^*(X,\alpha)\) - доверительное множество уровня \(1-\alpha\),
         то \(\overline{S_\alpha}(\theta_0)=\{x:\theta_0\notin\Theta(x,\alpha)\}\)
-        есть область применения гипотезы \(H_0\) (следовательно и критерий).
+        есть область принятия гипотезы \(H_0\) (следовательно и критерий).
     \end{enumerate}
 \end{theorem}
 \begin{remark} \label{hyp::accept_HO}
@@ -268,12 +270,13 @@
 
     Построим доверительное множество для \(\theta\) уровня \(1-\alpha\).
     Пусть \(\overline{X}=\frac{1}{n}\sum^n_{i=1}X_i\) - оптимальная оценка \(\theta\).
-    Тогда \(\frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\sim N(0,1)\),
+    Тогда
+    \[\frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\sim N(0,1)\]
     \[\P_\theta\left(\left\lvert\frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\right\rvert<\xi_{1-\alpha/2}\right) = 1-\alpha\]
     \[\Phi(\xi_{1-\alpha/2})=1-\alpha/2\]
-    То есть \(\Theta^*(X,\alpha)=\{\theta:\left\lvert \frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\right\rvert <\xi_{1-\alpha/2}\}\).
+    То есть \(\Theta^*(X,\alpha)=\left\{\theta:\left\lvert \frac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\right\rvert <\xi_{1-\alpha/2}\right\}\).
     В силу замечания к Теореме \ref{th::trusted_set_eq_plausibility_test}
-    \(S_{\alpha}(\theta_0)=\{X:\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert \geq\xi_{1-\alpha}\}\)
+    \(S_{\alpha}(\theta_0)=\left\{X:\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert \geq\xi_{1-\alpha}\right\}\)
     есть критическое множество для \(H_0\). Мощность
     \[W(\theta)=\P_\theta(X\in S_\alpha(\theta_0))=\P_\theta\left(\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert \geq\xi_{1-\alpha/2}\right)=
     1-\P_\theta\left(\left\lvert \frac{\sqrt{n}(\overline{X}-\theta_0)}{\sigma}\right\rvert <\xi_{1-\alpha/2}\right)=\]
@@ -388,13 +391,13 @@
 \end{leftbar}
 \end{lemma}
 \begin{proof}
-    Докажем соотношение \ref{iid::st}, \ref{iid::xi} и \ref{iid::fi} доказываются
+    Докажем соотношение \ref{iid::st}, а \ref{iid::xi} и \ref{iid::fi} доказываются
     аналогично.
 
     Заметим, что, если \(\xi\) и \(\eta\) - независимые случайные величины,
     и \(\E\left\lvert \phi(\xi,\eta) \right\rvert <\infty\), то
     \begin{equation} \label{eq::mo_phi}
-        \E\phi(\xi,\eta)=\E\left\{\left.\E\phi(\xi,\eta)\right\vert_{\xi=\eta}\right\}
+        \E\phi(\xi,\eta)=\E\left\{\left.\E\phi(\xi,y)\right\vert_{y=\eta}\right\}
     \end{equation}
     В силу \eqref{eq::mo_phi}
     \[\P(t_k(\mu_2)>x) = \P\left(\frac{\xi+\mu_2}{\sqrt{\frac{1}{k}\eta_k}}>x\right)=\E I\left(\xi>x\sqrt{\frac{1}{k}\eta_k}-\mu_2\right)=\]
@@ -410,9 +413,9 @@
 \[X=(X_1,\ldots, X_n)^T\text{ - наблюдения},\ Z\text{ - \(n\times p\) матрица регрессоров \(p<n\)}\]
 \[\Eps\sim N(0, \sigma^2\E_n),\ c=(c_1,\ldots, c_p)^T\]
 \[\text{\underline{\(c\) и \(\sigma^2\) неизвестны}}\]
-Рассмотрим новый вектор \(\beta=Ac\), \(A - k\times p\) матрица, \(rkA=k, k\leq p\).
+Рассмотрим новый вектор \(\beta=Ac\), \(A - k\times p\) матрица, \(\rk A=k, k\leq p\).
 
-\underline{Построим для \(\beta\) доверительное множество уровня \(1-\alpha\)}
+\underline{Построим для \(\beta\) доверительное множество уровня \(1-\alpha\)}.
 
 Пусть \(\widehat{c}_n\) - оценка наименьших квадратов (о.н.к.) для \(c\), \(\widehat{s}^2_n\) - о.н.к. для \(\sigma^2\).
 Пусть \(\widehat{\beta}_n=A\widehat{c}_n\).
@@ -420,7 +423,7 @@
 
 \begin{leftbar}
 Заметим, что \(D > 0\), так как для \(\alpha\in\R^k,\alpha\neq0\),
-\[\alpha^TD\alpha=(A^t\alpha)^T(Z^TZ)^{-1}(A^T\alpha)>0, \text{ т.к. } (Z^TZ)^{-1}>0, A^T\alpha\neq0 \text{ при } rkA=k, \alpha\neq0\]
+\[\alpha^TD\alpha=(A^t\alpha)^T(Z^TZ)^{-1}(A^T\alpha)>0, \text{ т.к. } (Z^TZ)^{-1}>0, A^T\alpha\neq0 \text{ при } \rk A=k, \alpha\neq0\]
 \end{leftbar}
 В силу пункта 2 леммы \ref{delta_dependency}
 \[\frac{1}{\sigma^2}\left(\widehat{\beta}_n-\beta\right)D^{-1}\left(\widehat{\beta}_n-\beta\right)\sim \chi^2(k)\]
@@ -461,9 +464,9 @@ $f_{k,n-p}(X,\beta_0)$ - статистика $F$-критерия.
 Мощность $F$-критерия
 \[W(\beta,S_\alpha(\beta_0))=\P_{\beta,\sigma^2}(f_{k,n-p}(X,\beta_0)>f_{1-\alpha}(k,n-p))=1-F_{k,n-p}(f_{1-\alpha}(k,n-p),\Delta^2)\]
 
-\underline{Свойства мощности}
+\underline{Свойства мощности}:
 \begin{enumerate}
-    \item Так как $\Delta =\Delta(\beta)=\Delta(\beta_0)>0$ при $\beta\neq\beta_0$,
+    \item Так как $\Delta =\Delta(\beta)>\Delta(\beta_0)=0$ при $\beta\neq\beta_0$,
     то в силу соотношения \ref{iid::fi}
     \[\P_{\beta,\sigma^2}(f_{k,n-p}(X, \beta_0)>f_{1-\alpha}(k,n-p))>\P_{\beta_0,\sigma}(f_{k,n-p}(X,\beta_0)>f_{1-\alpha}(k,n-p))=\alpha\]
     То есть при $\beta\neq\beta_0\ \P(H_1\vert H_1)>\P(H_1\vert H_0)$.
@@ -514,7 +517,7 @@ $f_{k,n-p}(X,\beta_0)$ - статистика $F$-критерия.
 $H_0$ отвергается, если $f_{p-m,n-p}(X,0)>f_{1-\alpha}(p-m,n-m)$,
 то есть
 \begin{equation}\label{fisher::ex::crit}
-    S_{\alpha}(0)=\{x:\frac{\widehat{c}_{(2)n}^TB_{22}^{-1}\widehat{c}_{(2)n}}{(p-m)\widehat{s}^2_n}>f_{1-\alpha}(p-m,n-m)\}
+    S_{\alpha}(0)=\left\{x:\frac{\widehat{c}_{(2)n}^TB_{22}^{-1}\widehat{c}_{(2)n}}{(p-m)\widehat{s}^2_n}>f_{1-\alpha}(p-m,n-m)\right\}
 \end{equation}
 \begin{equation}\label{fisher::ex::stat}
     f_{p-m,n-p}(X,0)\underset{H_1}{\sim} F(p-m,n-p, \Delta^2),\text{ где }\Delta^2=\frac{c_{(2)}^TB_{22}^{-1}c_{(2)}}{\sigma^2}
@@ -579,8 +582,8 @@ $H_0$ отвергается, если $f_{p-m,n-p}(X,0)>f_{1-\alpha}(p-m,n-m)$,
 Положим $A=(1, -1)$. Тогда $Ac=a-b=\beta$.
 
 $\begin{array}{ccc}
-    H_0:& Ac=a-b=\beta=0& (=\beta_0)\\
-    H_1:& Ac=a-b\neq0& (\beta\neq0)
+    H_0:& Ac=a-b=\beta=0 &(=\beta_0)\\
+    H_1:& Ac=a-b\neq0    &(\beta\neq0)
 \end{array}$
 
 О.н.к. для вектора $c$ - решение задачи
@@ -635,14 +638,14 @@ $F$-критерий для $H_0$ имеет вид
 \[\text{ где параметр нецентральности } \Delta^2=\Delta^2(\underset{a-b}{\beta})=\frac{(a-b)^2}{\sigma^2\left(\frac{1}{n}+\frac{1}{m}\right)}\]
 \begin{enumerate}
     \item Если $\vert a-b\vert$  возрастает, то мощность $F$-теста возрастает
-    \item Если $\sigma\rightarrow0$ или $\frac{1}{n}+\frac{1}{m}\rightarrow0$, то мощность возрастает
+    \item Если $\sigma\rightarrow0$ или $\frac{1}{n}+\frac{1}{m}\rightarrow0$, то мощность тоже возрастает
 \end{enumerate}
 \end{example}
 
 \subsection{Критерий согласия хи-квадрат Пирсона. Проверка для гипотезы о параметрах полиномиального распределения:
 опредлеление, поведение статистики Пирсона при альтернативах и теорема Пирсона. Проверка гипотезы о виде функции распределения.}
 Пусть проводятся $n$ независимых испытаний, и в каждом испытании возможны
-$m\geq2$ исходов $A_1,\ldots,A_m$ таких, что $A_iA_j=\emptyset,\ i\neq j,\ \sum A_i=\Omega$, тогда
+$m\geq2$ исходов $A_1,\ldots,A_m$ таких, что $A_iA_j=\varnothing,\ i\neq j,\ \sum A_i=\Omega$, тогда
 $\P(A_j)=p_j>0,\ \sum_{j=1}^mp_j=1$. Пусть $\nu=(\nu_1,\ldots,\nu_m)^T$, а $\nu_j$ -
 число появления $A_j$ в $n$ опытах, тогда $\sum_{j=1}^m\nu_j=n$.
 По вектору наблюдений $\nu$ необходимо проверить следующую гипотезу:
@@ -658,7 +661,7 @@ $\begin{array}{cl}
     \[ \P(\nu_1=k_1,\ldots,\nu_m=k_m)\underset{H_0}{=}\frac{n!}{k_1!\ldots k_m!}(p_1^\circ)^{k_1}\ldots(p_m^\circ)^{k_m}\]
 \end{remark*}
 Это полиномиальное распределение $\prod(n,p_1^\circ, \ldots, p_m^\circ)$.
-Статистика Хи-квадрат Пирсона:
+Статистика хи-квадрат Пирсона:
 \[\chi_n^2\underset{H_0}{\defeq}\sum_{j=1}^m\frac{(\nu_j-np_j^\circ)^2}{np_j^\circ}\]
 \underline{Поведение при альтернативе:} Очевидно
 \[\chi_n^2=n\sum_{j=1}^m\frac{(\nu_j/n-p_j^\circ)^2}{p_j^\circ}\]
@@ -764,13 +767,13 @@ $X_1\in\Delta_1\cup\Delta_2\cup\ldots\cup\Delta_m$
 с исходами $A_1,\ldots,A_m$, причем $A_j$ происходит тогда и только тогда,
 когда $X_i\in\Delta_j$. При $H_0$ $\P(A_j)=p_j^\circ$. Тогда наблюдения
 $X_1,\ldots,X_n$ порождают полиномиальную схему независимых испытаний.
-Пусть $\nu_j$-число исхода $A_j$ в этих испытаниях, то есть число
+Пусть $\nu_j$ - число исхода $A_j$ в этих испытаниях, то есть число
 наблюдений среди $X_1,\ldots,X_n$, попавших в $\Delta_j$.
 В силу теоремы Пирсона:
 \[\chi_n^2\defeq\sum_{j=1}^m\frac{(\nu_j-np^\circ_j)^2}{np^\circ_j}\xrightarrow[H_0]{d}\chi^2(m-1)\]
 
 \underline{Правило}: $H_0$ будем отвергать, если $\chi_n^2>\chi_{1-\alpha}(m-1)$. ($\alpha$ задано)
-Тогда $\P(H_1\vert H_0)\rightarrow\alpha,\ n\rightarrow\infty$.
+Тогда $\P(H_1\vert H_0)\xrightarrow[n\rightarrow\infty]{}\alpha$.
 \[p_j\defeq \P(X_1\in\Delta_j\vert H_1)=\int_{\Delta_j}dF_1(x)\]
 Если верна $H_1$ и хоть при одном $j$ $p_j\neq p_j^\circ$, то
 $\P(H_0\vert H_1) = \P(\chi_n^2<\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow 0$
@@ -813,11 +816,11 @@ $\P(H_0\vert H_1) = \P(\chi_n^2<\chi_{1-\alpha}(m-1)\vert H_1)\rightarrow 0$
 $A_1,\ldots,A_m$, $\nu=(\nu_1,\ldots,\nu_m)^T$ - вектор наблюдений.
 Пусть $H_0:\ \P(A_j)=p_j(\theta),\ \theta\in\Theta\in\R^k,\ k<m-1$.
 
-\underline{Условия регулярности}
+\underline{Условия регулярности}:
 \begin{enumerate}
     \item $\sum_{j=1}^mp_j(\theta)=1,\ \theta\in\Theta$
     \item $p_j(\theta)\geq c>0\ \forall j=1,\ldots,m$ и $\exists\ \frac{\partial p_j(\theta)}{\partial \theta_l},\frac{\partial^2p_j(\theta)}{\partial\theta_l\partial\theta_r}$
-    \item $rank(\underbrace{\frac{\partial p_j(\theta)}{\partial \theta_l}}_{\text{$m\times k$}})=k,\ \forall\theta\in\Theta$
+    \item $\rk\underbrace{\frac{\partial p_j(\theta)}{\partial \theta_l}}_{m\times k}=k,\ \forall\theta\in\Theta$
 \end{enumerate}
 В качестве оценки $\theta$ при $H_0$ будем использовать мультиномиальные
 оценки максимального правдоподобия:
@@ -847,7 +850,7 @@ $A_1,\ldots,A_m$, $\nu=(\nu_1,\ldots,\nu_m)^T$ - вектор наблюдени
     Максимизируя эту функцию по $p_{i\bullet},\ p_{\bullet j}$ при условиях, что $\sum_{i=1}^sp_{i\bullet}=1,\ \sum_{j=1}^rp_{\bullet j}=1$,
     находим оценки
     \[\widehat{p}_{i\bullet}=\frac{\nu_{i\bullet}}{n},\ \widehat{p}_{\bullet j}=\frac{\nu_{\bullet j}}{n},\text{ где } \nu_{i\bullet}=\sum_{j}\nu_{ij},\ \nu_{\bullet j}=\sum_{i}\nu_{ij}\]
-    Статистика Хи-квадрат имеет вид
+    Статистика хи-квадрат имеет вид:
     \[\widehat{\chi}_n^2=\sum_{i=1}^s\sum_{j=1}^r\frac{(\nu_{ij}-n\widehat{p}_{i\bullet}\widehat{p}_{\bullet j})^2}{n\widehat{p}_{i\bullet}\widehat{p}_{\bullet j}}\]
     \[\widehat{\chi}_n^2\xrightarrow[H_0]{d}\chi((s-1)(r-1))\]
     так как $m-k-1=sr-(s+r-2)-1=(s-1)(r-1)$. \\
